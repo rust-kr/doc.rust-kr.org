@@ -22,18 +22,18 @@
 때 한 번만 호출하기를 원하고, 그래서 사용자가 필요 이상으로 기다리지 
 않게 만들고 싶습니다.
 
-우리는 리스트 13-1 에 보이는 `simulated_expensive_calculation` 
+우리는 Listing 13-1 에 보이는 `simulated_expensive_calculation` 
 함수를 사용해서 이 가상의 알고리즘 호출을 시뮬레이션합니다. 이 함수는 
 `calculating slowly...` 를 출력하고, 2초를 기다린 다음, 
 인자로 넘어온 어떤 숫자든 돌려줍니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-1: 실행시간이 약 2초 걸리는 가상의 계산을 대신하는
+<span class="caption">Listing 13-1: 실행시간이 약 2초 걸리는 가상의 계산을 대신하는
 함수</span>
 
 다음은 이 예제에서 중요한 운동 앱의 일부를 담고 있는 `main` 
@@ -48,7 +48,7 @@
   나타내기 위해 사용자가 지정하는 *운동 강도 숫자*
 * 몇 가지 다양한 운동 계획들을 생성할 *임의의 숫자*
 
-출력은 추천 운동 계획이 될 것입니다. 리스트 13-2 는 
+출력은 추천 운동 계획이 될 것입니다. Listing 13-2 는 
 우리가 사용할 `main` 함수입니다.
 
 <span class="filename">파일이름: src/main.rs</span>
@@ -57,7 +57,7 @@
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-2:`main` 함수와 사용자 입력과 임의의 숫자 생성을 시뮬레이션
+<span class="caption">Listing 13-2:`main` 함수와 사용자 입력과 임의의 숫자 생성을 시뮬레이션
 하기 위한 하드코딩된 값</span>
 
 단순함을 위해서 `simulated_user_specified_value` 변수의 
@@ -67,7 +67,7 @@
 사용할 것입니다. `main` 함수는 `generate_workout` 함수를 
 모의의 입력값으로 호출합니다.
 
-이제 상황이 만들어졌으니, 알고리즘으로 넘어가겠습니다. 리스트 13-3 
+이제 상황이 만들어졌으니, 알고리즘으로 넘어가겠습니다. Listing 13-3 
 에 있는 `generate_workout` 함수는 이 예제에서 가장 신경 써야 
 할 앱의 비즈니스 로직을 포함하고 있습니다. 이 예제에서 나머지 코드 
 변경 사항은 이 함수에 적용됩니다:
@@ -78,10 +78,10 @@
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-3: 입력값과 `simulated_expensive_calculation` 함
+<span class="caption">Listing 13-3: 입력값과 `simulated_expensive_calculation` 함
 수 호출에 따라 운동 계획을 출력하는 비즈니스 로직</span>
 
-리스트 13-3 의 코드는 느린 계산 함수를 여러 번 호출합니다.
+Listing 13-3 의 코드는 느린 계산 함수를 여러 번 호출합니다.
 첫 번째 `if` 블록은 `simulated_expensive_calculation` 함수를 두 번 호출하고,
 바깥 `else` 의 안쪽에 있는 `if` 문에서는 전혀 호출하지 않으며, 두 번째 `else` 문
 의 경우는 한 번 호출합니다.
@@ -109,7 +109,7 @@
 
 #### 함수를 사용해서 리팩토링하기
 
-우리는 여러 방법으로 운동 프로그램을 재구성할 수 있습니다. 우선, 리스트 13-4 에 
+우리는 여러 방법으로 운동 프로그램을 재구성할 수 있습니다. 우선, Listing 13-4 에 
 보이는 것처럼 중복된 `simulated_expensive_calculation` 함수 호출을 
 하나의 변수로 추출해 볼 것입니다:
 
@@ -119,7 +119,7 @@
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-4: `simulated_expensive_calculation` 에 대한
+<span class="caption">Listing 13-4: `simulated_expensive_calculation` 에 대한
 호출들을 한 곳으로 추출하고 결과를 `expensive_result` 변수에 저장하기</span>
 
 이 변경은 `simulated_expensive_calculation` 에 대한 모든 호출들을 
@@ -129,12 +129,12 @@
 경우에도 이 함수 호출의 영향을 받게 됩니다.
 
 우리는 프로그램에서 한 곳에서 코드를 정의하고, 실제로 결과가 필요한 곳에서만
-그 코드를 *실행하고* 싶습니다. 이것이 클로저의 유스 케이스입니다.
+그 코드를 *실행하고* 싶습니다. 이것이 클로저의 용례입니다.
 
 #### 코드를 저장하기 위해 클로저를 사용해서 리팩토링하기.
 
 `if` 블록 전에 항상 `simulated_expensive_calculation` 함수를 
-호출하는 대신, 리스트 13-5에 보이는 것처럼 클로저를 정의하고 변수에 
+호출하는 대신, Listing 13-5에 보이는 것처럼 클로저를 정의하고 변수에 
 함수 리턴 값을 저장하기보단 *클로저*를 저장할 수 있습니다. 
 여기서 소개하는 것처럼 실제로 클로저 안에 `simulated_expensive_calculation` 
 의 전체 내용을 옮길 수 있습니다.
@@ -145,7 +145,7 @@
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-5: 클로저를 정의하고 `expensive_closure` 변수에
+<span class="caption">Listing 13-5: 클로저를 정의하고 `expensive_closure` 변수에
 저장하기</span>
 
 클로저 정의는 변수 `expensive_closure` 에 할당하기 위해 `=` 
@@ -170,22 +170,22 @@
 
 클로저를 정의한 후에는 `if` 블록 안의 코드는 클로저를 호출해서 결괏값을 
 얻는 식으로 코드를 바꿀 수 있습니다. 함수를 호출하는 것처럼 클로저를 
-호출합니다: 리스트 13-6 에 보이는 것처럼, 클로저 정의를 저장하는 
+호출합니다: Listing 13-6 에 보이는 것처럼, 클로저 정의를 저장하는 
 변수명을 적고 다음엔 사용할 인자값을 포함하는 괄호가 따라옵니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-6: 우리가 정의한 `expensive_closure` 호출하기
+<span class="caption">Listing 13-6: 우리가 정의한 `expensive_closure` 호출하기
 </span>
 
 이제 비용이 큰 계산은 단 한 곳에서만 호출되고, 우리가 결과가 필요한 곳에서만
 그 코드를 실행합니다.
 
-그러나, 이는 리스트 13-3 에 있는 문제중 하나를 다시 야기하게 됩니다: 
+그러나, 이는 Listing 13-3 에 있는 문제중 하나를 다시 야기하게 됩니다: 
 우리는 여전히 첫 번째 `if` 블록에서 클로저를 두 번 호출 하는데, 
 이는 비용이 큰 코드를 두 번 반복해서 호출하게 되면서 사용자는 두 배 
 더 기다리게 됩니다. `if` 블록 안에 클로저 호출의 결과를 저장하는 
@@ -215,16 +215,16 @@
 
 변수와 마찬가지로 필요 이상으로 자세히 표현하는 비용을 지불하고서라도
 명확성과 명료성을 높이고 싶다면 타입 어노테이션(혹은 타입 명시)를 추가할 수 있습니다.
-리스트 13-5 에 정의한 클로저에 타입을 명시하는 것은 리스트 13-7 에 보이는 것과
+Listing 13-5 에 정의한 클로저에 타입을 명시하는 것은 Listing 13-7 에 보이는 것과
 같을 것입니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-7: 클로저에 매개변수와 반환 값 타입에 대한 선택적
+<span class="caption">Listing 13-7: 클로저에 매개변수와 반환 값 타입에 대한 선택적
 인 타입 어노테이션 추가하기</span>
 
 타입 어노테이션이 있으면 클로저와 함수의 문법은 더 비슷해 보입니다.
@@ -249,20 +249,20 @@ let add_one_v4 = |x|               x + 1  ;
 왜냐하면 어떻게 호출되는지에 따라 타입이 추론되기 때문입니다.
 
 클로저 정의는 각각의 파라미터들과 반환 값에 대해 단 하나의 추론된 
-구체적인 타입을 갖습니다. 예를 들면, 리스트 13-8 은 파라미터로 
+구체적인 타입을 갖습니다. 예를 들면, Listing 13-8 은 파라미터로 
 받은 값을 그대로 반환하는 짧은 클로저의 정의를 보여줍니다. 이 클로저는 
 이 예제의 목적 외에는 유용하지 않습니다. 정의에 타입 어노테이션을 
 추가하지 않았다는 것에 유의하세요: 클로저를 두 번 호출하는데, 
 첫 번째는 `String` 을 인자로 사용하고 두 번째는 `u32` 를 사용한다면 
 에러가 발생합니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-8: 서로 다른 두 개의 타입으로 추론된 타입을 갖는 
+<span class="caption">Listing 13-8: 서로 다른 두 개의 타입으로 추론된 타입을 갖는 
 클로저 호출해 보기</span>
 
 컴파일러는 이런 에러를 줍니다:
@@ -277,7 +277,7 @@ let add_one_v4 = |x|               x + 1  ;
 
 ### 제네릭 파라미터와 `Fn` 트레잇을 사용하여 클로저 저장하기
 
-운동 생성 앱으로 돌아갑시다. 리스트 13-6 에서, 우리의 코드는 
+운동 생성 앱으로 돌아갑시다. Listing 13-6 에서, 우리의 코드는 
 아직도 비용이 큰 계산을 수행하는 클로저를 필요보다 더 많이 호출 
 합니다. 이 문제를 풀기 위한 한 가지 옵션은 비용이 많이 드는 
 클로저의 결괏값은 재활용을 위해 변수에 저장하고 후에 결과가
@@ -293,7 +293,7 @@ let add_one_v4 = |x|               x + 1  ;
 
 구조체에서 클로저를 갖고 있도록 하기 위해, 클로저 타입을 기술할 필요가 있는데,
 구조체 정의는 각 필드의 타입을 알 필요가 있기 때문입니다. 각 클로저 인스턴스는
-자신의 유일한 익명 타입을 갖습니다: 즉, 두 클로저가 동일한 타입 서명을 갖더라도
+자신의 유일한 익명 타입을 갖습니다: 즉, 두 클로저가 동일한 시그니처를 갖더라도
 그들의 타입은 여전히 다른 것으로 간주 됩니다. 클로저를 사용하는 구조체, 열거형,
 함수 파라미터를 정의하기 위해, 10장에서 설명한 것처럼 제네릭과 트레잇 바운드를
 사용합니다.
@@ -309,16 +309,16 @@ let add_one_v4 = |x|               x + 1  ;
 `u32`이고 `u32` 타입을 반환하므로, 명시하는 트레잇 바운드는 
 `Fn(u32) -> u32` 입니다.
 
-리스트 13-9 는 클로저와 선택적인 결괏값을 가진 `Cacher` 구조체의 
+Listing 13-9 는 클로저와 선택적인 결괏값을 가진 `Cacher` 구조체의 
 정의를 보여줍니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-9: `calculation` 에 클로저를 담고, 선택적인 결괏값을
+<span class="caption">Listing 13-9: `calculation` 에 클로저를 담고, 선택적인 결괏값을
 `value` 에 담는 `Cacher` 구조체 정의하기</span>
 
 `Cacher` 구조체는 제네릭 타입 `T` 의 `calculation` 필드를 갖습니다.
@@ -327,7 +327,7 @@ let add_one_v4 = |x|               x + 1  ;
 (`Fn` 다음 괄호 안에 명시됨)를 갖고 `u32` (`->` 다음에 명시됨) 타입의 값을
 반환해야 합니다.
 
-> 노트: 함수는 세 개의 `Fn` 트레잇도 모두 구현할 수 있습니다. 
+> 노트: 함수 또한 세 개의 `Fn` 트레잇을 모두 구현할 수 있습니다. 
 > 환경에서 값을 캡처할 필요가 없다면, `Fn` 트레잇을 구현해야 
 > 하는 클로저 대신 함수를 사용할 수 있습니다.
 
@@ -338,16 +338,16 @@ let add_one_v4 = |x|               x + 1  ;
 필드에 저장합니다. 그다음부터는 코드에서 클로저의 결과를 다시 요청하면 클로저를 다시 
 실행하는 대신, `Cacher` 는 `Some` variant 안에 있는 결과를 돌려줍니다.
 
-방금 설명한 `value` 필드에 대한 로직은 리스트 13-10 에 
+방금 설명한 `value` 필드에 대한 로직은 Listing 13-10 에 
 정의되어 있습니다: 
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-10: `Cacher` 의 캐싱 로직</span>
+<span class="caption">Listing 13-10: `Cacher` 의 캐싱 로직</span>
 
 우리는 호출하는 코드에서 구조체 필드의 값을 변경할 수 있게 
 만드는 것보다는 `Cacher` 가 값을 관리하도록 하고 싶기 
@@ -369,16 +369,16 @@ let add_one_v4 = |x|               x + 1  ;
 저장된 클로저를 호출하고, 나중에 재사용을 위해 결과를 `self.value` 에 
 저장한 후 값을 반환합니다.
 
-리스트 13-11 는 리스트 13-6 의 `generate_workout` 함수에서 `Cacher` 구조
-체를 사용하는 방법을 보여줍니다:
+Listing 13-11 는 Listing 13-6 의 `generate_workout` 함수에서 `Cacher` 
+구조체를 사용하는 방법을 보여줍니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 
-<span class="caption">리스트 13-11: 캐싱 로직을 추상화하기 위해
+<span class="caption">Listing 13-11: 캐싱 로직을 추상화하기 위해
 `generate_workout` 함수 안에서 `Cacher` 사용하기</span>
 
 클로저를 변수에 직접 저장하는 대신, 클로저를 갖는 `Cacher` 의 
@@ -387,13 +387,13 @@ let add_one_v4 = |x|               x + 1  ;
 `value` 메소드를 원하는 만큼 호출할 수 있고, 전혀 호출하지 
 않을 수도 있으며, 비싼 계산은 최대 한 번만 수행될 것입니다.
 
-리스트 13-2 의 `main` 함수로 이 프로그램을 실행해 보세요. 
+Listing 13-2 의 `main` 함수로 이 프로그램을 실행해 보세요. 
 다양한 `if` 와 `else` 블록에 있는 모든 케이스를 검증하기 위해 
 `simulated_user_specified_value` 와 `simulated_random_number` 
 변수들을 변경해 보세요. `calculating slowly...` 메세지는 단 한 번만, 
 그리고 필요할 때만 나타납니다. `Cacher` 는 `generate_workout` 가
 비즈니스 로직에 집중할 수 있도록 비싼 계산을 필요한 것보다 더 호출하지 
-않도록 보장하는 필요한 로직을 처리합니다.
+않도록 보장하기 위한 로직을 처리합니다.
 
 ### `Cacher` 구현의 제약사항
 
@@ -414,7 +414,7 @@ let add_one_v4 = |x|               x + 1  ;
 인스턴스의 `value` 메소드를 호출하고, `arg` 값을 2로 `value` 를 호출 했을 때
 2를 반환 할 것으로 기대합니다.
 
-리스트 13-9 와 13-10 에 있는 `Cacher` 구현에 대해 이 테스트를 돌리면, 테스트는
+Listing 13-9 와 13-10 에 있는 `Cacher` 구현에 대해 이 테스트를 돌리면, 테스트는
 다음과 같은 메시지와 함께 `assert_eq!` 에서 실패할 것입니다:
 
 ```console
@@ -446,16 +446,16 @@ let add_one_v4 = |x|               x + 1  ;
 추가적인 능력을 갖추고 있습니다: 환경을 캡처해서
 클로저가 정의된 스코프의 변수에 접근할 수 있습니다.
 
-리스트 13-12 는 `equal_to_x` 변수에 저장된 클로저가 클로저를 둘러싼 환경에 있는 `x` 변수를
+Listing 13-12 는 `equal_to_x` 변수에 저장된 클로저가 클로저를 둘러싼 환경에 있는 `x` 변수를
 사용하는 예제를 보여줍니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/main.rs}}
 ```
 
-<span class="caption">리스트 13-12: 둘러싼 스코프에 있는 변수를 참조하는 클로저의
+<span class="caption">Listing 13-12: 둘러싼 스코프에 있는 변수를 참조하는 클로저의
 예</span>
 
 비록 `x` 가 `equal_to_x` 의 파라미터 중의 하나가 
@@ -465,7 +465,7 @@ let add_one_v4 = |x|               x + 1  ;
 함수로는 이와 동일하게 할 수 없습니다; 다음 예제로 시도해 보면, 코드는 컴파일
 되지 않습니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
@@ -504,7 +504,7 @@ let add_one_v4 = |x|               x + 1  ;
 클로저는 최소 한 번씩은 호출될 수 있기 때문에 `FnOnce` 를 
 구현합니다. 캡처된 변수를 이동시키지 않는 클로저는 또한 `FnMut` 를, 
 캡처된 변수를 가변 사용할 필요가 없는 클로저는 `Fn` 를 구현합니다. 
-리스트 13-12 에서 `equal_to_x` 클로저의 몸통에서는 `x` 에 있는 값을 읽기만 
+Listing 13-12 에서 `equal_to_x` 클로저의 몸통에서는 `x` 에 있는 값을 읽기만 
 하면 되기 때문에 `x` 를 불변으로 빌립니다 (그래서 `equal_to_x` 은 `Fn` 트레잇입니다).
 
 만약 클로저가 환경으로부터 사용하는 값에 대해 소유권을 갖도록 강제하고 싶다면,
@@ -518,12 +518,12 @@ let add_one_v4 = |x|               x + 1  ;
 > `move` 키워드는 클로저가 어떻게 캡처하는지만 명시해주는 역할을 합니다.
 
 16장에서 병렬성에 대한 부분에서 더 많은 `move` 클로저의 
-예제가 있습니다. 우선은 변경된 리스트 13-12 의 코드를 
+예제가 있습니다. 우선은 변경된 Listing 13-12 의 코드를 
 살펴봅시다. 클로저 정의에 `move` 키워드를 추가하고
 정수는 이동되지 않고 복사되기 때문에 대신 벡터를 사용했습니다. 
 이 코드는 아직 컴파일되지 않습니다:
 
-<span class="filename">파일명: src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
