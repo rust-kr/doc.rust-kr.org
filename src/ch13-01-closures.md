@@ -1,31 +1,31 @@
-## Closures: Anonymous Functions that Can Capture Their Environment
+## 클로저: 환경을 캡처할 수 있는 익명 함수
 
-Rust’s closures are anonymous functions you can save in a variable or pass as
-arguments to other functions. You can create the closure in one place and then
-call the closure to evaluate it in a different context. Unlike functions,
-closures can capture values from the scope in which they’re defined. We’ll
-demonstrate how these closure features allow for code reuse and behavior
-customization.
+러스트의 *클로저*는 변수에 저장하거나 다른 함수에 인자로 넘길 수 
+있는 익명 함수입니다. 한 곳에서 클로저를 만들고 다른 문맥에서 
+그것을 평가하기 위해 호출할 수 있습니다. 함수와 다르게 클로저는 
+정의된 스코프에서 값을 캡처할 수 있습니다. 앞으로 클로저의 이러한 
+기능이 코드 재사용과 동작 사용자 정의를 어떻게 가능케 하는지 살펴볼 
+것입니다.
 
-### Creating an Abstraction of Behavior with Closures
+### 클로저로 동작을 추상화하기
 
-Let’s work on an example of a situation in which it’s useful to store a closure
-to be executed later. Along the way, we’ll talk about the syntax of closures,
-type inference, and traits.
+클로저를 나중에 실행하기 위해 저장하는 것이 유용한 상황에 대한 
+예제로 시작해봅시다. 이 과정에서 클로저 문법과 타입 추론, 
+트레잇에 관해 얘기합니다.
 
-Consider this hypothetical situation: we work at a startup that’s making an app
-to generate custom exercise workout plans. The backend is written in Rust, and
-the algorithm that generates the workout plan takes into account many factors,
-such as the app user’s age, body mass index, exercise preferences, recent
-workouts, and an intensity number they specify. The actual algorithm used isn’t
-important in this example; what’s important is that this calculation takes a
-few seconds. We want to call this algorithm only when we need to and only call
-it once so we don’t make the user wait more than necessary.
+이런 가상의 상황을 생각해 봅시다: 우리는 맞춤 운동 계획을 생성하는 
+앱을 만드는 스타트업에서 일합니다. 백엔드는 러스트로 작성되어 있고, 
+운동 계획을 생성하는 알고리즘은 사용자의 나이, 체질량 지수, 선호 운동, 
+최근 운동, 사용자가 설정한 운동 강도 등 여러 요소를 고려합니다. 
+실제 알고리즘은 이 예제에서 그렇게 중요하지 않습니다. 중요한 것은 
+이 계산에 몇 초씩이나 걸린다는 것입니다. 이 알고리즘을 우리가 필요할 
+때 한 번만 호출하기를 원하고, 그래서 사용자가 필요 이상으로 기다리지 
+않게 만들고 싶습니다.
 
-We’ll simulate calling this hypothetical algorithm with the function
-`simulated_expensive_calculation` shown in Listing 13-1, which will print
-`calculating slowly...`, wait for two seconds, and then return whatever number
-we passed in.
+우리는 Listing 13-1 에 보이는 `simulated_expensive_calculation` 
+함수를 사용해서 이 가상의 알고리즘 호출을 시뮬레이션합니다. 이 함수는 
+`calculating slowly...` 를 출력하고, 2초를 기다린 다음, 
+인자로 넘어온 어떤 숫자든 돌려줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -33,149 +33,145 @@ we passed in.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-1: A function to stand in for a hypothetical
-calculation that takes about 2 seconds to run</span>
+<span class="caption">Listing 13-1: 실행시간이 약 2초 걸리는 가상의 계산을 대신하는
+함수</span>
 
-Next is the `main` function, which contains the parts of the workout app
-important for this example. This function represents the code that the app will
-call when a user asks for a workout plan. Because the interaction with the
-app’s frontend isn’t relevant to the use of closures, we’ll hardcode values
-representing inputs to our program and print the outputs.
+다음은 이 예제에서 중요한 운동 앱의 일부를 담고 있는 `main` 
+함수입니다. 이 함수는 사용자가 운동 계획을 요청할 때 앱이 
+호출할 코드를 나타냅니다. 앱의 프론트엔드와의 상호작용은 
+클로저 사용과 관련이 없기 때문에 프로그램에 대한 입력을 
+나타내는 값을 하드코딩한 다음 결과를 출력할 것입니다.
 
-The required inputs are these:
+필요한 입력들은:
 
-* An intensity number from the user, which is specified when they request
-  a workout to indicate whether they want a low-intensity workout or a
-  high-intensity workout
-* A random number that will generate some variety in the workout plans
+* 낮은 강도 운동을 원하는지 혹은 고강도 운동을 원하는지를 
+  나타내기 위해 사용자가 지정하는 *운동 강도 숫자*
+* 몇 가지 다양한 운동 계획들을 생성할 *임의의 숫자*
 
-The output will be the recommended workout plan. Listing 13-2 shows the `main`
-function we’ll use.
+출력은 추천 운동 계획이 될 것입니다. Listing 13-2 는 
+우리가 사용할 `main` 함수입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일이름: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-2: A `main` function with hardcoded values to
-simulate user input and random number generation</span>
+<span class="caption">Listing 13-2:`main` 함수와 사용자 입력과 임의의 숫자 생성을 시뮬레이션
+하기 위한 하드코딩된 값</span>
 
-We’ve hardcoded the variable `simulated_user_specified_value` as 10 and the
-variable `simulated_random_number` as 7 for simplicity’s sake; in an actual
-program, we’d get the intensity number from the app frontend, and we’d use the
-`rand` crate to generate a random number, as we did in the Guessing Game
-example in Chapter 2. The `main` function calls a `generate_workout` function
-with the simulated input values.
+단순함을 위해서 `simulated_user_specified_value` 변수의 
+값을 10으로 하고 `simulated_random_number` 변수의 값을 
+7로 하드코딩 했습니다. 실제 프로그램에서는 운동 강도를 프론트엔드에서 
+전달받고 2장의 추리 게임에서처럼 난수 생성을 위해 `rand` 크레이트를 
+사용할 것입니다. `main` 함수는 `generate_workout` 함수를 
+모의의 입력값으로 호출합니다.
 
-Now that we have the context, let’s get to the algorithm. The function
-`generate_workout` in Listing 13-3 contains the business logic of the
-app that we’re most concerned with in this example. The rest of the code
-changes in this example will be made to this function.
+이제 상황이 만들어졌으니, 알고리즘으로 넘어가겠습니다. Listing 13-3 
+에 있는 `generate_workout` 함수는 이 예제에서 가장 신경 써야 
+할 앱의 비즈니스 로직을 포함하고 있습니다. 이 예제에서 나머지 코드 
+변경 사항은 이 함수에 적용됩니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일이름: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-3: The business logic that prints the workout
-plans based on the inputs and calls to the `simulated_expensive_calculation`
-function</span>
+<span class="caption">Listing 13-3: 입력값과 `simulated_expensive_calculation` 함
+수 호출에 따라 운동 계획을 출력하는 비즈니스 로직</span>
 
-The code in Listing 13-3 has multiple calls to the slow calculation function.
-The first `if` block calls `simulated_expensive_calculation` twice, the `if`
-inside the outer `else` doesn’t call it at all, and the code inside the
-second `else` case calls it once.
+Listing 13-3 의 코드는 느린 계산 함수를 여러 번 호출합니다.
+첫 번째 `if` 블록은 `simulated_expensive_calculation` 함수를 두 번 호출하고,
+바깥 `else` 의 안쪽에 있는 `if` 문에서는 전혀 호출하지 않으며, 두 번째 `else` 문
+의 경우는 한 번 호출합니다.
 
-The desired behavior of the `generate_workout` function is to first check
-whether the user wants a low-intensity workout (indicated by a number less than
-25) or a high-intensity workout (a number of 25 or greater).
+`generate_workout` 함수의 바람직한 동작은 먼저 사용자가 
+저강도 운동(25보다 작은 수로 표시) 혹은 고강도 운동(25 이상의 
+수)을 원하는지 판단하는 것입니다.
 
-Low-intensity workout plans will recommend a number of push-ups and sit-ups
-based on the complex algorithm we’re simulating.
+저강도 운동 계획은 우리가 시뮬레이션 하는 복잡한 알고리즘에 따라 팔굽혀펴기와
+윗몸일으키기의 횟수를 추천합니다.
 
-If the user wants a high-intensity workout, there’s some additional logic: if
-the value of the random number generated by the app happens to be 3, the app
-will recommend a break and hydration. If not, the user will get a number of
-minutes of running based on the complex algorithm.
+사용자가 고강도 운동을 원한다면, 약간의 추가 로직이 있습니다: 
+앱에서 생성된 난수값이 3인 경우, 앱은 휴식과 수분 섭취를 추천합니다. 
+그렇지 않은 경우, 사용자는 복잡한 알고리즘을 기반으로 선택된 시간(분) 
+동안 달리기를 하도록 안내받습니다.
 
-This code works the way the business wants it to now, but let’s say the data
-science team decides that we need to make some changes to the way we call the
-`simulated_expensive_calculation` function in the future. To simplify the
-update when those changes happen, we want to refactor this code so it calls the
-`simulated_expensive_calculation` function only once. We also want to cut the
-place where we’re currently unnecessarily calling the function twice without
-adding any other calls to that function in the process. That is, we don’t want
-to call it if the result isn’t needed, and we still want to call it only once.
+현재 코드는 우리가 원하는 대로 동작하고 있습니다. 하지만 한번 데이터 사이언스 팀이 
+앞으로 `simulated_expensive_calculation` 함수를 호출하는 방식을 바꾸기로 
+결정했다고 생각해 봅시다.
+이러한 변경이 발생했을 때 업데이트를 단순화하기 위해서, 이 코드를 리팩토링하여 
+`simulated_expensive_calculation` 함수를 딱 한 번만 호출하도록 하려고
+합니다. 또한 현재 해당 함수를 같은 값을 인자로 해서 불필요하게 두 번 호출하는 
+부분도 없애고 싶습니다. 즉, 결과가 필요 없다면 함수를 호출하고 싶지 않고, 
+필요하더라도 딱 한 번만 호출하고 싶습니다.
 
-#### Refactoring Using Functions
+#### 함수를 사용해서 리팩토링하기
 
-We could restructure the workout program in many ways. First, we’ll try
-extracting the duplicated call to the `simulated_expensive_calculation`
-function into a variable, as shown in Listing 13-4.
+우리는 여러 방법으로 운동 프로그램을 재구성할 수 있습니다. 우선, Listing 13-4 에 
+보이는 것처럼 중복된 `simulated_expensive_calculation` 함수 호출을 
+하나의 변수로 추출해 볼 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일이름: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-4: Extracting the calls to
-`simulated_expensive_calculation` to one place and storing the result in the
-`expensive_result` variable</span>
+<span class="caption">Listing 13-4: `simulated_expensive_calculation` 에 대한
+호출들을 한 곳으로 추출하고 결과를 `expensive_result` 변수에 저장하기</span>
 
-This change unifies all the calls to `simulated_expensive_calculation` and
-solves the problem of the first `if` block unnecessarily calling the function
-twice. Unfortunately, we’re now calling this function and waiting for the
-result in all cases, which includes the inner `if` block that doesn’t use the
-result value at all.
+이 변경은 `simulated_expensive_calculation` 에 대한 모든 호출들을 
+하나로 합치고 첫 번째 `if` 문에서 불필요하게 이 함수를 여러 번 호출하던 
+문제를 해결합니다. 안타깝게도 이제 모든 경우에 대해서 이 함수를 호출하고 
+결과를 기다리게 됩니다. 이 결과를 전혀 사용하지 않는 안쪽 `if` 블록의 
+경우에도 이 함수 호출의 영향을 받게 됩니다.
 
-We want to define code in one place in our program, but only *execute* that
-code where we actually need the result. This is a use case for closures!
+우리는 프로그램에서 한 곳에서 코드를 정의하고, 실제로 결과가 필요한 곳에서만
+그 코드를 *실행하고* 싶습니다. 이것이 클로저의 용례입니다.
 
-#### Refactoring with Closures to Store Code
+#### 코드를 저장하기 위해 클로저를 사용해서 리팩토링하기.
 
-Instead of always calling the `simulated_expensive_calculation` function before
-the `if` blocks, we can define a closure and store the *closure* in a variable
-rather than storing the result of the function call, as shown in Listing 13-5.
-We can actually move the whole body of `simulated_expensive_calculation` within
-the closure we’re introducing here.
+`if` 블록 전에 항상 `simulated_expensive_calculation` 함수를 
+호출하는 대신, Listing 13-5에 보이는 것처럼 클로저를 정의하고 변수에 
+함수 리턴 값을 저장하기보단 *클로저*를 저장할 수 있습니다. 
+여기서 소개하는 것처럼 실제로 클로저 안에 `simulated_expensive_calculation` 
+의 전체 내용을 옮길 수 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일이름: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-5: Defining a closure and storing it in the
-`expensive_closure` variable</span>
+<span class="caption">Listing 13-5: 클로저를 정의하고 `expensive_closure` 변수에
+저장하기</span>
 
-The closure definition comes after the `=` to assign it to the variable
-`expensive_closure`. To define a closure, we start with a pair of vertical
-pipes (`|`), inside which we specify the parameters to the closure; this syntax
-was chosen because of its similarity to closure definitions in Smalltalk and
-Ruby. This closure has one parameter named `num`: if we had more than one
-parameter, we would separate them with commas, like `|param1, param2|`.
+클로저 정의는 변수 `expensive_closure` 에 할당하기 위해 `=` 
+다음에 옵니다. 클로저 정의는 수직의 파이프 (`|`) 한 쌍으로 시작하며, 
+그 사이에는 매개변수를 적습니다; 이 문법은 스몰토크와 루비에서 클로저 
+정의와 비슷하여 선택되었습니다. 이 클로저는 `num` 이라는 하나의 
+매개변수를 갖습니다: 하나 이상의 매개변수를 갖는다면, `|param1, param2|` 
+와 같이 콤마로 구분합니다.
 
-After the parameters, we place curly brackets that hold the body of the
-closure—these are optional if the closure body is a single expression. The end
-of the closure, after the curly brackets, needs a semicolon to complete the
-`let` statement. The value returned from the last line in the closure body
-(`num`) will be the value returned from the closure when it’s called, because
-that line doesn’t end in a semicolon; just as in function bodies.
+매개변수 다음에는 클로저의 몸통을 포함하는 중괄호를 넣습니다. 클로저 
+몸통이 하나의 표현식이면 중괄호는 선택 사항입니다. 중괄호 다음에 
+클로저의 끝에는 `let`문을 완성하기 위해 세미콜론이 필요합니다. 클로저 
+몸통에서 마지막 줄의 (`num`) 은 클로저가 호출되었을 때 클로저로부터 
+반환되는 값입니다. 왜냐하면 해당 라인은 함수에서처럼 세미콜론으로 
+끝나지 않기 때문입니다.
 
-Note that this `let` statement means `expensive_closure` contains the
-*definition* of an anonymous function, not the *resulting value* of calling the
-anonymous function. Recall that we’re using a closure because we want to define
-the code to call at one point, store that code, and call it at a later point;
-the code we want to call is now stored in `expensive_closure`.
+`let` 문은 `expensive_closure` 가 익명함수의 *정의*를 포함하지, 
+호출한 *결괏값*을 포함하지는 않는다는 것에 유의하세요. 우리가 클로저를 
+사용하는 이유는 호출할 코드를 한 곳에서 정의하고 저장한 뒤에, 이후 
+다른 곳에서 그것을 호출하길 원하기 때문이라는 것을 기억하세요; 우리가 
+호출하고자 하는 코드는 이제 `expensive_closure` 에 저장되었습니다.
 
-With the closure defined, we can change the code in the `if` blocks to call the
-closure to execute the code and get the resulting value. We call a closure like
-we do a function: we specify the variable name that holds the closure
-definition and follow it with parentheses containing the argument values we
-want to use, as shown in Listing 13-6.
+클로저를 정의한 후에는 `if` 블록 안의 코드는 클로저를 호출해서 결괏값을 
+얻는 식으로 코드를 바꿀 수 있습니다. 함수를 호출하는 것처럼 클로저를 
+호출합니다: Listing 13-6 에 보이는 것처럼, 클로저 정의를 저장하는 
+변수명을 적고 다음엔 사용할 인자값을 포함하는 괄호가 따라옵니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -183,44 +179,44 @@ want to use, as shown in Listing 13-6.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-6: Calling the `expensive_closure` we’ve
-defined</span>
+<span class="caption">Listing 13-6: 우리가 정의한 `expensive_closure` 호출하기
+</span>
 
-Now the expensive calculation is called in only one place, and we’re only
-executing that code where we need the results.
+이제 비용이 큰 계산은 단 한 곳에서만 호출되고, 우리가 결과가 필요한 곳에서만
+그 코드를 실행합니다.
 
-However, we’ve reintroduced one of the problems from Listing 13-3: we’re still
-calling the closure twice in the first `if` block, which will call the
-expensive code twice and make the user wait twice as long as they need to. We
-could fix this problem by creating a variable local to that `if` block to hold
-the result of calling the closure, but closures provide us with another
-solution. We’ll talk about that solution in a bit. But first let’s talk about
-why there aren’t type annotations in the closure definition and the traits
-involved with closures.
+그러나, 이는 Listing 13-3 에 있는 문제중 하나를 다시 야기하게 됩니다: 
+우리는 여전히 첫 번째 `if` 블록에서 클로저를 두 번 호출 하는데, 
+이는 비용이 큰 코드를 두 번 반복해서 호출하게 되면서 사용자는 두 배 
+더 기다리게 됩니다. `if` 블록 안에 클로저 호출의 결과를 저장하는 
+지역 변수를 만들어서 문제를 해결할 수도 있지만, 클로저는 다른 해결책을 
+제공합니다. 그 해결책에 관해서는 조금 이따가 얘기하도록 하고 우선 
+클로저 정의에 타입 어노테이션이 없는 이유와 클로저와 연관된 트레잇에 
+관해 이야기 합시다.
 
-### Closure Type Inference and Annotation
+### 클로저 타입 추론과 어노테이션
 
-Closures don’t require you to annotate the types of the parameters or the
-return value like `fn` functions do. Type annotations are required on functions
-because they’re part of an explicit interface exposed to your users. Defining
-this interface rigidly is important for ensuring that everyone agrees on what
-types of values a function uses and returns. But closures aren’t used in an
-exposed interface like this: they’re stored in variables and used without
-naming them and exposing them to users of our library.
+클로저는 `fn` 함수처럼 파라미터나 반환 값의 타입을 명시할 것을 
+요구하지 않습니다. 타입 어노테이션은 사용자에게 노출되는 명시적인 
+인터페이스의 일부이기 때문에 함수에 필요합니다. 이 인터페이스를 
+엄격하게 정의하는 것은 함수가 어떤 타입의 값을 사용하고 반환하는지에 
+대해 모두가 합의한다는 것을 보장하는 데 중요합니다.
+그러나 클로저는 이처럼 노출된 인터페이스에 사용되지 않습니다: 변수에 저장되고
+이름 없이 우리의 라이브러리 사용자들에게 노출되지 않고 사용됩니다.
 
-Closures are usually short and relevant only within a narrow context rather
-than in any arbitrary scenario. Within these limited contexts, the compiler is
-reliably able to infer the types of the parameters and the return type, similar
-to how it’s able to infer the types of most variables.
+추가로, 클로저는 보통 짧고 임의의 시나리오 보다 좁은 문맥 
+안에서만 관련이 있습니다. 이런 제한된 문맥 안에서만, 
+컴파일러는 안정적으로 파라미터와 리턴타입을 추론할 수 있으며, 
+이는 대부분의 변수 타입을 추론하는 방법과 비슷합니다.
 
-Making programmers annotate the types in these small, anonymous functions would
-be annoying and largely redundant with the information the compiler already has
-available.
+프로그래머들에게 이런 작고 익명의 함수들에 타입을 달도록 하는 
+것은 짜증이 나고 컴파일러가 이미 사용할 수 있는 정보와 
+대개 중복됩니다.
 
-As with variables, we can add type annotations if we want to increase
-explicitness and clarity at the cost of being more verbose than is strictly
-necessary. Annotating the types for the closure we defined in Listing 13-5
-would look like the definition shown in Listing 13-7.
+변수와 마찬가지로 필요 이상으로 자세히 표현하는 비용을 지불하고서라도
+명확성과 명료성을 높이고 싶다면 타입 어노테이션(혹은 타입 명시)를 추가할 수 있습니다.
+Listing 13-5 에 정의한 클로저에 타입을 명시하는 것은 Listing 13-7 에 보이는 것과
+같을 것입니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -228,15 +224,14 @@ would look like the definition shown in Listing 13-7.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-7: Adding optional type annotations of the
-parameter and return value types in the closure</span>
+<span class="caption">Listing 13-7: 클로저에 매개변수와 반환 값 타입에 대한 선택적
+인 타입 어노테이션 추가하기</span>
 
-With type annotations added, the syntax of closures looks more similar to the
-syntax of functions. The following is a vertical comparison of the syntax for
-the definition of a function that adds 1 to its parameter and a closure that
-has the same behavior. We’ve added some spaces to line up the relevant parts.
-This illustrates how closure syntax is similar to function syntax except for
-the use of pipes and the amount of syntax that is optional:
+타입 어노테이션이 있으면 클로저와 함수의 문법은 더 비슷해 보입니다.
+다음은 매개변수에 1을 더하는 함수 정의와 동일한 행위를 하는 클로저를 
+수직으로 비교한 것입니다. 관련 있는 부분들을 같은 위치에 놓기 위해 
+약간의 공백을 추가했습니다. 이것은 파이프를 사용하는 것과 선택적인 
+문법의 양을 무시하고 클로저 문법과 함수 문법이 얼마나 비슷한지 보여줍니다:
 
 ```rust,ignore
 fn  add_one_v1   (x: u32) -> u32 { x + 1 }
@@ -245,21 +240,21 @@ let add_one_v3 = |x|             { x + 1 };
 let add_one_v4 = |x|               x + 1  ;
 ```
 
-The first line shows a function definition, and the second line shows a fully
-annotated closure definition. The third line removes the type annotations from
-the closure definition, and the fourth line removes the brackets, which are
-optional because the closure body has only one expression. These are all valid
-definitions that will produce the same behavior when they’re called. Calling
-the closures is required for `add_one_v3` and `add_one_v4` to be able to
-compile because the types will be inferred from their usage.
+첫 번째 줄은 함수 정의를 보여주고, 두 번째 줄은 타입을 모두 
+명기한 클로저 정의를 보여 줍니다. 세 번째 줄은 클로저 정의에서 
+타입 어노테이션을 지웠고, 네 번째 줄은 선택적인 중괄호를 지웠는데, 
+클로저 몸통이 단 하나의 표현식을 갖기 때문입니다.
+이것은 모두 호출 했을 때 동일한 동작을 가지는 유효한 정의들입니다. 
+`add_one_v3`와 `add_one_v4`의 경우에는 클로저 호출이 필요합니다. 
+왜냐하면 어떻게 호출되는지에 따라 타입이 추론되기 때문입니다.
 
-Closure definitions will have one concrete type inferred for each of their
-parameters and for their return value. For instance, Listing 13-8 shows the
-definition of a short closure that just returns the value it receives as a
-parameter. This closure isn’t very useful except for the purposes of this
-example. Note that we haven’t added any type annotations to the definition: if
-we then try to call the closure twice, using a `String` as an argument the
-first time and a `u32` the second time, we’ll get an error.
+클로저 정의는 각각의 파라미터들과 반환 값에 대해 단 하나의 추론된 
+구체적인 타입을 갖습니다. 예를 들면, Listing 13-8 은 파라미터로 
+받은 값을 그대로 반환하는 짧은 클로저의 정의를 보여줍니다. 이 클로저는 
+이 예제의 목적 외에는 유용하지 않습니다. 정의에 타입 어노테이션을 
+추가하지 않았다는 것에 유의하세요: 클로저를 두 번 호출하는데, 
+첫 번째는 `String` 을 인자로 사용하고 두 번째는 `u32` 를 사용한다면 
+에러가 발생합니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -267,56 +262,55 @@ first time and a `u32` the second time, we’ll get an error.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-8: Attempting to call a closure whose types
-are inferred with two different types</span>
+<span class="caption">Listing 13-8: 서로 다른 두 개의 타입으로 추론된 타입을 갖는 
+클로저 호출해 보기</span>
 
-The compiler gives us this error:
+컴파일러는 이런 에러를 줍니다:
 
 ```console
 {{#include ../listings/ch13-functional-features/listing-13-08/output.txt}}
 ```
 
-The first time we call `example_closure` with the `String` value, the compiler
-infers the type of `x` and the return type of the closure to be `String`. Those
-types are then locked into the closure in `example_closure`, and we get a type
-error if we try to use a different type with the same closure.
+처음 `String` 값으로 `example_closure` 을 호출하면, 컴파일러는 `x` 의 타입과
+클로저의 반환 타입을 `String` 으로 추론합니다. 그다음부터 `example_closure`의 타입은 `String`
+으로 고정되고, 같은 클로저를 다른 타입으로 사용하려고 할 때 타입 에러를 얻게 됩니다.
 
-### Storing Closures Using Generic Parameters and the `Fn` Traits
+### 제네릭 파라미터와 `Fn` 트레잇을 사용하여 클로저 저장하기
 
-Let’s return to our workout generation app. In Listing 13-6, our code was still
-calling the expensive calculation closure more times than it needed to. One
-option to solve this issue is to save the result of the expensive closure in a
-variable for reuse and use the variable in each place we need the result,
-instead of calling the closure again. However, this method could result in a
-lot of repeated code.
+운동 생성 앱으로 돌아갑시다. Listing 13-6 에서, 우리의 코드는 
+아직도 비용이 큰 계산을 수행하는 클로저를 필요보다 더 많이 호출 
+합니다. 이 문제를 풀기 위한 한 가지 옵션은 비용이 많이 드는 
+클로저의 결괏값은 재활용을 위해 변수에 저장하고 후에 결과가
+필요한 부분에서 클로저를 다시 호출하는 대신 그 변수를 사용하는 것입니다.
+그러나, 이 방법은 많은 반복된 코드를 만들 수 있습니다.
 
-Fortunately, another solution is available to us. We can create a struct that
-will hold the closure and the resulting value of calling the closure. The
-struct will execute the closure only if we need the resulting value, and it
-will cache the resulting value so the rest of our code doesn’t have to be
-responsible for saving and reusing the result. You may know this pattern as
-*memoization* or *lazy evaluation*.
+다행히도 다른 해결책이 있습니다. 우리는 클로저와 클로저를 
+호출한 결괏값을 가진 구조체를 만들 수 있습니다. 그 구조체는 
+결괏값을 필요할 때만 클로저를 호출할 것이며 그 결괏값을 
+캐싱해둬서 나머지 코드에서 결과를 저장하고 재사용하지 않아도 
+되도록 할 것입니다. 이 패턴을 *메모이제이션(memoization)* 
+혹은 *지연 평가(lazy evaluation)*로 알고 있을 것입니다.
 
-To make a struct that holds a closure, we need to specify the type of the
-closure, because a struct definition needs to know the types of each of its
-fields. Each closure instance has its own unique anonymous type: that is, even
-if two closures have the same signature, their types are still considered
-different. To define structs, enums, or function parameters that use closures,
-we use generics and trait bounds, as we discussed in Chapter 10.
+구조체에서 클로저를 갖고 있도록 하기 위해, 클로저 타입을 기술할 필요가 있는데,
+구조체 정의는 각 필드의 타입을 알 필요가 있기 때문입니다. 각 클로저 인스턴스는
+자신의 유일한 익명 타입을 갖습니다: 즉, 두 클로저가 동일한 시그니처를 갖더라도
+그들의 타입은 여전히 다른 것으로 간주 됩니다. 클로저를 사용하는 구조체, 열거형,
+함수 파라미터를 정의하기 위해, 10장에서 설명한 것처럼 제네릭과 트레잇 바운드를
+사용합니다.
 
-The `Fn` traits are provided by the standard library. All closures implement at
-least one of the traits: `Fn`, `FnMut`, or `FnOnce`. We’ll discuss the
-difference between these traits in the [“Capturing the Environment with
-Closures”](#capturing-the-environment-with-closures)<!-- ignore --> section; in
-this example, we can use the `Fn` trait.
+`Fn` 트레잇은 표준 라이브러리에서 제공합니다. 모든 클로저는 
+다음 트레잇 중 하나를 구현합니다: `Fn`, `FnMut`, 혹은 
+`FnOnce`. ["클로저로 환경 캡처 하기"](#클로저로-환경-캡처-하기)절에서 
+이 트레잇들의 차이점들에 관한 설명할 것입니다; 이 예제에서 우리는 
+`Fn` 트레잇을 사용할 수 있습니다.
 
-We add types to the `Fn` trait bound to represent the types of the parameters
-and return values the closures must have to match this trait bound. In this
-case, our closure has a parameter of type `u32` and returns a `u32`, so the
-trait bound we specify is `Fn(u32) -> u32`.
+클로저의 파라미터와 반환 값의 타입을 표현하기 위해 `Fn` 트레잇 
+바운드에 타입을 추가합니다. 예제의 경우 클로저는 파라미터 타입이 
+`u32`이고 `u32` 타입을 반환하므로, 명시하는 트레잇 바운드는 
+`Fn(u32) -> u32` 입니다.
 
-Listing 13-9 shows the definition of the `Cacher` struct that holds a closure
-and an optional result value.
+Listing 13-9 는 클로저와 선택적인 결괏값을 가진 `Cacher` 구조체의 
+정의를 보여줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -324,29 +318,28 @@ and an optional result value.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-9: Defining a `Cacher` struct that holds a
-closure in `calculation` and an optional result in `value`</span>
+<span class="caption">Listing 13-9: `calculation` 에 클로저를 담고, 선택적인 결괏값을
+`value` 에 담는 `Cacher` 구조체 정의하기</span>
 
-The `Cacher` struct has a `calculation` field of the generic type `T`. The
-trait bounds on `T` specify that it’s a closure by using the `Fn` trait. Any
-closure we want to store in the `calculation` field must have one `u32`
-parameter (specified within the parentheses after `Fn`) and must return a
-`u32` (specified after the `->`).
+`Cacher` 구조체는 제네릭 타입 `T` 의 `calculation` 필드를 갖습니다.
+`T` 에 대한 트레잇 바운드는 `Fn` 트레잇을 사용하여 그것이 클로저라는 것을 나타냅니다. 
+`calculation` 필드에 저장하고자 하는 클로저는 하나의 `u32` 타입 파라미터
+(`Fn` 다음 괄호 안에 명시됨)를 갖고 `u32` (`->` 다음에 명시됨) 타입의 값을
+반환해야 합니다.
 
-> Note: Functions can implement all three of the `Fn` traits too. If what we
-> want to do doesn’t require capturing a value from the environment, we can use
-> a function rather than a closure where we need something that implements an
-> `Fn` trait.
+> 노트: 함수 또한 세 개의 `Fn` 트레잇을 모두 구현할 수 있습니다. 
+> 환경에서 값을 캡처할 필요가 없다면, `Fn` 트레잇을 구현해야 
+> 하는 클로저 대신 함수를 사용할 수 있습니다.
 
-The `value` field is of type `Option<u32>`. Before we execute the closure,
-`value` will be `None`. When code using a `Cacher` asks for the *result* of the
-closure, the `Cacher` will execute the closure at that time and store the
-result within a `Some` variant in the `value` field. Then if the code asks for
-the result of the closure again, instead of executing the closure again, the
-`Cacher` will return the result held in the `Some` variant.
+`value` 필드는 `Option<u32>` 타입입니다. 클로저를 실행하기 
+전에 `value` 의 값은 `None` 입니다. `Cacher` 를 사용하는 
+코드에서 클로저의 *결과* 를 요청할 경우, `Cacher` 는 그때 
+클로저를 실행하고 결과를 `Some` variant에 넣어서 `value`
+필드에 저장합니다. 그다음부터는 코드에서 클로저의 결과를 다시 요청하면 클로저를 다시 
+실행하는 대신, `Cacher` 는 `Some` variant 안에 있는 결과를 돌려줍니다.
 
-The logic around the `value` field we’ve just described is defined in Listing
-13-10.
+방금 설명한 `value` 필드에 대한 로직은 Listing 13-10 에 
+정의되어 있습니다: 
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -354,30 +347,30 @@ The logic around the `value` field we’ve just described is defined in Listing
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-10: The caching logic of `Cacher`</span>
+<span class="caption">Listing 13-10: `Cacher` 의 캐싱 로직</span>
 
-We want `Cacher` to manage the struct fields’ values rather than letting the
-calling code potentially change the values in these fields directly, so these
-fields are private.
+우리는 호출하는 코드에서 구조체 필드의 값을 변경할 수 있게 
+만드는 것보다는 `Cacher` 가 값을 관리하도록 하고 싶기 
+때문에, 필드는 비공개(private) 입니다.
 
-The `Cacher::new` function takes a generic parameter `T`, which we’ve defined
-as having the same trait bound as the `Cacher` struct. Then `Cacher::new`
-returns a `Cacher` instance that holds the closure specified in the
-`calculation` field and a `None` value in the `value` field, because we haven’t
-executed the closure yet.
+`Cacher::new` 함수는 제네릭 파라미터 `T` 를 받는데, 
+`Cacher` 구조체와 동일한 트레잇 바운드를 갖도록 정의되었습니다. 
+그다음 `Cacher::new` 는 `calculation` 필드에는 명시된 클로저를, 
+`value` 필드에는 클로저를 아직 실행한 적이 없기 때문에 `None` 을 
+갖는 `Cacher` 인스턴스를 반환합니다.
 
-When the calling code needs the result of evaluating the closure, instead of
-calling the closure directly, it will call the `value` method. This method
-checks whether we already have a resulting value in `self.value` in a `Some`;
-if we do, it returns the value within the `Some` without executing the closure
-again.
+호출하는 코드에서 클로저를 평가한 결괏값을 원하면, 클로저를 
+직접 호출하기보다 `value` 메서드를 호출합니다. 이 메서드는 
+이미 `self.value` 에 결괏값을 `Some` 으로 가졌는지 
+체크하고 만약 그렇다면 클로저를 다시 실행하는 대신 `Some` 안에 
+있는 값을 반환합니다.
 
-If `self.value` is `None`, the code calls the closure stored in
-`self.calculation`, saves the result in `self.value` for future use, and
-returns the value as well.
+만약 `self.value` 가 `None` 이라면, `self.calculation` 에 
+저장된 클로저를 호출하고, 나중에 재사용을 위해 결과를 `self.value` 에 
+저장한 후 값을 반환합니다.
 
-Listing 13-11 shows how we can use this `Cacher` struct in the function
-`generate_workout` from Listing 13-6.
+Listing 13-11 는 Listing 13-6 의 `generate_workout` 함수에서 `Cacher` 
+구조체를 사용하는 방법을 보여줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -385,77 +378,76 @@ Listing 13-11 shows how we can use this `Cacher` struct in the function
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-11: Using `Cacher` in the `generate_workout`
-function to abstract away the caching logic</span>
+<span class="caption">Listing 13-11: 캐싱 로직을 추상화하기 위해
+`generate_workout` 함수 안에서 `Cacher` 사용하기</span>
 
-Instead of saving the closure in a variable directly, we save a new instance of
-`Cacher` that holds the closure. Then, in each place we want the result, we
-call the `value` method on the `Cacher` instance. We can call the `value`
-method as many times as we want, or not call it at all, and the expensive
-calculation will be run a maximum of once.
+클로저를 변수에 직접 저장하는 대신, 클로저를 갖는 `Cacher` 의 
+새 인스턴스를 저장했습니다. 그러고는, 결과가 필요한 각 위치에 
+`Cacher` 인스턴스의 `value` 메소드를 호출했습니다. 우리는 
+`value` 메소드를 원하는 만큼 호출할 수 있고, 전혀 호출하지 
+않을 수도 있으며, 비싼 계산은 최대 한 번만 수행될 것입니다.
 
-Try running this program with the `main` function from Listing 13-2. Change the
-values in the `simulated_user_specified_value` and `simulated_random_number`
-variables to verify that in all the cases in the various `if` and `else`
-blocks, `calculating slowly...` appears only once and only when needed. The
-`Cacher` takes care of the logic necessary to ensure we aren’t calling the
-expensive calculation more than we need to so `generate_workout` can focus on
-the business logic.
+Listing 13-2 의 `main` 함수로 이 프로그램을 실행해 보세요. 
+다양한 `if` 와 `else` 블록에 있는 모든 케이스를 검증하기 위해 
+`simulated_user_specified_value` 와 `simulated_random_number` 
+변수들을 변경해 보세요. `calculating slowly...` 메세지는 단 한 번만, 
+그리고 필요할 때만 나타납니다. `Cacher` 는 `generate_workout` 가
+비즈니스 로직에 집중할 수 있도록 비싼 계산을 필요한 것보다 더 호출하지 
+않도록 보장하기 위한 로직을 처리합니다.
 
-### Limitations of the `Cacher` Implementation
+### `Cacher` 구현의 제약사항
 
-Caching values is a generally useful behavior that we might want to use in
-other parts of our code with different closures. However, there are two
-problems with the current implementation of `Cacher` that would make reusing it
-in different contexts difficult.
+값을 캐싱하는 것은 일반적으로 유용한 동작이기 때문에 다른 클로저와 함께 
+코드의 다른 부분에서 사용하고 싶을 수도 있습니다. 그러나 현재 `Cacher`
+구현은 다른 문맥에서 다르게 재사용하기에는 두 가지 문제가 있습니다.
 
-The first problem is that a `Cacher` instance assumes it will always get the
-same value for the parameter `arg` to the `value` method. That is, this test of
-`Cacher` will fail:
+첫 번째 문제는 `Cacher` 인스턴스가 `value` 메소드의 `arg` 
+파라미터는 항상 같은 값을 얻는다는 가정을 한다는 것입니다. 
+즉, 이 `Cacher` 테스트는 실패할 것입니다:
 
 ```rust,ignore,panics
 {{#rustdoc_include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/src/lib.rs:here}}
 ```
 
-This test creates a new `Cacher` instance with a closure that returns the value
-passed into it. We call the `value` method on this `Cacher` instance with an
-`arg` value of 1 and then an `arg` value of 2, and we expect the call to
-`value` with the `arg` value of 2 to return 2.
+이 테스트는 인자로 받은 값을 그대로 돌려주는 클로저가 포함된 새로운 `Cacher`
+인스턴스를 생성합니다. `arg` 값을 1로 그리고 `arg` 값을 2로 해서 이 `Cacher`
+인스턴스의 `value` 메소드를 호출하고, `arg` 값을 2로 `value` 를 호출 했을 때
+2를 반환 할 것으로 기대합니다.
 
-Run this test with the `Cacher` implementation in Listing 13-9 and Listing
-13-10, and the test will fail on the `assert_eq!` with this message:
+Listing 13-9 와 13-10 에 있는 `Cacher` 구현에 대해 이 테스트를 돌리면, 테스트는
+다음과 같은 메시지와 함께 `assert_eq!` 에서 실패할 것입니다:
 
 ```console
 {{#include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/output.txt}}
 ```
 
-The problem is that the first time we called `c.value` with 1, the `Cacher`
-instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass into
-the `value` method, it will always return 1.
+문제는 처음 `c.value` 을 1로 호출 했을 때, `Cacher` 인스턴스는 `self.value` 에
+`Some(1)` 을 저장합니다. 그 후에, `value` 값으로 무엇을 넘기던 메소드는 항상 1을 
+반환할 것입니다.
 
-Try modifying `Cacher` to hold a hash map rather than a single value. The keys
-of the hash map will be the `arg` values that are passed in, and the values of
-the hash map will be the result of calling the closure on that key. Instead of
-looking at whether `self.value` directly has a `Some` or a `None` value, the
-`value` function will look up the `arg` in the hash map and return the value if
-it’s present. If it’s not present, the `Cacher` will call the closure and save
-the resulting value in the hash map associated with its `arg` value.
+`Cacher` 가 하나의 값 대신 해시맵을 사용하도록 수정해 봅시다. 
+해시맵의 키는 넘겨받은 `arg` 값이 될 것이고, 해시맵의 값은 
+그 키로 클로저를 호출한 결과가 될 것입니다. `self.value` 가 
+`Some` 혹은 `None` 값인지 직접 살펴보는 대신, `value` 함수는 
+해시맵의 `arg` 값을 살펴보고 값이 있으면 반환할 것입니다.
+값이 없으면, `Cacher` 는 클로저를 호출해서 해당 `arg` 값과 연관된 해시맵에
+결괏값을 저장할 것입니다.
 
-The second problem with the current `Cacher` implementation is that it only
-accepts closures that take one parameter of type `u32` and return a `u32`. We
-might want to cache the results of closures that take a string slice and return
-`usize` values, for example. To fix this issue, try introducing more generic
-parameters to increase the flexibility of the `Cacher` functionality.
+현재 `Cacher` 구현의 두 번째 문제는 `u32` 타입 파라미터 
+한 개만 받고 하나의 `u32` 을 반환한다는 것입니다. 예를 들면, 
+문자열 슬라이스를 넘겨주고 `usize` 값을 반환하는 클로저의 
+결과를 캐시에 저장하고 싶을 수도 있습니다. 이 이슈를 수정하기 위해, 
+`Cacher` 기능에 유연성을 높여주도록 더 제네릭한 파라미터를 사용해 봅시다.
 
-### Capturing the Environment with Closures
+### 클로저로 환경 캡처하기
 
-In the workout generator example, we only used closures as inline anonymous
-functions. However, closures have an additional capability that functions don’t
-have: they can capture their environment and access variables from the scope in
-which they’re defined.
+운동 생성 예제에서 우리는 클로저를 단지 인라인 익명 
+함수로 사용했습니다. 그러나 클로저는 함수에 없는 
+추가적인 능력을 갖추고 있습니다: 환경을 캡처해서
+클로저가 정의된 스코프의 변수에 접근할 수 있습니다.
 
-Listing 13-12 has an example of a closure stored in the `equal_to_x` variable
-that uses the `x` variable from the closure’s surrounding environment.
+Listing 13-12 는 `equal_to_x` 변수에 저장된 클로저가 클로저를 둘러싼 환경에 있는 `x` 변수를
+사용하는 예제를 보여줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -463,15 +455,15 @@ that uses the `x` variable from the closure’s surrounding environment.
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-12: Example of a closure that refers to a
-variable in its enclosing scope</span>
+<span class="caption">Listing 13-12: 둘러싼 스코프에 있는 변수를 참조하는 클로저의
+예</span>
 
-Here, even though `x` is not one of the parameters of `equal_to_x`, the
-`equal_to_x` closure is allowed to use the `x` variable that’s defined in the
-same scope that `equal_to_x` is defined in.
+비록 `x` 가 `equal_to_x` 의 파라미터 중의 하나가 
+아니더라도, `equal_to_x` 는 동일한 스코프에 정의된 
+`x` 변수를 사용하는 것이 허용됩니다.
 
-We can’t do the same with functions; if we try with the following example, our
-code won’t compile:
+함수로는 이와 동일하게 할 수 없습니다; 다음 예제로 시도해 보면, 코드는 컴파일
+되지 않습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -479,57 +471,57 @@ code won’t compile:
 {{#rustdoc_include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
 ```
 
-We get an error:
+에러가 발생합니다:
 
 ```console
 {{#include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/output.txt}}
 ```
 
-The compiler even reminds us that this only works with closures!
+컴파일러는 이것은 클로저에서만 동작한다고 상기시켜 주기까지 합니다!
 
-When a closure captures a value from its environment, it uses memory to store
-the values for use in the closure body. This use of memory is overhead that we
-don’t want to pay in more common cases where we want to execute code that
-doesn’t capture its environment. Because functions are never allowed to capture
-their environment, defining and using functions will never incur this overhead.
+클로저가 환경으로부터 값을 캡처할 때, 클로저 몸통에서 사용하기 위해 그 값을
+저장하기 위한 메모리를 사용합니다. 이 메모리 사용은 환경을 캡처하지 않는 코드를
+실행하길 원하는 더 흔한 상황에서는 지불하고 싶지 않은 오버헤드입니다.
+왜냐하면 함수는 환경을 캡처할 수 없기 때문에, 함수를 정의하고 사용하는데
+절대 이런 오버헤드는 발생하지 않습니다.
 
-Closures can capture values from their environment in three ways, which
-directly map to the three ways a function can take a parameter: taking
-ownership, borrowing mutably, and borrowing immutably. These are encoded in the
-three `Fn` traits as follows:
+클로저는 세 가지 방식으로 환경으로부터 값을 캡처할 수 있는데, 
+함수가 파라미터를 받는 세 가지 방식과 직접적으로 연결됩니다: 
+소유권 받기, 가변으로 빌려오기, 불변으로 빌려오기. 이들은 
+다음과 같이 세 가지의 `Fn` 트레잇으로 표현합니다:
 
-* `FnOnce` consumes the variables it captures from its enclosing scope, known
-  as the closure’s *environment*. To consume the captured variables, the
-  closure must take ownership of these variables and move them into the closure
-  when it is defined. The `Once` part of the name represents the fact that the
-  closure can’t take ownership of the same variables more than once, so it can
-  be called only once.
-* `FnMut` can change the environment because it mutably borrows values.
-* `Fn` borrows values from the environment immutably.
+* `FnOnce` 는 클로저의 *환경*라고 부르는, 클로저를 둘러싼
+  환경에서 캡처한 변수를 사용합니다. 캡처한 변수를 사용하기 
+  위해, 클로저는 해당 변수의 소유권을 가져야 하고 변수가 
+  정의될 때 클로저 안으로 옮겨와야 합니다. `Once` 는 
+  클로저가 동일한 변수의 소유권을 두 번 이상 가질 수 없으므로 
+  한 번만 호출될 수 있다는 사실을 나타냅니다.
+* `FnMut` 값들을 가변으로 빌려오기 때문에 환경을 변경할 수 있습니다.
+* `Fn` 은 환경으로부터 값들을 불변으로 빌려 옵니다.
 
-When you create a closure, Rust infers which trait to use based on how the
-closure uses the values from the environment. All closures implement `FnOnce`
-because they can all be called at least once. Closures that don’t move the
-captured variables also implement `FnMut`, and closures that don’t need mutable
-access to the captured variables also implement `Fn`. In Listing 13-12, the
-`equal_to_x` closure borrows `x` immutably (so `equal_to_x` has the `Fn` trait)
-because the body of the closure only needs to read the value in `x`.
+클로저를 만들 때 러스트는 클로저가 환경에 있는 값을 어떻게 
+사용하는지에 따라 어느 트레잇을 사용할지 추론합니다. 모든 
+클로저는 최소 한 번씩은 호출될 수 있기 때문에 `FnOnce` 를 
+구현합니다. 캡처된 변수를 이동시키지 않는 클로저는 또한 `FnMut` 를, 
+캡처된 변수를 가변 사용할 필요가 없는 클로저는 `Fn` 를 구현합니다. 
+Listing 13-12 에서 `equal_to_x` 클로저의 몸통에서는 `x` 에 있는 값을 읽기만 
+하면 되기 때문에 `x` 를 불변으로 빌립니다 (그래서 `equal_to_x` 은 `Fn` 트레잇입니다).
 
-If you want to force the closure to take ownership of the values it uses in the
-environment, you can use the `move` keyword before the parameter list. This
-technique is mostly useful when passing a closure to a new thread to move the
-data so it’s owned by the new thread.
+만약 클로저가 환경으로부터 사용하는 값에 대해 소유권을 갖도록 강제하고 싶다면,
+파라미터 리스트 앞에 `move` 키워드를 사용할 수 있습니다. 이 기법은 클로저를
+다른 스레드로 넘길 때 데이터를 이동시켜 새로운 스레드가 소유하도록 할 때 주로
+유용합니다.
 
-> Note: `move` closures may still implement `Fn` or `FnMut`, even though
-> they capture variables by move. This is because the traits implemented by a
-> closure type are determined by what the closure does with captured values,
-> not how it captures them. The `move` keyword only specifies the latter.
+> 노트: `move` 클로저는 변수의 소유권을 넘겨받고 있더라도 여전히 `Fn` 또는 `FnMut` 를 
+> 구현할 수도 있습니다. 이러한 이유는 클로저 타입으로 정의된 트레잇은 클로저가 어떻게
+> 캡처하는 지가 아닌 캡처된 값을 갖고 무엇을 하는지에 따라 결정되기 때문입니다.
+> `move` 키워드는 클로저가 어떻게 캡처하는지만 명시해주는 역할을 합니다.
 
-We’ll have more examples of `move` closures in Chapter 16 when we talk about
-concurrency. For now, here’s the code from Listing 13-12 with the `move`
-keyword added to the closure definition and using vectors instead of integers,
-because integers can be copied rather than moved; note that this code will not
-yet compile.
+16장에서 병렬성에 대한 부분에서 더 많은 `move` 클로저의 
+예제가 있습니다. 우선은 변경된 Listing 13-12 의 코드를 
+살펴봅시다. 클로저 정의에 `move` 키워드를 추가하고
+정수는 이동되지 않고 복사되기 때문에 대신 벡터를 사용했습니다. 
+이 코드는 아직 컴파일되지 않습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -537,20 +529,20 @@ yet compile.
 {{#rustdoc_include ../listings/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
 ```
 
-We receive the following error:
+다음과 같은 에러가 발생합니다:
 
 ```console
 {{#include ../listings/ch13-functional-features/no-listing-03-move-closures/output.txt}}
 ```
 
-The `x` value is moved into the closure when the closure is defined, because we
-added the `move` keyword. The closure then has ownership of `x`, and `main`
-isn’t allowed to use `x` anymore in the `println!` statement. Removing
-`println!` will fix this example.
+`move` 키워드를 추가했기 때문에 클로저가 정의될 때 `x` 
+값은 클로저 안으로 이동됩니다. `x` 의 소유권은 클로저가 
+갖게 되었고 `main` 은 더 이상 `println!` 문에서 `x` 를 
+사용할 수 없습니다. `println!` 를 삭제하면 문제를 해결할 수 있습니다.
 
-Most of the time when specifying one of the `Fn` trait bounds, you can start
-with `Fn` and the compiler will tell you if you need `FnMut` or `FnOnce` based
-on what happens in the closure body.
+`Fn` 트레잇 바운드 중 하나를 기술할 때 대부분의 경우, `Fn` 으로 시작해보면
+컴파일러는 클로저 몸통에서 어떻게 하는지에 따라 `FnMut` 혹은 `FnOnce` 이
+필요한지 말해 줍니다.
 
-To illustrate situations where closures that can capture their environment are
-useful as function parameters, let’s move on to our next topic: iterators.
+환경을 캡처할 수 있는 클로저를 함수 파라미터로 유용한 상황을 설명하기 위해 
+다음 주제인 반복자로 넘어갑시다.
