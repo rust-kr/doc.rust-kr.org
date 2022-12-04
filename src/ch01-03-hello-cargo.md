@@ -3,7 +3,8 @@
 Cargo 는 러스트 사용자라면 대부분 사용하는 러스트 빌드 시스템 및
 패키지 매니저입니다. 이 툴은 코드 빌드나, 코드 작성에 필요한 외부 라이브러리를
 다운할때나, 라이브러리를 제작할때 겪는 귀찮은 일들을 상당수 줄여주는 편리한 툴입니다.
-(앞으로 외부 라이브러리는 *의존성(dependencies)* 이라고 지칭하겠습니다.)
+(앞으로 외부 라이브러리는 *의존성(dependencies)* 이라고
+지칭하겠습니다.)
 
 여태 우리가 작성해온 간단한 러스트 프로그램에선 의존성을 추가하지 않았습니다.
 “Hello, world!” 프로젝트를 만들면서도 Cargo 기능 중 코드를 생성하는 기능만 사용했었죠.
@@ -63,8 +64,9 @@ Listing 1-2 처럼 나오면 정상입니다.
 [package]
 name = "hello_cargo"
 version = "0.1.0"
-authors = ["Your Name <you@example.com>"]
-edition = "2018"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 ```
@@ -79,11 +81,9 @@ Language*) 포맷으로, Cargo 설정에서 사용하는 포맷입니다.
 뒤에 패키지 설정 구문들이 따라오는 걸 보실 수 있습니다.
 나중에 우리가 이 파일에 내용을 추가하며 새로운 부문을 만들어 볼 겁니다.
 
-다음 4줄은 Cargo 가 코드를 컴파일하는데 필요한 설정 정보로,
+다음 세 줄은 Cargo 가 코드를 컴파일하는데 필요한 설정 정보로,
 각각 패키지명, 버전, 작성자, 사용하는 러스트 에디션을 나타냅니다.
-작성자 정보에 포함되는 이름, 이메일 등은 여러분 환경에서
-자동으로 가져오니 잘못된 정보는 수정 후 저장하시기 바랍니다.
-러스트 에디션은 부록 E에서 자세히 설명하니 참고하세요.
+`edition` 키에 대한 설명은 [부록 E][appendix-e]<!-- ignore -->에서 다룹니다.
 
 마지막 `[dependencies]` 는 프로젝트에서 사용하는 의존성 목록입니다.
 러스트에선 의존성 코드 패키지들을 *crates* 라 부르며,
@@ -130,7 +130,8 @@ $ cargo build
 
 이 명령어는 *target/debug/hello_cargo*
 (Windows 에선 *target\debug\hello_cargo.exe*) 에 실행 파일을 생성합니다.
-실행 파일은 다음 명령어로 실행할 수 있습니다:
+기본 빌드가 디버그 빌드기 때문에, Cargo 는 *debug*라는 디렉토리에 바이너리를
+생성합니다. 실행 파일은 다음 명령어로 실행할 수 있습니다:
 
 ```console
 $ ./target/debug/hello_cargo # or .\target\debug\hello_cargo.exe on Windows
@@ -155,10 +156,15 @@ $ cargo run
 Hello, world!
 ```
 
-출력 내용에 `hello cargo` 를 컴파일 중이라는 내용이 없는 걸 눈치채셨나요?
-이는 Cargo 가 파일 변경 사항이 없음을 알아채고 기존 바이너리를 그대로 실행했기 때문입니다.
-소스 코드를 수정한 뒤 명령어를 다시 실행해보면 다음과 같이
-프로젝트를 다시 빌드한 후에 바이너리를 실행함을 알 수 있습니다.
+`cargo run`을 사용하면 `cargo build` 실행 후 바이너리 패스를
+입력해서 실행하는 것보다 편리하므로, 대부분의 개발자들이 `cargo run`을
+이용합니다.
+
+출력 내용에 `hello_cargo` 를 컴파일 중이라는 내용이 없는 걸 눈치채셨나요?
+이는 Cargo 가 파일 변경 사항이 없음을 알아채고 기존 바이너리를 그대로
+실행했기 때문입니다. 소스 코드를 수정한 뒤 명령어를 다시 실행해보면 다음과
+같이 프로젝트를 다시 빌드한 후에 바이너리를 실행함을 알 수
+있습니다.
 
 ```console
 $ cargo run
@@ -177,18 +183,21 @@ $ cargo check
     Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
 ```
 
-실행 파일도 생성하지 않는 명령어가 왜 필요할까요? 이유는 바로,
-코드를 작성하는 도중에 문제가 없는지 중간중간 확인하는 용도로 사용하는 명령어이기 때문입니다.
-아직 코드를 완성하지 않았으니 실행 파일을 만들 필요가 없고, 따라서 실행 파일을 생성하는 단계를 건너뜀으로써 `cargo build` 보다 빠른 속도를 얻는 것이죠.
-
+실행 파일도 생성하지 않는 명령어가 왜 필요할까요? `cargo check`는
+실행 파일을 생성하는 단계를 건너뛰기 때문에 `cargo build`보다 훨씬
+빠르기 때문입니다. 코드를 작성하는 동안 여러분의 프로젝트가 컴파일 되는지
+지속적으로 검사하려면 `cargo check`를 이용하는 편이 더 빠릅니다.
 러스트 사용자는 대부분 주기적으로 이 명령어를 실행해 코드에서 컴파일 문제가
-발생하지 않는지 확인하고 실행 파일이 필요할 경우에만 `cargo build` 를 사용합니다.
+발생하지 않는지 확인하고 실행 파일이 필요할 경우에만 `cargo build` 를
+사용합니다.
 
 이제, 여태 배운 내용을 복습해봅시다:
 
+* `cargo new`로 새 프로젝트를 생성할 수 있습니다.
 * `cargo build` 명령으로 프로젝트를 빌드할 수 있습니다.
 * `cargo run` 명령어는 한번에 프로젝트를 빌드하고 실행할 수 있습니다.
-* `cargo check` 명령으로 바이너리를 생성하지 않고 프로젝트의 에러를 체크할 수 있습니다.
+* `cargo check` 명령으로 바이너리를 생성하지 않고 프로젝트의 에러를
+  체크할 수 있습니다.
 * 빌드로 만들어진 파일은 우리가 작성한 소스 코드와 뒤섞이지 않도록
   *target/debug* 디렉토리에 저장됩니다.
 
@@ -227,9 +236,7 @@ $ cd someproject
 $ cargo build
 ```
 
-더 자세한 내용은 [The Cargo Book (영문)] 에서 읽어보세요.
-
-[its documentation]: https://doc.rust-lang.org/cargo/
+더 자세한 내용은 [Cargo 문서 (영문)][cargo] 에서 읽어보세요.
 
 ## 요약
 
@@ -248,3 +255,6 @@ $ cargo build
 3장부터 읽고 2장을 읽는 것도 나쁘지 않습니다.
 
 [installation]: ch01-01-installation.html#러스트-설치
+[toml]: https://toml.io
+[appendix-e]: appendix-05-editions.html
+[cargo]: https://doc.rust-lang.org/cargo/
