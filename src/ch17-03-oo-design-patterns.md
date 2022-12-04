@@ -1,22 +1,30 @@
 ## Implementing an Object-Oriented Design Pattern
 
 The *state pattern* is an object-oriented design pattern. The crux of the
-pattern is that a value has some internal state, which is represented by a set
-of *state objects*, and the value’s behavior changes based on the internal
-state. The state objects share functionality: in Rust, of course, we use
-structs and traits rather than objects and inheritance. Each state object is
-responsible for its own behavior and for governing when it should change into
-another state. The value that holds a state object knows nothing about the
-different behavior of the states or when to transition between states.
+pattern is that we define a set of states a value can have internally. The
+states are represented by a set of *state objects*, and the value’s behavior
+changes based on its state. We’re going to work through an example of a blog
+post struct that has a field to hold its state, which will be a state object
+from the set "draft", "review", or "published".
 
-Using the state pattern means when the business requirements of the program
-change, we won’t need to change the code of the value holding the state or the
-code that uses the value. We’ll only need to update the code inside one of the
-state objects to change its rules or perhaps add more state objects. Let’s look
-at an example of the state design pattern and how to use it in Rust.
+The state objects share functionality: in Rust, of course, we use structs and
+traits rather than objects and inheritance. Each state object is responsible
+for its own behavior and for governing when it should change into another
+state. The value that holds a state object knows nothing about the different
+behavior of the states or when to transition between states.
 
-We’ll implement a blog post workflow in an incremental way. The blog’s final
-functionality will look like this:
+The advantage of using the state pattern is that, when the business
+requirements of the program change, we won’t need to change the code of the
+value holding the state or the code that uses the value. We’ll only need to
+update the code inside one of the state objects to change its rules or perhaps
+add more state objects.
+
+First, we’re going to implement the state pattern in a more traditional
+object-oriented way, then we’ll use an approach that’s a bit more natural in
+Rust. Let’s dig in to incrementally implementing a blog post workflow using the
+state pattern.
+
+The final functionality will look like this:
 
 1. A blog post starts as an empty draft.
 2. When the draft is done, a review of the post is requested.
@@ -30,7 +38,7 @@ should remain an unpublished draft.
 
 Listing 17-11 shows this workflow in code form: this is an example usage of the
 API we’ll implement in a library crate named `blog`. This won’t compile yet
-because we haven’t implemented the `blog` crate yet.
+because we haven’t implemented the `blog` crate.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -41,13 +49,13 @@ because we haven’t implemented the `blog` crate yet.
 <span class="caption">Listing 17-11: Code that demonstrates the desired
 behavior we want our `blog` crate to have</span>
 
-We want to allow the user to create a new draft blog post with `Post::new`.
-Then we want to allow text to be added to the blog post while it’s in the draft
-state. If we try to get the post’s content immediately, before approval,
-nothing should happen because the post is still a draft. We’ve added
-`assert_eq!` in the code for demonstration purposes. An excellent unit test for
-this would be to assert that a draft blog post returns an empty string from the
-`content` method, but we’re not going to write tests for this example.
+We want to allow the user to create a new draft blog post with `Post::new`. We
+want to allow text to be added to the blog post. If we try to get the post’s
+content immediately, before approval, we shouldn’t get any text because the
+post is still a draft. We’ve added `assert_eq!` in the code for demonstration
+purposes. An excellent unit test for this would be to assert that a draft blog
+post returns an empty string from the `content` method, but we’re not going to
+write tests for this example.
 
 Next, we want to enable a request for a review of the post, and we want
 `content` to return an empty string while waiting for the review. When the post
@@ -69,13 +77,16 @@ Let’s get started on the implementation of the library! We know we need a
 public `Post` struct that holds some content, so we’ll start with the
 definition of the struct and an associated public `new` function to create an
 instance of `Post`, as shown in Listing 17-12. We’ll also make a private
-`State` trait. Then `Post` will hold a trait object of `Box<dyn State>`
-inside an `Option<T>` in a private field named `state`. You’ll see why the
+`State` trait that will define the behavior that all state objects for a `Post`
+must have.
+
+Then `Post` will hold a trait object of `Box<dyn State>` inside an `Option<T>`
+in a private field named `state` to hold the state object. You’ll see why the
 `Option<T>` is necessary in a bit.
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-12/src/lib.rs}}
 ```
 
@@ -83,25 +94,26 @@ inside an `Option<T>` in a private field named `state`. You’ll see why the
 function that creates a new `Post` instance, a `State` trait, and a `Draft`
 struct</span>
 
-The `State` trait defines the behavior shared by different post states, and the
-`Draft`, `PendingReview`, and `Published` states will all implement the `State`
-trait. For now, the trait doesn’t have any methods, and we’ll start by defining
-just the `Draft` state because that is the state we want a post to start in.
+The `State` trait defines the behavior shared by different post states. The
+state objects are `Draft`, `PendingReview`, and `Published`, and they will all
+implement the `State` trait. For now, the trait doesn’t have any methods, and
+we’ll start by defining just the `Draft` state because that is the state we
+want a post to start in.
 
 When we create a new `Post`, we set its `state` field to a `Some` value that
-holds a `Box`. This `Box` points to a new instance of the `Draft` struct. This
-ensures whenever we create a new instance of `Post`, it will start out as a
-draft. Because the `state` field of `Post` is private, there is no way to
+holds a `Box`. This `Box` points to a new instance of the `Draft` struct.
+This ensures whenever we create a new instance of `Post`, it will start out as
+a draft. Because the `state` field of `Post` is private, there is no way to
 create a `Post` in any other state! In the `Post::new` function, we set the
 `content` field to a new, empty `String`.
 
 ### Storing the Text of the Post Content
 
-Listing 17-11 showed that we want to be able to call a method named
-`add_text` and pass it a `&str` that is then added to the text content of the
-blog post. We implement this as a method rather than exposing the `content`
-field as `pub`. This means we can implement a method later that will control
-how the `content` field’s data is read. The `add_text` method is pretty
+We saw in Listing 17-11 that we want to be able to call a method named
+`add_text` and pass it a `&str` that is then added as the text content of the
+blog post. We implement this as a method, rather than exposing the `content`
+field as `pub`, so that later we can implement a method that will control how
+the `content` field’s data is read. The `add_text` method is pretty
 straightforward, so let’s add the implementation in Listing 17-13 to the `impl
 Post` block:
 
@@ -164,7 +176,7 @@ reference to `self`. Then we call an internal `request_review` method on the
 current state of `Post`, and this second `request_review` method consumes the
 current state and returns a new state.
 
-We’ve added the `request_review` method to the `State` trait; all types that
+We add the `request_review` method to the `State` trait; all types that
 implement the trait will now need to implement the `request_review` method.
 Note that rather than having `self`, `&self`, or `&mut self` as the first
 parameter of the method, we have `self: Box<Self>`. This syntax means the
@@ -185,12 +197,12 @@ with code like `self.state = self.state.request_review();` to get ownership of
 the `state` value. This ensures `Post` can’t use the old `state` value after
 we’ve transformed it into a new state.
 
-The `request_review` method on `Draft` needs to return a new, boxed instance of
-a new `PendingReview` struct, which represents the state when a post is waiting
-for a review. The `PendingReview` struct also implements the `request_review`
-method but doesn’t do any transformations. Rather, it returns itself, because
-when we request a review on a post already in the `PendingReview` state, it
-should stay in the `PendingReview` state.
+The `request_review` method on `Draft` returns a new, boxed instance of a new
+`PendingReview` struct, which represents the state when a post is waiting for a
+review. The `PendingReview` struct also implements the `request_review` method
+but doesn’t do any transformations. Rather, it returns itself, because when we
+request a review on a post already in the `PendingReview` state, it should stay
+in the `PendingReview` state.
 
 Now we can start seeing the advantages of the state pattern: the
 `request_review` method on `Post` is the same no matter its `state` value. Each
@@ -201,7 +213,10 @@ slice. We can now have a `Post` in the `PendingReview` state as well as in the
 `Draft` state, but we want the same behavior in the `PendingReview` state.
 Listing 17-11 now works up to line 10!
 
-### Adding the `approve` Method that Changes the Behavior of `content`
+<!-- Old headings. Do not remove or links may break. -->
+<a id="adding-the-approve-method-that-changes-the-behavior-of-content"></a>
+
+### Adding `approve` to Change the Behavior of `content`
 
 The `approve` method will be similar to the `request_review` method: it will
 set `state` to the value that the current state says it should have when that
@@ -209,7 +224,7 @@ state is approved, as shown in Listing 17-16:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-16/src/lib.rs:here}}
 ```
 
@@ -219,16 +234,18 @@ state is approved, as shown in Listing 17-16:
 We add the `approve` method to the `State` trait and add a new struct that
 implements `State`, the `Published` state.
 
-Similar to `request_review`, if we call the `approve` method on a `Draft`, it
-will have no effect because it will return `self`. When we call `approve` on
-`PendingReview`, it returns a new, boxed instance of the `Published` struct.
-The `Published` struct implements the `State` trait, and for both the
-`request_review` method and the `approve` method, it returns itself, because
-the post should stay in the `Published` state in those cases.
+Similar to the way `request_review` on `PendingReview` works, if we call the
+`approve` method on a `Draft`, it will have no effect because `approve` will
+return `self`. When we call `approve` on `PendingReview`, it returns a new,
+boxed instance of the `Published` struct. The `Published` struct implements the
+`State` trait, and for both the `request_review` method and the `approve`
+method, it returns itself, because the post should stay in the `Published`
+state in those cases.
 
-Now we need to update the `content` method on `Post`: if the state is
-`Published`, we want to return the value in the post’s `content` field;
-otherwise, we want to return an empty string slice, as shown in Listing 17-17:
+Now we need to update the `content` method on `Post`. We want the value
+returned from `content` to depend on the current state of the `Post`, so we’re
+going to have the `Post` delegate to a `content` method defined on its `state`,
+as shown in Listing 17-17:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -241,14 +258,14 @@ delegate to a `content` method on `State`</span>
 
 Because the goal is to keep all these rules inside the structs that implement
 `State`, we call a `content` method on the value in `state` and pass the post
-instance (that is, `self`) as an argument. Then we return the value that is
+instance (that is, `self`) as an argument. Then we return the value that’s
 returned from using the `content` method on the `state` value.
 
 We call the `as_ref` method on the `Option` because we want a reference to the
 value inside the `Option` rather than ownership of the value. Because `state`
-is an `Option<Box<dyn State>>`, when we call `as_ref`, an `Option<&Box<dyn State>>` is
-returned. If we didn’t call `as_ref`, we would get an error because we can’t
-move `state` out of the borrowed `&self` of the function parameter.
+is an `Option<Box<dyn State>>`, when we call `as_ref`, an `Option<&Box<dyn
+State>>` is returned. If we didn’t call `as_ref`, we would get an error because
+we can’t move `state` out of the borrowed `&self` of the function parameter.
 
 We then call the `unwrap` method, which we know will never panic, because we
 know the methods on `Post` ensure that `state` will always contain a `Some`
@@ -258,16 +275,16 @@ Compiler”][more-info-than-rustc]<!-- ignore --> section of Chapter 9 when we
 know that a `None` value is never possible, even though the compiler isn’t able
 to understand that.
 
-At this point, when we call `content` on the `&Box<dyn State>`, deref coercion will
-take effect on the `&` and the `Box` so the `content` method will ultimately be
-called on the type that implements the `State` trait. That means we need to add
-`content` to the `State` trait definition, and that is where we’ll put the
-logic for what content to return depending on which state we have, as shown in
-Listing 17-18:
+At this point, when we call `content` on the `&Box<dyn State>`, deref coercion
+will take effect on the `&` and the `Box` so the `content` method will
+ultimately be called on the type that implements the `State` trait. That means
+we need to add `content` to the `State` trait definition, and that is where
+we’ll put the logic for what content to return depending on which state we
+have, as shown in Listing 17-18:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-18/src/lib.rs:here}}
 ```
 
@@ -287,6 +304,15 @@ related to the lifetime of the `post` argument.
 And we’re done—all of Listing 17-11 now works! We’ve implemented the state
 pattern with the rules of the blog post workflow. The logic related to the
 rules lives in the state objects rather than being scattered throughout `Post`.
+
+> #### Why Not An Enum?
+>
+> You may have been wondering why we didn’t use an `enum` with the different
+> possible post states as variants. That’s certainly a possible solution, try
+> it and compare the end results to see which you prefer! One disadvantage of
+> using an enum is every place that checks the value of the enum will need a
+> `match` expression or similar to handle every possible variant. This could
+> get more repetitive than this trait object solution.
 
 ### Trade-offs of the State Pattern
 
@@ -375,7 +401,7 @@ as well as methods on each:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-19/src/lib.rs}}
 ```
 
@@ -411,7 +437,7 @@ shown in Listing 17-20:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-20/src/lib.rs:here}}
 ```
 
@@ -435,7 +461,7 @@ But we also have to make some small changes to `main`. The `request_review` and
 `approve` methods return new instances rather than modifying the struct they’re
 called on, so we need to add more `let post =` shadowing assignments to save
 the returned instances. We also can’t have the assertions about the draft and
-pending review post’s contents be empty strings, nor do we need them: we can’t
+pending review posts’ contents be empty strings, nor do we need them: we can’t
 compile code that tries to use the content of posts in those states any longer.
 The updated code in `main` is shown in Listing 17-21:
 
@@ -456,10 +482,10 @@ now impossible because of the type system and the type checking that happens at
 compile time! This ensures that certain bugs, such as display of the content of
 an unpublished post, will be discovered before they make it to production.
 
-Try the tasks suggested for additional requirements that we mentioned at the
-start of this section on the `blog` crate as it is after Listing 17-20 to see
-what you think about the design of this version of the code. Note that some of
-the tasks might be completed already in this design.
+Try the tasks suggested at the start of this section on the `blog` crate as it
+is after Listing 17-21 to see what you think about the design of this version
+of the code. Note that some of the tasks might be completed already in this
+design.
 
 We’ve seen that even though Rust is capable of implementing object-oriented
 design patterns, other patterns, such as encoding state into the type system,

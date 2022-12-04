@@ -2,7 +2,7 @@ extern crate regex;
 
 use regex::{Captures, Regex};
 use std::io;
-use std::io::{Read, Write};
+use std::io::Read;
 
 fn main() {
     write_md(remove_markup(read_md()));
@@ -12,12 +12,12 @@ fn read_md() -> String {
     let mut buffer = String::new();
     match io::stdin().read_to_string(&mut buffer) {
         Ok(_) => buffer,
-        Err(error) => panic!(error),
+        Err(error) => panic!("{}", error),
     }
 }
 
 fn write_md(output: String) {
-    write!(io::stdout(), "{}", output).unwrap();
+    print!("{}", output);
 }
 
 fn remove_markup(input: String) -> String {
@@ -39,9 +39,11 @@ fn remove_markup(input: String) -> String {
             } else {
                 let result =
                     regexen.iter().fold(line.to_string(), |result, regex| {
-                        regex.replace_all(&result, |caps: &Captures<'_>| {
-                            caps.get(1).unwrap().as_str().to_string()
-                        }).to_string()
+                        regex
+                            .replace_all(&result, |caps: &Captures<'_>| {
+                                caps.get(1).unwrap().as_str().to_string()
+                            })
+                            .to_string()
                     });
                 Some(result)
             }

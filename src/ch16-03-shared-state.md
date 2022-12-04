@@ -1,11 +1,12 @@
 ## Shared-State Concurrency
 
 Message passing is a fine way of handling concurrency, but it’s not the only
-one. Consider this part of the slogan from the Go language documentation again:
-“do not communicate by sharing memory.”
+one. Another method would be for multiple threads to access the same shared
+data. Consider this part of the slogan from the Go language documentation
+again: “do not communicate by sharing memory.”
 
 What would communicating by sharing memory look like? In addition, why would
-message-passing enthusiasts not use it and do the opposite instead?
+message-passing enthusiasts caution not to use memory sharing?
 
 In a way, channels in any programming language are similar to single ownership,
 because once you transfer a value down a channel, you should no longer use that
@@ -71,19 +72,20 @@ that case, no one would ever be able to get the lock, so we’ve chosen to
 
 After we’ve acquired the lock, we can treat the return value, named `num` in
 this case, as a mutable reference to the data inside. The type system ensures
-that we acquire a lock before using the value in `m`: `Mutex<i32>` is not an
-`i32`, so we *must* acquire the lock to be able to use the `i32` value. We
-can’t forget; the type system won’t let us access the inner `i32` otherwise.
+that we acquire a lock before using the value in `m`. The type of `m` is
+`Mutex<i32>`, not `i32`, so we *must* call `lock` to be able to use the `i32`
+value. We can’t forget; the type system won’t let us access the inner `i32`
+otherwise.
 
 As you might suspect, `Mutex<T>` is a smart pointer. More accurately, the call
 to `lock` *returns* a smart pointer called `MutexGuard`, wrapped in a
 `LockResult` that we handled with the call to `unwrap`. The `MutexGuard` smart
 pointer implements `Deref` to point at our inner data; the smart pointer also
 has a `Drop` implementation that releases the lock automatically when a
-`MutexGuard` goes out of scope, which happens at the end of the inner scope in
-Listing 16-12. As a result, we don’t risk forgetting to release the lock and
-blocking the mutex from being used by other threads because the lock release
-happens automatically.
+`MutexGuard` goes out of scope, which happens at the end of the inner scope. As
+a result, we don’t risk forgetting to release the lock and blocking the mutex
+from being used by other threads, because the lock release happens
+automatically.
 
 After dropping the lock, we can print the mutex value and see that we were able
 to change the inner `i32` to 6.
@@ -105,11 +107,11 @@ a compiler error, and we’ll use that error to learn more about using
 <span class="caption">Listing 16-13: Ten threads each increment a counter
 guarded by a `Mutex<T>`</span>
 
-We create a `counter` variable to hold an `i32` inside a `Mutex<T>`, as we
-did in Listing 16-12. Next, we create 10 threads by iterating over a range
-of numbers. We use `thread::spawn` and give all the threads the same closure,
-one that moves the counter into the thread, acquires a lock on the `Mutex<T>`
-by calling the `lock` method, and then adds 1 to the value in the mutex. When a
+We create a `counter` variable to hold an `i32` inside a `Mutex<T>`, as we did
+in Listing 16-12. Next, we create 10 threads by iterating over a range of
+numbers. We use `thread::spawn` and give all the threads the same closure: one
+that moves the counter into the thread, acquires a lock on the `Mutex<T>` by
+calling the `lock` method, and then adds 1 to the value in the mutex. When a
 thread finishes running its closure, `num` will go out of scope and release the
 lock so another thread can acquire it.
 
@@ -125,7 +127,7 @@ We hinted that this example wouldn’t compile. Now let’s find out why!
 ```
 
 The error message states that the `counter` value was moved in the previous
-iteration of the loop. So Rust is telling us that we can’t move the ownership
+iteration of the loop. Rust is telling us that we can’t move the ownership
 of lock `counter` into multiple threads. Let’s fix the compiler error with a
 multiple-ownership method we discussed in Chapter 15.
 
@@ -152,9 +154,9 @@ a lot.
 {{#include ../listings/ch16-fearless-concurrency/listing-16-14/output.txt}}
 ```
 
-Wow, that error message is very wordy! Here’s the important part to focus
-on: `` `Rc<Mutex<i32>>` cannot be sent between threads safely ``. The compiler
-is also telling us the reason why: ``the trait `Send` is not implemented for
+Wow, that error message is very wordy! Here’s the important part to focus on:
+`` `Rc<Mutex<i32>>` cannot be sent between threads safely ``. The compiler is
+also telling us the reason why: ``the trait `Send` is not implemented for
 `Rc<Mutex<i32>>` ``. We’ll talk about `Send` in the next section: it’s one of
 the traits that ensures the types we use with threads are meant for use in
 concurrent situations.
@@ -174,11 +176,9 @@ Fortunately, `Arc<T>` *is* a type like `Rc<T>` that is safe to use in
 concurrent situations. The *a* stands for *atomic*, meaning it’s an *atomically
 reference counted* type. Atomics are an additional kind of concurrency
 primitive that we won’t cover in detail here: see the standard library
-documentation for [`std::sync::atomic`] for more details. At this point, you just
-need to know that atomics work like primitive types but are safe to share
-across threads.
-
-[`std::sync::atomic`]: ../std/sync/atomic/index.html
+documentation for [`std::sync::atomic`][atomic]<!-- ignore --> for more
+details. At this point, you just need to know that atomics work like primitive
+types but are safe to share across threads.
 
 You might then wonder why all primitive types aren’t atomic and why standard
 library types aren’t implemented to use `Arc<T>` by default. The reason is that
@@ -217,6 +217,12 @@ counter. Using this strategy, you can divide a calculation into independent
 parts, split those parts across threads, and then use a `Mutex<T>` to have each
 thread update the final result with its part.
 
+Note that if you are doing simple numerical operations, there are types simpler
+than `Mutex<T>` types provided by the [`std::sync::atomic` module of the
+standard library][atomic]<!-- ignore -->. These types provide safe, concurrent,
+atomic access to primitive types. We chose to use `Mutex<T>` with a primitive
+type for this example so we could concentrate on how `Mutex<T>` works.
+
 ### Similarities Between `RefCell<T>`/`Rc<T>` and `Mutex<T>`/`Arc<T>`
 
 You might have noticed that `counter` is immutable but we could get a mutable
@@ -239,3 +245,5 @@ useful information.
 
 We’ll round out this chapter by talking about the `Send` and `Sync` traits and
 how we can use them with custom types.
+
+[atomic]: ../std/sync/atomic/index.html

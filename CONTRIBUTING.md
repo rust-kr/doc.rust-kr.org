@@ -2,6 +2,29 @@
 
 We'd love your help! Thanks for caring about the book.
 
+## Where to Edit
+
+All edits should be made in the `src` directory.
+
+The `nostarch` directory contains snapshots for sending edits to the publishers
+of the print version. The snapshot files reflect what has been sent or not, so
+they only get updated when edits are sent to No Starch. **Do not submit pull
+requests changing files in the `nostarch` directory, they will be closed.**
+
+## Checking for Fixes
+
+The book rides the Rust release trains. Therefore, if you see a problem on
+https://doc.rust-lang.org/stable/book, it may already be fixed on the `main`
+branch in this repo, but the fix hasn't gone through nightly -> beta -> stable
+yet. Please check the `main` branch in this repo before reporting an issue.
+
+Looking at the history for a particular file can also give more information on
+how or whether an issue has been fixed or not if you're trying to figure that
+out.
+
+Please also search open and closed issues and open and closed PRs before
+reporting a new issue or opening a new PR.
+
 ## Licensing
 
 This repository is under the same license as Rust itself, MIT/Apache2. You
@@ -13,13 +36,19 @@ repository.
 The Rust project has [a code of conduct](http://rust-lang.org/policies/code-of-conduct)
 that governs all sub-projects, including this one. Please respect it!
 
-## Review
+## Expectations
 
-Our [open pull requests][pulls] are new chapters or edits that we're
-currently working on. We would love if you would read through those and make
-comments for any suggestions or corrections!
+Because the book is [printed](https://nostarch.com/rust), and because we want
+to keep the online version of the book close to the print version when
+possible, it may take longer than you're used to for us to address your issue
+or pull request.
 
-[pulls]: https://github.com/rust-lang/book/pulls
+So far, we've been doing a larger revision to coincide with [Rust
+Editions](https://doc.rust-lang.org/edition-guide/). Between those larger
+revisions, we will only be correcting errors. If your issue or pull request
+isn't strictly fixing an error, it might sit until the next time that we're
+working on a large revision: expect on the order of months or years. Thank you
+for your patience!
 
 ## Help wanted
 

@@ -18,10 +18,10 @@ If you want different behavior from that provided by the `derive` attribute,
 consult the [standard library documentation](../std/index.html)<!-- ignore -->
 for each trait for details of how to manually implement them.
 
-The rest of the traits defined in the standard library can’t be implemented on
-your types using `derive`. These traits don’t have sensible default behavior,
-so it’s up to you to implement them in the way that makes sense for what you’re
-trying to accomplish.
+These traits listed here are the only ones defined by the standard library that
+can be implemented on your types using `derive`. Other traits defined in the
+standard library don’t have sensible default behavior, so it’s up to you to
+implement them in the way that makes sense for what you’re trying to accomplish.
 
 An example of a trait that can’t be derived is `Display`, which handles
 formatting for end users. You should always consider the appropriate way to
@@ -94,7 +94,7 @@ enum definition are considered less than the variants listed later.
 
 The `PartialOrd` trait is required, for example, for the `gen_range` method
 from the `rand` crate that generates a random value in the range specified by a
-low value and a high value.
+range expression.
 
 The `Ord` trait allows you to know that for any two values of the annotated
 type, a valid ordering will exist. The `Ord` trait implements the `cmp` method,
@@ -134,10 +134,10 @@ overloading those methods and violating the assumption that no arbitrary code
 is being run. That way, all programmers can assume that copying a value will be
 very fast.
 
-You can derive `Copy` on any type whose parts all implement `Copy`. You can
-only apply the `Copy` trait to types that also implement `Clone`, because a
-type that implements `Copy` has a trivial implementation of `Clone` that
-performs the same task as `Copy`.
+You can derive `Copy` on any type whose parts all implement `Copy`. A type that
+implements `Copy` must also implement `Clone`, because a type that implements
+`Copy` has a trivial implementation of `Clone` that performs the same task as
+`Copy`.
 
 The `Copy` trait is rarely required; types that implement `Copy` have
 optimizations available, meaning you don’t have to call `clone`, which makes

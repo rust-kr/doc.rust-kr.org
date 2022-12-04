@@ -1,29 +1,29 @@
 ## Advanced Types
 
-The Rust type system has some features that we’ve mentioned in this book but
-haven’t yet discussed. We’ll start by discussing newtypes in general as we
-examine why newtypes are useful as types. Then we’ll move on to type aliases, a
-feature similar to newtypes but with slightly different semantics. We’ll also
-discuss the `!` type and dynamically sized types.
-
-> Note: The next section assumes you’ve read the earlier section [“Using the
-> Newtype Pattern to Implement External Traits on External
-> Types.”][using-the-newtype-pattern]<!-- ignore -->
+The Rust type system has some features that we’ve so far mentioned but haven’t
+yet discussed. We’ll start by discussing newtypes in general as we examine why
+newtypes are useful as types. Then we’ll move on to type aliases, a feature
+similar to newtypes but with slightly different semantics. We’ll also discuss
+the `!` type and dynamically sized types.
 
 ### Using the Newtype Pattern for Type Safety and Abstraction
 
-The newtype pattern is useful for tasks beyond those we’ve discussed so far,
-including statically enforcing that values are never confused and indicating
-the units of a value. You saw an example of using newtypes to indicate units in
-Listing 19-15: recall that the `Millimeters` and `Meters` structs wrapped `u32`
-values in a newtype. If we wrote a function with a parameter of type
-`Millimeters`, we couldn’t compile a program that accidentally tried to call
-that function with a value of type `Meters` or a plain `u32`.
+> Note: This section assumes you’ve read the earlier section [“Using the
+> Newtype Pattern to Implement External Traits on External
+> Types.”][using-the-newtype-pattern]<!-- ignore -->
 
-Another use of the newtype pattern is in abstracting away some implementation
+The newtype pattern is also useful for tasks beyond those we’ve discussed so
+far, including statically enforcing that values are never confused and
+indicating the units of a value. You saw an example of using newtypes to
+indicate units in Listing 19-15: recall that the `Millimeters` and `Meters`
+structs wrapped `u32` values in a newtype. If we wrote a function with a
+parameter of type `Millimeters`, we couldn’t compile a program that
+accidentally tried to call that function with a value of type `Meters` or a
+plain `u32`.
+
+We can also use the newtype pattern to abstract away some implementation
 details of a type: the new type can expose a public API that is different from
-the API of the private inner type if we used the new type directly to restrict
-the available functionality, for example.
+the API of the private inner type.
 
 Newtypes can also hide internal implementation. For example, we could provide a
 `People` type to wrap a `HashMap<i32, String>` that stores a person’s ID
@@ -38,9 +38,9 @@ section of Chapter 17.
 
 ### Creating Type Synonyms with Type Aliases
 
-Along with the newtype pattern, Rust provides the ability to declare a *type
-alias* to give an existing type another name. For this we use the `type`
-keyword. For example, we can create the alias `Kilometers` to `i32` like so:
+Rust provides the ability to declare a *type alias* to give an existing type
+another name. For this we use the `type` keyword. For example, we can create
+the alias `Kilometers` to `i32` like so:
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:here}}
@@ -58,7 +58,9 @@ values of type `i32`:
 Because `Kilometers` and `i32` are the same type, we can add values of both
 types and we can pass `Kilometers` values to functions that take `i32`
 parameters. However, using this method, we don’t get the type checking benefits
-that we get from the newtype pattern discussed earlier.
+that we get from the newtype pattern discussed earlier. In other words, if we
+mix up `Kilometers` and `i32` values somewhere, the compiler will not give us
+an error.
 
 The main use case for type synonyms is to reduce repetition. For example, we
 might have a lengthy type like this:
@@ -101,11 +103,11 @@ possible I/O errors. Many of the functions in `std::io` will be returning
 `Result<T, E>` where the `E` is `std::io::Error`, such as these functions in
 the `Write` trait:
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-05-write-trait/src/lib.rs}}
 ```
 
-The `Result<..., Error>` is repeated a lot. As such, `std::io` has this type of
+The `Result<..., Error>` is repeated a lot. As such, `std::io` has this type
 alias declaration:
 
 ```rust,noplayground
@@ -113,7 +115,7 @@ alias declaration:
 ```
 
 Because this declaration is in the `std::io` module, we can use the fully
-qualified alias `std::io::Result<T>`—that is, a `Result<T, E>` with the `E`
+qualified alias `std::io::Result<T>`; that is, a `Result<T, E>` with the `E`
 filled in as `std::io::Error`. The `Write` trait function signatures end up
 looking like this:
 
@@ -142,7 +144,8 @@ never are called *diverging functions*. We can’t create values of the type `!`
 so `bar` can never possibly return.
 
 But what use is a type you can never create values for? Recall the code from
-Listing 2-5; we’ve reproduced part of it here in Listing 19-26.
+Listing 2-5, part of the number guessing game; we’ve reproduced a bit of it
+here in Listing 19-26.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:ch19}}
@@ -152,9 +155,9 @@ Listing 2-5; we’ve reproduced part of it here in Listing 19-26.
 `continue`</span>
 
 At the time, we skipped over some details in this code. In Chapter 6 in [“The
-`match` Control Flow Operator”][the-match-control-flow-operator]<!-- ignore
---> section, we discussed that `match` arms must all return the same type. So,
-for example, the following code doesn’t work:
+`match` Control Flow Operator”][the-match-control-flow-operator]<!-- ignore -->
+section, we discussed that `match` arms must all return the same type. So, for
+example, the following code doesn’t work:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-08-match-arms-different-types/src/main.rs:here}}
@@ -176,9 +179,9 @@ be coerced into any other type. We’re allowed to end this `match` arm with
 back to the top of the loop, so in the `Err` case, we never assign a value to
 `guess`.
 
-The never type is useful with the `panic!` macro as well. Remember the `unwrap`
-function that we call on `Option<T>` values to produce a value or panic? Here
-is its definition:
+The never type is useful with the `panic!` macro as well. Recall the `unwrap`
+function that we call on `Option<T>` values to produce a value or panic with
+this definition:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-09-unwrap-definition/src/lib.rs:here}}
@@ -202,11 +205,11 @@ when it got to the `break`.
 
 ### Dynamically Sized Types and the `Sized` Trait
 
-Due to Rust’s need to know certain details, such as how much space to allocate
-for a value of a particular type, there is a corner of its type system that can
-be confusing: the concept of *dynamically sized types*. Sometimes referred to
-as *DSTs* or *unsized types*, these types let us write code using values whose
-size we can know only at runtime.
+Rust needs to know certain details about its types, such as how much space to
+allocate for a value of a particular type. This leaves one corner of its type
+system a little confusing at first: the concept of *dynamically sized types*.
+Sometimes referred to as *DSTs* or *unsized types*, these types let us write
+code using values whose size we can know only at runtime.
 
 Let’s dig into the details of a dynamically sized type called `str`, which
 we’ve been using throughout the book. That’s right, not `&str`, but `str` on
@@ -226,12 +229,11 @@ storage and `s2` needs 15. This is why it’s not possible to create a variable
 holding a dynamically sized type.
 
 So what do we do? In this case, you already know the answer: we make the types
-of `s1` and `s2` a `&str` rather than a `str`. Recall that in the [“String
-Slices”][string-slices]<!-- ignore --> section of Chapter 4, we said the slice
-data structure stores the starting position and the length of the slice.
-
-So although a `&T` is a single value that stores the memory address of where
-the `T` is located, a `&str` is *two* values: the address of the `str` and its
+of `s1` and `s2` a `&str` rather than a `str`. Recall from the [“String
+Slices”][string-slices]<!-- ignore --> section of Chapter 4 that the slice data
+structure just stores the starting position and the length of the slice. So
+although a `&T` is a single value that stores the memory address of where the
+`T` is located, a `&str` is *two* values: the address of the `str` and its
 length. As such, we can know the size of a `&str` value at compile time: it’s
 twice the length of a `usize`. That is, we always know the size of a `&str`, no
 matter how long the string it refers to is. In general, this is the way in
@@ -250,11 +252,11 @@ ignore --> section, we mentioned that to use traits as trait objects, we must
 put them behind a pointer, such as `&dyn Trait` or `Box<dyn Trait>` (`Rc<dyn
 Trait>` would work too).
 
-To work with DSTs, Rust has a particular trait called the `Sized` trait to
-determine whether or not a type’s size is known at compile time. This trait is
-automatically implemented for everything whose size is known at compile time.
-In addition, Rust implicitly adds a bound on `Sized` to every generic function.
-That is, a generic function definition like this:
+To work with DSTs, Rust provides the `Sized` trait to determine whether or not
+a type’s size is known at compile time. This trait is automatically implemented
+for everything whose size is known at compile time. In addition, Rust
+implicitly adds a bound on `Sized` to every generic function. That is, a
+generic function definition like this:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-12-generic-fn-definition/src/lib.rs}}
@@ -274,8 +276,9 @@ restriction:
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-14-generic-maybe-sized/src/lib.rs}}
 ```
 
-A trait bound on `?Sized` is the opposite of a trait bound on `Sized`: we would
-read this as “`T` may or may not be `Sized`.” This syntax is only available for
+A trait bound on `?Sized` means “`T` may or may not be `Sized`” and this
+notation overrides the default that generic types must have a known size at
+compile time. The `?Trait` syntax with this meaning is only available for
 `Sized`, not any other traits.
 
 Also note that we switched the type of the `t` parameter from `T` to `&T`.

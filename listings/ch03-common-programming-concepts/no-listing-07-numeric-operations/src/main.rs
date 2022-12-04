@@ -10,6 +10,7 @@ fn main() {
 
     // division
     let quotient = 56.7 / 32.2;
+    let truncated = -5 / 3; // Results in -1
 
     // remainder
     let remainder = 43 % 5;
