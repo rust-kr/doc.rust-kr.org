@@ -1,23 +1,24 @@
 ## 슬라이스(Slice)
 
-소유권을 갖지 않는 또 하나의 타입은 *슬라이스(slice)* 입니다.
-이 타입은 컬렉션(collection) 을 통째로 참조하는 것이 아닌,
-컬렉션의 연속된 일련의 요소를 참조하는 데 사용합니다.
+*슬라이스 (slice)*는 컬렉션(collection)을 통째로 참조하는 것이 아닌,
+컬렉션의 연속된 일련의 요소를 참조하도록 해줍니다. 슬라이스는 참조자의
+일종으로서 소유권을 갖지 않습니다.
 
-한번 간단한 함수를 만들어 봅시다.
-문자열을 입력받아, 해당 문자열의 첫 번째 단어를 반환하는 함수를요.
+한번 간단한 함수를 만들어 봅시다. 공백문자로 구분된 단어들의 문자열을
+입력받아서 해당 문자열의 첫 번째 단어를 반환하는 함수를요.
 공백문자를 찾을 수 없는 경우엔 문자열 전체가 하나의 단어라는 뜻이니
 전체 문자열을 반환하도록 합시다.
 
-먼저 함수 정의는 어떻게 해야 할지 생각해보죠:
+이 문제를 슬라이스가 해결할 수 있음을 이해하기 위해서는 먼저 슬라이스
+없이 이 함수의 시그니처를 어떻게 작성할지부터 생각해봅시다:
 
 ```rust,ignore
 fn first_word(s: &String) -> ?
 ```
 
 `first_word` 함수는 소유권을 가질 필요가 없으니 `&String` 을 매개변수로 갖게 했습니다.
-그런데, 뭘 반환해야 할까요? 문자열 일부분을 나타내는 법을 모르겠네요.
-일단 Listing 4-7 처럼 단어 끝부분의 인덱스를
+그런데, 뭘 반환해야 할까요? 문자열 *일부분*을 나타내는 법을 모르겠네요.
+일단 Listing 4-7 처럼 공백문자를 가리키는 단어 끝부분의 인덱스를
 반환하도록 만들어 보겠습니다.
 
 <span class="filename">Filename: src/main.rs</span>
@@ -31,7 +32,7 @@ fn first_word(s: &String) -> ?
 
 `String` 을 하나하나 쪼개서
 해당 요소가 공백 값인지 확인해야 하므로,
-`as_bytes` 메소드를 이용해 바이트 배열로 변환하였습니다:
+`as_bytes` 메소드를 이용해 바이트 배열로 변환하였습니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:as_bytes}}
@@ -43,22 +44,23 @@ fn first_word(s: &String) -> ?
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:iter}}
 ```
 
-반복자(iterator)는 13장에서 자세히 알아볼 예정이니
-일단 `iter` 메소드는 컬렉션의 각 요소를 반환하고,
+반복자(iterator)는 [13장][ch13]<!-- ignore -->에서 자세히 알아볼
+예정이니 일단 `iter` 메소드는 컬렉션의 각 요소를 반환하고,
 `enumerate` 메소드는 `iter` 의 결과 값을
 각각 튜플로 감싸 반환한다는 것만 알아두도록 합시다.
 이때 반환하는 튜플은 첫 번째 요소가 인덱스,
 두 번째 요소가 해당 요소의 참조자로 이루어져 있습니다.
 
 `enumerate` 메소드가 반환한 튜플은 패턴을 이용해 해체하였습니다.
-따라서 `for` 루프 내에서 `i` 는 튜플 요소 중 인덱스에 대응하고,
-`&item` 은 바이트에 대응됩니다.
-이때 `&` 를 사용하는 이유는 우린 `iter().enumerate()` 에서
-얻은 요소의 참조자가 필요하기 때문입니다.
+패턴에 대해서는 [6장][ch6]<!-- ignore -->에서 더 자세히 다루겠습니다.
+`for` 루프 내에서 `i` 는 튜플 요소 중 인덱스에 대응하고,
+`&item`은 바이트에 대응됩니다. 이때 패턴에 `&`를 사용하는
+이유는 `iter().enumerate()`에서 얻은 요소의 참조자가 필요하기
+때문입니다.
 
 `for` 반복문 내에선 바이트 리터럴 문법으로
 공백 문자를 찾고, 찾으면 해당 위치를 반환합니다.
-찾지 못했을 땐 `s.len()` 으로 문자열의 길이를 반환합니다:
+찾지 못했을 땐 `s.len()` 으로 문자열의 길이를 반환합니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:inside_for}}
@@ -96,8 +98,8 @@ fn second_word(s: &String) -> (usize, usize) {
 
 두 번째 단어이니 시작, 끝 두 개의 인덱스가 필요할 것이고,
 이는 앞선 Listing 4-8 의 `word` 처럼 어떠한 데이터의 특정 상태에만
-의존하는 값들이 늘어남을 의미합니다.
-그럼 여러분은 3 개나 되는 변수를 계속 관리해야 하겠죠.
+의존하는 값들이 늘어남을 의미합니다. 그럼 여러분은 3개의 관련 없는
+변수들을 계속 동기화 해야겠죠.
 
 다행히도, 문자열 슬라이스라는 적절한 대안책이 존재합니다.
 
@@ -109,10 +111,8 @@ fn second_word(s: &String) -> (usize, usize) {
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-17-slice/src/main.rs:here}}
 ```
 
-만드는 방식은 `String` 참조자와 유사하지만, `[0..5]` 가 추가로 붙어 있네요.
-이는 `String` 전체가 아닌 일부만 가리킨다는 것을
-의미합니다.
-
+만드는 방식은 `String` 참조자와 유사하지만, `hello`는 추가적인 `[0..5]`으로
+명시된 `String`의 일부분을 가르키는 참조자입니다.
 `[starting_index..ending_index]` 는 `starting_index` 부터 시작해 `ending_index` 직전,
 즉 `ending_index` 에서 1을 뺀 위치까지 슬라이스를 생성한다는 의미입니다.
 슬라이스는 내부적으로 시작 위치, 길이를 데이터 구조에 저장하며,
@@ -121,14 +121,18 @@ fn second_word(s: &String) -> (usize, usize) {
 시작 위치로 `s` 의 (1부터 시작하여) 7번째 바이트를 가리키는 포인터와,
 길이 값 5를 갖는 슬라이스가 되겠죠.
 
-Figure 4-6 을 참고하겠습니다:
+Figure 4-6는 위 내용을 다이어그램으로 그린 것입니다:
 
-<img alt="world 는 String s 의 7번째 바이트를 가리키는 포인터와, 길이 값 5 를 갖습니다" src="img/trpl04-06.svg" class="center" style="width: 50%;" />
+<img alt="세 개의 테이블: 힙 상의 문자열 데이터 &quot;hello world&quot;이
+들어있는 테이블의 0번째 바이트를 가리키고 있는 s의 스택 데이터를 나타내는 테이블.
+세번째 테이블은 슬라이스 세계의 스텍 데이터를 나타내는데, 길이가 5이고 힙 데이터
+테이블의 6번째 바이트를 가리키고 있습니다."
+src="img/trpl04-06.svg" class="center" style="width: 50%;" />
 
 <span class="caption">Figure 4-6: `String` 일부를 참조하는
 문자열 슬라이스</span>
 
-`..` 범위 표현법은 맨 첫 번째 인덱스부터 시작하는 경우, 앞의 값을 생략할 수 있습니다.
+`..` 범위 표현법은 인덱스 0부터 시작하는 경우, 앞의 값을 생략할 수 있습니다.
 즉 다음 코드에 등장하는 두 슬라이스 표현은 동일합니다:
 
 ```rust
@@ -215,13 +219,19 @@ fn second_word(s: &String) -> &str {
 {{#include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
 ```
 
-이전 절에서 배운 borrow 규칙 중, 특정 대상의 불변 참조자가 이미 존재할 경우에는
+이전 절에서 배운 빌림 규칙 중에서 특정 대상의 불변 참조자가 이미 존재할 경우에는
 가변 참조자를 만들 수 없다는 규칙이 있었죠. `clear` 함수는 `String` 의 길이를
-변경해야 하니 가변 참조자가 필요하지만 이미 불변 참조자가 존재하므로 오류가 발생하게 됩니다.
-이런 식으로 러스트는 우리가 더 간단히 사용할 수 있는 API 를 만들도록 도와주고,
-다양한 오류를 컴파일 타임에 제거해 줍니다.
+변경해야 하니 가변 참조자가 필요합니다. `clear` 호출 이후 `println!`는 `word`의
+참조자를 사용하므로, 이 불변 참조자는 이 지점까지 계속 활성화되어 있어야 합니다.
+러스트는 `clear` 내의 가변 참조자와 `word`의 불변 참조자가 같은 시점에 존재하는
+것을 허용하지 않으므로 컴파일 에러가 발생합니다. 이런 식으로 러스트는 우리가 더
+간단히 사용할 수 있는 API 를 만들도록 도와주고, 다양한 오류를 컴파일 타임에
+제거해 줍니다.
 
-#### 문자열 리터럴은 슬라이스입니다
+<!-- Old heading. Do not remove or links may break. -->
+<a id="string-literals-are-slices"></a>
+
+#### 슬라이스로서의 문자열 리터럴
 
 앞서, 문자열 리터럴은 바이너리 내에 저장된다는 이야기를 잠깐 언급했는데, 기억하시나요?
 슬라이스를 배웠으니, 문자열 리터럴도 제대로 이해해봅시다:
@@ -254,10 +264,14 @@ fn first_word(s: &String) -> &str {
 <span class="caption">Listing 4-9: `first_word` 함수 개선
 (매개변수 `s` 를 문자열 슬라이스 타입으로 변경)</span>
 
-이처럼 함수 매개변수를 `String` 참조자 대신 문자열 슬라이스로 정의할 경우,
-함수를 사용하는 관점에선 문자열 슬라이스, `String` 을 모두 넘길 수 있고,
-API 를 제공하는 관점에선 간단하고 손해 없는 방법으로 더 범용적인 함수를 만들 수 있으니 유용합니다.
-문자열 슬라이스, `String` 을 넘기는 방법은 다음과 같습니다.
+문자열 슬라이스를 가지고 있다면 이걸 바로 넘길 수 있습니다. `String`을
+가지고 있다면 `String`의 슬라이스 혹은 `String`에 대한 참조자를 넘길 수 있습니다.
+이러한 유연성은 *역참조 강제 (deref coercions)* 기능을 이용하는데, 15장의
+[“함수와 메소드의 암묵적 역참조 강제”][deref-coercions]<!--ignore-->절에서
+다룰 것입니다.
+
+`String`에 대한 참조자 대신에 문자열 슬라이스를 매개변수로 하는 함수를 정의하면
+기능 면에서 손해보지 않고 API를 더 일반적이고 유용하게 만들어 줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -274,13 +288,15 @@ API 를 제공하는 관점에선 간단하고 손해 없는 방법으로 더 �
 let a = [1, 2, 3, 4, 5];
 ```
 
-문자열 일부를 참조할 때처럼
+문자열 일부를 참조할 때처럼 다음과 같이
 배열 일부를 참조할 수 있죠:
 
 ```rust
 let a = [1, 2, 3, 4, 5];
 
 let slice = &a[1..3];
+
+assert_eq!(slice, &[2, 3]);
 ```
 
 이 슬라이스는 `&[i32]` 타입입니다.
@@ -290,7 +306,7 @@ let slice = &a[1..3];
 
 ## 요약
 
-러스트는 소유권, borrow, 슬라이스는
+러스트는 소유권, 빌림, 슬라이스는
 러스트가 컴파일 타임에 메모리 안정성을 보장하는 비결입니다.
 여타 시스템 프로그래밍 언어처럼 프로그래머에게 메모리 사용 제어 권한을 주면서,
 어떠한 데이터의 소유자가 스코프를 벗어날 경우 자동으로 해당 데이터를 정리하는 것이 가능하죠.
@@ -300,4 +316,7 @@ let slice = &a[1..3];
 영향을 미치는 개념인 만큼 이후 내용에서도 계속해서 다룰 예정입니다.
 그럼 이제 5장에서 `struct` 로 여러 데이터를 묶는 방법을 알아보죠.
 
+[ch13]: ch13-02-iterators.html
+[ch6]: ch06-02-match.html#patterns-that-bind-to-values
 [strings]: ch08-02-strings.html#storing-utf-8-encoded-text-with-strings
+[deref-coercions]: ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
