@@ -1,21 +1,23 @@
 ## `if let`을 사용한 간결한 흐름 제어
 
-`if let` 문법은 `if`와 `let`을 조합하여 하나의 패턴만 매칭시키고 나머지 경우는
-무시하는 값을 다루는 덜 수다스러운 방법을 제공합니다. 어떤 `Option<u8>` 값을
-매칭 하지만 그 값이 3일 경우에만 코드를 실행시키고 싶어 하는 Listing 6-6에서의
-프로그램을 고려해 보세요:
+`if let` 문법은 `if`와 `let`을 조합하여 하나의 패턴만 매칭시키고
+나머지 경우는 무시하는 값을 다루는 간결한 방법을 제공합니다.
+Listing 6-6의 프로그램은 `config_max` 변수의 어떤 `Option<u8>`
+값을 매칭하지만 그 값이 `Some` variant일 경우에만 코드를 실행시키고
+싶어 하는 예제를 보여줍니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-6: 어떤 값이 `Some(3)` 일 때에만 코드를 실행하도록
+<span class="caption">Listing 6-6: 어떤 값이 `Some` 일 때에만 코드를 실행하도록
 하는 `match`</span>
 
-우리는 `Some(3)`에 매칭되는 경우에만 뭔가를 하지만 다른 `Some<u8>` 값 혹은
-`None` 값인 경우에는 아무것도 하지 않고 싶습니다. 이러한 `match` 표현식을
-만족시키기 위해, `_ => ()`을 단 하나의 variant를 처리한 다음에 추가해야
-하는데, 이는 추가하기에 너무 많은 보일러 플레이트 코드입니다.
+이 값이 `Some`이면 패턴 내에 있는 `max`에 `Some` variant의 값을
+묶어서 출력합니다. `None` 값에 대해서는 아무 처리도 하지 않으려고
+합니다. `match` 표현식을 만족시키려면 딱 하나의 variant 처리 후
+`_ => ()`를 붙여야 하는데, 이는 다소 성가신 보일러 플레이트
+코드입니다.
 
 그 대신, `if let`을 이용하여 이 코드를 더 짧게 쓸 수 있습니다. 아래의 코드는
 Listing 6-6에서의 `match`와 동일하게 동작합니다:
@@ -24,9 +26,13 @@ Listing 6-6에서의 `match`와 동일하게 동작합니다:
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
 ```
 
-`if let`은 `=`로 구분된 패턴과 표현식을 입력받습니다. 이는 `match`와 동일한
-방식으로 작동하는데, 여기서 표현식은 `match`에 주어지는 것이고 패턴은 이
-`match`의 첫 번째 갈래와 같습니다.
+`if let`은 `=`로 구분된 패턴과 표현식을 입력받습니다. 이는
+`match`와 동일한 방식으로 작동하는데, 여기서 표현식은 `match`에
+주어지는 것이고 패턴은 이 `match`의 첫 번째 갈래와 같습니다.
+위의 경우 패턴은 `Some(max)`이고 `max`는 `Some` 내에 있는
+값에 묶입니다. 그렇게 되면 `match`의 갈래 안에서 `max`를
+사용했던 것과 같은 방식으로 `if let` 본문 블록 내에서 `max`를
+사용할 수 있습니다.
 
 `if let`을 이용하는 것은 여러분이 덜 타이핑하고, 덜 들여쓰기 하고, 보일러
 플레이트 코드를 덜 쓰게 된다는 뜻입니다. 하지만, `match`가 강제했던 하나도
