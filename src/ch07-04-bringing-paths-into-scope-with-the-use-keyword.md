@@ -1,12 +1,11 @@
 ## `use` 키워드로 경로를 스코프 내로 가져오기
 
-앞서 작성한 함수 호출 경로는
-너무 길고 반복적으로 느껴지기도 합니다.
-예를 들어, Listing 7-7에서는 절대 경로를 사용하건 상대 경로를 사용하건,
-`add_to_waitlist` 호출할 때마다 `front_of_house`,
-`hosting` 모듈을 매번 명시해 주어야 하죠.
-`use` 키워드를 사용해 경로를 스코프 내로 가져오면
-이 과정을 단축하여 마치 로컬 항목처럼 호출할 수 있습니다.
+함수 호출을 위해서 경로를 작성하는 것은 불편하고 반복적인 느낌이 들 수
+있습니다. Listing 7-7에서는 절대 경로를 사용하건 상대 경로를 사용하건,
+`add_to_waitlist` 호출할 때마다 `front_of_house`, `hosting` 모듈을 매번
+명시해 주어야 하죠. 다행히도 이 과정을 단축할 방법이 있습니다: `use` 키워드를
+한번 사용하여 어떤 경로의 숏컷을 만들 수 있고, 그러면 스코프 내의 어디에서라도
+짧은 이름을 사용할 수 있습니다. 
 
 Listing 7-11은 `crate::front_of_house::hosting` 모듈을
 `eat_at_restaurant` 함수가 존재하는 스코프로 가져와,
@@ -28,18 +27,31 @@ Listing 7-11은 `crate::front_of_house::hosting` 모듈을
 해당 스코프에서 `hosting` 모듈을 크레이트 루트에 정의한 것처럼 사용할 수 있습니다.
 `use` 키워드로 가져온 경우 또한 다른 경로와 마찬가지로 비공개 규칙이 적용됩니다.
 
-`use` 키워드에 상대 경로를 사용할 수도 있습니다.
-Listing 7-12는 Listing 7-11 코드를
-상대 경로로 변경한 예제입니다.
+`use`가 사용된 특정한 스코프에 대해서만 숏컷이 만들어진다는 점을
+유의하세요. Listing 7-12에서는 `eat_at_restaurant` 함수를 새로운
+자식 모듈 `customer`로 옮겼는데, 이러면 `use` 구문과 다른 스코프가
+되므로, 이 함수는 컴파일 되지 않습니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust,noplayground,test_harness
+```rust,noplayground,test_harness,does_not_compile,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-12: `use` 키워드와 상대 경로를 작성하여
-모듈을 스코프에 가져오기</span>
+<span class="caption">Listing 7-12: `use` 구문은 사용된 스코프 내에서만
+적용됩니다</span>
+
+컴파일러는 `customer` 모듈 내에 더 이상 숏컷이 적용되지 않음을
+알려줍니다:
+
+```console
+{{#include ../listings/ch07-managing-growing-projects/listing-07-12/output.txt}}
+```
+
+`use`가 해당 스코프 내에서 더이상 사용되지 않는다는 경고도 있음을 주목하세요!
+이 문제를 해결하려면 `use`도 `customer` 모듈 안쪽으로 옮기거나, `customer`
+모듈 내에서 `super::hosting`를 써서 부모 모듈로의 숏컷을 참조하면
+됩니다.
 
 ### 보편적인 `use` 경로 작성법
 
@@ -59,10 +71,11 @@ Listing 7-13 처럼 작성하면 안 되는 걸까요?
 
 Listing 7-11과 7-13의 동작은 동일하지만, Listing 7-11 코드가
 `use` 키워드로 스코프에 함수를 가져올 때의 관용적인 코드입니다.
-함수의 부모 모듈을 `use` 키워드로 가져올 경우, 전체 경로 대신 축약 경로만 작성하면서도,
-해당 함수가 현재 위치에 정의된 함수가 아님이 명확해지기 때문입니다.
-반면, Listing 7-13은 `add_to_waitlist` 함수가 어디에 정의되어 있는지
-알기 어렵습니다.
+함수의 부모 모듈을 `use` 키워드로 가져오는 것은 함수를 호출할 때 부모
+모듈을 특정해야 한다는 것을 의미합니다. 함수 호출 시 부모 모듈을 특정하면
+전체 경로를 반복하는 것을 최소화하면서도 함수가 지역적으로 정의되어 있지
+않음을 확실히 보여주게 됩니다. Listing 7-13의 코드는 `add_to_waitlist`가
+어디에 정의되어 있는지 불분명합니다.
 
 한편, `use` 키워드로 구조체나 열거형 등의 타 항목을
 가져올 시에는 전체 경로를 작성하는 것이 보편적입니다.
@@ -109,7 +122,7 @@ Listing 7-16은 `as` 키워드를 이용해 Listing 7-15 코드 내
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-16/src/lib.rs:here}}
 ```
 
@@ -142,10 +155,11 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 <span class="caption">Listing 7-17: 다른 스코프의 코드에서 사용할 수 있도록
 `pub use` 사용</span>
 
-`pub use`를 사용하면 외부 코드에서 `add_to_waitlist` 함수를
-`hosting::add_to_waitlist` 코드로 호출할 수 있습니다.
-`pub use` 로 지정하지 않을 경우, `eat_at_restaurant` 함수에서는
-여전히 `hosting::add_to_waitlist` 로 호출할 수 있지만, 외부 코드에서는 불가능합니다.
+위의 변경 전이라면 외부 코드에서는 `add_to_waitlist` 함수를 호출하기 위해
+`restaurant::front_of_house::hosting::add_to_waitlist()`라는
+경로를 사용해야 할 것입니다. 위의 `pub use`가 루트 모듈로부터 `hosting`
+모듈을 다시 내보냈으므로, 이제 외부 코드는 `restaurant::hosting::add_to_waitlist()`
+경로를 대신 사용할 수 있습니다.
 
 다시 내보내기 기법은 여러분이 작성한 코드의 구조 내부와,
 여러분의 코드를 사용할 프로그래머들이 예상할법한 해당 분야의 구조가 서로 다를 때 유용합니다.
@@ -154,7 +168,10 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 하지만 레스토랑을 방문하는 고객들은 레스토랑의 부서를 그런 용어로 나누어 생각하지 않겠죠.
 `pub use` 를 사용하면 코드를 작성할 때의 구조와, 노출할 때의 구조를 다르게 만들 수 있습니다.
 라이브러리를 제작하는 프로그래머와, 라이브러리를 사용하는 프로그래머
-모두를 위한 라이브러리를 구성하는데 큰 도움이 되죠.
+모두를 위한 라이브러리를 구성하는데 큰 도움이 되죠. `pub use`에 대한
+또다른 예제, 그리고 이것이 여러분의 크레이트에 대한 문서에 어떤 영향을
+주는지에 대해서는 14장의 [“`pub use`를 사용하여 편리한 공개 API
+내보내기”][ch14-pub-use]<!-- ignore -->절에서 살펴보겠습니다.
 
 ### 외부 패키지 사용하기
 
@@ -194,7 +211,7 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 `use` 키워드를 사용해 스코프로 가져오면 됩니다.
 
 알아 두어야 할 것은,
-표준 라이브러리 `std`도 마찬가지로 외부 크레이트라는 겁니다.
+`std` 표준 라이브러리도 마찬가지로 외부 크레이트라는 겁니다.
 러스트 언어에 포함되어 있기 때문에 *Cargo.toml* 에 추가할 필요는 없지만,
 표준 라이브러리에서 우리가 만든 패키지의 스코프로 가져오려면 `use` 문을 작성해야 합니다.
 예를 들어, `HashMap`을 가져오는 코드는 다음과 같습니다.
@@ -244,7 +261,7 @@ use std::collections::HashMap;
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-19/src/lib.rs}}
 ```
 
@@ -257,7 +274,7 @@ use std::collections::HashMap;
 
 <span class="filename">Filename: src/lib.rs</span>
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-20/src/lib.rs}}
 ```
 
@@ -282,10 +299,11 @@ use std::collections::*;
 
 글롭 연산자는 테스트할 모든 항목을 `tests` 모듈로
 가져오는 용도로 자주 사용됩니다.
-(11장 ["테스트 작성 방법"][writing-tests]<!-- ignore --> 에서 다룰 예정입니다.)
+(11장 [“테스트 작성 방법”][writing-tests]<!-- ignore --> 에서 다룰 예정입니다.)
 또한 프렐루드 패턴의 일부로 사용되기도 하며, 자세한 내용은
 [표준 라이브러리 문서]([../std/prelude/index.html#other-preludes](https://doc.rust-lang.org/std/prelude/index.html#other-preludes))<!-- ignore --> 를
 참고 바랍니다.
 
+[ch14-pub-use]: ch14-02-publishing-to-crates-io.html#exporting-a-convenient-public-api-with-pub-use
 [rand]: ch02-00-guessing-game-tutorial.html#임의의-숫자를-생성하기
 [writing-tests]: ch11-01-writing-tests.html#테스트-작성-방법
