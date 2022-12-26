@@ -19,7 +19,7 @@
 표준 라이브러리가 제공해주는 다른 종류의 컬렉션에 대해 알고 싶으시면,
 [the documentation][collections]를 봐주세요.
 
-[collections]: https://doc.rust-lang.org/std/collections/index.html
-
 이제부터 어떻게 벡터, 문자열, 해쉬맵을 만들고 업데이트하는지 뿐만 아니라 어떤
 것이 각각의 컬렉션을 특별하게 해주는지에 대해 논의해 보겠습니다.
+
+[collections]: https://doc.rust-lang.org/std/collections/index.html
