@@ -64,13 +64,13 @@
     - [테스트 실행 제어하기](ch11-02-running-tests.md)
     - [테스트 조직화](ch11-03-test-organization.md)
 
-- [An I/O Project: Building a Command Line Program](ch12-00-an-io-project.md)
-    - [Accepting Command Line Arguments](ch12-01-accepting-command-line-arguments.md)
-    - [Reading a File](ch12-02-reading-a-file.md)
-    - [Refactoring to Improve Modularity and Error Handling](ch12-03-improving-error-handling-and-modularity.md)
-    - [Developing the Library’s Functionality with Test Driven Development](ch12-04-testing-the-librarys-functionality.md)
-    - [Working with Environment Variables](ch12-05-working-with-environment-variables.md)
-    - [Writing Error Messages to Standard Error Instead of Standard Output](ch12-06-writing-to-stderr-instead-of-stdout.md)
+- [I/O 프로젝트: 커맨드 라인 프로그램 만들기](ch12-00-an-io-project.md)
+    - [커맨드 라인 인자 받기](ch12-01-accepting-command-line-arguments.md)
+    - [파일 읽기](ch12-02-reading-a-file.md)
+    - [모듈성과 에러 처리 향상을 위한 리팩토링](ch12-03-improving-error-handling-and-modularity.md)
+    - [테스트 주도 개발로 라이브러리 기능 개발하기](ch12-04-testing-the-librarys-functionality.md)
+    - [환경 변수 사용하기](ch12-05-working-with-environment-variables.md)
+    - [표준 출력 대신 표준 에러로 에러 메세지 작성하기](ch12-06-writing-to-stderr-instead-of-stdout.md)
 
 ## Thinking in Rust
 
