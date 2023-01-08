@@ -15,7 +15,7 @@
 [https://rinthel.github.io/rust-lang-book-ko/](https://rinthel.github.io/rust-lang-book-ko/)(2판 번역본)에서 읽어보실 수 있습니다.
 오프라인 본(영문)은 설치되어있는 `rustup` 의 `rustup docs --book` 명령어로 열어보실 수 있습니다.
 
-커뮤니티 [번역본](translations)<!-- ignore -->도 물론 이용 가능합니다.
+커뮤니티 [번역본][translations]<!-- ignore -->도 물론 이용 가능합니다.
 
 [No Starch Press][nsprust] 에서는 영문 원서가
 종이책 및 ebook으로 제공됩니다.
