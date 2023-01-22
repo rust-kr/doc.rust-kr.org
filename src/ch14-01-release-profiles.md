@@ -1,16 +1,16 @@
-## Customizing Builds with Release Profiles
+# 릴리즈 프로필을 통한 빌드 커스터마이징하기
 
-In Rust, *release profiles* are predefined and customizable profiles with
-different configurations that allow a programmer to have more control over
-various options for compiling code. Each profile is configured independently of
-the others.
+러스트에서의 *릴리즈 프로필 (release profiles)*이란 설정값을 가지고 있는
+미리 정의된, 커스터마이징 가능한 프로필인데, 이 설정값으로 프로그래머는 코드
+컴파일을 위한 다양한 옵션을 제어할 수 있습니다. 각 프로필은 다른 프로필과
+독립적으로 설정됩니다.
 
-Cargo has two main profiles: the `dev` profile Cargo uses when you run `cargo
-build` and the `release` profile Cargo uses when you run `cargo build
---release`. The `dev` profile is defined with good defaults for development,
-and the `release` profile has good defaults for release builds.
+Cargo는 두 개의 주요 프로필을 가지고 있습니다: `cargo build`를 실행할때
+쓰는 `dev` 프로필과 `cargo build --release`를 실행할 때 쓰는 `release`
+프로필이 바로 이 둘입니다. `dev` 프로필은 개발에 적합한 기본값으로 정의되었고,
+`release` 프로필은 릴리즈 빌드용 설정을 기본값으로 가집니다.
 
-These profile names might be familiar from the output of your builds:
+이 프로필 이름이 빌드 출력에 나와서 익숙할 수도 있겠습니다:
 
 <!-- manual-regeneration
 anywhere, run:
@@ -26,13 +26,13 @@ $ cargo build --release
     Finished release [optimized] target(s) in 0.0s
 ```
 
-The `dev` and `release` are these different profiles used by the compiler.
+여기서의 `dev`와 `release`가 바로 컴파일러에 의해 사용된 이 두 개의 프로필입니다.
 
-Cargo has default settings for each of the profiles that apply when you haven't
-explicitly added any `[profile.*]` sections in the project’s *Cargo.toml* file.
-By adding `[profile.*]` sections for any profile you want to customize, you
-override any subset of the default settings. For example, here are the default
-values for the `opt-level` setting for the `dev` and `release` profiles:
+Cargo는 프로젝트의 *Cargo.toml* 파일에 `[profile.*]`절을 명시적으로
+추가하지 않았을 경우 적용되는 각 프로필의 기본 설정을 가지고 있습니다.
+커스터마이징을 원하는 프로필에 대해 `[profile.*]`절을 추가하면 이
+기본 설정을 덮어 씌울 수 있습니다. 여기 예시로 `opt-level` 설정에
+대한 `dev` 와 `release` 프로필의 기본 설정 값을 보여드리겠습니다:
 
 <span class="filename">Filename: Cargo.toml</span>
 
@@ -44,20 +44,20 @@ opt-level = 0
 opt-level = 3
 ```
 
-The `opt-level` setting controls the number of optimizations Rust will apply to
-your code, with a range of 0 to 3. Applying more optimizations extends
-compiling time, so if you’re in development and compiling your code often,
-you’ll want fewer optimizations to compile faster even if the resulting code
-runs slower. The default `opt-level` for `dev` is therefore `0`. When you’re
-ready to release your code, it’s best to spend more time compiling. You’ll only
-compile in release mode once, but you’ll run the compiled program many times,
-so release mode trades longer compile time for code that runs faster. That is
-why the default `opt-level` for the `release` profile is `3`.
+`opt-level` 설정은 러스트가 여러분의 코드에 적용할 최적화 수치이며,
+0에서 3 사이의 값을 가집니다. 높은 최적화 수치를 적용할수록 컴파일
+시간이 늘어나므로, 개발 중 코드를 자주 컴파일하는 상황이라면 코드의 실행
+속도가 조금 느려지더라도 컴파일이 빨리 되도록 덜 최적화하길 원할 것입니다.
+따라서 `dev`의 `opt-level` 기본값은 `0` 으로 되어 있습니다.
+코드를 출시할 준비가 됐을 때라면 더 많은 시간을 컴파일에 쓰는게 최상책입니다.
+릴리즈 모드에서의 컴파일은 한 번이지만, 실행 횟수는 여러번이니까요.
+따라서 릴리즈 모드에서는 긴 컴파일 시간과 빠른 코드 실행 속도를 맞바꿉니다.
+`release` 프로필의 `opt-level` 기본값이 `3`으로 되어 있는 이유는 이 때문입니다.
 
-You can override a default setting by adding a different value for it in
-*Cargo.toml*. For example, if we want to use optimization level 1 in the
-development profile, we can add these two lines to our project’s *Cargo.toml*
-file:
+*Cargo.toml*에 기본 설정과 다른 값을 넣어서 기본 설정을 덮어씌울
+수 있습니다. 예를 들어 개발용 프로필에 최적화 단계 1을 사용하고
+싶다면, 프로젝트의 *Cargo.toml*에 아래의 두 줄을 추가하면
+됩니다:
 
 <span class="filename">Filename: Cargo.toml</span>
 
@@ -66,10 +66,10 @@ file:
 opt-level = 1
 ```
 
-This code overrides the default setting of `0`. Now when we run `cargo build`,
-Cargo will use the defaults for the `dev` profile plus our customization to
-`opt-level`. Because we set `opt-level` to `1`, Cargo will apply more
-optimizations than the default, but not as many as in a release build.
+이 코드는 기본 설정인 `0` 을 덮어 씌웁니다. 이제부터 `cargo build`를 실행할
+때는 Cargo가 `dev` 프로필의 기본값과 커스터마이징된 `opt-level`을 사용하게
+될 것입니다. `opt-level` 을 `1`로 설정했으므로 Cargo는 릴리즈 빌드만큼은
+아니지만 기본값 보다 많은 최적화를 적용할 것입니다.
 
-For the full list of configuration options and defaults for each profile, see
-[Cargo’s documentation](https://doc.rust-lang.org/cargo/reference/profiles.html).
+각 프로필의 설정 옵션 및 기본값의 전체 목록을 보시려면
+[Cargo 공식 문서](https://doc.rust-lang.org/cargo/reference/profiles.html)를 참고해 주시기 바랍니다.

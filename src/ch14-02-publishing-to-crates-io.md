@@ -1,30 +1,30 @@
-## Publishing a Crate to Crates.io
+## Crates.io에 크레이트 배포하기
 
-We’ve used packages from [crates.io](https://crates.io/)<!-- ignore --> as
-dependencies of our project, but you can also share your code with other people
-by publishing your own packages. The crate registry at
-[crates.io](https://crates.io/)<!-- ignore --> distributes the source code of
-your packages, so it primarily hosts code that is open source.
+여지까지 프로젝트의 의존성으로서 [crates.io](https://crates.io/)<!-- ignore -->의
+패키지를 이용해왔지만, 여러분도 자신만의 패키지를 배포(publish)하여 다른
+사람들과 코드를 공유할 수 있습니다. [crates.io](https://crates.io/)<!-- ignore -->에
+있는 크레이트 등기소(registry)는 여러분 패키지의 소스 코드를 공개하므로,
+이는 주로 오픈 소스인 코드를 호스팅합니다.
 
-Rust and Cargo have features that make your published package easier for people
-to find and use. We’ll talk about some of these features next and then explain
-how to publish a package.
+러스트와 Cargo는 여러분이 배포한 패키지를 사람들이 더 쉽게 찾고 사용할 수
+있도록 도와주는 기능이 있습니다. 이 기능들 몇가지에 대해 바로 다음에 이야기한 후
+패키지를 배포하는 방법을 설명하겠습니다.
 
-### Making Useful Documentation Comments
+### 유용한 문서화 주석 만들기
 
-Accurately documenting your packages will help other users know how and when to
-use them, so it’s worth investing the time to write documentation. In Chapter
-3, we discussed how to comment Rust code using two slashes, `//`. Rust also has
-a particular kind of comment for documentation, known conveniently as a
-*documentation comment*, that will generate HTML documentation. The HTML
-displays the contents of documentation comments for public API items intended
-for programmers interested in knowing how to *use* your crate as opposed to how
-your crate is *implemented*.
+여러분의 패키지에 대한 상세한 문서화는 다른 사용자들이 패키지를 어떻게, 언제
+사용해야 하는지 알게 해주므로, 문서 작성에 시간을 투자하는 것은 가치있는 일입니다.
+3장에서 러스트 코드에 두 개의 슬래시 `//`를 이용하여 주석을 다는 법을
+이야기했습니다. 러스트에는 또한 *문서화 주석(documentation comment)* 이라고
+불리는 문서화를 위한 특별한 종류의 주석이 있는데, 이 주석이 HTML 문서를 생성할
+겁니다. 이 HTML에는 여러분의 크레이트가 어떻게 *구현되었는지*가 아닌 어떻게
+*사용하는지*에 관심있는 프로그래머들을 위하여 공개 API 아이템들에 대한 문서화
+주석 내용을 보여줍니다.
 
-Documentation comments use three slashes, `///`, instead of two and support
-Markdown notation for formatting the text. Place documentation comments just
-before the item they’re documenting. Listing 14-1 shows documentation comments
-for an `add_one` function in a crate named `my_crate`.
+문서화 주석은 슬래시 두 개가 아니라 세 개 `///`를 이용하며 텍스트 서식을
+위한 마크다운 표기법을 지원합니다. 문서화할 아이템 바로 앞에 문서화 주석을
+배치하세요. Listing 14-1 은 `my_crate`라는 이름의 크레이트에 있는
+`add_one` 함수에 대한 문서화 주석을 보여줍니다.
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -32,57 +32,57 @@ for an `add_one` function in a crate named `my_crate`.
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-01/src/lib.rs}}
 ```
 
-<span class="caption">Listing 14-1: A documentation comment for a
-function</span>
+<span class="caption">Listing 14-1: 함수에 대한 문서화
+주석</span>
 
-Here, we give a description of what the `add_one` function does, start a
-section with the heading `Examples`, and then provide code that demonstrates
-how to use the `add_one` function. We can generate the HTML documentation from
-this documentation comment by running `cargo doc`. This command runs the
-`rustdoc` tool distributed with Rust and puts the generated HTML documentation
-in the *target/doc* directory.
+여기서 `add_one` 함수가 무슨 일을 하는지에 대한 설명을 적었고,
+제목 `Example`으로 절을 시작한 다음, `add_one` 함수의 사용법을
+보여주는 코드를 제공했습니다. `cargo doc`을 실행하면 이 문서화
+주석으로부터 HTML 문서를 생성할 수 있습니다. 이 명령어는 러스트와
+함께 배포되는 `rustdoc` 도구를 실행하여 생성된 HTML 문서를
+*target/doc* 디렉토리에 넣습니다.
 
-For convenience, running `cargo doc --open` will build the HTML for your
-current crate’s documentation (as well as the documentation for all of your
-crate’s dependencies) and open the result in a web browser. Navigate to the
-`add_one` function and you’ll see how the text in the documentation comments is
-rendered, as shown in Figure 14-1:
+편의성의 위하여 `cargo doc --open`을 실행시키면 여러분의 현재 크레이트의
+문서에 대해 (심지어 여러분의 크레이트가 가진 모든 의존성들의 문서까지)
+HTML을 생성하고 그 결과를 웹 브라우저에 띄워줄 겁니다. 이제 `add_one`
+함수를 찾아보면 Figure 14-1에 보시는 것처럼 문서화 주석의 텍스트가 어떤
+식으로 렌더링되는지 알 수 있을 겁니다:
 
 <img alt="Rendered HTML documentation for the `add_one` function of `my_crate`" src="img/trpl14-01.png" class="center" />
 
-<span class="caption">Figure 14-1: HTML documentation for the `add_one`
-function</span>
+<span class="caption">Figure 14-1: `add_one` 함수에 대한 HTML
+문서</span>
 
-#### Commonly Used Sections
+#### 자주 사용되는 절
 
-We used the `# Examples` Markdown heading in Listing 14-1 to create a section
-in the HTML with the title “Examples.” Here are some other sections that crate
-authors commonly use in their documentation:
+Listing 14-1에서는 HTML에 "Examples" 제목을 가진 절을 만들기 위해
+`# Examples` 마크다운 제목을 사용했습니다. 이외에 크레이트 저자가
+문서에서 자주 사용하는 구절은 다음과 같습니다:
 
-* **Panics**: The scenarios in which the function being documented could
-  panic. Callers of the function who don’t want their programs to panic should
-  make sure they don’t call the function in these situations.
-* **Errors**: If the function returns a `Result`, describing the kinds of
-  errors that might occur and what conditions might cause those errors to be
-  returned can be helpful to callers so they can write code to handle the
-  different kinds of errors in different ways.
-* **Safety**: If the function is `unsafe` to call (we discuss unsafety in
-  Chapter 19), there should be a section explaining why the function is unsafe
-  and covering the invariants that the function expects callers to uphold.
+* **Panics**: 문서화된 함수가 패닉을 일으킬 수 있는 시나리오입니다.
+  함수를 호출하는 쪽에서 자신의 프로그램이 패닉을 일으키는 것을 원치 않는다면
+  이러한 상황에서 함수를 호출하지 않음을 확실해 해야 합니다.
+* **Errors**: 해당 함수가 `Result`를 반환하는 경우에는 발생할 수 있는
+  에러의 종류와 해당 에러들이 발생하는 조건을 설명해 준다면 호출하는
+  사람이 다양한 종류의 에러를 여러 방법으로 처리할 수 있도록 코드를
+  작성하는데 도움을 줄 수 있습니다.
+* **Safety**: 함수가 호출하기에 `unsafe`한 경우라면 (불안전성에 대해서는
+  19장에서 다룹니다), 왜 이 함수가 안전하지 않은지와 호출자가 이 함수를
+  호출할 때 지켜야 할 불변성에 대해 설명하는 절이 있어야 합니다.
 
-Most documentation comments don’t need all of these sections, but this is a
-good checklist to remind you of the aspects of your code users will be
-interested in knowing about.
+대부분의 문서화 주석은 이 절들이 모두 필요하진 않습니다만, 여러분의
+코드를 사용하는 사람들이 알고 싶어하는 것에 대한 측면을 상기하는데
+좋은 체크리스트입니다.
 
-#### Documentation Comments as Tests
+#### 테스트로서의 문서화 주석
 
-Adding example code blocks in your documentation comments can help demonstrate
-how to use your library, and doing so has an additional bonus: running `cargo
-test` will run the code examples in your documentation as tests! Nothing is
-better than documentation with examples. But nothing is worse than examples
-that don’t work because the code has changed since the documentation was
-written. If we run `cargo test` with the documentation for the `add_one`
-function from Listing 14-1, we will see a section in the test results like this:
+문서화 주석에 예시 코드를 추가하는 건 라이브러리의 사용 방법을 보여주는데
+도움이 될 뿐더러 추가적인 보너스도 가질 수 있습니다: 무려 `cargo test`를
+실행하면 여러분의 문서에 들어있던 예시 코드들이 테스트로서 실행됩니다!
+예시를 포함한 문서보다 좋은 문서는 없습니다. 하지만 문서가 작성된 이후
+코드가 변경되어 작동하지 않게 되버린 예제보다 나쁜 것도 없습니다.
+Listing 14-1의 `add_one` 함수에 대한 문서를 가지고 `cargo test`를
+실행하면 다음과 같이 테스트 결과 절을 볼 수 있습니다:
 
 <!-- manual-regeneration
 cd listings/ch14-more-about-cargo/listing-14-01/
@@ -99,21 +99,22 @@ test src/lib.rs - add_one (line 5) ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
 ```
 
-Now if we change either the function or the example so the `assert_eq!` in the
-example panics and run `cargo test` again, we’ll see that the doc tests catch
-that the example and the code are out of sync with each other!
+이제 함수나 예제를 변경하여 예시 코드의 `assert_eq!`가 패닉을 발생시키는
+상태로 `cargo test`를 다시 실행하면, 문서 테스트 기능이 해당 예제를 찾아내어
+이 코드가 더 이상 기능하지 못함을 알려줄 것입니다!
 
 #### Commenting Contained Items
+#### 주석이 포함된 아이템
 
-The style of doc comment `//!` adds documentation to the item that contains the
-comments rather than to the items following the comments. We typically use
-these doc comments inside the crate root file (*src/lib.rs* by convention) or
-inside a module to document the crate or the module as a whole.
+문서화 주석 스타일 `//!`은 주석 뒤에 오는 항목을 문서화하는 것이 아닌
+주석을 포함하는 아이템을 문서화합니다. 이러한 문서화 주석은 일반적으로
+크레이트 루트 파일 (관례상 *src/lib.rs*) 혹은 모듈 내에 사용하여
+크레이트 혹은 모듈 전체에 대한 문서를 작성하는데 씁니다.
 
-For example, to add documentation that describes the purpose of the `my_crate`
-crate that contains the `add_one` function, we add documentation comments that
-start with `//!` to the beginning of the *src/lib.rs* file, as shown in Listing
-14-2:
+예를 들어 `add_one` 함수를 담고 있는 `my_crate` 크레이트의
+목적을 설명하는 문서를 추가하려면 Listing 14-2와 같이
+*src/lib.rs* 파일의 시작 지점에 `//!`로 시작하는 문서화 주석을
+추가합니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -121,56 +122,56 @@ start with `//!` to the beginning of the *src/lib.rs* file, as shown in Listing
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-02/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-2: Documentation for the `my_crate` crate as a
-whole</span>
+<span class="caption">Listing 14-2: `my_crate` 크레이트 전체에 대한
+문서</span>
 
-Notice there isn’t any code after the last line that begins with `//!`. Because
-we started the comments with `//!` instead of `///`, we’re documenting the item
-that contains this comment rather than an item that follows this comment. In
-this case, that item is the *src/lib.rs* file, which is the crate root. These
-comments describe the entire crate.
+`//!`로 시작하는 라인 중 마지막 라인 이후에 아무 코드도 없음을 주목하세요.
+`///` 대신 `//!`로 주석을 시작하였기 때문에, 이 주석 뒤에 나오는 아이템이 아닌
+이 주석을 포함하고 있는 아이템에 대한 문서화를 하는 중입니다. 위의 경우,
+그 아이템은 *src/lib.rs* 파일이고, 이는 크레이트 루트입니다. 이 주석은
+크레이트 전체를 설명합니다
 
-When we run `cargo doc --open`, these comments will display on the front
-page of the documentation for `my_crate` above the list of public items in the
-crate, as shown in Figure 14-2:
+`cargo doc --open`을 실행하면 Figure 14-2와 같이 문서
+첫 페이지 내용 중 크레이트의 공개 아이템 리스트 상단에
+이 주석의 내용이 나타날 것입니다:
 
-<img alt="Rendered HTML documentation with a comment for the crate as a whole" src="img/trpl14-02.png" class="center" />
+<img alt="전체 크레이트를 위한 주석을 포함하는 렌더링된 HTML 문서" src="img/trpl14-02.png" class="center" />
 
-<span class="caption">Figure 14-2: Rendered documentation for `my_crate`,
-including the comment describing the crate as a whole</span>
+<span class="caption">Figure 14-2: 전체 크레이트를 설명하는 주석이 포함된
+`my_crate`의 렌더링된 문서</span>
 
-Documentation comments within items are useful for describing crates and
-modules especially. Use them to explain the overall purpose of the container to
-help your users understand the crate’s organization.
+아이템 내 문서화 주석은 특히 크레이트와 모듈에 대해 기술할 때
+유용합니다. 이를 이용해 주석이 담긴 것의 전체 목적을 설명해서
+사용자들이 크레이트 구조를 이해할 수 있도록 해보세요.
 
-### Exporting a Convenient Public API with `pub use`
+## `pub use`로 편리한 공개 API 내보내기
 
-The structure of your public API is a major consideration when publishing a
-crate. People who use your crate are less familiar with the structure than you
-are and might have difficulty finding the pieces they want to use if your crate
-has a large module hierarchy.
+크레이트를 배포할 때는 공개 API의 구조가 주요 고려사항입니다.
+여러분의 크레이트를 사용하는 사람들은 여러분보다 그 구조에 덜 익숙하고,
+크레이트가 커다란 모듈 계층 구조를 이루고 있다면 사용하고자 하는 조각들을
+찾아내는데 어려움이 있을 수도 있습니다.
 
-In Chapter 7, we covered how to make items public using the `pub` keyword, and
-bring items into a scope with the `use` keyword. However, the structure that
-makes sense to you while you’re developing a crate might not be very convenient
-for your users. You might want to organize your structs in a hierarchy
-containing multiple levels, but then people who want to use a type you’ve
-defined deep in the hierarchy might have trouble finding out that type exists.
-They might also be annoyed at having to enter `use`
-`my_crate::some_module::another_module::UsefulType;` rather than `use`
-`my_crate::UsefulType;`.
+7장에서는 `pub` 키워드를 사용하여 아이템을 공개하는 법, 그리고 `use` 키워드를
+가지고 스코프 내로  아이템을 가져오는 법을 다루었습니다. 하지만 크레이트를 개발하는
+동안 여러분에게 익숙해진 구조가 사용자들에게는 마냥 편리하지 않을런지도 모릅니다.
+여러분은 여러 단계로 구성된 계층 구조에 구조체들을 조직화하고 싶을지도
+모르겠지만, 그러면 계층 구조 내에 깊숙히 정의된 타입을 이용하고 싶어하는
+사람들은 해당 타입이 존재하는지 발견하는데 어려움을 겪을 수도 있습니다.
+또한 사용자들은 `use` `my_crate::UsefulType;`이 아니라 `use`
+`my_crate::some_module::another_module::UsefulType;`라고 입력해야
+하는데 짜증을 낼지도 모릅니다.
 
-The good news is that if the structure *isn’t* convenient for others to use
-from another library, you don’t have to rearrange your internal organization:
-instead, you can re-export items to make a public structure that’s different
-from your private structure by using `pub use`. Re-exporting takes a public
-item in one location and makes it public in another location, as if it were
-defined in the other location instead.
+좋은 소식은 지금의 구조가 다른 사람들이 다른 라이브러리에서 사용하는데 편리하지
+*않더라도* 굳이 내부 구조를 뒤엎을 필요는 없다는 겁니다. 대신에 `pub use`를
+이용하여 내부 아이템을 다시 내보내서 (*re-export*) 기존의 비공개 구조와
+다른 공개 구조를 만들 수 있습니다. 다시 내보내기는 어떤 위치에서 공개
+아이템(public item)을 가져와서 이를 마치 다른 위치에 정의된 것처럼 해당
+위치의 공개 아이템으로 만듭니다.
 
-For example, say we made a library named `art` for modeling artistic concepts.
-Within this library are two modules: a `kinds` module containing two enums
-named `PrimaryColor` and `SecondaryColor` and a `utils` module containing a
-function named `mix`, as shown in Listing 14-3:
+예를 들어, 예술적인 개념을 모델링하기 위해 `art`라는 라이브러리를 만들었다고
+가정해 봅시다. 이 라이브러리에는 두 모듈이 들어 있습니다: Listing 14-3과 같이,
+`kinds` 모듈은 `PrimaryColor`와 `SecondaryColor` 열거형을 가지고 있고,
+`utils` 모듈은 `mix`라는 이름의 함수를 가지고 있습니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -178,25 +179,25 @@ function named `mix`, as shown in Listing 14-3:
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-3: An `art` library with items organized into
-`kinds` and `utils` modules</span>
+<span class="caption">Listing 14-3: `kinds`와 `utils` 모듈에 아이템을 구성한
+`art` 라이브러리</span>
 
-Figure 14-3 shows what the front page of the documentation for this crate
-generated by `cargo doc` would look like:
+Figure 14-3은 이 크레이트에 대하여 `cargo doc`으로 생성시킨 문서의
+첫 화면입니다:
 
-<img alt="Rendered documentation for the `art` crate that lists the `kinds` and `utils` modules" src="img/trpl14-03.png" class="center" />
+<img alt="`kinds`와 `utils` 모듈이 리스트에 올라와 있는 `art` 크레이트에 대한 렌더링된 문서" src="img/trpl14-03.png" class="center" />
 
-<span class="caption">Figure 14-3: Front page of the documentation for `art`
-that lists the `kinds` and `utils` modules</span>
+<span class="caption">Figure 14-3: `kinds`와 `utils` 모듈이 리스트에 나타난
+`art`의 문서 첫 화면</span>
 
-Note that the `PrimaryColor` and `SecondaryColor` types aren’t listed on the
-front page, nor is the `mix` function. We have to click `kinds` and `utils` to
-see them.
+`PrimaryColor`와 `SecondaryColor` 타입도, `mix` 함수도 리스트에
+나타나지 않았음을 주목하세요. 이들을 보려면 각각 `kinds` 와 `utils`를
+클릭해야 합니다.
 
-Another crate that depends on this library would need `use` statements that
-bring the items from `art` into scope, specifying the module structure that’s
-currently defined. Listing 14-4 shows an example of a crate that uses the
-`PrimaryColor` and `mix` items from the `art` crate:
+이 라이브러리를 의존성으로 가지고 있는 다른 크레이트에서는 `art`의 아이템을
+스코프 내로 가져오는 `use`를 사용할 필요가 있는데, 현재 정의된 모듈의 구조대로
+명시해야 합니다. Listing 14-4는 어떤 크레이트에서 `art` 크레이트의
+`PrimaryColor`와 `mix`를 이용하는 예시를 보여줍니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -204,21 +205,21 @@ currently defined. Listing 14-4 shows an example of a crate that uses the
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 14-4: A crate using the `art` crate’s items with
-its internal structure exported</span>
+<span class="caption">Listing 14-4: `art` 크레이트의 내부 구조에서 내보내진 
+아이템을 이용하는 크레이트</span>
 
-The author of the code in Listing 14-4, which uses the `art` crate, had to
-figure out that `PrimaryColor` is in the `kinds` module and `mix` is in the
-`utils` module. The module structure of the `art` crate is more relevant to
-developers working on the `art` crate than to those using it. The internal
-structure doesn’t contain any useful information for someone trying to
-understand how to use the `art` crate, but rather causes confusion because
-developers who use it have to figure out where to look, and must specify the
-module names in the `use` statements.
+Listing 14-4 코드의 저자, 즉 `art` 크레이트를 사용하는 사람은
+`PrimaryColor`가 `kinds` 모듈에 들어있고 `mix`가 `utils` 모듈에
+들어있다는 사실을 알아내야 합니다. `art` 크레이트의 구조는 크레이트를
+사용하는 사람보다 크레이트를 개발하는 사람에게 더 적합합니다. 내부 구조는
+`art` 크레이트를 사용하고자 하는 사람에게는 전혀 필요 없는 정보이며
+오히려 혼란만 가져올 수 있는데, 이는 크레이트를 사용하는 개발자가
+어디를 찾아봐야 하는지알아내야 하고 `use` 구문에 모듈 이름들을
+명시해야하기 때문입니다.
 
-To remove the internal organization from the public API, we can modify the
-`art` crate code in Listing 14-3 to add `pub use` statements to re-export the
-items at the top level, as shown in Listing 14-5:
+공개 API로부터 내부 구조를 제거하기 위해서는 Listing 14-5와 같이
+Listing 14-3의 `art` 크레이트 코드에 `pub use` 구문을 추가하여
+아이템들을 최상위 단계로 다시 내보내야 합니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -226,21 +227,21 @@ items at the top level, as shown in Listing 14-5:
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-05/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-5: Adding `pub use` statements to re-export
-items</span>
+<span class="caption">Listing 14-5: `pub use` 구문을 추가하여 아이템을 다시
+내보내기</span>
 
-The API documentation that `cargo doc` generates for this crate will now list
-and link re-exports on the front page, as shown in Figure 14-4, making the
-`PrimaryColor` and `SecondaryColor` types and the `mix` function easier to find.
+`cargo doc`이 생성한 이 크레이트의 API 문서는 이제 Figure 14-4와 같이 다시 내보내진
+아이템을 첫 화면의 리스트에 보여주고 링크를 걸어줄 것이며, 이로써 `PrimaryColor`와
+`SecondaryColor` 타입과 `mix` 함수를 더 쉽게 찾도록 만들어 줍니다.
 
-<img alt="Rendered documentation for the `art` crate with the re-exports on the front page" src="img/trpl14-04.png" class="center" />
+<img alt="첫 화면에 다시 내보내진 아이템이 있는 `art` 크레이트의 렌더링된 문서" src="img/trpl14-04.png" class="center" />
 
-<span class="caption">Figure 14-4: The front page of the documentation for `art`
-that lists the re-exports</span>
+<span class="caption">Figure 14-4: 다시 내보내진 아이템이 리스트에 있는 `art`
+문서 첫 화면</span>
 
-The `art` crate users can still see and use the internal structure from Listing
-14-3 as demonstrated in Listing 14-4, or they can use the more convenient
-structure in Listing 14-5, as shown in Listing 14-6:
+`art` 크레이트 사용자는 Listing 14-4에서 봤던 것처럼 Listing 14-3의 내부
+구조를 여전히 보고 이용할 수 있고, 혹은 Listing 14-6과 같이 Listing 14-5의
+더 편리해진 구조를 사용할 수도 있습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -248,57 +249,57 @@ structure in Listing 14-5, as shown in Listing 14-6:
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 14-6: A program using the re-exported items from
-the `art` crate</span>
+<span class="caption">Listing 14-6: `art` 크레이트의 다시 내보내진 아이템을 사용하는
+프로그램</span>
 
-In cases where there are many nested modules, re-exporting the types at the top
-level with `pub use` can make a significant difference in the experience of
-people who use the crate. Another common use of `pub use` is to re-export
-definitions of a dependency in the current crate to make that crate's
-definitions part of your crate’s public API.
+중첩된 모듈이 많이 있는 경우, `pub use`를 사용하여 최상위 단계로
+타입들을 다시 내보내는 것은 크레이트를 사용하는 사람들의 경험을 크게
+바꿀 수 있습니다. `pub use`의 또다른 일반적 사용법은 현재 크레이트가
+의존하고 있는 크레이트 내에 정의된 것들을 다시 내보내서 그 크레이트의
+정의들을 여러분의 크레이트의 공개 API의 일부분으로 만드는 것입니다.
 
-Creating a useful public API structure is more of an art than a science, and
-you can iterate to find the API that works best for your users. Choosing `pub
-use` gives you flexibility in how you structure your crate internally and
-decouples that internal structure from what you present to your users. Look at
-some of the code of crates you’ve installed to see if their internal structure
-differs from their public API.
+유용한 공개 API를 만드는 것은 기술보단 예술에 가깝고, 여러분은
+반복적으로 사용자들에게 가장 잘 맞는 API를 찾아갈 수 있습니다.
+`pub use`를 사용하는 것은 크레이트를 내부적으로 구조화하는데 유연성을
+제공하면서 이 내부 구조와 사용자에게 제공하는 것을 분리해줍니다.
+여러분이 설치한 크레이트 코드 몇 개를 열어서 내부 구조와 공개 API가
+얼마나 다른지 살펴보세요.
 
-### Setting Up a Crates.io Account
+### Cartes.io 계정 설정하기
 
-Before you can publish any crates, you need to create an account on
-[crates.io](https://crates.io/)<!-- ignore --> and get an API token. To do so,
-visit the home page at [crates.io](https://crates.io/)<!-- ignore --> and log
-in via a GitHub account. (The GitHub account is currently a requirement, but
-the site might support other ways of creating an account in the future.) Once
-you’re logged in, visit your account settings at
-[https://crates.io/me/](https://crates.io/me/)<!-- ignore --> and retrieve your
-API key. Then run the `cargo login` command with your API key, like this:
+여러분이 어떤 크레이트를 배포하기에 앞서서, [crates.io](https://crates.io/)<!-- ignore -->에서
+계정을 만들고 API 토큰을 얻을 필요가 있습니다. 그러려면
+[crates.io](https://crates.io/)<!-- ignore --> 홈페이지에 방문해서
+GitHub 계정으로 로그인하세요. (현재는 GitHub 계정이 필수지만, 나중에는 다른
+계정 생성 방법을 지원할 수도 있습니다.) 일단 로그인되었다면
+[https://crates.io/me/](https://crates.io/me/)<!-- ignore -->에 있는
+계정 설정으로 가서 API 키를 얻으세요. 그런 다음 아래와 같이 여러분의 API 키로
+`cargo login` 명령어를 실행하세요:
 
 ```console
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
 ```
 
-This command will inform Cargo of your API token and store it locally in
-*~/.cargo/credentials*. Note that this token is a *secret*: do not share it
-with anyone else. If you do share it with anyone for any reason, you should
-revoke it and generate a new token on [crates.io](https://crates.io/)<!-- ignore
--->.
+이 명령어는 Cargo에게 여러분의 API 토큰을 알려주고 로컬의 *~/.cargo/credentials*에
+저장하도록 합니다. 이 토큰은 *비밀키 (secret)*임을 주의하세요: 아무와도
+공유하지 마세요. 어떤 이유에서든 누군가와 공유했다면, 이 토큰을 무효화시키고
+[crates.io](https://crates.io)<!-- ignore-->에서 새 토큰을 생성해야
+합니다.
 
-### Adding Metadata to a New Crate
+### 새 크레이트에 메타데이터 추가하기
 
-Let’s say you have a crate you want to publish. Before publishing, you’ll need
-to add some metadata in the `[package]` section of the crate’s *Cargo.toml*
-file.
+이제 배포하고자 하는 크레이트가 있다고 칩시다. 배포하기 전, 크레이트의
+*Cargo.toml* 파일의 `[package]` 절 안에 메타데이터 몇가지를 추가할 필요가
+있을 것입니다.
 
-Your crate will need a unique name. While you’re working on a crate locally,
-you can name a crate whatever you’d like. However, crate names on
-[crates.io](https://crates.io/)<!-- ignore --> are allocated on a first-come,
-first-served basis. Once a crate name is taken, no one else can publish a crate
-with that name. Before attempting to publish a crate, search for the name you
-want to use. If the name has been used, you will need to find another name and
-edit the `name` field in the *Cargo.toml* file under the `[package]` section to
-use the new name for publishing, like so:
+여러분의 크레이트는 고유한 이름이 필요할 것입니다. 로컬에서 어떤 크레이로 작업하는
+중이라면 이 크레이트의 이름을 뭐라고 짓든 상관없습니다. 하지만
+[crates.io](https://crates.io)<!-- ignore --> 에 올라오는 크레이트의
+이름은 선착순으로 배정됩니다. 일단 크레이트 이름이 써졌다면, 그 이름으로는 다른
+누구도 크레이트를 배포할 수 없습니다. 크레이트를 배포하기 전에 사용하려는 이름을
+검색해보세요. 해당 크레이트명이 사용되었다면, 다른 이름을 찾아서 *Cargo.toml*
+파일 안의 `[package]` 절 아래에 다음과 같이 `name` 필드를 수정하여 배포를
+위한 새로운 이름을 사용할 필요가 있을 것입니다:
 
 <span class="filename">Filename: Cargo.toml</span>
 
@@ -307,8 +308,8 @@ use the new name for publishing, like so:
 name = "guessing_game"
 ```
 
-Even if you’ve chosen a unique name, when you run `cargo publish` to publish
-the crate at this point, you’ll get a warning and then an error:
+고유한 이름을 선택했더라도 이 시점에서 `cargo publish`를 실행시켜 크레이트를
+배포해보면 다음과 같은 경고 후 에러를 보게 될 것입니다:
 
 <!-- manual-regeneration
 cd listings/ch14-more-about-cargo/listing-14-01/
@@ -328,14 +329,14 @@ Caused by:
   the remote server responded with an error: missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ```
 
-This errors because you’re missing some crucial information: a description and
-license are required so people will know what your crate does and under what
-terms they can use it. In *Cargo.toml*, add a description that's just a
-sentence or two, because it will appear with your crate in search results. For
-the `license` field, you need to give a *license identifier value*. The [Linux
-Foundation’s Software Package Data Exchange (SPDX)][spdx] lists the identifiers
-you can use for this value. For example, to specify that you’ve licensed your
-crate using the MIT License, add the `MIT` identifier:
+이 에러는 몇가지 중요한 정보가 없기 때문에 발생된 것입니다: 설명과 라이센스는
+필수로서 여러분의 크레이트가 무엇을 하는지와 어떤 조건으로 사용할 수 있는지
+사람들이 알게끔 할 것입니다. *Cargo.toml* 안에 한두 문장 정도만 설명을 추가해
+주세요. 이 설명은 검색 결과에 여러분의 크레이트와 함께 나타나게 될 것입니다.
+`license` 필드에는 *라이센스 식별자 값 (license identifier value)*이 필요합니다.
+[리눅스 재단의 Software Package Data Exchange (SPDX)][spdx]에 이 값으로
+사용할 수 있는 식별자 리스트가 있습니다. 예를 들어 여러분의 크레이트에 MIT
+라이센스를 적용하고 싶다면, `MIT` 식별자를 추가합니다:
 
 <span class="filename">Filename: Cargo.toml</span>
 
@@ -345,19 +346,19 @@ name = "guessing_game"
 license = "MIT"
 ```
 
-If you want to use a license that doesn’t appear in the SPDX, you need to place
-the text of that license in a file, include the file in your project, and then
-use `license-file` to specify the name of that file instead of using the
-`license` key.
+SPDX에 없는 라이센스를 사용하고 싶다면, 그 라이센스에 대한
+텍스트를 파일에 넣어서 프로젝트 내에 포함시킨 다음, `license` 키
+대신 `license-file`을 사용하여 해당 파일의 이름을 명시할 필요가
+있습니다.
 
-Guidance on which license is appropriate for your project is beyond the scope
-of this book. Many people in the Rust community license their projects in the
-same way as Rust by using a dual license of `MIT OR Apache-2.0`. This practice
-demonstrates that you can also specify multiple license identifiers separated
-by `OR` to have multiple licenses for your project.
+여러분의 프로젝트에 어떤 라이센스가 적합한지에 대한 안내는 이 책의 범위를
+벗어납니다. 러스트 커뮤니티의 많은 이들은 자신의 프로젝트에 러스트가 쓰는
+라이센스인 `MIT OR Apache-2.0` 듀얼 라이센스를 사용합니다. 이러한 실제 예는
+여러분도 `OR`로 구분된 여러 라이센스 식별자를 지정하여 프로젝트에 여러 개의
+라이센스를 적용할 수 있음을 보여줍니다.
 
-With a unique name, the version, your description, and a license added, the
-*Cargo.toml* file for a project that is ready to publish might look like this:
+고유한 이름, 버전, 설명, 그리고 라이센스가 추가된 상태에서 배포할
+준비가 된 프로젝트의 *Cargo.toml* 파일은 아래처럼 생겼습니다:
 
 <span class="filename">Filename: Cargo.toml</span>
 
@@ -372,26 +373,26 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 ```
 
-[Cargo’s documentation](https://doc.rust-lang.org/cargo/) describes other
-metadata you can specify to ensure others can discover and use your crate more
-easily.
+[Cargo 공식 문서](https://doc.rust-lang.org/cargo/)에는 다른 사람들이
+여러분의 크레이트를 더 쉽게 발견하고 사용하도록 해주기 위해 지정할 수 있는
+다른 메타데이터에 대해 설명되어 있습니다.
 
-### Publishing to Crates.io
+### Crates.io에 배포하기
 
-Now that you’ve created an account, saved your API token, chosen a name for
-your crate, and specified the required metadata, you’re ready to publish!
-Publishing a crate uploads a specific version to
-[crates.io](https://crates.io/)<!-- ignore --> for others to use.
+이제 계정을 만들었고, API 토큰을 저장했고, 크레이트의 이름도 정했고,
+필요한 메타데이터도 지정되었다면, 배포할 준비가 된 것입니다!
+크레이트 배포는 다른 사람들이 사용할 특정 버전을
+[crates.io](https://crates.io/)<!-- ignore -->에 올리는 것입니다.
 
-Be careful, because a publish is *permanent*. The version can never be
-overwritten, and the code cannot be deleted. One major goal of
-[crates.io](https://crates.io/)<!-- ignore --> is to act as a permanent archive
-of code so that builds of all projects that depend on crates from
-[crates.io](https://crates.io/)<!-- ignore --> will continue to work. Allowing
-version deletions would make fulfilling that goal impossible. However, there is
-no limit to the number of crate versions you can publish.
+배포는 *영구적이므로* 주의하세요. 버전은 덮어씌워질 수 없고,
+코드는 삭제될 수 없습니다. [crates.io](https://crates.io/)<!-- ignore -->의
+주요 목표 한가지는 영구적인 코드 보관소로서 동작하여
+[crates.io](https://crates.io/)<!-- ignore -->의 크레이트에
+의존하는 모든 프로젝트의 빌드가 계속 동작하도록 하는 것입니다.
+버전 삭제를 서용하면 이 목표의 이행을 불가능하게 할 것입니다.
+하지만 배포할 수 있는 크레이트 버전의 숫자에 제한은 없습니다.
 
-Run the `cargo publish` command again. It should succeed now:
+다시 한번 `cargo publish` 명령어를 수행해보세요. 이제 성공해야 합니다:
 
 <!-- manual-regeneration
 go to some valid crate, publish a new version
@@ -410,37 +411,37 @@ $ cargo publish
    Uploading guessing_game v0.1.0 (file:///projects/guessing_game)
 ```
 
-Congratulations! You’ve now shared your code with the Rust community, and
-anyone can easily add your crate as a dependency of their project.
+축하합니다! 여러분은 이제 코드를 러스트 커뮤니티에 공유하였고, 다른 사람들이
+자신의 프로젝트에 여러분의 크레이트를 의존성으로 쉽게 추가할 수 있습니다.
 
-### Publishing a New Version of an Existing Crate
+### 이미 존재하는 크레이트의 새 버전 배포하기
 
-When you’ve made changes to your crate and are ready to release a new version,
-you change the `version` value specified in your *Cargo.toml* file and
-republish. Use the [Semantic Versioning rules][semver] to decide what an
-appropriate next version number is based on the kinds of changes you’ve made.
-Then run `cargo publish` to upload the new version.
+크레이트를 변경하여 새 버전을 배포할 준비가 되었다면, *Cargo.toml*
+파일에 명시된 `version` 값을 바꿔 다시 배포하면 됩니다.
+변경사항의 종류에 기반하여 적절한 버전 숫자를 결정하려면
+[유의적 버전 규칙 (Semantic Versioning rules)][semver]을 사용하세요.
+그 다음 `cargo publis`를 실행하여 새 버전을 올립니다.
 
 <!-- Old link, do not remove -->
 <a id="removing-versions-from-cratesio-with-cargo-yank"></a>
 
-### Deprecating Versions from Crates.io with `cargo yank`
+### `cargo yank`로 Crates.io에서 버전 사용하지 않게 하기
 
-Although you can’t remove previous versions of a crate, you can prevent any
-future projects from adding them as a new dependency. This is useful when a
-crate version is broken for one reason or another. In such situations, Cargo
-supports *yanking* a crate version.
+킄레이트의 이전 버전을 제거할 수는 없지만, 향후의 프로젝트들이 이를 새로운
+의존성으로 추가하는 것을 방지할 수는 있습니다. 이는 어떤 크레이트 버전이
+어떤 이유에서인가 깨졌을 때 유용합니다. 그런 상황에서 Cargo는
+어떤 크레이트 버전의 *끌어내기 (yanking)*를 지원합니다.
 
-Yanking a version prevents new projects from depending on that version while
-allowing all existing projects that depend on it to continue. Essentially, a
-yank means that all projects with a *Cargo.lock* will not break, and any future
-*Cargo.lock* files generated will not use the yanked version.
+버전 끌어내기는 이 버전에 의존중인 존재하는 모든 프로젝트들이 계속 지원하면서
+새 프로젝트가 이 버전에 의존하는 것을 방지합니다. 근본적으로 끌어내기란
+*Cargo.lock*이 있는 모든 프로젝트가 깨지지 않으면서, 이후에 생성되는
+*Cargo.lock* 파일에는 끌어내려진 버전을 사용하지 않을 것임을 의미합니다.
 
-To yank a version of a crate, in the directory of the crate that you’ve
-previously published, run `cargo yank` and specify which version you want to
-yank. For example, if we've published a crate named `guessing_game` version
-1.0.1 and we want to yank it, in the project directory for `guessing_game` we'd
-run:
+크레이트의 버전을 끌어내리려면 이전에 배포했던 크레이트 디렉토리에서
+`cargo yank`를 실행하여 끌어내리고자 하는 버전을 지정하세요.
+예를 들머 `guessing_game`이라는 이름의 크레이트 버전 1.0.1을
+배포했었고 이를 끌어내리고자 한다면, `guessing_game`의 프로젝트
+디렉토리에서 다음과 같이 실행합니다:
 
 <!-- manual-regeneration:
 cargo yank carol-test --version 2.1.0
@@ -453,8 +454,8 @@ $ cargo yank --vers 1.0.1
         Yank guessing_game@1.0.1
 ```
 
-By adding `--undo` to the command, you can also undo a yank and allow projects
-to start depending on a version again:
+명령어에 `--undo`를 추가하면 끌어내기를 되돌려 다른 프로젝트들이
+다시 이 버전에 대한 의존을 허용할 수 있습니다:
 
 ```console
 $ cargo yank --vers 1.0.1 --undo
@@ -462,8 +463,8 @@ $ cargo yank --vers 1.0.1 --undo
       Unyank guessing_game@1.0.1
 ```
 
-A yank *does not* delete any code. It cannot, for example, delete accidentally
-uploaded secrets. If that happens, you must reset those secrets immediately.
+끌어내기는 어떤 코드도 삭제하지 *않습니다*. 예를 들어 실수로 업로드된 비밀키 같은걸
+삭제할 수는 없습니다. 그런 일이 벌어졌다면 즉시 해당 비밀키를 리셋해야 합니다.
 
 [spdx]: http://spdx.org/licenses/
 [semver]: http://semver.org/
