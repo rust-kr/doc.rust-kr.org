@@ -134,7 +134,7 @@ Listing 8-4는 인덱스 문법과 `get` 메소드를 가지고 벡터의 값에
 이 예제를 컴파일하면 아래와 같은 에러가 발생합니다:
 
 ```console
-{{#include ../listings/ch08-common-collections/listing-08-07/output.txt}}
+{{#include ../listings/ch08-common-collections/listing-08-06/output.txt}}
 ```
 
 
@@ -205,7 +205,7 @@ Listing 8-7은 `for` 루프를 사용하여 `i32`의 벡터 내에 있는 각 �
 수 있습니다. Listing 8-9에서 이를 보여주고 있습니다:
 
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-9/src/main.rs:here}}
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-09/src/main.rs:here}}
 ```
 
 <span class="caption">Listing 8-9: 열거형을 정의하여 벡터 내에 다른
