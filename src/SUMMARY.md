@@ -95,11 +95,11 @@
     - [`RefCell<T>`와 내부 가변성 패턴](ch15-05-interior-mutability.md)
     - [순환 참조는 메모리 릭을 발생시킬 수 있습니다](ch15-06-reference-cycles.md)
 
-- [Fearless Concurrency](ch16-00-concurrency.md)
-    - [Using Threads to Run Code Simultaneously](ch16-01-threads.md)
-    - [Using Message Passing to Transfer Data Between Threads](ch16-02-message-passing.md)
-    - [Shared-State Concurrency](ch16-03-shared-state.md)
-    - [Extensible Concurrency with the `Sync` and `Send` Traits](ch16-04-extensible-concurrency-sync-and-send.md)
+- [겁없는 동시성](ch16-00-concurrency.md)
+    - [스레드를 이용하여 코드를 동시에 실행하기](ch16-01-threads.md)
+    - [메세지 패싱을 사용하여 스레드 간 데이터 전송하기](ch16-02-message-passing.md)
+    - [공유 상태 동시성](ch16-03-shared-state.md)
+    - [`Sync`와 `Send` 트레잇을 이용한 확장 가능한 동시성](ch16-04-extensible-concurrency-sync-and-send.md)
 
 - [Object Oriented Programming Features of Rust](ch17-00-oop.md)
     - [Characteristics of Object-Oriented Languages](ch17-01-what-is-oo.md)
