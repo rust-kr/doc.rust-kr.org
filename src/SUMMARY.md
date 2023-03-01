@@ -101,10 +101,10 @@
     - [공유 상태 동시성](ch16-03-shared-state.md)
     - [`Sync`와 `Send` 트레잇을 이용한 확장 가능한 동시성](ch16-04-extensible-concurrency-sync-and-send.md)
 
-- [Object Oriented Programming Features of Rust](ch17-00-oop.md)
-    - [Characteristics of Object-Oriented Languages](ch17-01-what-is-oo.md)
-    - [Using Trait Objects That Allow for Values of Different Types](ch17-02-trait-objects.md)
-    - [Implementing an Object-Oriented Design Pattern](ch17-03-oo-design-patterns.md)
+- [러스트의 객체 지향 프로그래밍 기능들](ch17-00-oop.md)
+    - [객체 지향 언어의 특성](ch17-01-what-is-oo.md)
+    - [트레잇 객체를 사용하여 다른 타입의 값 허용하기](ch17-02-trait-objects.md)
+    - [객체 지향 디자인 패턴 구현하기](ch17-03-oo-design-patterns.md)
 
 ## Advanced Topics
 
