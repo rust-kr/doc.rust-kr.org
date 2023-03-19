@@ -99,7 +99,7 @@ Listing 7-3은 Listing 7-1의 일부 모듈과 함수를 제거한 내용을 담
 
 ### `pub` 키워드로 경로 노출하기
 
-`hosting` 모듈이 비공개임을 의미하던 Listing 7-4 오류로 돌아와보죠.
+`hosting` 모듈이 비공개임을 의미하던 Listing 7-4 에러로 돌아와보죠.
 부모 모듈 내 `eat_at_restaurant` 함수가 자식 모듈 내 `add_to_waitlist`
 함수에 접근해야 하니, `hosting` 모듈에 `pub` 키워드를 작성했습니다.
 작성한 모습은 Listing 7-5 와 같습니다.
@@ -259,7 +259,7 @@ Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 공개 필드이기 때문에 `eat_at_restaurant` 함수에서 점 표기법으로
 `toast` 필드를 읽고 쓸 수 있습니다.
 반면, `seasonal_fruit` 필드는 비공개 필드이기 때문에 `eat_at_restaurant` 함수에서 사용할 수 없습니다.
-한번 `seasonal_fruit` 필드를 수정하는 코드의 주석을 해제하고 어떤 오류가 발생하는지 확인해보세요!
+한번 `seasonal_fruit` 필드를 수정하는 코드의 주석을 해제하고 어떤 에러가 발생하는지 확인해보세요!
 
 또한, `back_of_house::Breakfast` 구조체는 비공개 필드를 갖고 있기 때문에,
 `Breakfast` 인스턴스를 생성할 공개 연관 함수(예제에서는 `summer` 함수입니다)를 반드시 제공해야 합니다.

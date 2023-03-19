@@ -75,7 +75,7 @@
 
 <span class="caption">Listing 4-6: borrow 한 값을 수정해보는 코드</span>
 
-나타나는 오류는 다음과 같습니다:
+나타나는 에러는 다음과 같습니다:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/listing-04-06/output.txt}}
@@ -87,7 +87,7 @@
 ### 가변 참조자 (Mutable Reference)
 
 *가변 참조자 (mutable reference)*를 사용하는 식으로 Listing 4-6을 살짝만
-수정하면 오류를 없앨 수 있습니다:
+수정하면 에러를 없앨 수 있습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -110,7 +110,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/src/main.rs:here}}
 ```
 
-나타나는 오류는 다음과 같습니다:
+나타나는 에러는 다음과 같습니다:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/output.txt}}
@@ -145,13 +145,13 @@
 ```
 
 가변 참조자와 불변 참조자를 혼용할 때도 유사한 규칙이 적용됩니다.
-다음 코드는 컴파일 오류가 발생합니다:
+다음 코드는 컴파일 에러가 발생합니다:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/src/main.rs:here}}
 ```
 
-나타나는 오류는 다음과 같습니다:
+나타나는 에러는 다음과 같습니다:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/output.txt}}
@@ -167,7 +167,7 @@
 
 참조자는 정의된 지점부터 시작하여 해당 참조자가 마지막으로
 사용된 부분까지 유효합니다. 즉, 다음 코드는 불변 참조자가 마지막으로
-사용되는 `println!` 이후에 가변 참조자의 정의가 있으므로 컴파일 오류가
+사용되는 `println!` 이후에 가변 참조자의 정의가 있으므로 컴파일 에러가
 발생하지 않습니다.
 
 ```rust,edition2021
@@ -204,7 +204,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/src/main.rs}}
 ```
 
-나타나는 오류는 다음과 같습니다:
+나타나는 에러는 다음과 같습니다:
 
 ```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/output.txt}}
@@ -231,7 +231,7 @@ this function's return type contains a borrowed value, but there is no value for
 `s` 는 `dangle` 함수 내에서 생성됐기 때문에,
 함수가 끝날 때 할당 해제됩니다.
 하지만 코드에선 `&s` 를 반환하려 했고, 이는 유효하지 않은 `String` 을 가리키는
-참조자를 반환하는 행위이기 때문에 오류가 발생합니다.
+참조자를 반환하는 행위이기 때문에 에러가 발생합니다.
 
 따라서, 이런 경우엔 `String` 을 직접 반환해야 합니다:
 
