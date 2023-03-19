@@ -1,33 +1,33 @@
-## Pattern Syntax
+## 패턴 문법
 
-In this section, we gather all the syntax valid in patterns and discuss why and
-when you might want to use each one.
+이번 절에서는 패턴이 유효한 모든 문법을 모아보고 각 문법의 사용이 필요한
+이유과 시기에 대해 설명합니다.
 
-### Matching Literals
+### 리터럴 매칭
 
-As you saw in Chapter 6, you can match patterns against literals directly. The
-following code gives some examples:
+6장에서 살펴본 것처럼 패턴과 리터럴을 직접 매칭시킬 수 있습니다.
+다음 코드는 몇 가지 예를 제공합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-01-literals/src/main.rs:here}}
 ```
 
-This code prints `one` because the value in `x` is 1. This syntax is useful
-when you want your code to take an action if it gets a particular concrete
-value.
+`x`의 값이 1이므로 이 코드는 `one`을 출력합니다. 이 문법은
+코드에서 특정한 구체적인 값을 가질때 어떤 동작을 수행하려는 경우에
+유용합니다.
 
-### Matching Named Variables
+### 명명된 변수 매칭
 
-Named variables are irrefutable patterns that match any value, and we’ve used
-them many times in the book. However, there is a complication when you use
-named variables in `match` expressions. Because `match` starts a new scope,
-variables declared as part of a pattern inside the `match` expression will
-shadow those with the same name outside the `match` construct, as is the case
-with all variables. In Listing 18-11, we declare a variable named `x` with the
-value `Some(5)` and a variable `y` with the value `10`. We then create a
-`match` expression on the value `x`. Look at the patterns in the match arms and
-`println!` at the end, and try to figure out what the code will print before
-running this code or reading further.
+명명된 변수는 어떤 값과도 매칭되는 반박 불가능한 패턴으로, 이 책에서
+여러 번 사용했습니다. 하지만 `match` 표현식에서 명명된 변수를 사용할
+때는 복잡한 문제가 있습니다. `match`는 새로운 스코프를 시작하기
+때문에, `match` 표현식 내부에서 패턴의 일부로써 선언된 변수는 모든
+변수의 경우와 마찬가지로 `match` 구조 외부에 있는 같은 이름의 변수를
+가리게 될 것입니다. Listing 18-11에서는 값 `Some(5)`을 가진 변수
+`x`와 값 `10`을 가진 변수 `y`를 선언합니다. 그 다음 값 `x`에
+`match` 표현식을 만듭니다. 이 코드를 실행하거나 뒷부분을 더 읽기
+전에 매치 갈래의 패턴과 마지막에 있는 `println!`을 보고 코드가
+무엇을 출력할지 알아보세요.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -35,89 +35,89 @@ running this code or reading further.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-11: A `match` expression with an arm that
-introduces a shadowed variable `y`</span>
+<span class="caption">Listing 18-11: 쉐도잉된 변수 `y`가 도입된
+갈래를 갖는 `match` 표현식</span>
 
-Let’s walk through what happens when the `match` expression runs. The pattern
-in the first match arm doesn’t match the defined value of `x`, so the code
-continues.
+`match` 표현식이 실행되면 어떤 일이 일어하는지 살펴봅시다.
+첫 번째 매치 갈래의 패턴이 `x`에 정의된 값과 매칭되지 않으므로
+코드는 계속 실행됩니다.
 
-The pattern in the second match arm introduces a new variable named `y` that
-will match any value inside a `Some` value. Because we’re in a new scope inside
-the `match` expression, this is a new `y` variable, not the `y` we declared at
-the beginning with the value 10. This new `y` binding will match any value
-inside a `Some`, which is what we have in `x`. Therefore, this new `y` binds to
-the inner value of the `Some` in `x`. That value is `5`, so the expression for
-that arm executes and prints `Matched, y = 5`.
+두 번째 매치 갈래의 패턴은 `Some` 값 안에 있는 모든 값과 매칭되는
+`y`라는 새 변수를 도입합니다. `match` 표현식 내부의 새로운 스코프에
+있기 때문에, 이것은 처음에 10이라는 값으로 선언한 `y`가 아니라
+새로운 `y` 변수입니다. 이 새로운 `y` 바인딩은 `Some` 내부의 모든
+값에 매칭되고, 이는 `x`에도 해당됩니다. 따라서 이 새로운 `y`는 `x`
+안의 `Some` 내부 값에 바인딩됩니다. 그 값은 `5`이므로 해당 갈래에
+대한 표현식이 실행되어 `Matched, y = 5`를 출력합니다.
 
-If `x` had been a `None` value instead of `Some(5)`, the patterns in the first
-two arms wouldn’t have matched, so the value would have matched to the
-underscore. We didn’t introduce the `x` variable in the pattern of the
-underscore arm, so the `x` in the expression is still the outer `x` that hasn’t
-been shadowed. In this hypothetical case, the `match` would print `Default
-case, x = None`.
+만약 `x`가 `Some(5)` 대신 `None` 값이었다면, 처음 두 갈래의
+패턴에 매칭되지 않았을 것이므로 밑줄에 값이 매칭되었을
+것입니다. 밑줄 갈래의 패턴에 `x` 변수를 도입하지
+않았으므로, 표현식의 `x`는 여전히 가려지지 않은 바깥쪽
+`x`입니다. 이러한 가정을 한 상황에서는 `match`가
+`Default case, x = None`을 출력했을 것입니다.
 
-When the `match` expression is done, its scope ends, and so does the scope of
-the inner `y`. The last `println!` produces `at the end: x = Some(5), y = 10`.
+`match` 표현식이 완료되면 그 스코프가 끝나고, 따라서 내부 `y`의 스코프도 끝납니다.
+마지막 `println!`은 `at the end: x = Some(5), y = 10`을 출력합니다.
 
-To create a `match` expression that compares the values of the outer `x` and
-`y`, rather than introducing a shadowed variable, we would need to use a match
-guard conditional instead. We’ll talk about match guards later in the [“Extra
-Conditionals with Match Guards”](#extra-conditionals-with-match-guards)<!--
-ignore --> section.
+쉐도우 변수를 도입하지 않고 외부 `x`와 `y`의 값을 비교하는 `match`
+표현식을 만들려면 대신 매치 가드 조건문 (match guard conditional) 을
+사용해야 합니다. 매치 가드에 대해서는 나중에
+[“매치 가드를 사용한 추가 조건”](#extra-conditionals-with-match-guards)<!-- ignore -->절에서
+설명하겠습니다.
 
-### Multiple Patterns
+### 다중 패턴
 
-In `match` expressions, you can match multiple patterns using the `|` syntax,
-which is the pattern *or* operator. For example, in the following code we match
-the value of `x` against the match arms, the first of which has an *or* option,
-meaning if the value of `x` matches either of the values in that arm, that
-arm’s code will run:
+`match` 표현식에서는 패턴에 대한 *또는 (or)* 연산자인 `|` 문법을 사용하여
+여러 패턴을 매칭시킬 수 있습니다. 예를 들어, 다음 코드에서는 매치
+갈래에 대해 `x` 값을 매칭시키는데, 첫 번째 갈래에는 *또는* 옵션이
+있으므로 `x` 값이 해당 갈래의 값 중 하나와 일치하면 해당 갈래의 코드가
+실행됩니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-02-multiple-patterns/src/main.rs:here}}
 ```
 
-This code prints `one or two`.
+이 코드는 `one or two`를 출력합니다.
 
-### Matching Ranges of Values with `..=`
+### `..=`를 이용한 값의 범위 매칭
 
-The `..=` syntax allows us to match to an inclusive range of values. In the
-following code, when a pattern matches any of the values within the given
-range, that arm will execute:
+`..=` 문법은 경계값을 포함하는 범위와 매칭시키도록 해줍니다.
+다음 코드에서는 패턴이 주어진 범위 내의 값과 매칭되면 해당 갈래를
+실행됩니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-03-ranges/src/main.rs:here}}
 ```
 
-If `x` is 1, 2, 3, 4, or 5, the first arm will match. This syntax is more
-convenient for multiple match values than using the `|` operator to express the
-same idea; if we were to use `|` we would have to specify `1 | 2 | 3 | 4 | 5`.
-Specifying a range is much shorter, especially if we want to match, say, any
-number between 1 and 1,000!
+`x`가 1, 2, 3, 4, 5 중 하나라면 첫 번째 갈래에 매칭됩니다. 이 문법은
+`|` 연산자를 사용하여 동일한 개념을 표현하는 것보다 여러 개의 값을 매칭하는데
+더 편리합니다; `|`를 사용하려면 `1 | 2 | 3 | 4 | 5`라고 지정해야 하니까요.
+특히 1에서 1,000 사이의 숫자 같은 것과 매칭시키려는 경우 범위를 지정하는
+것이 훨씬 더 짧습니다!
 
-The compiler checks that the range isn’t empty at compile time, and because the
-only types for which Rust can tell if a range is empty or not are `char` and
-numeric values, ranges are only allowed with numeric or `char` values.
+컴파일러는 컴파일 타임에 범위가 비어 있지 않은지 확인하며, 러스트가 범위가
+비어 있는지 여부를 알 수 있는 유일한 타입은 `char`와 숫자 값이므로, 범위는
+숫자 또는 `char` 값으로만 허용됩니다.
 
-Here is an example using ranges of `char` values:
+아래는 `char` 값의 범위를 사용하는 예입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-04-ranges-of-char/src/main.rs:here}}
 ```
 
-Rust can tell that `'c'` is within the first pattern’s range and prints `early
-ASCII letter`.
+러스트는 `'c'`가 첫 번째 패턴의 범위 내에 있음을 인식하고
+`early ASCII letter`를 출력합니다.
 
-### Destructuring to Break Apart Values
+### 값을 해체하여 분리하기
 
-We can also use patterns to destructure structs, enums, and tuples to use
-different parts of these values. Let’s walk through each value.
+구조체, 열거형, 튜플을 분해하여 이 값의 부분들을 쓰기 위해
+패턴을 사용할 수도 있습니다. 각각에 대해 알아봅시다.
 
-#### Destructuring Structs
+#### 구조체 해체하기
 
-Listing 18-12 shows a `Point` struct with two fields, `x` and `y`, that we can
-break apart using a pattern with a `let` statement.
+Listing 18-12는 `x` 와 `y` 두 개의 필드를 가진 `Point` 구조체를
+보여주며, `let` 구문에 패턴을 사용해 분해할 수 있습니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -125,20 +125,20 @@ break apart using a pattern with a `let` statement.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-12: Destructuring a struct’s fields into
-separate variables</span>
+<span class="caption">Listing 18-12: 구조체 필드를 별도의 변수로
+분해하기</span>
 
-This code creates the variables `a` and `b` that match the values of the `x`
-and `y` fields of the `p` struct. This example shows that the names of the
-variables in the pattern don’t have to match the field names of the struct.
-However, it’s common to match the variable names to the field names to make it
-easier to remember which variables came from which fields. Because of this
-common usage, and because writing `let Point { x: x, y: y } = p;` contains a
-lot of duplication, Rust has a shorthand for patterns that match struct fields:
-you only need to list the name of the struct field, and the variables created
-from the pattern will have the same names. Listing 18-13 behaves in the same
-way as the code in Listing 18-12, but the variables created in the `let`
-pattern are `x` and `y` instead of `a` and `b`.
+이 코드는 `p` 구조체의 `x`와 `y` 필드 값에 매칭되는 변수
+`a`와 `b`를 생성합니다. 이 예제는 패턴의 변수 이름이 구조체의
+필드 이름과 일치할 필요는 없음을 보여줍니다. 그러나 어떤
+변수가 어떤 필드에서 왔는지 쉽게 기억할 수 있도록 변수
+이름을 필드 이름과 일치시키는 것이 일반적입니다. 이러한 일반적인
+사용법과 `let Point { x: x, y: y } = p;`라고 작성하는 것이 많은
+중복을 발생시키는 이유로, 러스트에는 구조체 필드와 일치하는 패턴에
+대한 축약법이 있습니다: 구조체 필드 이름만 나열하면 패턴에서
+생성된 변수는 동일한 이름을 갖습니다. Listing 18-13은 Listing
+18-12의 코드와 동일한 방식으로 동작하지만, `let` 패턴에서 생성된
+변수는 `a`와 `b` 대신 `x`와 `y`입니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -146,21 +146,21 @@ pattern are `x` and `y` instead of `a` and `b`.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-13/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-13: Destructuring struct fields using struct
-field shorthand</span>
+<span class="caption">Listing 18-13: 구조체 필드 축약법을 사용한
+구조체 필드 해체하기</span>
 
-This code creates the variables `x` and `y` that match the `x` and `y` fields
-of the `p` variable. The outcome is that the variables `x` and `y` contain the
-values from the `p` struct.
+이 코드는 `p` 변수의 `x` 및 `y` 필드와 매칭되는 변수 `x` 및
+`y`를 생성합니다. 그 결과 변수 `x`와 `y`는 `p` 구조체로부터
+나온 값을 갖습니다.
 
-We can also destructure with literal values as part of the struct pattern
-rather than creating variables for all the fields. Doing so allows us to test
-some of the fields for particular values while creating variables to
-destructure the other fields.
+또한 모든 필드에 대해 변수를 생성하는 대신 구조체 패턴의 일부에
+리터럴 값을 사용하여 해체할 수도 있습니다. 이렇게 하면 일부
+필드에서 특정 값을 테스트하는 동시에 다른 필드를 해체하여
+변수를 생성할 수 있습니다.
 
-In Listing 18-14, we have a `match` expression that separates `Point` values
-into three cases: points that lie directly on the `x` axis (which is true when
-`y = 0`), on the `y` axis (`x = 0`), or neither.
+Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
+표현식이 있습니다: `x` 축 위의 점 (`y = 0`이 참인 경우),
+`y` 축 위의 점 (`x = 0`), 그 외의 경우입니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -168,32 +168,32 @@ into three cases: points that lie directly on the `x` axis (which is true when
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-14: Destructuring and matching literal values
-in one pattern</span>
+<span class="caption">Listing 18-14: 패턴 하나로 리터럴 값과 매칭
+하면서 해체하기</span>
 
-The first arm will match any point that lies on the `x` axis by specifying that
-the `y` field matches if its value matches the literal `0`. The pattern still
-creates an `x` variable that we can use in the code for this arm.
+첫 번째 갈래는 `y` 필드의 값이 리터럴 `0`과 매칭되는 경우를 지정하여
+`x`축 위의 모든 점과 매칭될 것입니다. 이 패턴은 여전히 이 갈래를 위한
+코드에서 사용할 수 있는 `x` 변수를 생성합니다.
 
-Similarly, the second arm matches any point on the `y` axis by specifying that
-the `x` field matches if its value is `0` and creates a variable `y` for the
-value of the `y` field. The third arm doesn’t specify any literals, so it
-matches any other `Point` and creates variables for both the `x` and `y` fields.
+마찬가지로 두 번째 갈래는 `x` 필드의 값이 `0`이면 매칭되도록
+지정하여 `y`축 위의 모든 점과 매칭시키고 `y` 필드 값에 대해 변수
+`y`를 생성합니다. 세 번째 갈래는 리터럴을 지정하지 않으므로 다른
+모든 `Point`와 매칭되고 `x` 및 `y` 필드 모두에 대한 변수를 생성합니다.
 
-In this example, the value `p` matches the second arm by virtue of `x`
-containing a 0, so this code will print `On the y axis at 7`.
+이 예제에서 값 `p`는 0을 가지고 있는 `x`에 의해 두 번째 갈래에 매칭되므로,
+이 코드는 `On the y axis at 7`를 출력합니다.
 
-Remember that a `match` expression stops checking arms once it has found the
-first matching pattern, so even though `Point { x: 0, y: 0}` is on the `x` axis
-and the `y` axis, this code would only print `On the x axis at 0`.
+`match` 표현식은 첫 번째 매칭되는 패턴을 찾으면 갈래 검사를
+중지하므로, `Point { x: 0, y: 0}`가 `x`축과 `y`축에 있더라도
+이 코드는 `On the x axis at 0`만 출력한다는 점을 기억하세요.
 
-#### Destructuring Enums
+#### 열거형 해체하기
 
-We've destructured enums in this book (for example, Listing 6-5 in Chapter 6),
-but haven’t yet explicitly discussed that the pattern to destructure an enum
-corresponds to the way the data stored within the enum is defined. As an
-example, in Listing 18-15 we use the `Message` enum from Listing 6-2 and write
-a `match` with patterns that will destructure each inner value.
+이 책에서 열거형을 분해해 봤지만 (예를 들면 6장의 Listing 6-5),
+열거형을 분해하는 패턴이 열거형 내에 저장되는 데이터가 정의되는
+방식과 일치한다는 것을 아직 명시적으로 논의하지는 않았습니다.
+예를 들어, Listing 18-15에서는 Listing 6-2의 `Message` 열거형을
+사용하여 각 내부 값을 해체하는 패턴으로 `match`를 작성합니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -201,80 +201,80 @@ a `match` with patterns that will destructure each inner value.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-15/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-15: Destructuring enum variants that hold
-different kinds of values</span>
+<span class="caption">Listing 18-15: 다른 종류의 값을 가진 열거형
+variant 해체하기</span>
 
-This code will print `Change the color to red 0, green 160, and blue 255`. Try
-changing the value of `msg` to see the code from the other arms run.
+이 코드는 `Change the color to red 0, green 160, and blue 255`를 출력할
+것입니다. 다른 갈래가 실행되는 것을 보려면 `msg`의 값을 변경해보세요.
 
-For enum variants without any data, like `Message::Quit`, we can’t destructure
-the value any further. We can only match on the literal `Message::Quit` value,
-and no variables are in that pattern.
+`Message::Quit`과 같이 데이터가 없는 열거형 variant의 경우 값을
+더 이상 해체할 수는 없습니다. 리터럴 `Message::Quit` 값만 매칭시킬
+수 있으며 해당 패턴에 변수는 없습니다.
 
-For struct-like enum variants, such as `Message::Move`, we can use a pattern
-similar to the pattern we specify to match structs. After the variant name, we
-place curly brackets and then list the fields with variables so we break apart
-the pieces to use in the code for this arm. Here we use the shorthand form as
-we did in Listing 18-13.
+`Message::Move`처럼 구조체형 열거형 variant의 경우, 구조체와
+매칭되도록 지정한 패턴과 유사한 패턴을 사용할 수 있습니다. variant 이름
+뒤에 중괄호를 넣은 다음 변수가 있는 필드를 나열하여 이 갈래에 대한
+코드에서 사용할 부분을 분해합니다. 여기서는 Listing 18-13에서 했던 것처럼
+축약형을 사용합니다.
 
-For tuple-like enum variants, like `Message::Write` that holds a tuple with one
-element and `Message::ChangeColor` that holds a tuple with three elements, the
-pattern is similar to the pattern we specify to match tuples. The number of
-variables in the pattern must match the number of elements in the variant we’re
-matching.
+하나의 요소로 이루어진 튜플을 갖는 `Message::Write`와 세 개의 요소로
+되어있는 튜플을 갖는 `Message::ChangeColor` 같은 튜플형 열거형
+variant의 경우, 패턴은 튜플을 매칭시키기 위해 지정하는 패턴과
+비슷합니다. 패턴에 포함된 변수의 개수는 매칭시키려는 variant의 요소
+개수와 일치해야 합니다.
 
-#### Destructuring Nested Structs and Enums
+#### 중첩된 구조체와 열거형 해체하기
 
-So far, our examples have all been matching structs or enums one level deep,
-but matching can work on nested items too! For example, we can refactor the
-code in Listing 18-15 to support RGB and HSV colors in the `ChangeColor`
-message, as shown in Listing 18-16.
+지금까지의 예제는 모두 한 단계 깊이의 구조체나 열거형을 매칭시켰지만,
+중첩된 아이템에 대해서도 매칭시킬 수 있습니다! 예를 들어, Listing
+18-15의 코드를 리팩토링하여 Listing 18-16과 같이 `ChangeColor` 메시지에서
+RGB 및 HSV 색상을 지원할 수 있습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-16/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-16: Matching on nested enums</span>
+<span class="caption">Listing 18-16: 중첩된 열거형에 대한 매칭</span>
 
-The pattern of the first arm in the `match` expression matches a
-`Message::ChangeColor` enum variant that contains a `Color::Rgb` variant; then
-the pattern binds to the three inner `i32` values. The pattern of the second
-arm also matches a `Message::ChangeColor` enum variant, but the inner enum
-matches `Color::Hsv` instead. We can specify these complex conditions in one
-`match` expression, even though two enums are involved.
+`match` 표현식에서 첫 번째 갈래의 패턴이 `Color::Rgb` variant를 포함하는
+`Message::ChangeColor` 열거형 variant와 매칭합니다; 그런 다음 이 패턴은
+세 개의 내부 `i32` 값을 바인딩합니다. 두 번째 갈래의 패턴도
+`Message::ChangeColor` 열거형 variant와 일치하지만, 내부 열거형은 대신
+`Color::Hsv`와 매칭하고 있습니다. 이렇게 두 열거형을 포함하는 복잡한
+조건을 하나의 `match` 표현식으로 특정할 수 있습니다.
 
-#### Destructuring Structs and Tuples
+#### 구조체와 튜플 해체하기
 
-We can mix, match, and nest destructuring patterns in even more complex ways.
-The following example shows a complicated destructure where we nest structs and
-tuples inside a tuple and destructure all the primitive values out:
+해체 패턴은 훨씬 더 복잡한 방식으로 섞이고, 매칭되고, 중첩될 수 있습니다.
+다음 예제는 구조체와 튜플을 튜플 안에 중첩하고 모든 기본값을 해체하여
+꺼내는 복잡한 해체를 보여줍니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-05-destructuring-structs-and-tuples/src/main.rs:here}}
 ```
 
-This code lets us break complex types into their component parts so we can use
-the values we’re interested in separately.
+이 코드를 사용하면 복잡한 타입을 구성 요소로 분해하여 필요한
+값을 개별적으로 사용할 수 있습니다.
 
-Destructuring with patterns is a convenient way to use pieces of values, such
-as the value from each field in a struct, separately from each other.
+패턴으로 구조체를 해체하는 것은 구조체의 각 필드에 있는 값처럼 값들의 조각을
+서로 분리하여 사용하는 편리한 방식입니다.
 
-### Ignoring Values in a Pattern
+### 패턴에서 값 무시하기
 
-You’ve seen that it’s sometimes useful to ignore values in a pattern, such as
-in the last arm of a `match`, to get a catchall that doesn’t actually do
-anything but does account for all remaining possible values. There are a few
-ways to ignore entire values or parts of values in a pattern: using the `_`
-pattern (which you’ve seen), using the `_` pattern within another pattern,
-using a name that starts with an underscore, or using `..` to ignore remaining
-parts of a value. Let’s explore how and why to use each of these patterns.
+`match`의 마지막 갈래와 같이 실제로는 아무 일도 하지 않지만 나머지
+가능한 모든 값을 매칭하는 캐치올을 얻기 위해 패턴의 값을 무시하는
+것이 종종 유용할 때가 있다는 것을 보았습니다. 패턴에서 전체 값 또는
+값의 일부를 무시하는 방법은 몇 가지가 있습니다: `_` 패턴 사용하기 (여러분이
+이미 보셨던 것이죠), 다른 패턴 내에서 `_` 패턴 사용하기, 밑줄로 시작하는
+이름 사용하기, 또는 `..`를 사용하여 값의 나머지 부분을 무시하는 방법이
+있습니다. 이러한 각 패턴을 사용하는 방법과 사용하는 이유를 알아봅시다.
 
-#### Ignoring an Entire Value with `_`
+#### `_`로 전체 값 무시하기
 
-We’ve used the underscore as a wildcard pattern that will match any value but
-not bind to the value. This is especially useful as the last arm in a `match`
-expression, but we can also use it in any pattern, including function
-parameters, as shown in Listing 18-17.
+밑줄은 어떤 값과도 일치하지만 값에 바인딩되지는 않는 와일드카드
+패턴으로 사용했습니다. 이는 `match` 표현식의 마지막 갈래로 특히
+유용하지만, Listing 18-17처럼 함수 매개변수를 포함한 모든 패턴에
+사용할 수도 있습니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -282,69 +282,69 @@ parameters, as shown in Listing 18-17.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-17/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-17: Using `_` in a function signature</span>
+<span class="caption">Listing 18-17: 함수 시그니처에 `_` 하기</span>
 
-This code will completely ignore the value `3` passed as the first argument,
-and will print `This code only uses the y parameter: 4`.
+이 코드는 첫 번째 인자로 전달된 값 `3`을 완전히 무시하고
+`This code only uses the y parameter: 4`를 출력합니다.
 
-In most cases when you no longer need a particular function parameter, you
-would change the signature so it doesn’t include the unused parameter. Ignoring
-a function parameter can be especially useful in cases when, for example,
-you're implementing a trait when you need a certain type signature but the
-function body in your implementation doesn’t need one of the parameters. You
-then avoid getting a compiler warning about unused function parameters, as you
-would if you used a name instead.
+특정 함수 매개변수가 더 이상 필요없는 경우에는 대부분 함수 시그니처를
+변경하여 사용하지 않는 매개변수가 포함되지 않도록 합니다. 함수
+매개변수를 무시하는 것은, 예를 들면 특정 타입의 시그니처가 필요한
+트레잇을 구현하는 중인데 구현체의 함수 본문에는 매개변수 중 하나가
+필요하지 않은 경우 특히 유용할 수 있습니다. 그러면 대신 이름을
+사용할 때처럼 사용하지 않는 함수 매개변수에 대한 컴파일러 경고를
+받지 않게 됩니다.
 
-#### Ignoring Parts of a Value with a Nested `_`
+#### 중첩된 `_`로 값의 일부 무시하기
 
-We can also use `_` inside another pattern to ignore just part of a value, for
-example, when we want to test for only part of a value but have no use for the
-other parts in the corresponding code we want to run. Listing 18-18 shows code
-responsible for managing a setting’s value. The business requirements are that
-the user should not be allowed to overwrite an existing customization of a
-setting but can unset the setting and give it a value if it is currently unset.
+다른 패턴 내에서 `_`를 사용하여 값의 일부만 무시할 수도 있습니다.
+예를 들어, 값의 일부만 테스트하고 싶지만 다른 부분은 실행하고자 하는
+해당 코드에서 사용되는 곳이 없는 경우입니다. Listing 18-18은 설정 값
+관리를 담당하는 코드를 보여줍니다. 비즈니스 요구사항은 사용자가
+기존 커스터마이징 값을 덮어쓸 수는 없지만 설정값을 해제할 수는 있으며
+해제된 상태라면 값을 지정할 수 있어야 한다는 것입니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-18: Using an underscore within patterns that
-match `Some` variants when we don’t need to use the value inside the
-`Some`</span>
+<span class="caption">Listing 18-18: `Some` variant에 매칭되는
+패턴에서 `Some` 내부 값을 사용할 필요가 없을 경우 패턴 내에 밑줄
+사용하기</span>
 
-This code will print `Can't overwrite an existing customized value` and then
-`setting is Some(5)`. In the first match arm, we don’t need to match on or use
-the values inside either `Some` variant, but we do need to test for the case
-when `setting_value` and `new_setting_value` are the `Some` variant. In that
-case, we print the reason for not changing `setting_value`, and it doesn’t get
-changed.
+이 코드는 `Can't overwrite an existing customized value`를 출력한 다음
+`setting is Some(5)`를 출력합니다. 첫 번째 매치 갈래에서는 `Some` variant
+내부의 값을 매칭시키거나 사용할 필요는 없지만 `setting_value`와
+`new_setting_value`가 `Some` variant인 경우를 테스트할 필요는 있습니다.
+그런 경우 `setting_value`를 변경하지 않는 이유를 출력하고 변경하지
+않습니다.
 
-In all other cases (if either `setting_value` or `new_setting_value` are
-`None`) expressed by the `_` pattern in the second arm, we want to allow
-`new_setting_value` to become `setting_value`.
+두 번째 갈래에서 `_` 패턴으로 표현된 다른 모든 경우에는 (즉 `setting_value`
+또는 `new_setting_value`가 `None`인 경우에는) `new_setting_value`가
+`setting_value`가 될 수 있도록 허용하고자 합니다.
 
-We can also use underscores in multiple places within one pattern to ignore
-particular values. Listing 18-19 shows an example of ignoring the second and
-fourth values in a tuple of five items.
+또한 하나의 패턴 내에서 여러 위치에 밑줄을 사용하여 특정 값을
+무시할 수도 있습니다. Listing 18-19는 다섯 개의 아이템으로 구성된
+튜플에서 두 번째 및 네 번째 값을 무시하는 예제를 보여줍니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-19/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-19: Ignoring multiple parts of a tuple</span>
+<span class="caption">Listing 18-19: 튜플의 여러 부분 무시하기</span>
 
-This code will print `Some numbers: 2, 8, 32`, and the values 4 and 16 will be
-ignored.
+이 코드는 `Some numbers: 2, 8, 32`를 출력하고 값 4와 16은 무시될
+것입니다.
 
-#### Ignoring an Unused Variable by Starting Its Name with `_`
+#### `_`로 시작하는 이름으로 사용하지 않는 변수 무시하기
 
-If you create a variable but don’t use it anywhere, Rust will usually issue a
-warning because an unused variable could be a bug. However, sometimes it’s
-useful to be able to create a variable you won’t use yet, such as when you’re
-prototyping or just starting a project. In this situation, you can tell Rust
-not to warn you about the unused variable by starting the name of the variable
-with an underscore. In Listing 18-20, we create two unused variables, but when
-we compile this code, we should only get a warning about one of them.
+변수가 만들어졌지만 어디에도 사용되지 않는 경우, 사용하지 않는 변수는
+버그가 될 수 있으므로 러스트는 보통 경고를 표시합니다. 그러나 프로토타이핑
+중이거나 프로젝트를 막 시작할 때와 같이, 아직 사용하지 않을 변수를 생성하는
+것이 유용할 때도 있습니다. 이런 상황에서는 변수 이름을 밑줄로 시작하는
+것으로 사용하지 않는 변수에 대해 경고하지 않도록 러스트에게 지시할 수
+있습니다. Listing 18-20에서는 사용하지 않는 변수를 두 개 생성했지만,
+이 코드를 컴파일할 때는 이 중 하나에 대해서만 경고를 받게 됩니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -352,62 +352,62 @@ we compile this code, we should only get a warning about one of them.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-20/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-20: Starting a variable name with an
-underscore to avoid getting unused variable warnings</span>
+<span class="caption">Listing 18-20: 밑줄로 시작하는 변수명으로
+사용하지 않는 변수에 대한 경고 피하기</span>
 
-Here we get a warning about not using the variable `y`, but we don’t get a
-warning about not using `_x`.
+여기서는 변수 `y`가 사용되지 않는 것에 대한 경고를 받지만, `_x`가
+사용되지 않는 것에 대한 경고는 받지 않습니다.
 
-Note that there is a subtle difference between using only `_` and using a name
-that starts with an underscore. The syntax `_x` still binds the value to the
-variable, whereas `_` doesn’t bind at all. To show a case where this
-distinction matters, Listing 18-21 will provide us with an error.
+`_`만 사용하는 것과 밑줄로 시작하는 이름을 사용하는 것 사이에는
+미묘한 차이가 있다는 점을 유의하세요. 문법 `_x`는 여전히 변수에 값을
+바인딩하는 반면, `_`는 전혀 바인딩하지 않습니다. 이 구분이 중요한 경우를
+보여드리기 위해서, Listing 18-21는 에러가 발생할 것입니다.
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-21: An unused variable starting with an
-underscore still binds the value, which might take ownership of the value</span>
+<span class="caption">Listing 18-21: 밑줄로 시작하는 사용하지 않는
+변수는 여전히 값을 바인딩하여 값의 소유권을 가져갈 수 있습니다</span>
 
-We’ll receive an error because the `s` value will still be moved into `_s`,
-which prevents us from using `s` again. However, using the underscore by itself
-doesn’t ever bind to the value. Listing 18-22 will compile without any errors
-because `s` doesn’t get moved into `_`.
+`s` 값이 여전히 `_s`로 이동되는데, 이는 `s`를 다시 사용할 수 없도록
+하기 때문에 에러가 발생합니다. 그러나 밑줄만 단독으로 사용하면
+값이 바인딩되지 않습니다. Listing 18-22는 `s`가 `_`로 이동되지
+않기 때문에 에러없이 컴파일됩니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-22: Using an underscore does not bind the
-value</span>
+<span class="caption">Listing 18-22: 밑줄을 사용하는 것은 값을 바인딩하지
+않습니다</span>
 
-This code works just fine because we never bind `s` to anything; it isn’t moved.
+이 코드는 `s`를 어디에도 바인딩하지 않았기 때문에, 즉 이동되지 않았았으므로 잘 작동합니다.
 
-#### Ignoring Remaining Parts of a Value with `..`
+#### `..`로 값의 나머지 부분 무시하기
 
-With values that have many parts, we can use the `..` syntax to use specific
-parts and ignore the rest, avoiding the need to list underscores for each
-ignored value. The `..` pattern ignores any parts of a value that we haven’t
-explicitly matched in the rest of the pattern. In Listing 18-23, we have a
-`Point` struct that holds a coordinate in three-dimensional space. In the
-`match` expression, we want to operate only on the `x` coordinate and ignore
-the values in the `y` and `z` fields.
+여러 부분으로 구성된 값의 경우, `..` 문법을 사용하여 특정
+부분만 사용하고 나머지는 무시할 수 있으므로 무시된 각 값에
+밑줄을 나열할 필요가 없습니다. `..` 패턴은 나머지 패턴에서
+명시적으로 매칭시키지 않은 값의 모든 부분을 무시합니다.
+Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
+있습니다. `match` 표현식에서 `x` 좌표에 대해서만 연산하고
+`y` 및 `z` 필드의 값은 무시하려고 합니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-23/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-23: Ignoring all fields of a `Point` except
-for `x` by using `..`</span>
+<span class="caption">Listing 18-23: `..`를 사용하여 `x`를 제외한 `Point`의
+모든 필드 무시하기</span>
 
-We list the `x` value and then just include the `..` pattern. This is quicker
-than having to list `y: _` and `z: _`, particularly when we’re working with
-structs that have lots of fields in situations where only one or two fields are
-relevant.
+`x` 값을 나열한 다음 그냥 `..` 패턴만 포함시켰습니다. 이는
+`y: _`와 `z: _`를 나열해야 하는 것보다 빠르며, 특히 많은 필드가
+있는 구조체로 작업하는 데 한두 개의 필드만 관련 있는 상황에서
+유용합니다.
 
-The syntax `..` will expand to as many values as it needs to be. Listing 18-24
-shows how to use `..` with a tuple.
+`..` 문법은 필요한 만큼의 값으로 확장됩니다. Listing 18-24는
+튜플에 `..`를 사용하는 방법을 보여줍니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -415,16 +415,16 @@ shows how to use `..` with a tuple.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-24/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-24: Matching only the first and last values in
-a tuple and ignoring all other values</span>
+<span class="caption">Listing 18-24: 튜플에서 첫 번째와 마지막
+값만 매칭하고 나머지 모든 값들 무시하기</span>
 
-In this code, the first and last value are matched with `first` and `last`. The
-`..` will match and ignore everything in the middle.
+이 코드에서는 첫 번째와 마지막 값이 `first`와 `last`로 매칭됩니다.
+`..`는 중간의 모든 것들과 매칭되고 무시될 것입니다.
 
-However, using `..` must be unambiguous. If it is unclear which values are
-intended for matching and which should be ignored, Rust will give us an error.
-Listing 18-25 shows an example of using `..` ambiguously, so it will not
-compile.
+그러나, `..`을 사용하는 것은 모호하지 않아야 합니다. 어떤 값을
+매칭시키고 어떤 값을 무시해야 하는지 불분명하다면, 러스트는 에러를
+발생시킵니다. Listing 18-25는 `..`를 모호하게 사용하는 예제를 보여주며,
+컴파일되지 않습니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -432,60 +432,60 @@ compile.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-25/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-25: An attempt to use `..` in an ambiguous
-way</span>
+<span class="caption">Listing 18-25: `..`를 모호한 방법으로 사용
+시도하기</span>
 
-When we compile this example, we get this error:
+이 예제를 컴파일하면 아래와 같은 에러가 발생합니다:
 
 ```console
 {{#include ../listings/ch18-patterns-and-matching/listing-18-25/output.txt}}
 ```
 
-It’s impossible for Rust to determine how many values in the tuple to ignore
-before matching a value with `second` and then how many further values to
-ignore thereafter. This code could mean that we want to ignore `2`, bind
-`second` to `4`, and then ignore `8`, `16`, and `32`; or that we want to ignore
-`2` and `4`, bind `second` to `8`, and then ignore `16` and `32`; and so forth.
-The variable name `second` doesn’t mean anything special to Rust, so we get a
-compiler error because using `..` in two places like this is ambiguous.
+러스트로서는 `second`에 값을 매칭시키기 전에 튜플에서 몇 개의 값을 무시하고,
+그 이후에 몇 개의 값을 더 무시할지 결정하는 것이 불가능합니다. 이 코드는
+`2`를 무시하고 `second`를 `4`에 바인딩한 다음 `8`, `16`, `32`를 무시하려함을
+의미하는 것일 수 있습니다; 혹은 `2`와 `4`를 무시하고 `second`를 `8`에 바인딩한
+다음 `16`과 `32`를 무시하는 등등을 의미하는 것일 수도 있습니다. 변수 이름
+`second`는 러스트에겐 특별한 의미가 없으므로, 이와 같이 두 곳에 `..`를
+사용하는 것은 모호하기 때문에 컴파일러 에러가 발생합니다.
 
-### Extra Conditionals with Match Guards
+### 매치 가드를 사용한 추가 조건
 
-A *match guard* is an additional `if` condition, specified after the pattern in
-a `match` arm, that must also match for that arm to be chosen. Match guards are
-useful for expressing more complex ideas than a pattern alone allows.
+*매치 가드 (match guard)* 는 `match` 갈래의 패턴 뒤에 지정되는 추가 `if`
+조건으로, 해당 갈래가 선택되려면 이 조건도 매칭되어야 합니다. 매치 가드는
+패턴만 가지고는 할 수 없는 더 복잡한 아이디어를 표현할 때 유용합니다.
 
-The condition can use variables created in the pattern. Listing 18-26 shows a
-`match` where the first arm has the pattern `Some(x)` and also has a match
-guard of `if x % 2 == 0` (which will be true if the number is even).
+조건은 패턴에서 생성된 변수를 사용할 수 있습니다. Listing 18-26은
+첫 번째 갈래에 `Some(x)` 패턴이 있고 `if x % 2 == 0`의 매치 가드
+(숫자가 짝수이면 참) 가 있는 `match`를 보여줍니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-26/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-26: Adding a match guard to a pattern</span>
+<span class="caption">Listing 18-26: 패턴에 매치 가드 추가하기</span>
 
-This example will print `The number 4 is even`. When `num` is compared to the
-pattern in the first arm, it matches, because `Some(4)` matches `Some(x)`. Then
-the match guard checks whether the remainder of dividing `x` by 2 is equal to
-0, and because it is, the first arm is selected.
+이 예제는 `The number 4 is even`를 출력합니다. `Some(4)`가 `Some(x)`에
+매칭되기 때문에, `num`이 첫 번째 갈래의 패턴과 비교될때 매칭됩니다.
+그 다음 매치 가드가 `x`를 2로 나눈 나머지가 0과 같은지 검사하고,
+같으므로 첫 번째 갈래가 선택됩니다.
 
-If `num` had been `Some(5)` instead, the match guard in the first arm would
-have been false because the remainder of 5 divided by 2 is 1, which is not
-equal to 0. Rust would then go to the second arm, which would match because the
-second arm doesn’t have a match guard and therefore matches any `Some` variant.
+대신 `num`이 `Some(5)`였다면, 5를 2로 나눈 나머지는 1이고,
+0과 같지 않으므로 첫 번째 갈래의 매치 가드는 거짓이 되었을 것입니다.
+그러면 러스트는 두 번째 갈래로 이동하는데, 두 번째 갈래에는 매치
+가드가 없어 모든 `Some` variant와 매칭되기 때문에 매치되었을 것입니다.
 
-There is no way to express the `if x % 2 == 0` condition within a pattern, so
-the match guard gives us the ability to express this logic. The downside of
-this additional expressiveness is that the compiler doesn't try to check for
-exhaustiveness when match guard expressions are involved.
+패턴 내에서 `if x % 2 == 0` 조건을 표현할 방법이 없으며, 매치
+가드는 이런 로직을 표현하는 기능을 제공합니다. 이 추가적인 표현
+능력의 단점은 매치 가드 표현식이 포함되면 컴파일러가 완전성을
+확인하려고 하지 않는다는 것입니다.
 
-In Listing 18-11, we mentioned that we could use match guards to solve our
-pattern-shadowing problem. Recall that we created a new variable inside the
-pattern in the `match` expression instead of using the variable outside the
-`match`. That new variable meant we couldn’t test against the value of the
-outer variable. Listing 18-27 shows how we can use a match guard to fix this
-problem.
+Listing 18-11에서 패턴 쉐도잉 문제를 해결하기 위해 매치 가드를
+사용할 수 있다고 언급했습니다. `match` 외부의 변수를 사용하는 대신
+`match` 표현식의 패턴 내부에 새 변수가 만들어졌던 것을 상기합시다.
+이 새로운 변수는 외부 변수의 값에 대한 테스트를 할 수 없다는 것을
+의미했습니다. Listing 18-27은 이 문제를 해결하기 위해 매치 가드를
+사용하는 방법을 보여줍니다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -493,43 +493,43 @@ problem.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-27/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-27: Using a match guard to test for equality
-with an outer variable</span>
+<span class="caption">Listing 18-27: 매치 가드를 사용하여 외부 변수
+값과 같은지 테스트하기</span>
 
-This code will now print `Default case, x = Some(5)`. The pattern in the second
-match arm doesn’t introduce a new variable `y` that would shadow the outer `y`,
-meaning we can use the outer `y` in the match guard. Instead of specifying the
-pattern as `Some(y)`, which would have shadowed the outer `y`, we specify
-`Some(n)`. This creates a new variable `n` that doesn’t shadow anything because
-there is no `n` variable outside the `match`.
+이제 이 코드는 `Default case, x = Some(5)`를 출력합니다. 두 번째 매치
+갈래의 패턴은 외부 `y`를 가리는 새로운 변수 `y`를 도입하지 않으며,
+이는 매치 가드에서 외부 `y`를 사용할 수 있음을 뜻합니다. 패턴을
+`Some(y)`로 지정하여 외부 `y`를 가리는 대신 `Some(n)`을 지정합니다.
+이렇게 하면 `match` 외부에 `n` 변수가 없으므로 아무것도 가리지 않는
+새 변수 `n`이 생성됩니다.
 
-The match guard `if n == y` is not a pattern and therefore doesn’t introduce
-new variables. This `y` *is* the outer `y` rather than a new shadowed `y`, and
-we can look for a value that has the same value as the outer `y` by comparing
-`n` to `y`.
+매치 가드 `if n == y`는 패턴이 아니므로 새로운 변수를 도입하지
+않습니다. 이 `y`는 새로운 쉐도잉 `y`가 아니라 외부의 `y`이며,
+`n`과 `y`를 비교하여 외부 `y`와 같은 값을 가진 값을 찾을 수
+있습니다.
 
-You can also use the *or* operator `|` in a match guard to specify multiple
-patterns; the match guard condition will apply to all the patterns. Listing
-18-28 shows the precedence when combining a pattern that uses `|` with a match
-guard. The important part of this example is that the `if y` match guard
-applies to `4`, `5`, *and* `6`, even though it might look like `if y` only
-applies to `6`.
+매치 가드에 *또는* 연산자 `|`를 사용하여 여러 패턴을 지정할 수도
+있습니다; 매치 가드 조건은 모든 패턴에 적용될 것입니다. Listing
+18-28은 `|`를 사용하는 패턴과 매치 가드를 조합할 때의 우선순위를
+보여줍니다. 이 예제의 중요한 부분은 `if y` 매치 가드가 `6`에만
+적용되는 것처럼 보일지라도 `4`, `5`, *및* `6`에도 적용된다는
+것입니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-28/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-28: Combining multiple patterns with a match
-guard</span>
+<span class="caption">Listing 18-28: 다중 패턴에 매치 가드
+조합하기</span>
 
-The match condition states that the arm only matches if the value of `x` is
-equal to `4`, `5`, or `6` *and* if `y` is `true`. When this code runs, the
-pattern of the first arm matches because `x` is `4`, but the match guard `if y`
-is false, so the first arm is not chosen. The code moves on to the second arm,
-which does match, and this program prints `no`. The reason is that the `if`
-condition applies to the whole pattern `4 | 5 | 6`, not only to the last value
-`6`. In other words, the precedence of a match guard in relation to a pattern
-behaves like this:
+매치 조건은 `x`의 값이 `4`, `5` 또는 `6` *이면서* `y`가 `true`면
+이 갈래에 매칭된다고 기술합니다. 이 코드가 실행되면 `x`가 `4`이므로
+첫 번째 갈래의 패턴에 매칭되지만, 매치 가드 `if y`는 거짓이므로
+첫 번째 갈래가 선택되지 않습니다. 이 코드는 두 번째 암으로 이동하고,
+여기에 매칭되고, 이 프로그램은 `no`를 출력합니다. 그 이유는 `if`
+조건이 마지막 값 `6` 뿐만 아니라 전체 패턴 `4 | 5 | 6`에 적용되기
+때문입니다. 바꿔 말하면, 패턴과 관련된 매치 가드의 우선 순위는 다음과
+같이 동작합니다:
 
 ```text
 (4 | 5 | 6) if y => ...
@@ -541,54 +541,54 @@ rather than this:
 4 | 5 | (6 if y) => ...
 ```
 
-After running the code, the precedence behavior is evident: if the match guard
-were applied only to the final value in the list of values specified using the
-`|` operator, the arm would have matched and the program would have printed
-`yes`.
+코드가 실행하고 나면 우선순위 동작은 명확해집니다: `|`
+연산자를 사용하여 지정한 값 목록의 마지막 값에만 매치 가드가
+적용되었다면, 해당 갈래에 매칭되어 프로그램은 `yes`를 출력했을
+것입니다.
 
-### `@` Bindings
+### `@` 바인딩
 
-The *at* operator `@` lets us create a variable that holds a value at the same
-time as we’re testing that value for a pattern match. In Listing 18-29, we want
-to test that a `Message::Hello` `id` field is within the range `3..=7`. We also
-want to bind the value to the variable `id_variable` so we can use it in the
-code associated with the arm. We could name this variable `id`, the same as the
-field, but for this example we’ll use a different name.
+*at* 연산자 `@`을 사용하면 값에 대한 패턴 매칭 여부를 테스트하는
+동시에 해당 값을 값는 변수를 만들 수 있습니다. Listing 18-29에서는
+`Message::Hello` `id` 필드가 `3..=7` 범위 내에 있는지 테스트하려고
+합니다. 또한 이 값을 `id_variable` 변수에 바인딩하여 갈래와 관련된
+코드에서 사용하고 싶습니다. 이 변수의 이름을 필드와 동일한 `id`로
+지정할 수 있지만, 이 예제에서는 다른 이름을 사용하겠습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-29/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-29: Using `@` to bind to a value in a pattern
-while also testing it</span>
+<span class="caption">Listing 18-29: `@`를 사용하여 값을 테스트하는 동시에
+값 바인딩도 하기</span>
 
-This example will print `Found an id in range: 5`. By specifying `id_variable
-@` before the range `3..=7`, we’re capturing whatever value matched the range
-while also testing that the value matched the range pattern.
+이 예제는 `Found an id in range: 5`를 출력합니다. 범위 `3..=7` 앞에
+`id_variable @`를 지정함으로써, 범위에 매칭되는 어떤 값이든 캡처하는
+동시에 해당 값이 범위 패턴에 매칭되는지 테스트합니다.
 
-In the second arm, where we only have a range specified in the pattern, the code
-associated with the arm doesn’t have a variable that contains the actual value
-of the `id` field. The `id` field’s value could have been 10, 11, or 12, but
-the code that goes with that pattern doesn’t know which it is. The pattern code
-isn’t able to use the value from the `id` field, because we haven’t saved the
-`id` value in a variable.
+패턴에 범위만 지정된 두 번째 갈래에서는, 해당 갈래와 관련된
+코드에 `id` 필드의 실제 값을 포함하는 변수가 없습니다. `id`
+필드의 값은 10, 11, 또는 12일 수 있지만, 이 패턴과 함께
+사용되는 코드에서는 어떤 값인지 알지 못합니다. 변수에 `id` 값을
+저장하지 않았기 때문에 패턴 코드에서 `id` 필드의 값을 사용할
+수 없습니다.
 
-In the last arm, where we’ve specified a variable without a range, we do have
-the value available to use in the arm’s code in a variable named `id`. The
-reason is that we’ve used the struct field shorthand syntax. But we haven’t
-applied any test to the value in the `id` field in this arm, as we did with the
-first two arms: any value would match this pattern.
+범위 없이 변수를 지정한 마지막 갈래에서는 해당 갈래의 코드에서
+사용 가능한 값이 `id`라는 변수에 있습니다. 그 이유는 구조체 필드
+축약 문법을 사용했기 때문입니다. 하지만 이 갈래에는 앞의 두 갈래와
+같이 `id` 필드의 값에 어떤 테스트도 적용하지 않았습니다: 즉, 어떤
+값이라도 이 패턴과 매칭될 것입니다.
 
-Using `@` lets us test a value and save it in a variable within one pattern.
+`@`를 사용하면 하나의 패턴 내에서 값을 테스트하면서 그 값을 변수에 저장하게 해줍니다.
 
-## Summary
+## 정리
 
-Rust’s patterns are very useful in distinguishing between different kinds of
-data. When used in `match` expressions, Rust ensures your patterns cover every
-possible value, or your program won’t compile. Patterns in `let` statements and
-function parameters make those constructs more useful, enabling the
-destructuring of values into smaller parts at the same time as assigning to
-variables. We can create simple or complex patterns to suit our needs.
+러스트의 패턴은 다양한 종류의 데이터를 구분하는 데 매우 유용합니다.
+`match` 표현식에 패턴을 사용하면, 러스트는 패턴이 가능한 모든 값을
+포함하도록 보장하며, 그렇지 않으면 프로그램이 컴파일되지 않습니다.
+`let` 구문과 함수 매개변수에서의 패턴은 이러한 구성을 더욱 유용하게
+만들어 값을 더 작은 부분으로 분해하는 동시에 변수에 할당할 수 있게
+해줍니다. 필요에 따라 단순하거나 복잡한 패턴을 만들 수 있습니다.
 
-Next, for the penultimate chapter of the book, we’ll look at some advanced
-aspects of a variety of Rust’s features.
+다음으로 이 책의 끝에서 두번째 장에서는 러스트의 다양한 기능 중
+고급 기능 몇가지를 살펴보겠습니다.

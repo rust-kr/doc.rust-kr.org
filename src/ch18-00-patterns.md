@@ -1,29 +1,29 @@
-# Patterns and Matching
+# 패턴과 매칭
 
-*Patterns* are a special syntax in Rust for matching against the structure of
-types, both complex and simple. Using patterns in conjunction with `match`
-expressions and other constructs gives you more control over a program’s
-control flow. A pattern consists of some combination of the following:
+*패턴 (pattern)* 은 복잡하거나 단순한 타입의 구조와 매칭을
+위한 러스트의 특수 문법입니다. 패턴을 `match` 표현 및 기타
+구문과 함께 사용하면 프로그램 흐름을 더 잘 제어할 수 있습니다.
+패턴은 다음의 조합으로 구성됩니다:
 
-* Literals
-* Destructured arrays, enums, structs, or tuples
-* Variables
-* Wildcards
-* Placeholders
+* 리터럴 값 (literals)
+* 분해한 (destructured) 배열, 열거형, 구조체, 튜플
+* 변수
+* 와일드카드 (wildcard)
+* 자리표시자 (placeholder)
 
-Some example patterns include `x`, `(a, 3)`, and `Some(Color::Red)`. In the
-contexts in which patterns are valid, these components describe the shape of
-data. Our program then matches values against the patterns to determine whether
-it has the correct shape of data to continue running a particular piece of code.
+몇 가지 예제 패턴에는 `x`, `(a, 3)`, `Some(Color::Red)` 같은 것들이 있습니다.
+패턴이 유효한 맥락 내에서 이러한 구성 요소들은 데이터의 형태를 설명합니다.
+그러면 프로그램은 값들을 패턴에 매칭해보고 특정 코드 조각을 계속 실행하기에
+데이터가 올바른 형태인지 확인합니다.
 
-To use a pattern, we compare it to some value. If the pattern matches the
-value, we use the value parts in our code. Recall the `match` expressions in
-Chapter 6 that used patterns, such as the coin-sorting machine example. If the
-value fits the shape of the pattern, we can use the named pieces. If it
-doesn’t, the code associated with the pattern won’t run.
+패턴을 이용하기 위해서는 그 패턴을 어떤 값에 비교합니다. 패턴이
+값에 매칭된다면 코드에서 값 부분을 사용합니다. 6장에서 동전 계수기
+예제와 같이 패턴을 사용했던 `match` 표현식을 떠올려봅시다. 값이
+패턴의 형태에 들어맞는다면 명명된 부분을 사용할 수 있습니다.
+그렇지 않다면 해당 패턴과 관련된 코드는 실행 되지 않습니다.
 
-This chapter is a reference on all things related to patterns. We’ll cover the
-valid places to use patterns, the difference between refutable and irrefutable
-patterns, and the different kinds of pattern syntax that you might see. By the
-end of the chapter, you’ll know how to use patterns to express many concepts in
-a clear way.
+이번 장은 패턴과 관련된 모든 것에 대한 참고자료입니다. 패턴을 사용할
+수 있는 유효한 위치, *반박 가능한 패턴(refutable patterns)* 과
+*반박 불가능한 패턴(irrefutable patterns)* 의 차이점, 여러분이 접해볼 수 있는
+다양한 종류의 패턴 문법에 대해서 다뤄보겠습니다. 이번 장을 마치고 나면 패턴을
+이용해 다양한 개념을 명확하게 표현하는 방법에 대해 알게 될 것입니다.

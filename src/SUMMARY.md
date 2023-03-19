@@ -108,10 +108,10 @@
 
 ## Advanced Topics
 
-- [Patterns and Matching](ch18-00-patterns.md)
-    - [All the Places Patterns Can Be Used](ch18-01-all-the-places-for-patterns.md)
-    - [Refutability: Whether a Pattern Might Fail to Match](ch18-02-refutability.md)
-    - [Pattern Syntax](ch18-03-pattern-syntax.md)
+- [패턴과 매칭](ch18-00-patterns.md)
+    - [패턴이 사용될 수 있는 모든 곳](ch18-01-all-the-places-for-patterns.md)
+    - [반박 가능성 (Refutability): 패턴이 매칭에 실패할지의 여부](ch18-02-refutability.md)
+    - [패턴 문법](ch18-03-pattern-syntax.md)
 
 - [Advanced Features](ch19-00-advanced-features.md)
     - [Unsafe Rust](ch19-01-unsafe-rust.md)
