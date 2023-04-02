@@ -322,7 +322,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 `NewsArticle`, `Tweet` 중 하나를 반환하는 행위는 컴파일러 내에서
 `impl Trait` 문법이 구현되는 방식으로 인해 제한됩니다.
 함수가 이렇게 동작하도록 만드는 방법은 17장의
-["트레잇 객체를 사용하여 다른 타입 간의 값 허용하기"][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->
+[“트레잇 객체를 사용하여 다른 타입의 값 허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->
 절에서 알아볼
 예정입니다.
 
