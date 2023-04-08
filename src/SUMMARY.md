@@ -118,7 +118,7 @@
     - [고급 트레잇](ch19-03-advanced-traits.md)
     - [고급 타입](ch19-04-advanced-types.md)
     - [고급 함수와 클로저](ch19-05-advanced-functions-and-closures.md)
-    - [Macros](ch19-06-macros.md)
+    - [매크로](ch19-06-macros.md)
 
 - [Final Project: Building a Multithreaded Web Server](ch20-00-final-project-a-web-server.md)
     - [Building a Single-Threaded Web Server](ch20-01-single-threaded.md)
