@@ -1,33 +1,33 @@
-# Final Project: Building a Multithreaded Web Server
+# 최종 프로젝트: 멀티스레드 웹 서버 구축하기
 
-It’s been a long journey, but we’ve reached the end of the book. In this
-chapter, we’ll build one more project together to demonstrate some of the
-concepts we covered in the final chapters, as well as recap some earlier
-lessons.
+기나긴 여정이었습니다만, 이 책의 끝에 도달했습니다. 이 장에서는
+함께 프로젝트를 하나 더 작성하여 앞서 다룬 내용들을 다시
+요약하는 것은 물론, 마지막 장에서 다룬 개념들을 보여드리고자
+합니다.
 
-For our final project, we’ll make a web server that says “hello” and looks like
-Figure 20-1 in a web browser.
+최종 프로젝트로는 “hello”라고 말하는 웹 서버를 만들 것이며 웹 브라우저에서는
+Figure 20-1과 같이 보일 것입니다.
 
 ![hello from rust](img/trpl20-01.png)
 
-<span class="caption">Figure 20-1: Our final shared project</span>
+<span class="caption">Figure 20-1: 최종 프로젝트</span>
 
-Here is our plan for building the web server:
+이 웹 서버를 만들기 위한 계획은 다음과 같습니다:
 
-1. Learn a bit about TCP and HTTP.
-2. Listen for TCP connections on a socket.
-3. Parse a small number of HTTP requests.
-4. Create a proper HTTP response.
-5. Improve the throughput of our server with a thread pool.
+1. TCP와 HTTP에 대해 조금 알아봅니다.
+2. 소켓에서 TCP 연결을 수신 대기합니다.
+3. 소수의 HTTP 요청을 파싱합니다.
+4. 적절한 HTTP 응답을 생성합니다.
+5. 스레드 풀로 서버의 처리량을 개선합니다.
 
-Before we get started, we should mention one detail: the method we’ll use won’t
-be the best way to build a web server with Rust. Community members have
-published a number of production-ready crates available on
-[crates.io](https://crates.io/) that provide more complete web server and
-thread pool implementations than we’ll build. However, our intention in this
-chapter is to help you learn, not to take the easy route. Because Rust is a
-systems programming language, we can choose the level of abstraction we want to
-work with and can go to a lower level than is possible or practical in other
-languages. We’ll therefore write the basic HTTP server and thread pool manually
-so you can learn the general ideas and techniques behind the crates you might
-use in the future.
+시작하기 전에 한 가지 세부 사항을 언급해야 합니다: 여기서 사용할
+방법이 러스트로 웹 서버를 구축하는 최선의 방법은 아닙니다. 커뮤니티
+회원들은 [crates.io](https://crates.io/)에 여기서 구축하는 것보다
+더 완벽한 웹 서버와 스레드 풀 구현을 제공하는, 프로덕션에 바로 사용할
+수 있는 여러 개의 크레이트를 배포했습니다. 하지만 이 장의 의도는 쉬운
+길을 안내하는 것이 아니라 학습을 돕는 것입니다. 러스트는 시스템
+프로그래밍 언어이므로, 작업하고자 하는 추상화 수준을 선택할 수 있으며
+다른 언어에서 가능한 수준 혹은 실용적인 수준보다 더 낮은 수준까지 갈
+수 있습니다. 그러므로 기본 HTTP 서버와 스레드 풀을 수동으로 작성하여
+향후 사용할 수 있는 크레이트의 일반적인 아이디어와 기술을 배울 수
+있도록 하겠습니다.
