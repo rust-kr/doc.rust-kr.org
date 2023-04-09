@@ -45,7 +45,7 @@ Listing 13-11의 예제에서는 `for` 루프에서 반복자를 사용하는 �
 자료구조 뿐만 아니라, 많은 다른 종류의 시퀀스에 대해 동일한 로직을 사용할 수
 있도록 더 많은 유연성을 제공 합니다. 반복자가 어떻게 그렇게 하는지 살펴봅시다.
 
-### `Iterator`트레잇과 `next` 메서드
+### `Iterator` 트레잇과 `next` 메소드
 
 모든 반복자는 표준 라이브러리에 정의된 `Iterator`라는 이름의 트레잇을
 구현합니다. 트레잇의 정의는 아래처럼 생겼습니다:
@@ -82,7 +82,7 @@ pub trait Iterator {
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-12: 반복자의 `next` 메서드
+<span class="caption">Listing 13-12: 반복자의 `next` 메소드
 호출하기</span>
 
 `v1_iter`를 가변으로 만들 필요가 있음을 주의하세요: 반복자에 대한 `next`
