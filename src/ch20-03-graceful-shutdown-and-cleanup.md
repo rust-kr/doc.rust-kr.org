@@ -1,4 +1,3 @@
-## Graceful Shutdown and Cleanup
 ## 우아한 종료와 정리
 
 Listing 20-20의 코드는 의도한 대로 스레드 풀을 사용하여 비동기적으로

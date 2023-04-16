@@ -120,10 +120,10 @@
     - [고급 함수와 클로저](ch19-05-advanced-functions-and-closures.md)
     - [매크로](ch19-06-macros.md)
 
-- [Final Project: Building a Multithreaded Web Server](ch20-00-final-project-a-web-server.md)
-    - [Building a Single-Threaded Web Server](ch20-01-single-threaded.md)
-    - [Turning Our Single-Threaded Server into a Multithreaded Server](ch20-02-multithreaded.md)
-    - [Graceful Shutdown and Cleanup](ch20-03-graceful-shutdown-and-cleanup.md)
+- [최종 프로젝트: 멀티스레드 웹 서버 구축하기](ch20-00-final-project-a-web-server.md)
+    - [싱글스레드 웹 서버 구축하기](ch20-01-single-threaded.md)
+    - [싱글스레드 서버를 멀티스레드 서버로 바꾸기](ch20-02-multithreaded.md)
+    - [우아한 종료와 정리](ch20-03-graceful-shutdown-and-cleanup.md)
 
 - [Appendix](appendix-00.md)
     - [A - Keywords](appendix-01-keywords.md)
