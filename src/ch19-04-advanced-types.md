@@ -131,7 +131,6 @@ code like that in Listing 19-24.
 때문에 그저 또다른 `Result<T, E>`일 뿐이고, 이는 `Result<T, E>`에서 작동하는
 모든 메소드는 물론, `?` 연산자와 같은 특별 문법도 사용할 수 있음을 뜻합니다.
 
-### The Never Type that Never Returns
 ### 결코 반환하지 않는 부정 타입
 
 러스트에는 `!`라는 특수한 타입이 있는데, 이 타입은 값이 없기 때문에 타입

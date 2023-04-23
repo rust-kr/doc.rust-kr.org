@@ -345,7 +345,7 @@ DeriveInput {
 있는 코드를 파싱했을 때 얻게 되는 `DeriveInput` 인스턴스</span>
 
 이 구조체의 필드는 파싱한 러스트 코드가 `Pancakes`의 `ident` (식별자
-(identifier), 이름을 의미) 를 가진 단위 구조체라는 것을 보여줍니다.
+(identifier), 이름을 의미) 를 가진 유닛 구조체라는 것을 보여줍니다.
 이 구조체에는 모든 종류의 러스트 코드를 기술하는 더 많은 필드가 있습니다;
 자세한 내용은 [`DeriveInput`에 대한 `syn` 문서][syn-docs]를 참조하세요.
 

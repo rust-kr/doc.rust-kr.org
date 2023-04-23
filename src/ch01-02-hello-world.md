@@ -22,7 +22,7 @@
 터미널을 열고 다음 명령어를 입력해 *projects* 디렉토리를 생성한 후,
 *projects* 내에 “Hello, world!” 프로젝트용 디렉토리를 만들어봅시다.
 
-Linux, macOS, 윈도우 PowerShell 에선 다음 명령어를 입력해주세요:
+Linux, macOS, Windows PowerShell 에선 다음 명령어를 입력해주세요:
 
 ```console
 $ mkdir ~/projects
@@ -31,7 +31,7 @@ $ mkdir hello_world
 $ cd hello_world
 ```
 
-윈도우 CMD 사용자는 다음 명령어를 입력해주세요:
+Windows CMD 사용자는 다음 명령어를 입력해주세요:
 
 ```cmd
 > mkdir "%USERPROFILE%\projects"
@@ -69,7 +69,7 @@ $ ./main
 Hello, world!
 ```
 
-윈도우에선 `./main` 을 `.\main.exe` 로 바꿔주시면 됩니다:
+Windows에선 `./main` 을 `.\main.exe` 로 바꿔주시면 됩니다:
 
 ```powershell
 > rustc main.rs
@@ -152,7 +152,7 @@ $ rustc main.rs
 C 나 C++ 을 다뤄보셨다면 `gcc` 나 `clang` 사용방법과 비슷하다는 걸 눈치채셨을지도 모르겠네요.
 러스트는 소스 파일 컴파일에 성공하면 실행 가능한 바이너리를 만들어냅니다.
 
-Linux, macOS, 윈도우 PowerShell 상에서는
+Linux, macOS, Windows PowerShell 상에서는
 `ls` 명령어로 실행 파일을 확인할 수 있습니다.
 
 ```console
@@ -161,7 +161,7 @@ main  main.rs
 ```
 
 Linux와 macOS에서는 두 개의 파일이 보일 것이고, PowerShell의 경우에는
-CMD와 같이 세 개의 파일이 보일 것입니다. 윈도우 CMD 는 다음 명령어를
+CMD와 같이 세 개의 파일이 보일 것입니다. Windows CMD 는 다음 명령어를
 입력해야 합니다:
 
 ```cmd
@@ -172,12 +172,12 @@ main.rs
 ```
 
 *.rs* 확장자를 갖는 소스 파일과 실행 파일
-(타 플랫폼에선 *main*, 윈도우에선 *main.exe* 입니다)을 확인할 수 있습니다.
-윈도우에선 디버깅 정보가 포함된 *pdb* 확장자 파일도 볼 수 있네요.
+(타 플랫폼에선 *main*, Windows에선 *main.exe* 입니다)을 확인할 수 있습니다.
+Windows에선 디버깅 정보가 포함된 *pdb* 확장자 파일도 볼 수 있네요.
 여기서 *main* 이나 *main.exe* 를 실행하는 방법은 다음과 같습니다:
 
 ```text
-$ ./main # 윈도우에서는 .\main.exe
+$ ./main # Windows에서는 .\main.exe
 ```
 
 *main.rs*가 여러분의 “Hello, world!” 프로그램이라면
