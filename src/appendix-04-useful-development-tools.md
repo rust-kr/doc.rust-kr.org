@@ -1,40 +1,40 @@
-## Appendix D - Useful Development Tools
+## 부록 D - 유용한 개발 도구
 
-In this appendix, we talk about some useful development tools that the Rust
-project provides. We’ll look at automatic formatting, quick ways to apply
-warning fixes, a linter, and integrating with IDEs.
+이 부록에서는 러스트 프로젝트가 제공하는 유용한 개발 도구에 대해
+알아보겠습니다. 자동 포맷팅, 경고 수정을 적용하는 빠른 방법, 린터,
+IDE와의 통합 등을 살펴보겠습니다.
 
-### Automatic Formatting with `rustfmt`
+### `rustfmt`로 자동 포맷팅하기
 
-The `rustfmt` tool reformats your code according to the community code style.
-Many collaborative projects use `rustfmt` to prevent arguments about which
-style to use when writing Rust: everyone formats their code using the tool.
+`rustfmt` 도구는 커뮤니티 코드 스타일에 따라 여러분의 코드를 다시 포맷합니다.
+많은 협업 프로젝트는 `rustfmt`를 사용하여 러스트를 작성할 때 사용할 스타일에
+대한 논쟁을 방지합니다: 모든 사람들이 이 도구를 사용하여 코드를 포맷합니다.
 
-To install `rustfmt`, enter the following:
+`rustfmt` 도구를 설치하려면 다음을 입력하세요:
 
 ```console
 $ rustup component add rustfmt
 ```
 
-This command gives you `rustfmt` and `cargo-fmt`, similar to how Rust gives you
-both `rustc` and `cargo`. To format any Cargo project, enter the following:
+이 명령은 `rustc`와 `cargo`처럼 `rustfmt`와 `cargo-fmt`를 제공합니다.
+어떤 Cargo 프로젝트를 포맷하려면, 다음을 입력하세요:
 
 ```console
 $ cargo fmt
 ```
 
-Running this command reformats all the Rust code in the current crate. This
-should only change the code style, not the code semantics. For more information
-on `rustfmt`, see [its documentation][rustfmt].
+이 명령을 실행하면 현재 크레이트의 모든 러스트 코드를 다시 포맷합니다.
+이 명령은 코드의 의미를 변경하지 않고 코드 스타일만 변경합니다.
+`rustfmt`에 대한 자세한 내용은 [문서][rustfmt]를 참고하세요.
 
 [rustfmt]: https://github.com/rust-lang/rustfmt
 
-### Fix Your Code with `rustfix`
+### `rustfix`로 코드 수정하기
 
-The rustfix tool is included with Rust installations and can automatically fix
-compiler warnings that have a clear way to correct the problem that’s likely
-what you want. It’s likely you’ve seen compiler warnings before. For example,
-consider this code:
+`rustfix` 도구는 러스트 설치에 포함되어 있으며 원하는 문제를 해결할
+수 있는 명확한 방법이 있는 컴파일러 경고를 자동으로 수정할 수
+있습니다. 컴파일러 경고를 이미 본 적이 있을 것입니다. 예를 들어,
+다음 코드를 살펴보겠습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -48,8 +48,8 @@ fn main() {
 }
 ```
 
-Here, we’re calling the `do_something` function 100 times, but we never use the
-variable `i` in the body of the `for` loop. Rust warns us about that:
+여기서는 `do_something` 함수를 100번 호출하지만, `for` 루프의 본문에서
+`i` 변수를 사용하지 않습니다. 러스트는 이것에 대해 경고합니다:
 
 ```console
 $ cargo build
@@ -65,10 +65,10 @@ warning: unused variable: `i`
     Finished dev [unoptimized + debuginfo] target(s) in 0.50s
 ```
 
-The warning suggests that we use `_i` as a name instead: the underscore
-indicates that we intend for this variable to be unused. We can automatically
-apply that suggestion using the `rustfix` tool by running the command `cargo
-fix`:
+이 경고는 대신에 `_i`라는 이름을 사용하라고 제안합니다: 밑줄은 이
+변수를 사용하지 않을 것이라는 의도를 나타냅니다. `cargo fix` 명령을
+실행하면 `rustfix` 도구를 사용하여 이 제안을 자동으로 적용할 수
+있습니다:
 
 ```console
 $ cargo fix
@@ -77,8 +77,8 @@ $ cargo fix
     Finished dev [unoptimized + debuginfo] target(s) in 0.59s
 ```
 
-When we look at *src/main.rs* again, we’ll see that `cargo fix` has changed the
-code:
+*src/main.rs*를 다시 살펴보면, `cargo fix`가 코드를 변경했음을 알 수
+있습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -92,30 +92,30 @@ fn main() {
 }
 ```
 
-The `for` loop variable is now named `_i`, and the warning no longer appears.
+`for` 루프 변수가 이제 `_i`라는 이름이 되었고, 경고는 더 이상 나타나지 않습니다.
 
-You can also use the `cargo fix` command to transition your code between
-different Rust editions. Editions are covered in Appendix E.
+또한 `cargo fix` 명령을 사용하여 코드에 대해 서로 다른 러스트 에디션 간
+변경을 적용할 수도 있습니다. 에디션은 부록 E에서 다룹니다.
 
-### More Lints with Clippy
+### Clippy로 더 많은 린트 사용하기
 
-The Clippy tool is a collection of lints to analyze your code so you can catch
-common mistakes and improve your Rust code.
+Clippy 도구는 코드를 분석하여 일반적인 실수를 잡고 러스트 코드를
+개선할 수 있도록 하는 린트 모음입니다.
 
-To install Clippy, enter the following:
+Clippy를 설치하려면 다음을 입력하세요:
 
 ```console
 $ rustup component add clippy
 ```
 
-To run Clippy’s lints on any Cargo project, enter the following:
+Clippy의 린트를 어떤 Cargo 프로젝트에 실행하려면 다음을 입력하세요:
 
 ```console
 $ cargo clippy
 ```
 
-For example, say you write a program that uses an approximation of a
-mathematical constant, such as pi, as this program does:
+예를 들어 다음과 같이 수학적 상수(예: pi)의 근사치를 사용하는 프로그램을
+작성했다고 가정해 보겠습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -127,7 +127,7 @@ fn main() {
 }
 ```
 
-Running `cargo clippy` on this project results in this error:
+`cargo clippy`를 이 프로젝트에 실행하면 다음과 같은 오류가 발생합니다:
 
 ```text
 error: approximate value of `f{32, 64}::consts::PI` found
@@ -141,10 +141,10 @@ error: approximate value of `f{32, 64}::consts::PI` found
   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#approx_constant
 ```
 
-This error lets you know that Rust already has a more precise `PI` constant
-defined, and that your program would be more correct if you used the constant
-instead. You would then change your code to use the `PI` constant. The
-following code doesn’t result in any errors or warnings from Clippy:
+이 에러는 러스트에 이미 더 정확한 `PI` 상수가 정의되어 있으며, 프로그램이
+이 상수를 대신 사용하도록 수정하면 더 정확해진다는 것을 알려줍니다.
+그러면 여러분이 `PI` 상수를 사용하도록 코드를 변경할 수 있습니다.
+다음 코드는 Clippy에서 어떠한 오류나 경고도 발생하지 않습니다:
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -156,25 +156,25 @@ fn main() {
 }
 ```
 
-For more information on Clippy, see [its documentation][clippy].
+Clippy에 대한 더 많은 정보를 보려면 [Clippy 문서][clippy]를 참조하세요.
 
 [clippy]: https://github.com/rust-lang/rust-clippy
 
-### IDE Integration Using `rust-analyzer`
+### `rust-analyzer`를 사용한 IDE 통합
 
-To help IDE integration, the Rust community recommends using
-[`rust-analyzer`][rust-analyzer]<!-- ignore -->. This tool is a set of
-compiler-centric utilities that speaks the [Language Server Protocol][lsp]<!--
-ignore -->, which is a specification for IDEs and programming languages to
-communicate with each other. Different clients can use `rust-analyzer`, such as
-[the Rust analyzer plug-in for Visual Studio Code][vscode].
+러스트 커뮤니티는 IDE 통합을 돕기 위해 [`rust-analyzer`][rust-analyzer]<!-- ignore -->를
+추천합니다. 이 도구는 [언어 서버 프로토콜 (Language Server Protocol)][lsp]<!-- ignore -->을
+사용하는 컴파일러 중심의 유틸리티 세트인데, 이 프로토콜은 IDE와
+프로그래밍 언어가 서로 통신할 수 있도록 하는 사양입니다.
+[Visual Studio Code의 Rust analyzer 플러그인][vscode]<!-- ignore -->과 같은
+다른 클라이언트에서도 `rust-analyzer`를 사용할 수 있습니다.
 
 [lsp]: http://langserver.org/
 [vscode]: https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
 
-Visit the `rust-analyzer` project’s [home page][rust-analyzer]<!-- ignore -->
-for installation instructions, then install the language server support in your
-particular IDE. Your IDE will gain abilities such as autocompletion, jump to
-definition, and inline errors.
+설치 방법을 보려면 `rust-analyzer` 프로젝트의 [홈페이지][rust-analyzer]<!-- ignore -->를
+방문하고, 여러분의 IDE에 특정한 언어 서버 지원을 설치하세요.
+여러분의 IDE는 자동 완성, 정의로 이동, 인라인 오류 등과 같은
+기능을 얻게 될 것입니다.
 
 [rust-analyzer]: https://rust-analyzer.github.io
