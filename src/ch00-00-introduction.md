@@ -4,7 +4,7 @@
 > 무료 제공되는 [The Rust Programming Language][nsprust]
 > 와 동일한 내용을 원작자의 동의 하에 번역한 것입니다.
 
-[nsprust]: https://nostarch.com/rust
+[nsprust]: https://nostarch.com/rust-programming-language-2nd-edition
 [nsp]: https://nostarch.com/
 
 러스트 소개서, *The Rust Programming Language*에 오신것을 환영합니다.

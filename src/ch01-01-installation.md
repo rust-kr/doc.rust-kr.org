@@ -28,7 +28,7 @@
 Linux 나 macOS 사용자는 터미널을 열고 다음 명령어를 입력해주세요:
 
 ```console
-$ curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
 최신 stable 버전 러스트를 설치하는 데 사용할 `rustup` 툴을 설치하는
