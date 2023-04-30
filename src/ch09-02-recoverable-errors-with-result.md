@@ -17,11 +17,11 @@ enum Result<T, E> {
 }
 ```
 
-`T`와 `E`는 제네릭 타입 파라미터입니다.
+`T`와 `E`는 제네릭 타입 매개변수입니다.
 제네릭은 10장에서 자세히 다룰 예정입니다.
 지금 당장은, `T`는 성공한 경우에 `Ok` variant 내에 반환될 값의 타입을
 나타내고 `E`는 실패한 경우에 `Err` variant 내에 반환될 에러의 타입을
-나타낸다는 점만 알아둡시다. `Result`가 이러한 제네릭 타입 파라미터를
+나타낸다는 점만 알아둡시다. `Result`가 이러한 제네릭 타입 매개변수를
 갖기 때문에, 반환하고자 하는 성공적인 값과 에러값이 달라질 수 있는
 다양한 상황에서 `Result` 타입과 그에 정의된 함수들을 사용할 수
 있습니다.
@@ -37,7 +37,7 @@ Listing 9-3는 파일을 열어보는 코드입니다.
 
 <span class="caption">Listing 9-3: 파일 열기</span>
 
-`File::open`의 반환 타입은 `Result<T, E>` 입니다. 제네릭 파라미터
+`File::open`의 반환 타입은 `Result<T, E>` 입니다. 제네릭 매개변수
 `T`는 `File::open`의 구현부에 성공값인 `std::fs::File`로 채워져
 있는데, 이는 파일 핸들입니다. 에러값에 사용된 `E`의 타입은
 `std::io::Error`입니다. 이 반환 타입은 `File::open`의 호출이
@@ -112,7 +112,7 @@ tests to fail lol -->
 
 `Err` variant 내에 있는 `File::open`이 반환하는 값의 타입은 `io::Error`인데,
 이는 표준 라이브러리에서 제공하는 구조체입니다.
-이 구조체는 `kind` 메소드를 제공하는데 이를 호출하여 `io::ErrorKind`값을 얻을 수 있습니다.
+이 구조체는 `kind` 메서드를 제공하는데 이를 호출하여 `io::ErrorKind`값을 얻을 수 있습니다.
 `io::ErrorKind`는 `io` 연산으로부터 발생할 수 있는 여러 종류의 에러를 표현하는 variant를 가진,
 표준 라이브러리에서 제공하는 열거형입니다. 우리가 사용하고자 하는
 variant는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직 존재하지
@@ -131,11 +131,11 @@ variant는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직
 >
 > `match`가 정말 많군요! `match` 표현식은 매우 유용하지만 굉장히 원시적이기도
 > 합니다. 13장에서는 클로저에 대해서 배워볼 텐데, `Result<T, E>` 타입에는
-> 클로저를 사용하는 여러 메소드가 있습니다. 여러분의 코드에서 `Result<T, E>`
-> 값들을 처리할 때 이 메소드들로 `match` 보다 더 간결하게 만들 수 있습니다.
+> 클로저를 사용하는 여러 메서드가 있습니다. 여러분의 코드에서 `Result<T, E>`
+> 값들을 처리할 때 이 메서드들로 `match` 보다 더 간결하게 만들 수 있습니다.
 >
 > 예를 들면, Listing 9-5와 동일한 로직을 작성한 다른 방법이 아래 있는데,
-> 이번에는 `unwrap_or_else` 메소드와 클로저를 사용했습니다:
+> 이번에는 `unwrap_or_else` 메서드와 클로저를 사용했습니다:
 >
 > <!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
 >
@@ -159,15 +159,15 @@ variant는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직
 > 이 코드는 Listing 9-5와 완벽히 동일하게 작동하지만, 
 > `match` 표현식을 전혀 사용하지 않았으며 읽기도 더 깔끔합니다.
 > 13장을 읽고 이 예제로 돌아와서, 표준 라이브러리 문서에서
-> `unwrap_or_else` 메소드를 찾아보세요. 에러를 다룰 때 이런 메소드들을
+> `unwrap_or_else` 메서드를 찾아보세요. 에러를 다룰 때 이런 메서드들을
 > 사용하면 거대하게 중첩된 `match` 표현식 덩어리를 제거할 수 있습니다.
 
 ### 에러가 났을 때 패닉을 위한 숏컷: `unwrap`과 `expect`
 
 `match`의 사용은 충분히 잘 동작하지만, 살짝 장황하기도 하고 의도를 항상
 잘 전달하는 것도 아닙니다. `Result<T, E>` 타입은 다채롭고 더 특정한 작업을
-하기 위해 정의된 수많은 헬퍼 메소드를 가지고 있습니다. `unwrap` 메소드는
-Listing 9-4에서 작성한 `match` 구문과 비슷한 구현을 한 숏컷 메소드입니다.
+하기 위해 정의된 수많은 헬퍼 메서드를 가지고 있습니다. `unwrap` 메서드는
+Listing 9-4에서 작성한 `match` 구문과 비슷한 구현을 한 숏컷 메서드입니다.
 만일 `Result` 값이 `Ok` variant라면, `unwrap`은 `Ok` 내의 값을 반환할
 것입니다. 만일 `Result`가 `Err` variant라면, `unwrap`은 우리를 위해
 `panic!` 매크로를 호출할 것입니다. 아래에 `unwrap`이 작동하는 예가 있습니다:
@@ -178,7 +178,7 @@ Listing 9-4에서 작성한 `match` 구문과 비슷한 구현을 한 숏컷 메
 {{#rustdoc_include ../listings/ch09-error-handling/no-listing-04-unwrap/src/main.rs}}
 ```
 
-*hello.txt* 파일이 없는 상태에서 이 코드를 실행시키면, `unwrap` 메소드에 의한 `panic!`
+*hello.txt* 파일이 없는 상태에서 이 코드를 실행시키면, `unwrap` 메서드에 의한 `panic!`
 호출로부터의 에러 메세지를 보게 될 것입니다:
 
 <!-- manual-regeneration
@@ -255,7 +255,7 @@ don't want to include it for rustdoc testing purposes. -->
 이 함수는 더 간결하게 작성할 수 있지만, 에러 처리를 배우기 위해
 과정을 하나씩 직접 작성해보고, 간결한 버전은 마지막에 살펴보도록 하겠습니다.
 함수의 반환 타입인 `Result<String, io::Error>` 부터 먼저 살펴봅시다.
-이는 함수가 `Result<T, E>` 타입의 값을 반환하는데 제네릭 파라미터 `T`는
+이는 함수가 `Result<T, E>` 타입의 값을 반환하는데 제네릭 매개변수 `T`는
 구체 타입(concrete type)인 `String`로 채워져 있고, 제네릭 타입 `E`는
 구체 타입인 `io::Error`로 채워져 있다는 의미입니다.
 
@@ -268,7 +268,7 @@ don't want to include it for rustdoc testing purposes. -->
 그 이유는 우리가 이 함수 내부에서 호출하고 있는 실패 가능한
 연산 두 가지가 모두 이 타입의 에러 값을 반환하기
 때문입니다: `File::open` 함수와 `read_to_string`
-메소드 말이죠.
+메서드 말이죠.
 
 함수의 본체는 `File::open` 함수를 호출하면서 시작합니다. 그다음에는
 Listing 9-4에서 본 `match`와 유사한 식으로 `match`을 이용해서 `Result`
@@ -281,8 +281,8 @@ Listing 9-4에서 본 `match`와 유사한 식으로 `match`을 이용해서 `Re
 
 그래서 `username_file`에 파일 핸들을 얻게 되면, 함수는 `username` 변수에
 새로운 `String`을 생성하고 `username_file`의 파일 핸들에 대해
-`read_to_string` 메소드를 호출하여 파일의 내용물을 `username`으로
-읽어들입니다. `File::open`이 성공했을지라도 `read_to_string` 메소드
+`read_to_string` 메서드를 호출하여 파일의 내용물을 `username`으로
+읽어들입니다. `File::open`이 성공했을지라도 `read_to_string` 메서드
 또한 실패할 수 있으므로 `Result`를 반환합니다. 따라서 이 `Result`를 처리하기
 위한 또다른 `match`가 필요합니다: `read_to_string`이 성공하면, 이 함수는
 성공한 것이고, 이제는 `username`에 있는 파일로부터 읽은 사용자명을
@@ -354,7 +354,7 @@ Listing 9-7의 내용에서, `File::open` 호출 부분의 끝에 있는 `?`는
 같은 것이 적용되어 있습니다.
 
 `?`는 많은 양의 보일러플레이트를 제거해주고 이 함수의 구현을 더 단순하게 만들어 줍니다.
-심지어는 Listing 9-8과 같이 `?` 뒤에 바로 메소드 호출을 연결하는 식으로 이 코드를 더
+심지어는 Listing 9-8과 같이 `?` 뒤에 바로 메서드 호출을 연결하는 식으로 이 코드를 더
 줄일 수도 있습니다:
 
 <span class="filename">Filename: src/main.rs</span>
@@ -367,7 +367,7 @@ don't want to include it for rustdoc testing purposes. -->
 {{#include ../listings/ch09-error-handling/listing-09-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 9-8: `?` 연산자 뒤에 메소드 호출을
+<span class="caption">Listing 9-8: `?` 연산자 뒤에 메서드 호출을
 연결하기</span>
 
 새로운 `String`을 만들어 `username`에 넣는 부분을 함수의 시작 부분으로
@@ -441,7 +441,7 @@ don't want to include it for rustdoc testing purposes. -->
 사용되는 곳의 값과 호환되는 반환 타입으로 함수를 고치는 것인데, 이렇게
 고치는 걸 방지하는 어떤 제약이 없는 한도 내에서 가능하겠습니다. 다른 방법은
 `Result<T, E>`를 적절한 식으로 처리하기 위해 `match` 혹은 `Result<T, E>`의
-메소드 중 하나를 사용하는 것입니다.
+메서드 중 하나를 사용하는 것입니다.
 
 에러 메세지는 또한 `?`가 `Option<T>` 값에 대해서도 사용될 수 있음을
 알려주었습니다. `Result`에 대하여 `?`를 사용할 때와 마찬가지로, 함수가
@@ -462,7 +462,7 @@ Listing 9-11은 주어진 텍스트에서 첫 번째 줄의 마지막 문자를 
 
 이 함수는 `Option<char>`를 반환하는데 이는 어떤 문자가 있을 수도,
 없을 수도 있기 때문입니다. 이 코드는 `text` 문자열 슬라이스 인자를
-가져와서 `lines` 메소드를 호출하는데, 이는 해당 문자열의 라인에 대한
+가져와서 `lines` 메서드를 호출하는데, 이는 해당 문자열의 라인에 대한
 반복자를 반환합니다. 이 함수가 첫번쨰 줄을 시험하길 원하므로,
 반복자의 `next`를 호출하여 첫번째 값을 얻어옵니다.
 만일 `text`가 빈 문자열이라면 `next` 호출은 `None`을 반환하는데,
@@ -479,13 +479,13 @@ Listing 9-11은 주어진 텍스트에서 첫 번째 줄의 마지막 문자를 
 variant를 반환할 것입니다. 가운데 `?` 연산자가 이러한 로직을 표현할
 간단한 방식을 제공하여 이 함수를 한줄로 작성할 수 있도록 해줍니다.
 만일 `Option`에 대하여 `?`  연산자를 이용할 수 없었다면 더 많은
-메소드 호출 혹은 `match` 표현식을 사용하여 이 로직을 구현했어야 할 것입니다.
+메서드 호출 혹은 `match` 표현식을 사용하여 이 로직을 구현했어야 할 것입니다.
 
 `Result`를 반환하는 함수에서는 `Result`에서 `?` 연산자를 사용할 수 있고,
 `Option`을 반환하는 함수에서는 `Option`에 대해 `?` 연산자를 사용할 수 있지만,
 이를 섞어서 사용할 수 는 없음을 주목하세요. `?` 연산자는 `Result`를 `Option`으로
 자동으로 변환하거나 혹은 그 반대를 할 수 없습니다; 그러한 경우에는
-`Result`의 `ok` 메소드 혹은 `Option`의 `ok_or` 메소드 같은 것을 통해
+`Result`의 `ok` 메서드 혹은 `Option`의 `ok_or` 메서드 같은 것을 통해
 명시적으로 변환을 할 수 있습니다.
 
 여기까지 우리가 다뤄본 `main` 함수는 `()`를 반환했습니다. `main` 함수는

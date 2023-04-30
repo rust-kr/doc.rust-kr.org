@@ -97,11 +97,11 @@ I/O 프로젝트에 있는 *src/lib.rs* 파일에서, Listing 13-19와 같이
 때문에, `args` 매개변수의 명세 부분에 `mut` 키워드를 추가하여 가변이
 되도록 할 수 있겠습니다.
 
-#### 인덱싱 대신 `Iterator` 트레잇 메소드 사용하기
+#### 인덱싱 대신 `Iterator` 트레잇 메서드 사용하기
 
 다음으로 `Config::build`의 본문을 수정하겠습니다. `args`가 `Iterator` 트레잇을
-구현하고 있으므로, 여기에 `next` 메소드를 호출할 수 있다는 것을 알고 있지요!
-Listing 13-20은 Listing 12-23의 코드를 `next` 메소드를 사용하여 업데이트한 것입니다:
+구현하고 있으므로, 여기에 `next` 메서드를 호출할 수 있다는 것을 알고 있지요!
+Listing 13-20은 Listing 12-23의 코드를 `next` 메서드를 사용하여 업데이트한 것입니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -109,7 +109,7 @@ Listing 13-20은 Listing 12-23의 코드를 `next` 메소드를 사용하여 업
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-20: 반복자 메소드를 사용하여
+<span class="caption">Listing 13-20: 반복자 메서드를 사용하여
 `Config::build`의 본문 변경하기</span>
 
 `env::args` 반환값의 첫번째 값이 프로그램의 이름이라는 점을 기억해둡시다.
@@ -134,7 +134,7 @@ Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
 <span class="caption">Listing 13-21: Listing 12-19의 `search`
 함수 구현</span>
 
-반복자 어댑터 메소드를 사용하면 이 코드를 더 간결한 방식으로 작성할 수 있습니다.
+반복자 어댑터 메서드를 사용하면 이 코드를 더 간결한 방식으로 작성할 수 있습니다.
 이렇게 하면 변경 가능한 중간 `results` 벡터를 만드는 것도 회피할 수 있게 해줍니다.
 함수형 프로그래밍 스타일은 더 명확한 코드를 만들기 위해 변경 가능한 상태의 양을
 최소화하는 것을 선호합니다. 가변 상태를 제거하면 추후에 검색을 병렬로 수행하도록 하는
@@ -148,14 +148,14 @@ Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
 ```
 
 <span class="caption">Listing 13-22: `search` 함수 구현에서 반복자 어댑터
-메소드 사용하기</span>
+메서드 사용하기</span>
 
 `search` 함수의 목적은 `query`를 포함하는 `contents`의 모든 라인을 반환하는
 것임을 상기합시다. Listing 13-16의 `filter` 예제와 유사하게, 이 코드는
 `line.contains(query)`이 `true` 를 반환하는 라인들만 유지하기 위해서
 `filter` 어댑터를 사용 합니다. 그런 다음 `collect`를 사용하여 매칭된 라인들을
 모아 새로운 벡터로 만듭니다. 훨씬 단순하군요! 마찬가지로
-`search_case_insensitive`도 반복자 메소드들을 사용하도록 동일한 변경을
+`search_case_insensitive`도 반복자 메서드들을 사용하도록 동일한 변경을
 해보셔도 됩니다.
 
 ### 루프와 반복자 중 선택하기

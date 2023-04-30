@@ -165,7 +165,7 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 
-첫번째 `spaces`는 스트링 타입이고 두번째 `spaces`는 숫자 타입입니다.
+첫번째 `spaces`는 문자열 타입이고 두번째 `spaces`는 숫자 타입입니다.
 따라서 변수명 가리기는 `spaces_str`과 `spaces_num` 같이 구분되는
 변수명을 쓸 필요가 없도록 여유를 줍니다. 그 대신 우리는 더 간단한
 `spaces`라는 이름을 재사용할 수 있습니다. 그런데 여기에서 `mut`을

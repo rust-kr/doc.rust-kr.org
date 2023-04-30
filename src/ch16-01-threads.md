@@ -90,7 +90,7 @@ Listing 16-1의 코드는 메인 스레드의 종료 때문에 대개의 경우 
 
 생성된 스레드가 실행되지 않거나, 전부 실행되지 않는 문제는 `thread::spawn`의
 반환값을 변수에 저장함으로서 해결할 수 있습니다. `thread::spawn`의 반환
-타입은 `JoinHandle`입니다. `JoinHandle`은 이것이 가지고 있는 `join` 메소드를
+타입은 `JoinHandle`입니다. `JoinHandle`은 이것이 가지고 있는 `join` 메서드를
 호출했을 때 그 스레드가 끝날 때까지 기다리는 소유된 값입니다. Listing 16-2는
 Listing 16-1에서 만들었던 스레드의 `JoinHandle`을 이용해서 `join`을 호출하여
 `main`이 끝나기 전에 생성된 스레드가 종료됨을 보장하는 방법을 보여줍니다:

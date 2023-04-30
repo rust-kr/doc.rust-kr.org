@@ -54,7 +54,7 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 만약 승인 전에 게시물의 내용을 즉시 얻어오는 시도를 하면, 해당 게시물이 아직
 초안이기 때문에 텍스트를 가지고 올 수 없어야 합니다. 이를 확인할 목적으로 코드에
 `assert_eq!`를 추가했습니다. 이를 위한 훌륭한 유닛 테스트는 블로그 게시물 초안이
-`content` 메소드에서 빈 문자열을 반환하는지 확인하는 것이겠지만, 이 예제에서는
+`content` 메서드에서 빈 문자열을 반환하는지 확인하는 것이겠지만, 이 예제에서는
 테스트를 작성하지는 않겠습니다.
 
 다음으로 게시물의 검토를 요청하는 것을 활성화하고, 검토를 기다리는 동안에는
@@ -67,7 +67,7 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 검토 대기, 게시됨을 나타내는 세 가지 상태 객체 중 하나가 될 값을
 보유할 것입니다. 어떤 상태에서 다른 상태로 변경되는 것은 `Post` 타입
 내에서 내부적으로 관리됩니다. 이 상태들은 라이브러리 사용자가 `Post`
-인스턴스에서 호출하는 메소드에 대해 응답하여 변경되지만, 사용자가 상태
+인스턴스에서 호출하는 메서드에 대해 응답하여 변경되지만, 사용자가 상태
 변화를 직접 관리할 필요는 없습니다. 또한, 사용자는 검토 전에 게시물이
 게시되는 것 같은 상태와 관련된 실수를 할 수 없습니다.
 
@@ -96,7 +96,7 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 
 `State` 트레잇은 서로 다른 게시물 상태들이 공유하는 동작을 정의합니다.
 상태 객체는 `Draft`, `PendingReview`, 그리고 `Published`이며, 모두
-`State` 트레잇을 구현할 것입니다. 지금은 트레잇에 아무 메소드도 없고,
+`State` 트레잇을 구현할 것입니다. 지금은 트레잇에 아무 메서드도 없고,
 `Draft` 상태가 게시물이 시작되도록 원하는 상태이므로 `Draft` 상태만
 정의하는 것으로 시작하겠습니다.
 
@@ -109,11 +109,11 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 
 ### 게시물 콘텐츠의 텍스트 저장하기
 
-Listing 17-11에서 `add_text`라는 메소드를 호출하고 여기에 `&str`을
+Listing 17-11에서 `add_text`라는 메서드를 호출하고 여기에 `&str`을
 전달하여 블로그 게시물의 콘텐츠 텍스트로 추가할 수 있길 원한다는
 것을 보았습니다. 나중에 `content` 필드의 데이터를 읽는 방식을
-제어할 수 있는 메소드를 구현할 수 있도록 `content` 필드를 `pub`으로
-노출시키는 대신 메소드로 구현합니다. `add_text` 메소드는 매우
+제어할 수 있는 메서드를 구현할 수 있도록 `content` 필드를 `pub`으로
+노출시키는 대신 메서드로 구현합니다. `add_text` 메서드는 매우
 직관적이므로, Listing 17-13의 구현을 `impl Post` 블록에
 추가해봅시다:
 
@@ -124,24 +124,24 @@ Listing 17-11에서 `add_text`라는 메소드를 호출하고 여기에 `&str`�
 ```
 
 <span class="caption">Listing 17-13: `content`에 텍스트를 추가하기
-위한 `add_text` 메소드 구현하기</span>
+위한 `add_text` 메서드 구현하기</span>
 
-`add_text` 메소드는 가변 참조자 `self`를 취하는데, 이는 `add_text`를
+`add_text` 메서드는 가변 참조자 `self`를 취하는데, 이는 `add_text`를
 호출하고 있는 해당 `Post` 인스턴스가 변경되기 때문입니다. 그 다음
 `content`의 `String`에서 `push_str`을 호출하고 `text`를 인자로 전달해
 저장된 `content`에 추가합니다. 이 동작은 게시물의 상태에 의존적이지
-않으므로, 상태 패턴의 일부가 아닙니다. `add_text` 메소드는 `state`
+않으므로, 상태 패턴의 일부가 아닙니다. `add_text` 메서드는 `state`
 필드와 전혀 상호작용을 하지 않지만, 지원하고자 하는 동작의
 일부입니다.
 
 ### 초안 게시물의 내용이 비어있음을 보장하기
 
 `add_text`를 호출하고 게시물에 어떤 콘텐츠를 추가한 이후일지라도, 여전히
-`content` 메소드가 빈 스트링 슬라이스을 반환하길 원하는데, 그 이유는 
+`content` 메서드가 빈 문자열 슬라이스을 반환하길 원하는데, 그 이유는 
 Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 때문입니다. 당장은
-이 요건을 만족할 가장 단순한 것으로 `content` 메소드를 구현해놓으려고 합니다:
-언제나 빈 스트링 슬라이스를 반환하는 것으로요. 나중에 게시물이 게시될 수 있도록
-게시물의 상태를 변경하는 기능을 구현하게 되면 이 메소드를 변경하겠습니다.
+이 요건을 만족할 가장 단순한 것으로 `content` 메서드를 구현해놓으려고 합니다:
+언제나 빈 문자열 슬라이스를 반환하는 것으로요. 나중에 게시물이 게시될 수 있도록
+게시물의 상태를 변경하는 기능을 구현하게 되면 이 메서드를 변경하겠습니다.
 지금까지는 게시물이 오직 초안 상태만 가능하므로, 게시물 컨텐츠는 항상 비어 있어야
 합니다. Listing 17-14는 이 껍데기 구현을 보여줍니다:
 
@@ -151,10 +151,10 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 {{#rustdoc_include ../listings/ch17-oop/listing-17-14/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-14: 항상 비어있는 스트링 슬라이스를
-반환하는 `Post`의 `content` 메소드에 대한 껍데기 구현</span>
+<span class="caption">Listing 17-14: 항상 비어있는 문자열 슬라이스를
+반환하는 `Post`의 `content` 메서드에 대한 껍데기 구현</span>
 
-`content` 메소드를 추가함으로써, Listing 17-11의 7번째 줄까지는
+`content` 메서드를 추가함으로써, Listing 17-11의 7번째 줄까지는
 의도한대로 작동됩니다.
 
 ### 게시물에 대한 검토 요청이 게시물의 상태를 변경합니다
@@ -169,25 +169,25 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 ```
 
 <span class="caption">Listing 17-15: `Post`와 `State` 트레잇에
-`request_review` 메소드를 구현하기</span>
+`request_review` 메서드를 구현하기</span>
 
 `Post`에게 `self`에 대한 가변 참조자를 받는 `request_review`라는 이름의
-공개 메소드가 제공되었습니다. 그런 다음 `Post`의 현재 상태에 대해 내부
-메소드 `request_review`를 호출하고, 이 두번째 `request_review` 메소드는
+공개 메서드가 제공되었습니다. 그런 다음 `Post`의 현재 상태에 대해 내부
+메서드 `request_review`를 호출하고, 이 두번째 `request_review` 메서드는
 현재의 상태를 소비하고 새로운 상태를 반환합니다.
 
-`State` 트레잇에 `request_review` 메소드가 추가되었습니다; 트레잇을
-구현하는 모든 타입은 이제 `request_review` 메소드를 구현할 필요가 있을
-것입니다. 메소드의 첫 인자가 `self`, `&self`, 나 `&mut self`가 아니라
-`self:Box<Self>`라는 점을 주목하세요. 이 문법은 메소드가 오직 그 타입을
+`State` 트레잇에 `request_review` 메서드가 추가되었습니다; 트레잇을
+구현하는 모든 타입은 이제 `request_review` 메서드를 구현할 필요가 있을
+것입니다. 메서드의 첫 인자가 `self`, `&self`, 나 `&mut self`가 아니라
+`self:Box<Self>`라는 점을 주목하세요. 이 문법은 메서드가 오직 그 타입을
 보유한 `Box`에 대해서 호출될 경우에만 유효함을 뜻합니다. 이 문법은
 `Box<Self>`의 소유권을 가져와서 `Post`의 예전 상태를 무효화하여 `Post`의
 상태 값이 새로운 상태로 변환될 수 있도록 합니다.
 
-이전 상태를 소비하려면 `request_review` 메소드가 상태 값의 소유권을
+이전 상태를 소비하려면 `request_review` 메서드가 상태 값의 소유권을
 가져올 필요가 있습니다. 여기서 `Post`의 `state` 필드 내 `Option`이 중요한
 역할을 합니다: 러스트는 구조체 내에 값이 없는 필드를 허용하지 않기 때문에,
-`take` 메소드를 호출하여 `state` 필드 밖으로 `Some` 값을 빼내고 그
+`take` 메서드를 호출하여 `state` 필드 밖으로 `Some` 값을 빼내고 그
 자리에 `None`을 남깁니다. 이렇게 하면 `state` 값을 빌리지 않고 `Post`
 밖으로 옮길 수 있습니다. 그런 다음 게시물의 `state` 값을 이 작업의
 결과물로 설정합니다.
@@ -197,18 +197,18 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 있습니다. 이는 `Post`가 새 상태로 변환된 후 이전 `state` 값을
 사용할 수 없음을 보장합니다.
 
-`Draft`의 `request_review` 메소드는 새 `PendingReview` 구조체의 새로운,
+`Draft`의 `request_review` 메서드는 새 `PendingReview` 구조체의 새로운,
 박스로 감싸진 인스턴스를 반환하는데, 이는 게시물이 검토를 기다리는 상태를
-나타냅니다. `PendingReview` 구조체도 `request_review` 메소드를 구현하지만
+나타냅니다. `PendingReview` 구조체도 `request_review` 메서드를 구현하지만
 어떤 변환도 수행하지 않습니다. 오히려 자기 자신을 반환하는데, 이미
 `PendingReview` 상태인 게시물에 대한 검토를 요청하면 `PendingReview` 상태를
 유지해야 하기 때문입니다.
 
 이제 상태 패턴의 장점을 확인할 수 있습니다: `Post`의 `request_review`
-메소드는 `state` 값에 관계없이 동일합니다. 각 상태는 자신의
+메서드는 `state` 값에 관계없이 동일합니다. 각 상태는 자신의
 규칙을 담당합니다.
 
-`Post`의 `content` 메소드는 빈 스트링 슬라이스를 반환하도록 그대로
+`Post`의 `content` 메서드는 빈 문자열 슬라이스를 반환하도록 그대로
 놔두겠습니다. 이제는 `Draft` 상태에 있는 `Post` 뿐만 아니라 `PendingReview`
 상태에 있는 `Post`도 있습니다만, `PendingReview` 상태에서도 동일한 동작이
 필요합니다. Listing 17-11은 이제 10번째 줄까지 동작합니다!
@@ -216,9 +216,9 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 <!-- Old headings. Do not remove or links may break. -->
 <a id="adding-the-approve-method-that-changes-the-behavior-of-content"></a>
 
-### `content`의 동작을 변경하는 `approve` 메소드 추가하기
+### `content`의 동작을 변경하는 `approve` 메서드 추가하기
 
-`approve` 메소드는 `request_review` 메소드와 유사할 것입니다: 이것은
+`approve` 메서드는 `request_review` 메서드와 유사할 것입니다: 이것은
 Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값으로 `state`를
 설정하게 됩니다:
 
@@ -229,22 +229,22 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 ```
 
 <span class="caption">Listing 17-16: `Post`와 `State` 트레잇에
-`approve` 메소드 구현하기</span>
+`approve` 메서드 구현하기</span>
 
-`State` 트레잇에 `approve` 메소드를 추가하고 `State`를 구현하는
+`State` 트레잇에 `approve` 메서드를 추가하고 `State`를 구현하는
 새 구조체 `Published` 상태도 추가합니다.
 
-`Draft`의 `approve` 메소드를 호출하면 `PendingReview`의 `request_review`가
+`Draft`의 `approve` 메서드를 호출하면 `PendingReview`의 `request_review`가
 동작하는 것과 유사하게 `approve`가 `self`를 반환하므로 아무 효과가
 없습니다. `PendingReview`에서 `approve`를 호출하면 박스로 포장된
 `Published` 구조체의 새 인스턴스가 반환됩니다. `Published` 구조체는
-`State` 트레잇을 구현하고, `request_review`와 `approve` 메소드 양 쪽
+`State` 트레잇을 구현하고, `request_review`와 `approve` 메서드 양 쪽
 모두의 경우 게시물이 `Published` 상태를 유지해야 하므로 자기 자신을
 반환합니다.
 
-이제 `Post`의 `content` 메소드를 갱신해야 합니다. `content`로부터 반환된
+이제 `Post`의 `content` 메서드를 갱신해야 합니다. `content`로부터 반환된
 값이 `Post`의 현재 상태에 의존적이길 원하므로, Listing 17-17과 같이
-`Post`가 자신의 `state`에 정의된 `content` 메소드에게 위임 (delegate)
+`Post`가 자신의 `state`에 정의된 `content` 메서드에게 위임 (delegate)
 하도록 할 것입니다:
 
 <span class="filename">Filename: src/lib.rs</span>
@@ -253,21 +253,21 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 {{#rustdoc_include ../listings/ch17-oop/listing-17-17/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-17: `Post`의 `content` 메소드가
-`State`의 `content` 메소드에게 위임하도록 갱신하기</span>
+<span class="caption">Listing 17-17: `Post`의 `content` 메서드가
+`State`의 `content` 메서드에게 위임하도록 갱신하기</span>
 
 목표는 `State`를 구현하는 구조체들 안에서 이 모든 규칙을 유지하는 것이기
-때문에, `state`의 값에 `content` 메소드를 호출하고 게시물 인스턴스
+때문에, `state`의 값에 `content` 메서드를 호출하고 게시물 인스턴스
 (즉 `self`) 를 인자로 넘겨줍니다. 그러면 `state` 값의 `content`
-메소드를 사용하여 얻어낸 값이 반환됩니다.
+메서드를 사용하여 얻어낸 값이 반환됩니다.
 
-`Option`의 `as_ref` 메소드가 호출되었는데 `Option` 값에 대한 소유권이 아니라
+`Option`의 `as_ref` 메서드가 호출되었는데 `Option` 값에 대한 소유권이 아니라
 그에 대한 참조자가 필요하기 때문입니다. `state`는 `Option<Box<dyn State>>`이므로,
 `as_ref`가 호출되면 `Option<&Box<dyn State>>`가 반환됩니다. `as_ref`를
 호출하지 않는다면, 함수 매개변수의 `&self`로부터 빌려온 `state`를 이동시킬
 수 없기 때문에 에러가 발생했을 것입니다.
 
-그 다음은 `unwrap`이 호출되는데, `Post`의 메소드가 완료되면
+그 다음은 `unwrap`이 호출되는데, `Post`의 메서드가 완료되면
 `state`에 언제나 `Some` 값이 들어있음을 보장한다는 것을 알고
 있으므로 패닉이 발생하지 않을 것입니다. 이는 9장의
 [“여러분이 컴파일러보다 더 많은 정보를 가진 경우”][more-info-than-rustc]<!-- ignore -->
@@ -276,7 +276,7 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 입니다.
 
 이 시점에서 `&Box<dyn State>`의 `content`가 호출되면, `&`와 `Box`에
-역참조 강제가 적용되어, `content` 메소드는 궁극적으로 `State`
+역참조 강제가 적용되어, `content` 메서드는 궁극적으로 `State`
 트레잇을 구현하는 타입에서 호출될 것입니다. 이는 즉 `State` 트레잇
 정의에 `content`를 추가해야 함을 뜻하고, Listing 17-18처럼
 가지고 있는 상태에 따라 어떤 내용물을 반환할지에 대한 로직을
@@ -288,15 +288,15 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 {{#rustdoc_include ../listings/ch17-oop/listing-17-18/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-18: `State` 트레잇에 `content` 메소드
+<span class="caption">Listing 17-18: `State` 트레잇에 `content` 메서드
 추가하기</span>
 
-`content` 메소드에 대하여 빈 스트링 슬라이스를 반환하는 기본 구현이
+`content` 메서드에 대하여 빈 문자열 슬라이스를 반환하는 기본 구현이
 추가되었습니다. 이는 즉 `Draft`와 `PendingReview` 구조체에 대한 `content`는
-구현할 필요가 없음을 뜻입니다. `Published` 구조체는 `content` 메소드를
+구현할 필요가 없음을 뜻입니다. `Published` 구조체는 `content` 메서드를
 오버라이딩하고 `post.content`의 값을 반환할 것입니다.
 
-10장에서 설명한 것처럼 이 메소드에 대한 라이프타임 명시가 필요하다는 것에
+10장에서 설명한 것처럼 이 메서드에 대한 라이프타임 명시가 필요하다는 것에
 주의하세요. `post`에 대한 참조자를 인자로 취하고 있고 해당 `post`의
 일부분에 대한 참조자를 반환하는 중이므로, 반환되는 참조자의 라이프타임은
 `post` 인자의 라이프타임과 관련이 있습니다.
@@ -318,28 +318,28 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 
 게시물이 각 상태에서 가져야 하는 다양한 종류의 동작을 캡슐화하기
 위해서 러스트로 객체 지향 상태 패턴을 충분히 구현할 수 있음을
-보았습니다. `Post`의 메소드는 이런 다양한 동작에 대해서 전혀 알지 못합니다.
+보았습니다. `Post`의 메서드는 이런 다양한 동작에 대해서 전혀 알지 못합니다.
 코드를 구조화한 방식에 따라, 게시된 게시물이 작동할 수 있는 서로 다른
 방식을 알기 위해서는 단 한 곳만 보면 됩니다: 바로 `Published` 구조체에서
 `State` 트레잇을 구현한 내용말이죠.
 
 만약 상태 패턴을 사용하지 않는 다른 구현을 만들려면, 대신
-`Post`의 메소드나 심지어 `main` 코드에서 `match` 표현식을 사용하여
+`Post`의 메서드나 심지어 `main` 코드에서 `match` 표현식을 사용하여
 게시물의 상태를 검사하고 이에 따라 해야 할 행동을 변경할 수도
 있겠습니다. 이는 게시된 상태의 게시물의 모든 결과들에 대해
 이해하기 위해서 여러 곳을 살펴봐야 한다는 것을 뜻합니다! 이는
 상태를 더 많이 추가할수록 각 `match` 표현식에 또다른 갈래를 추가가
 필요하게 됩니다.
 
-상태 패턴을 이용하면 `Post`의 메소드와 `Post`를 사용하는 곳에서는
+상태 패턴을 이용하면 `Post`의 메서드와 `Post`를 사용하는 곳에서는
 `match` 표현식을 사용할 필요가 없고, 새로운 상태를 추가하려면 그저 새로운
-구조체와 구조체에 대한 트레잇 메소드들을 구현하면 됩니다.
+구조체와 구조체에 대한 트레잇 메서드들을 구현하면 됩니다.
 
 상태 패턴을 사용하는 구현은 더 많은 기능을 추가하는 확장이 쉽습니다.
 상태 패턴을 사용하는 코드를 유지하는 것이 간단하다는 것을 확인해보려면,
 다음 몇 가지 제안 사항을 시도해보세요:
 
-* 게시물의 상태를 `PendingReview`에서 `Draft`로 변경하는 `reject` 메소드
+* 게시물의 상태를 `PendingReview`에서 `Draft`로 변경하는 `reject` 메서드
   추가하기
 * 상태를 `Published`로 변경하려면 `approve`의 호출이 두 번 필요하도록 하기
 * 게시물이 `Draft` 상태일 때는 사용자들에게 텍스트 콘텐츠 추가만 하용하기.
@@ -355,16 +355,16 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 패턴으로의 전환을 의미할 겁니다.
 
 또다른 단점은 일부 로직이 중복된다는 점입니다. 일부 중복을 제거하기
-위해서 `State` 트레잇의 `request_review`와 `approve` 메소드가
+위해서 `State` 트레잇의 `request_review`와 `approve` 메서드가
 `self`를 반환하도록 기본 구현을 만드는 시도를 할 수도 있습니다; 하지만
 이는 트레잇이 구체적인 `self`가 정확히 무엇인지 모르기 때문에 객체
 안전성을 위반할 수 있습니다. `State`가 트레잇 객체로 사용될 수 있기를
-원하므로, 해당 메소드들이 객체 안전성을 지킬 필요가 있습니다. 
+원하므로, 해당 메서드들이 객체 안전성을 지킬 필요가 있습니다. 
 
-`Post`의 `request_review`와 `approve` 메소드의 유사한 구현들도
-그 밖의 중복에 포함됩니다. 두 메소드 모두 `Option`의 `state` 필드
-값에 대해 동일한 메소드의 구현을 위임하며, `state` 필드의 새 값을
-결과로 설정합니다. 이 패턴을 따르는 `Post`의 메소드가 많다면,
+`Post`의 `request_review`와 `approve` 메서드의 유사한 구현들도
+그 밖의 중복에 포함됩니다. 두 메서드 모두 `Option`의 `state` 필드
+값에 대해 동일한 메서드의 구현을 위임하며, `state` 필드의 새 값을
+결과로 설정합니다. 이 패턴을 따르는 `Post`의 메서드가 많다면,
 매크로를 정의하여 반복을 없애는 것도 좋을 수 있겠습니다
 (19장의 [“매크로”][macros]<!-- ignore -->절을 살펴보세요).
 
@@ -391,13 +391,13 @@ Listing 17-11의 `main` 첫 부분을 고려해 봅시다:
 
 `Post::new`를 사용하여 초안 상태의 새 게시물을 생성하고 게시물의
 내용에 새 글을 추가할 수 있는 기능은 계속 사용할 수 있습니다. 하지만
-초안 게시물의 `content` 메소드가 빈 문자열을 반환하는 대신, 초안 게시물이
-`content` 메소드를 갖지 않도록 만들려고 합니다. 이렇게 하면 초안 게시물의
-내용을 얻는 시도를 할 경우, 해당 메소드가 존재하지 않는다는 컴파일 에러가
+초안 게시물의 `content` 메서드가 빈 문자열을 반환하는 대신, 초안 게시물이
+`content` 메서드를 갖지 않도록 만들려고 합니다. 이렇게 하면 초안 게시물의
+내용을 얻는 시도를 할 경우, 해당 메서드가 존재하지 않는다는 컴파일 에러가
 발생할 것입니다. 결과적으로, 프로덕션 환경에서 실수로 초안 게시물의 내용을
 얻게 되는 일은 아예 컴파일조차 되지 않으므로 불가능해집니다.
 Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각의
-메소드를 보여줍니다:
+메서드를 보여줍니다:
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -405,13 +405,13 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 {{#rustdoc_include ../listings/ch17-oop/listing-17-19/src/lib.rs}}
 ```
 
-<span class="caption">Listing 17-19: `content` 메소드가 있는
-`Post`와 `content` 메소드가 없는 `DraftPost`</span>
+<span class="caption">Listing 17-19: `content` 메서드가 있는
+`Post`와 `content` 메서드가 없는 `DraftPost`</span>
 
 `Post`와 `DraftPost` 구조체 모두 블로그 게시물의 텍스트를 저장하는 비공개
 `content` 필드를 가지고 있습니다. 이 구조체들이 더 이상 `state` 필드를 갖지 않는
 이유는 상태의 인코딩을 구조체의 타입으로 옮겼기 때문입니다. `Post` 구조체는
-공개된 게시물을 나타낼 것이고, `content`를 반환하는 `content` 메소드가
+공개된 게시물을 나타낼 것이고, `content`를 반환하는 `content` 메서드가
 있습니다.
 
 `Post::new` 함수는 여전히 있지만, `Post`의 인스턴스를 반환하는
@@ -419,8 +419,8 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 어떤 함수도 존재하지 않기 때문에, 곧바로 `Post`의 인스턴스를 생성하는
 것은 불가능합니다. 
 
-`DraftPost` 구조체에 `add_text` 메소드가 있으므로 전처럼 `content`에
-텍스트를 추가할 수 있지만, `DraftPost`에는 `content` 메소드가 정의되어 있지
+`DraftPost` 구조체에 `add_text` 메서드가 있으므로 전처럼 `content`에
+텍스트를 추가할 수 있지만, `DraftPost`에는 `content` 메서드가 정의되어 있지
 않다는 것을 주의하세요! 따라서 이제 프로그램은 모든 게시물이 초안 게시물로
 시작되고, 초안 게시물은 자신의 콘텐츠를 표시할 수 없도록 합니다. 이러한
 제약사항을 우회하려는 시도는 컴파일 에러를 발생시킬 것입니다.
@@ -431,8 +431,8 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 전에 검토와 승인을 받아야 하는 규칙은 적용되기를 원합니다. 검토를 기다리는
 상태인 게시물은 여전히 어떤 내용도 보여줘서는 안되구요. Listing 17-20처럼
 또다른 구조체 `PendingReviewPost`를 추가하고, `DraftPost`에
-`PendingReviewPost`를 반환하는 `request_review` 메소드를 정의하고,
-`PendingReviewPost`에 `Post`를 반환하는 `approve` 메소드를 정의하여
+`PendingReviewPost`를 반환하는 `request_review` 메서드를 정의하고,
+`PendingReviewPost`에 `Post`를 반환하는 `approve` 메서드를 정의하여
 위의 제약사항들을 구현해봅시다:
 
 <span class="filename">Filename: src/lib.rs</span>
@@ -443,22 +443,22 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 
 <span class="caption">Listing 17-20: `DraftPost`의 `request_review`를
 호출하여 생성되는 `PendingReviewPost` 및 `PendingReviewPost`를 게시된
-`Post`로 전환하는 `approve` 메소드</span>
+`Post`로 전환하는 `approve` 메서드</span>
 
-`request_review`와 `approve` 메소드는 `self`의 소유권을 가져와서
+`request_review`와 `approve` 메서드는 `self`의 소유권을 가져와서
 `DraftPost`와 `PendingReviewPost`의 인스턴스를 소비하고 이들을
 각각 `PendingReviewPost`와 게시된 `Post`로 변환시킵니다. 이렇게 하면
 `request_review`를 호출한 후 등등에는 `DraftPost` 인스턴스가
 남아있지 않게 될겁니다. `PendingReviewPost` 구조체에는 `content`
-메소드가 정의되어 있지 않기 때문에, 그 콘텐츠를 읽으려는 시도는 `DraftPost`에서와
-마찬가지로 컴파일 에러를 발생시킵니다. `content` 메소드가 정의된
+메서드가 정의되어 있지 않기 때문에, 그 콘텐츠를 읽으려는 시도는 `DraftPost`에서와
+마찬가지로 컴파일 에러를 발생시킵니다. `content` 메서드가 정의된
 게시된 `Post` 인스턴스를 얻을 수 있는 유일한 방법은 `PendingReviewPost`의
-`approve` 메소드를 호출하는 것이고, `PendingReviewPost`를 얻을 수
+`approve` 메서드를 호출하는 것이고, `PendingReviewPost`를 얻을 수
 있는 유일한 방법은 `DraftPost`의 `request_review`를 호출하는 것이므로,
 이제 블로그 게시물의 작업 흐름을 타입 시스템으로 인코딩했습니다.
 
 또한 `main`에도 약간의 수정이 필요합니다. `request_review`와 `approve`
-메소드는 호출되고 있는 구조체를 변경하는 것이 아니라 새 인스턴스를
+메서드는 호출되고 있는 구조체를 변경하는 것이 아니라 새 인스턴스를
 반환하기 때문에, 더 많은 `let post =` 쉐도잉 할당을 추가하여
 반환되는 인스턴스를 보관해야 합니다. 또한 초안과 검토 중인 게시물의
 내용이 빈 문자열이라고 단언할 수도 없고, 단언할 필요도 없습니다: 이 상태에서

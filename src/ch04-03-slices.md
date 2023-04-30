@@ -32,26 +32,26 @@ fn first_word(s: &String) -> ?
 
 `String` 을 하나하나 쪼개서
 해당 요소가 공백 값인지 확인해야 하므로,
-`as_bytes` 메소드를 이용해 바이트 배열로 변환하였습니다.
+`as_bytes` 메서드를 이용해 바이트 배열로 변환하였습니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:as_bytes}}
 ```
 
-그 다음, 바이트 배열에 사용할 반복자(iterator)를 `iter` 메소드로 생성했습니다:
+그 다음, 바이트 배열에 사용할 반복자(iterator)를 `iter` 메서드로 생성했습니다:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:iter}}
 ```
 
 반복자(iterator)는 [13장][ch13]<!-- ignore -->에서 자세히 알아볼
-예정이니 일단 `iter` 메소드는 컬렉션의 각 요소를 반환하고,
-`enumerate` 메소드는 `iter` 의 결과 값을
+예정이니 일단 `iter` 메서드는 컬렉션의 각 요소를 반환하고,
+`enumerate` 메서드는 `iter` 의 결과 값을
 각각 튜플로 감싸 반환한다는 것만 알아두도록 합시다.
 이때 반환하는 튜플은 첫 번째 요소가 인덱스,
 두 번째 요소가 해당 요소의 참조자로 이루어져 있습니다.
 
-`enumerate` 메소드가 반환한 튜플은 패턴을 이용해 해체하였습니다.
+`enumerate` 메서드가 반환한 튜플은 패턴을 이용해 해체하였습니다.
 패턴에 대해서는 [6장][ch6]<!-- ignore -->에서 더 자세히 다루겠습니다.
 `for` 루프 내에서 `i` 는 튜플 요소 중 인덱스에 대응하고,
 `&item`은 바이트에 대응됩니다. 이때 패턴에 `&`를 사용하는
@@ -267,7 +267,7 @@ fn first_word(s: &String) -> &str {
 문자열 슬라이스를 가지고 있다면 이걸 바로 넘길 수 있습니다. `String`을
 가지고 있다면 `String`의 슬라이스 혹은 `String`에 대한 참조자를 넘길 수 있습니다.
 이러한 유연성은 *역참조 강제 (deref coercions)* 기능을 이용하는데, 15장의
-[“함수와 메소드의 암묵적 역참조 강제”][deref-coercions]<!--ignore-->절에서
+[“함수와 메서드의 암묵적 역참조 강제”][deref-coercions]<!--ignore-->절에서
 다룰 것입니다.
 
 `String`에 대한 참조자 대신에 문자열 슬라이스를 매개변수로 하는 함수를 정의하면

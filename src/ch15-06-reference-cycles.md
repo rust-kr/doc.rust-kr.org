@@ -11,7 +11,7 @@
 
 ### 순환 참조 만들기
 
-Listing 15-25의 `List` 열거형과 `tail` 메소드 정의를 시작으로
+Listing 15-25의 `List` 열거형과 `tail` 메서드 정의를 시작으로
 어떻게 순환 참조가 생길 수 있고, 이를 어떻게 방지하는지
 알아봅시다:
 
@@ -28,7 +28,7 @@ Listing 15-5의 `List` 정의의 또다른 변형이 이용되고 있습니다.
 이제 `Cons` variant 내의 두번째 요소는 `RefCell<Rc<List>>`인데,
 이는 Listing 15-24에서 했던 것처럼 `i32` 값을 변경하는 능력을 갖는 대신,
 `Cons` variant가 가리키고 있는 `List` 값을 변경하길 원한다는 의미입니다.
-또한 `tail` 메소드를 추가하여 `Cons` variant를 갖고 있다면 두번째 아이템에
+또한 `tail` 메서드를 추가하여 `Cons` variant를 갖고 있다면 두번째 아이템에
 접근하기 편하게 만들었습니다.
 
 Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하고 있습니다.
@@ -52,9 +52,9 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 있습니다.
 
 `a`를 수정하여 이것이 `Nil` 대신 `b`를 가리키도록 하였는데, 이렇게 순환이
-만들어집니다. 이는 `tail` 메소드를 사용하여 `a`에 있는 `RefCell<Rc<List>>`로부터
+만들어집니다. 이는 `tail` 메서드를 사용하여 `a`에 있는 `RefCell<Rc<List>>`로부터
 참조자를 얻어오는 식으로 이루어졌는데, 이것을 `link`라는 변수에 넣었습니다. 그 다음
-`RefCell<Rc<List>>`의 `borrow_mut` 메소드를 사용하여 `Nil` 값을 가지고 있는
+`RefCell<Rc<List>>`의 `borrow_mut` 메서드를 사용하여 `Nil` 값을 가지고 있는
 `Rc<List>` 내부의 값을 `b`의 `Rc<List>`로 바꾸었습니다.
 
 잠시 마지막 `println!` 문이 실해되지 않도록 주석처리하고서 이 코드를 실행시면
@@ -130,7 +130,7 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 
 `Weak<T>`가 참조하고 있는 값이 이미 버려졌을지도 모르기 때문에, `Weak<T>`가
 가리키고 있는 값으로 어떤 일을 하기 위해서는 그 값이 여전히 존재하는지를 반드시
-확인해야 합니다. 이를 위해 `Weak<T>`의 `upgrade` 메소드를 호출하는데, 이 메소드는
+확인해야 합니다. 이를 위해 `Weak<T>`의 `upgrade` 메서드를 호출하는데, 이 메서드는
 `Option<Rc<T>>`를 반환할 것입니다. 만일 `Rc<T>` 값이 아직 버려지지 않았다면
 `Some` 결과를 얻게 될 것이고 `Rc<T>` 값이 버려졌다면 `None` 결과값을 얻게
 될 것입니다. `upgrade`가 `Option<T>`를 반환하기 때문에, 러스트는 `Some`의
@@ -220,7 +220,7 @@ Listing 15-28에서는 `main`을 갱신하여 이 새로운 정의를 사용하�
 비슷해 보입니다: `leaf`는 부모없이 시작되서, 새 비어있는 `Weak<Node>`
 참조자 인스턴스를 생성하였습니다.
 
-이 시점에서 `upgrade` 메소드를 사용하여 `leaf`의 부모에 대한 참조자를
+이 시점에서 `upgrade` 메서드를 사용하여 `leaf`의 부모에 대한 참조자를
 얻는 시도를 하면 `None` 값을 얻습니다. 첫번째 `println!` 구문에서는
 아래와 같은 출력을 보게됩니다:
 
@@ -233,7 +233,7 @@ leaf parent = None
 `leaf`는 여전히 `branch`의 자식 중 하나입니다. 일단 `branch`의 `Node`
 인스턴스를 갖게 되면, `leaf`를 수정하여 자신의 부모에 대한 `Weak<Node>`
 참조자를 갖도록 할 수 있습니다. `leaf`의 `parent` 필드의
-`RefCell<Weak<Node>>`에 있는 `borrow_mut` 메소드를 사용하고, 그런 다음
+`RefCell<Weak<Node>>`에 있는 `borrow_mut` 메서드를 사용하고, 그런 다음
 `Rc::downgrade` 함수를 사용하여 `branch`의 `Rc<Node>`로부터 `branch`에
 대한 `Weak<Node>` 참조자를 생성하였습니다.
 

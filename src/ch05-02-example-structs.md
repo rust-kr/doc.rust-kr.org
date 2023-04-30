@@ -237,7 +237,7 @@ Listing 5-12 처럼 구조체 정의 바로 이전에 `#[derive(Debug)]`
 우리가 만든 `area` 함수는 사각형의 면적만을 계산합니다.
 `Rectangle` 구조체를 제외한 다른 타입으로는 작동하지 않으니
 `Rectangle` 구조체와 더 밀접하게 묶는 편이 더 유용할 겁니다.
-다음에는 `area` 함수를 `Rectangle` 타입 내에 *메소드(method)* 형태로
+다음에는 `area` 함수를 `Rectangle` 타입 내에 *메서드(method)* 형태로
 정의하여 코드를 리팩토링하는 방법을 알아보겠습니다.
 
 [the-tuple-type]: ch03-02-data-types.html#the-tuple-type

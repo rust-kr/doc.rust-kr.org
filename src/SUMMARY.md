@@ -28,7 +28,7 @@
 - [연관된 데이터를 구조체로 구조화하기](ch05-00-structs.md)
     - [구조체 정의 및 인스턴트화](ch05-01-defining-structs.md)
     - [구조체를 사용한 예제 프로그램](ch05-02-example-structs.md)
-    - [메소드 문법](ch05-03-method-syntax.md)
+    - [메서드 문법](ch05-03-method-syntax.md)
 
 - [열거형과 패턴 매칭](ch06-00-enums.md)
     - [열거형 정의하기](ch06-01-defining-an-enum.md)

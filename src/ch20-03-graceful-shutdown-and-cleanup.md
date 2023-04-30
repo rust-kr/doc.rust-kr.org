@@ -49,7 +49,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 소유한 `Worker` 인스턴스로부터 스레드를 밖으로 옮겨서 `join`이 스레드를
 써버릴 수 있도록 할 필요가 있습니다. Listing 17-15에서 이 작업을 해봤었지요:
 `Worker`가 대신 `Option<thread::JoinHandle<()>>`을 가지고 있다면,
-`Option`의 `take` 메소드를 호출하여 `Some` variant에서 값을 빼내고
+`Option`의 `take` 메서드를 호출하여 `Some` variant에서 값을 빼내고
 그 자리에는 `None` variant를 남길 수 있습니다. 바꿔 말하면, 실행 중인
 `Worker`는 `thread`에 `Some` variant를 갖도록 하고, `Worker`를 정리하고
 싶을 때는 `Some`을 `None`으로 대체하여 `Worker`에 실행 스레드가 없도록
@@ -90,7 +90,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-06-fix-threadpool-drop/src/lib.rs:here}}
 ```
 
-17장에서 논의한 것처럼 `Option`의 `take` 메소드는 `Some` variant를
+17장에서 논의한 것처럼 `Option`의 `take` 메서드는 `Some` variant를
 제거하고 그 자리에 `None`을 남깁니다. 여기서는 `if let`을 사용해 `Some`을
 해체하고 스레드를 가져옵니다; 그런 다음 그 스레드에서 `join`을 호출합니다.
 워커의 스레드가 이미 `None`이면 해당 워커의 스레드가 이미 정리되었음을 알 수
@@ -155,7 +155,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 것입니다. 이 코드는 그저 정상 종료 및 정리가 정상적으로 작동하고 있음을
 보여줄 따름입니다.
 
-`take` 메소드는 `Iterator` 트레잇에 정의되어 있으며 반복을 최대 첫
+`take` 메서드는 `Iterator` 트레잇에 정의되어 있으며 반복을 최대 첫
 두 개의 아이템으로 제한합니다. `ThreadPool`은 `main`이 끝날 때 스코프를
 벗어나고, `drop` 구현이 실행될 것입니다.
 
@@ -228,7 +228,7 @@ Shutting down worker 3
 여기에 더 많은 작업을 할 수도 있습니다! 이 프로젝트를 계속 개선하고 싶으시다면,
 몇 가지 아이디어를 소개합니다:
 
-* `ThreadPool`과 그 공개 메소드에 문서를 더 추가해 보세요.
+* `ThreadPool`과 그 공개 메서드에 문서를 더 추가해 보세요.
 * 라이브러리 기능에 대한 테스트를 추가해 보세요.
 * `unwrap` 호출을 좀 더 강건한 에러 처리 형태로 바꿔보세요.
 * `ThreadPool`을 사용하여 웹 요청을 처리하는 것 말고 다른 작업을 수행해 보세요.

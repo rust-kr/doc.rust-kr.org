@@ -178,7 +178,7 @@ Cargo가 테스트를 컴파일하고 실행했습니다. `running 1 test` 줄�
 호출하여 테스트는 실패하도록 만듭니다. 우리가 작성한 코드가 의도대로 기능하는지
 검사할 때 `assert!` 매크로를 유용하게 사용할 수 있습니다.
 
-5장 Listing 5-15에서 `Rectangle` 구조체랑 `can_hold` 메소드를 사용했었죠.
+5장 Listing 5-15에서 `Rectangle` 구조체랑 `can_hold` 메서드를 사용했었죠.
 (Listing 11-5로 다시 보여드립니다.) 이 코드를 *src/lib.rs* 파일에
 작성하고, 그 다음 `assert!` 매크로로 테스트를 작성해봅시다.
 
@@ -189,11 +189,11 @@ Cargo가 테스트를 컴파일하고 실행했습니다. `running 1 test` 줄�
 ```
 
 <span class="caption">Listing 11-5: 5장 `Rectangle` 구조체와
-`can_hold` 메소드</span>
+`can_hold` 메서드</span>
 
-`can_hold` 메소드는 Boolean 값을 반환하니
+`can_hold` 메서드는 Boolean 값을 반환하니
 `assert` 매크로 사용 예시로 쓰기에 딱 알맞습니다.
-Listing 11-6는 `can_hold` 메소드를 시험하는 테스트를 작성한 모습입니다.
+Listing 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모습입니다.
 너비 8, 높이 7 `Rectangle` 인스턴스를 생성하고,
 이 인스턴스는 너비 5, 높이 1 `Rectangle` 인스턴스를 포함할 수 있음을 단언합니다.
 
@@ -204,7 +204,7 @@ Listing 11-6는 `can_hold` 메소드를 시험하는 테스트를 작성한 모�
 ```
 
 <span class="caption">Listing 11-6: 큰 사각형이 작은 사각형을 정말로
-포함할 수 있는지 검사하는 `can_hold` 메소드 테스트</span>
+포함할 수 있는지 검사하는 `can_hold` 메서드 테스트</span>
 
 `tests` 모듈에 `use super::*;` 줄이 추가되었습니다.
 `tests` 모듈 또한 7장
@@ -243,7 +243,7 @@ Listing 11-6는 `can_hold` 메소드를 시험하는 테스트를 작성한 모�
 
 두 테스트를 모두 통과했습니다! 그럼 이제 코드에 버그가 있으면
 테스트 결과가 어떻게 되는지 알아보죠.
-`can_hold` 메소드 구현부 중 너비 비교 부분의
+`can_hold` 메서드 구현부 중 너비 비교 부분의
 큰 부등호를 작은 부등호로 바꿔보겠습니다:
 
 ```rust,not_desired_behavior,noplayground
