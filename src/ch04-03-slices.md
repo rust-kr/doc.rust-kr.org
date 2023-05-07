@@ -66,12 +66,12 @@ fn first_word(s: &String) -> ?
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:inside_for}}
 ```
 
-문자열 첫 단어의 끝부분을 찾아 해당 인덱스를 반환하는 함수를 완성했습니다.
-하지만 함수에서 반환하는 `usize` 값이
-`&String` 의 내용에 의존적임에도 불구하고,
-`String` 과 분리되어 있다는 점이 아쉽군요.
-이대로라면, 앞으로도 이 값이 의미 있는 값일 거란 보장을 할 수가 없습니다.
-어떤 뜻인지 Listing 4-8 을 보고 생각해봅시다:
+이제 문자열에서 첫 번째 단어 끝의 인덱스를 찾는 방법이
+생겼지만, 문제가 있습니다. `usize`를 반환하고 있는데, 이는
+`&String`의 컨텍스트에서만 의미 있는 숫자일 뿐입니다. 바꿔
+말하면, `String`과는 별개의 값이기 때문에 향후에도 유효하다는
+보장이 없습니다. Listing 4-7의 `first_word` 함수를 사용하는
+Listing 4-8의 프로그램을 살펴봅시다.
 
 <span class="filename">Filename: src/main.rs</span>
 
@@ -80,7 +80,7 @@ fn first_word(s: &String) -> ?
 ```
 
 <span class="caption">Listing 4-8: `first_word` 함수의 결과를 저장했으나,
-이후에 `String` 의 내용이 변경된 상황</span>
+이후에 `String`의 내용물이 변경된 상황</span>
 
 이 코드는 문법적으로 전혀 문제없고, 정상적으로 컴파일됩니다.
 `s.clear()` 을 호출한 후에 `word` 를 사용하는 코드를 작성하더라도,

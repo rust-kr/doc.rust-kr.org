@@ -49,7 +49,7 @@
 
 #### `Mutex<T>`의 API
 
-뮤텍스 사용 방법에 대한 예제로서 Listing 16-12처럼 싱글스레드 맥락에서
+뮤텍스 사용 방법에 대한 예제로서 Listing 16-12처럼 싱글스레드 컨텍스트에서
 뮤텍스를 사용하는 것으로 시작해봅시다:
 
 <span class="filename">Filename: src/main.rs</span>
@@ -58,7 +58,7 @@
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-12: 간소화를 위해 싱글스레드 맥락에서
+<span class="caption">Listing 16-12: 간소화를 위해 싱글스레드 컨텍스트에서
 `Mutex<T>`의 API 탐색하기</span>
 
 많은 타입들이 그렇듯 `Mutex<T>`는 연관함수 `new`를 사용하여 만들어집니다.
