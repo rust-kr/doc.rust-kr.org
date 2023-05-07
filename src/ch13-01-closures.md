@@ -27,7 +27,7 @@
 현재 제일 많이 가지고 있는 색상을 받게 됩니다.
 
 이를 구현하는 방법은 여러가지가 있습니다. 이번 예제에서는 `Red`와
-`Blue` variant를 가진 (단순함을 위해 가능한 색상을 제한했습니다)
+`Blue` 배리언트를 가진 (단순함을 위해 가능한 색상을 제한했습니다)
 `ShirtColor`라는 열거형을 이용해 보겠습니다. 회사의 재고는 `Inventory`
 구조체로 표현하는데 여기에는 `shirts`라는 이름의 필드가 있고, 이 필드는
 현재 재고에 있는 셔츠 색상을 나타내는 `Vec<ShirtColor>` 타입입니다.
@@ -55,9 +55,9 @@
 [`Option<T>`의 `unwrap_or_else` 메서드 `Option<T>`][unwrap-or-else]<!-- ignore -->는
 표준 라이브러리에 정의되어 있습니다. 이것은 하나의 인자를 받습니다: 바로 아무런
 인자도 없고 `T` 값을 반환하는 클로저 입니다 (이때 `T`는 `Option<T>`의 `Some`
-variant에 저장되는 타입과 동일하며, 지금의 경우 `ShirtColor`입니다). 만일
-`Option<T>`가 `Some` variant라면, `unwrap_or_else`는 그 `Some` 안에 들어있는
-값을 반환합니다. 만일 `Option<T>`가 `None` variant라면, `unwrap_or_else`는
+배리언트에 저장되는 타입과 동일하며, 지금의 경우 `ShirtColor`입니다). 만일
+`Option<T>`가 `Some` 배리언트라면, `unwrap_or_else`는 그 `Some` 안에 들어있는
+값을 반환합니다. 만일 `Option<T>`가 `None` 배리언트라면, `unwrap_or_else`는
 이 클로저를 호출하여 클로저가 반환한 값을 반환해 줍니다.
 
 `unwrap_or_else`의 인자로는 `|| self.most_stocked()`이라는 클로저
@@ -314,7 +314,7 @@ impl<T> Option<T> {
 }
 ```
 
-`T`가 `Option`의 `Some` variant 내 값의 타입을 나타내는 제네릭 타입임을
+`T`가 `Option`의 `Some` 배리언트 내 값의 타입을 나타내는 제네릭 타입임을
 상기합시다. 이 타입 `T`는 또한 `unwrap_or_else` 함수의 반환 타입이기도
 합니다: 예를 들어 `Option<String>` 상에서 `unwrap_or_else`를 호출하면
 `String`을 얻을 것입니다.

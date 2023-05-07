@@ -7,7 +7,7 @@
 원할지도 모르죠.
 
 2장의 [“`Result` 타입으로 잠재된 실패 다루기”][handle_failure]<!-- ignore --> 절에서
-`Result` 열거형은 다음과 같이 `Ok`와 `Err`라는 두 개의 variant를 갖도록 정의되어 있음을
+`Result` 열거형은 다음과 같이 `Ok`와 `Err`라는 두 개의 배리언트를 갖도록 정의되어 있음을
 상기하세요:
 
 ```rust
@@ -19,8 +19,8 @@ enum Result<T, E> {
 
 `T`와 `E`는 제네릭 타입 매개변수입니다.
 제네릭은 10장에서 자세히 다룰 예정입니다.
-지금 당장은, `T`는 성공한 경우에 `Ok` variant 내에 반환될 값의 타입을
-나타내고 `E`는 실패한 경우에 `Err` variant 내에 반환될 에러의 타입을
+지금 당장은, `T`는 성공한 경우에 `Ok` 배리언트 내에 반환될 값의 타입을
+나타내고 `E`는 실패한 경우에 `Err` 배리언트 내에 반환될 에러의 타입을
 나타낸다는 점만 알아둡시다. `Result`가 이러한 제네릭 타입 매개변수를
 갖기 때문에, 반환하고자 하는 성공적인 값과 에러값이 달라질 수 있는
 다양한 상황에서 `Result` 타입과 그에 정의된 함수들을 사용할 수
@@ -65,14 +65,14 @@ Listing 9-4은 6장에서 다뤘던 `match` 표현식을 이용하여
 {{#rustdoc_include ../listings/ch09-error-handling/listing-09-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 9-4: 반환될 수 있는 `Result` variant들을 `match`
+<span class="caption">Listing 9-4: 반환될 수 있는 `Result` 배리언트들을 `match`
 표현식으로 처리하기</span>
 
-`Option` 열거형과 같이 `Result` 열거형과 variant들은 프렐루드(prelude)로부터
+`Option` 열거형과 같이 `Result` 열거형과 배리언트들은 프렐루드(prelude)로부터
 가져와 진다는 점을 기억하세요. 따라서 `Ok`와 `Err` 앞에 `Result::`를 특정하지 않아도
 됩니다.
 
-결과가 `Ok`일 때 이 코드는 `Ok` variant 내부의 `file` 값을 반환하고,
+결과가 `Ok`일 때 이 코드는 `Ok` 배리언트 내부의 `file` 값을 반환하고,
 그후 이 파일 핸들 값을 변수 `greeting_file`에 대입합니다.
 `match` 이후에는 이 파일 핸들을 읽거나 쓰는 데에 사용할 수
 있습니다.
@@ -110,17 +110,17 @@ tests to fail lol -->
 <span class="caption">Listing 9-5: 다른 종류의 에러를
 다른 방식으로 처리하기</span>
 
-`Err` variant 내에 있는 `File::open`이 반환하는 값의 타입은 `io::Error`인데,
+`Err` 배리언트 내에 있는 `File::open`이 반환하는 값의 타입은 `io::Error`인데,
 이는 표준 라이브러리에서 제공하는 구조체입니다.
 이 구조체는 `kind` 메서드를 제공하는데 이를 호출하여 `io::ErrorKind`값을 얻을 수 있습니다.
-`io::ErrorKind`는 `io` 연산으로부터 발생할 수 있는 여러 종류의 에러를 표현하는 variant를 가진,
+`io::ErrorKind`는 `io` 연산으로부터 발생할 수 있는 여러 종류의 에러를 표현하는 배리언트를 가진,
 표준 라이브러리에서 제공하는 열거형입니다. 우리가 사용하고자 하는
-variant는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직 존재하지
+배리언트는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직 존재하지
 않음을 나타냅니다. 따라서 이를 `greeting_file_result`와 매치시켰습니다.
 그런데 `error.kind()` 내부에 매치가 하나 더 있군요.
 
 내부 매치에서는 `error.kind()`가 반환한 값이 `ErrorKind` 열거형의
-`NotFound` variant가 맞는지 확인하고, 맞다면 `File::create`로 파일을 생성합니다.
+`NotFound` 배리언트가 맞는지 확인하고, 맞다면 `File::create`로 파일을 생성합니다.
 하지만 `File::create`도 실패할 수 있으니, 내부 `match` 표현식의
 두 번째 갈래 또한 작성해야 합니다.
 파일을 생성하지 못한 경우에는 별도의 에러 메세지가 출력됩니다.
@@ -168,8 +168,8 @@ variant는 `ErrorKind::NotFound`인데, 이는 열고자 하는 파일이 아직
 잘 전달하는 것도 아닙니다. `Result<T, E>` 타입은 다채롭고 더 특정한 작업을
 하기 위해 정의된 수많은 헬퍼 메서드를 가지고 있습니다. `unwrap` 메서드는
 Listing 9-4에서 작성한 `match` 구문과 비슷한 구현을 한 숏컷 메서드입니다.
-만일 `Result` 값이 `Ok` variant라면, `unwrap`은 `Ok` 내의 값을 반환할
-것입니다. 만일 `Result`가 `Err` variant라면, `unwrap`은 우리를 위해
+만일 `Result` 값이 `Ok` 배리언트라면, `unwrap`은 `Ok` 내의 값을 반환할
+것입니다. 만일 `Result`가 `Err` 배리언트라면, `unwrap`은 우리를 위해
 `panic!` 매크로를 호출할 것입니다. 아래에 `unwrap`이 작동하는 예가 있습니다:
 
 <span class="filename">Filename: src/main.rs</span>
@@ -476,7 +476,7 @@ Listing 9-11은 주어진 텍스트에서 첫 번째 줄의 마지막 문자를 
 아이템을 얻어옵니다. `"\nhi"`처럼 빈 줄로 시작하지만 다른 줄에는 문자가
 담겨있는 경우처럼, 첫번째 라인이 빈 문자열일 수 있으므로 반복자의 결과는
 `Option`입니다. 만약 첫번째 라인에 어떤 마지막 문자가 있다면 `Some`
-variant를 반환할 것입니다. 가운데 `?` 연산자가 이러한 로직을 표현할
+배리언트를 반환할 것입니다. 가운데 `?` 연산자가 이러한 로직을 표현할
 간단한 방식을 제공하여 이 함수를 한줄로 작성할 수 있도록 해줍니다.
 만일 `Option`에 대하여 `?`  연산자를 이용할 수 없었다면 더 많은
 메서드 호출 혹은 `match` 표현식을 사용하여 이 로직을 구현했어야 할 것입니다.

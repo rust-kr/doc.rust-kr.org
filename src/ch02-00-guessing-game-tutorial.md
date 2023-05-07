@@ -711,9 +711,9 @@ let guess: u32 = guess.trim().parse().expect("Please type a number!");
 `Result` 타입을 결과로 돌려 줍니다. 우리는 이 `Result`를
 `expect` 메서드를 사용하여 같은 방식으로 처리합니다.
 만약 `parse` 메서드가 문자열에서 정수로 파싱을 실패하여
-`Err` `Result` variant를 돌려준다면 `expect` 호출은 게임을 멈추고
+`Err` `Result` 배리언트를 돌려준다면 `expect` 호출은 게임을 멈추고
 우리가 명시한 메세지를 출력합니다. 만약 `parse` 메서드가 성공적으로
-문자열을 정수로 바꾸었다면 `Result`의 `Ok` variant를 돌려 받으므로
+문자열을 정수로 바꾸었다면 `Result`의 `Ok` 배리언트를 돌려 받으므로
 `expect`에서 `Ok`에서 얻고 싶었던 값을 결과로 받게
 됩니다.
 
@@ -839,7 +839,7 @@ Listing 2-5에서 보이는 대로입니다.
 
 `expect` 메서드 호출을 `match` 표현식으로 바꾸어 에러 발생 시 크래시가 나지 않고
 에러를 처리하도록 합니다. `parse` 메서드가 `Result` 타입을
-돌려주는 것과 `Result`는 `Ok`나 `Err` variants를 가진 열거형임을 떠올리세요.
+돌려주는 것과 `Result`는 `Ok`나 `Err` 배리언트를 가진 열거형임을 떠올리세요.
 `cmp` 메서드의 `Ordering` 결과를 처리했을 때처럼 여기서 `match` 표현식을
 사용하고 있습니다.
 

@@ -202,25 +202,25 @@ Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
 ```
 
 <span class="caption">Listing 18-15: 다른 종류의 값을 가진 열거형
-variant 해체하기</span>
+배리언트 해체하기</span>
 
 이 코드는 `Change the color to red 0, green 160, and blue 255`를 출력할
 것입니다. 다른 갈래가 실행되는 것을 보려면 `msg`의 값을 변경해보세요.
 
-`Message::Quit`과 같이 데이터가 없는 열거형 variant의 경우 값을
+`Message::Quit`과 같이 데이터가 없는 열거형 배리언트의 경우 값을
 더 이상 해체할 수는 없습니다. 리터럴 `Message::Quit` 값만 매칭시킬
 수 있으며 해당 패턴에 변수는 없습니다.
 
-`Message::Move`처럼 구조체형 열거형 variant의 경우, 구조체와
-매칭되도록 지정한 패턴과 유사한 패턴을 사용할 수 있습니다. variant 이름
+`Message::Move`처럼 구조체형 열거형 배리언트의 경우, 구조체와
+매칭되도록 지정한 패턴과 유사한 패턴을 사용할 수 있습니다. 배리언트 이름
 뒤에 중괄호를 넣은 다음 변수가 있는 필드를 나열하여 이 갈래에 대한
 코드에서 사용할 부분을 분해합니다. 여기서는 Listing 18-13에서 했던 것처럼
 축약형을 사용합니다.
 
 하나의 요소로 이루어진 튜플을 갖는 `Message::Write`와 세 개의 요소로
 되어있는 튜플을 갖는 `Message::ChangeColor` 같은 튜플형 열거형
-variant의 경우, 패턴은 튜플을 매칭시키기 위해 지정하는 패턴과
-비슷합니다. 패턴에 포함된 변수의 개수는 매칭시키려는 variant의 요소
+배리언트의 경우, 패턴은 튜플을 매칭시키기 위해 지정하는 패턴과
+비슷합니다. 패턴에 포함된 변수의 개수는 매칭시키려는 배리언트의 요소
 개수와 일치해야 합니다.
 
 #### 중첩된 구조체와 열거형 해체하기
@@ -236,10 +236,10 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 
 <span class="caption">Listing 18-16: 중첩된 열거형에 대한 매칭</span>
 
-`match` 표현식에서 첫 번째 갈래의 패턴이 `Color::Rgb` variant를 포함하는
-`Message::ChangeColor` 열거형 variant와 매칭합니다; 그런 다음 이 패턴은
+`match` 표현식에서 첫 번째 갈래의 패턴이 `Color::Rgb` 배리언트를 포함하는
+`Message::ChangeColor` 열거형 배리언트와 매칭합니다; 그런 다음 이 패턴은
 세 개의 내부 `i32` 값을 바인딩합니다. 두 번째 갈래의 패턴도
-`Message::ChangeColor` 열거형 variant와 일치하지만, 내부 열거형은 대신
+`Message::ChangeColor` 열거형 배리언트와 일치하지만, 내부 열거형은 대신
 `Color::Hsv`와 매칭하고 있습니다. 이렇게 두 열거형을 포함하는 복잡한
 조건을 하나의 `match` 표현식으로 특정할 수 있습니다.
 
@@ -308,14 +308,14 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-18: `Some` variant에 매칭되는
+<span class="caption">Listing 18-18: `Some` 배리언트에 매칭되는
 패턴에서 `Some` 내부 값을 사용할 필요가 없을 경우 패턴 내에 밑줄
 사용하기</span>
 
 이 코드는 `Can't overwrite an existing customized value`를 출력한 다음
-`setting is Some(5)`를 출력합니다. 첫 번째 매치 갈래에서는 `Some` variant
+`setting is Some(5)`를 출력합니다. 첫 번째 매치 갈래에서는 `Some` 배리언트
 내부의 값을 매칭시키거나 사용할 필요는 없지만 `setting_value`와
-`new_setting_value`가 `Some` variant인 경우를 테스트할 필요는 있습니다.
+`new_setting_value`가 `Some` 배리언트인 경우를 테스트할 필요는 있습니다.
 그런 경우 `setting_value`를 변경하지 않는 이유를 출력하고 변경하지
 않습니다.
 
@@ -473,7 +473,7 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 대신 `num`이 `Some(5)`였다면, 5를 2로 나눈 나머지는 1이고,
 0과 같지 않으므로 첫 번째 갈래의 매치 가드는 거짓이 되었을 것입니다.
 그러면 러스트는 두 번째 갈래로 이동하는데, 두 번째 갈래에는 매치
-가드가 없어 모든 `Some` variant와 매칭되기 때문에 매치되었을 것입니다.
+가드가 없어 모든 `Some` 배리언트와 매칭되기 때문에 매치되었을 것입니다.
 
 패턴 내에서 `if x % 2 == 0` 조건을 표현할 방법이 없으며, 매치
 가드는 이런 로직을 표현하는 기능을 제공합니다. 이 추가적인 표현

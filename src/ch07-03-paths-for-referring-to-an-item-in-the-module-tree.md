@@ -268,7 +268,7 @@ Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 `eat_at_restaurant` 함수 내에서는 비공개 필드인 `seasonal_fruit` 필드의 값을
 지정할 방법이 없기 때문입니다.
 
-반대로, 열거형은 공개로 지정할 경우 모든 variant가 공개됩니다. 열거형을 공개하는 방법은
+반대로, 열거형은 공개로 지정할 경우 모든 배리언트가 공개됩니다. 열거형을 공개하는 방법은
 `enum` 키워드 앞에 `pub` 키워드만 작성하면 됩니다. 작성한 모습은 Listing 7-10과 같습니다.
 
 <span class="filename">Filename: src/lib.rs</span>
@@ -277,15 +277,15 @@ Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-10: 열거형과, 열거형의 모든 variant를
+<span class="caption">Listing 7-10: 열거형과, 열거형의 모든 배리언트를
 공개로 지정하기</span>
 
 `Appetizer` 열거형을 공개하였으니, `eat_at_restaurant` 함수에서
-`Soup`, `Salad` variant를 사용할 수 있습니다.
+`Soup`, `Salad` 배리언트를 사용할 수 있습니다.
 
-열거형은 그 variant가 공개되지 않는다면 그다지 쓸모가 없습니다;
-열거형의 모든 variant에 대해 전부 `pub`를 붙이는 것은 짜증나는
-일이 될 것이므로, 열거형의 variant는 기본적으로 공개입니다. 구조체의
+열거형은 그 배리언트가 공개되지 않는다면 그다지 쓸모가 없습니다;
+열거형의 모든 배리언트에 대해 전부 `pub`를 붙이는 것은 짜증나는
+일이 될 것이므로, 열거형의 배리언트는 기본적으로 공개입니다. 구조체의
 경우 필드를 공개로하지 않는 것이 종종 유용하므로, 구조체 필드는 `pub`을
 명시하지 않는 한 기본적으로 모든 것이 비공개라는 일반적인 규칙을 따릅니다.
 

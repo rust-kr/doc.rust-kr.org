@@ -26,7 +26,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-3: 열거형과 열거형의 variant를 패턴으로서 사용하는
+<span class="caption">Listing 6-3: 열거형과 열거형의 배리언트를 패턴으로서 사용하는
 `match` 표현식</span>
 
 `value_in_cents` 함수 내의 `match`를 쪼개 봅시다.
@@ -66,12 +66,12 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 
 매치 갈래의 또 다른 유용한 기능은 패턴과 매치된
 값들의 부분을 바인딩할 수 있다는 것입니다.
-이것이 열거형 variant로부터 어떤 값들을 추출할 수 있는 방법입니다.
+이것이 열거형 배리언트로부터 어떤 값들을 추출할 수 있는 방법입니다.
 
-한 가지 예로서, 우리의 열거형 variant 중 하나를 내부에 값을 들고 있도록 바꿔봅시다.
+한 가지 예로서, 우리의 열거형 배리언트 중 하나를 내부에 값을 들고 있도록 바꿔봅시다.
 1999년부터 2008년까지, 미국은 각 50개 주마다 한쪽 면의 디자인이 다른 쿼터 동전을 주조했습니다.
 다른 동전들은 주의 디자인을 갖지 않고, 따라서 오직 쿼터 동전들만 이 특별 값을 갖습니다.
-우리는 이 정보를 `Quarter` variant 내에 `UsState` 값을 포함하도록
+우리는 이 정보를 `Quarter` 배리언트 내에 `UsState` 값을 포함하도록
 우리의 `enum`을 변경함으로써 추가할 수 있는데,
 이는 Listing 6-4에서 한 바와 같습니다:
 
@@ -79,7 +79,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-4: `Quarter` variant가 `UsSate` 값 또한 들고
+<span class="caption">Listing 6-4: `Quarter` 배리언트가 `UsSate` 값 또한 들고
 있는 `Coin` 열거형</span>
 
 우리의 친구가 모든 50개 주 쿼터 동전을 모으기를 시도하는 중이라고 상상해봅시다.
@@ -87,7 +87,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 연관된 주의 이름을 외쳐서, 만일 그것이 우리 친구가 가지고 있지 않은 것이라면,
 그 친구는 자기 컬렉션에 그 동전을 추가할 수 있겠지요.
 
-이 코드를 위한 매치 표현식 내에서는 variant `Coin::Quarter`의 값과 매치되는 패턴에 `state`라는
+이 코드를 위한 매치 표현식 내에서는 배리언트 `Coin::Quarter`의 값과 매치되는 패턴에 `state`라는
 이름의 변수를 추가합니다. `Coin::Quarter`이 매치될 때, `state` 변수는 그 쿼터 동전의 주에 대한
 값에 바인드 될 것입니다. 그러면 우리는 다음과 같이 해당 갈래에서의 코드 내에서 `state`를 사용할 수
 있습니다:
@@ -100,7 +100,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 `Coin::Quarter(UsState::Alaska)`가 될 테지요. 각각의 매치 갈래들과 이 값을 비교할 때,
 `Coin::Quarter(state)`에 도달할 때까지 아무것도 매치되지 않습니다. 이 시점에서, `state`에
 대한 바인딩은 값 `UsState::Alaska`가 될 것입니다. 그러면 이 바인딩을 `println!` 표현식
-내에서 사용할 수 있고, 따라서 `Quarter`에 대한 `Coin` 열거형 variant로부터 내부의 주에 대한
+내에서 사용할 수 있고, 따라서 `Quarter`에 대한 `Coin` 열거형 배리언트로부터 내부의 주에 대한
 값을 얻었습니다.
 
 ### `Option<T>` 를 이용하는 매칭
@@ -108,7 +108,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 이전 절에서 `Option<T>` 값을 사용하려면 `Some` 일 때 실행돼서,
 `Some` 내의 `T` 값을 얻을 수 있는 코드가 필요하다고 했었죠.
 이제 `Coin` 열거형을 다뤘던 것처럼 `Option<T>` 도 `match` 로 다뤄보도록 하겠습니다.
-동전들을 비교하는 대신, `Option<T>`의 variant를 비교할 것이지만,
+동전들을 비교하는 대신, `Option<T>`의 배리언트를 비교할 것이지만,
 `match` 표현식이 동작하는 방법은 동일하게 남아있습니다.
 
 `Option<i32>`를 매개변수로 받아서, 내부에 값이 있으면,
@@ -141,7 +141,7 @@ Listing 6-5와 같이 보일 것입니다:
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
 ```
 
-`Some(5)`가 `Some(i)`랑 매칭되나요? 그렇습니다! 동일한 variant를 갖고 있습니다.
+`Some(5)`가 `Some(i)`랑 매칭되나요? 그렇습니다! 동일한 배리언트를 갖고 있습니다.
 `Some` 내부에 담긴 값은 `i`에 바인드 되므로, `i`는 값 `5`를 갖습니다.
 그런 다음 매치 갈래 내의 코드가 실행되므로, `i`의 값에 1을 더한 다음
 최종적으로 `6`을 담은 새로운 `Some` 값을 생성합니다.

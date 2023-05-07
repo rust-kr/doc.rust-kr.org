@@ -49,9 +49,9 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 소유한 `Worker` 인스턴스로부터 스레드를 밖으로 옮겨서 `join`이 스레드를
 써버릴 수 있도록 할 필요가 있습니다. Listing 17-15에서 이 작업을 해봤었지요:
 `Worker`가 대신 `Option<thread::JoinHandle<()>>`을 가지고 있다면,
-`Option`의 `take` 메서드를 호출하여 `Some` variant에서 값을 빼내고
-그 자리에는 `None` variant를 남길 수 있습니다. 바꿔 말하면, 실행 중인
-`Worker`는 `thread`에 `Some` variant를 갖도록 하고, `Worker`를 정리하고
+`Option`의 `take` 메서드를 호출하여 `Some` 배리언트에서 값을 빼내고
+그 자리에는 `None` 배리언트를 남길 수 있습니다. 바꿔 말하면, 실행 중인
+`Worker`는 `thread`에 `Some` 배리언트를 갖도록 하고, `Worker`를 정리하고
 싶을 때는 `Some`을 `None`으로 대체하여 `Worker`에 실행 스레드가 없도록
 할 것입니다.
 
@@ -90,7 +90,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-06-fix-threadpool-drop/src/lib.rs:here}}
 ```
 
-17장에서 논의한 것처럼 `Option`의 `take` 메서드는 `Some` variant를
+17장에서 논의한 것처럼 `Option`의 `take` 메서드는 `Some` 배리언트를
 제거하고 그 자리에 `None`을 남깁니다. 여기서는 `if let`을 사용해 `Some`을
 해체하고 스레드를 가져옵니다; 그런 다음 그 스레드에서 `join`을 호출합니다.
 워커의 스레드가 이미 `None`이면 해당 워커의 스레드가 이미 정리되었음을 알 수
