@@ -208,7 +208,7 @@ Listing 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모�
 
 `tests` 모듈에 `use super::*;` 줄이 추가되었습니다.
 `tests` 모듈 또한 7장
-[“Paths for Referring to an Item in the Module Tree”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->에서 다룬
+[“경로를 사용해 모듈 트리에서 아이템 가리키기”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->에서 다룬
 가시성 규칙을 따르는 평범한 모듈입니다.
 따라서, 내부 모듈인 `tests` 모듈에서 외부 모듈의 코드를
 테스트하려면 먼저 내부 스코프로 가져와야 합니다.

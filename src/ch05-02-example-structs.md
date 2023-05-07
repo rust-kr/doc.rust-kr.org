@@ -70,7 +70,7 @@ Listing 5-8 은 *src/main.rs* 에 이 기능을 간단하게 구현한
 
 구조체는 데이터에 이름표를 붙여서 의미를 나타낼 수 있습니다.
 Listing 5-10 처럼, 기존에 사용하던 튜플을 구조체로 바꿔
-각 요소에 이름을 지어줍시다.
+각 구성 요소에 이름을 지어줍시다.
 
 <span class="filename">Filename: src/main.rs</span>
 
