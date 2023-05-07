@@ -8,7 +8,7 @@
 
 이 책은 온라인, 오프라인 모두 제공됩니다.
 온라인엔 원본(영문) 이외에도 번역본이 존재하며, 각각 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)(영문)과
-[https://rinthel.github.io/rust-lang-book-ko/](https://rinthel.github.io/rust-lang-book-ko/)(2판 번역본)에서 읽어보실 수 있습니다.
+[https://rust-kr.github.io/doc.rust-kr.org/](https://rust-kr.github.io/doc.rust-kr.org/)에서 읽어보실 수 있습니다.
 오프라인 본(영문)은 설치되어있는 `rustup` 의 `rustup docs --book` 명령어로 열어보실 수 있습니다.
 
 커뮤니티 [번역본][translations]<!-- ignore -->도 물론 이용 가능합니다.
