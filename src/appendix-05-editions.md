@@ -53,4 +53,5 @@
 
 더 자세한 내용은 에디션 간의 차이점을 열거하고 `cargo fix`를 통해 코드를
 새 에디션으로 자동 업그레이드하는 방법을 설명하는 에디션에 대한 전체 책자인
-[*에디션 가이드*](https://doc.rust-lang.org/stable/edition-guide/)를 참조하세요.
+[*에디션 가이드*](https://doc.rust-lang.org/stable/edition-guide/)를
+참조하세요.

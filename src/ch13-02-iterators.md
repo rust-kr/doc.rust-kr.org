@@ -133,11 +133,6 @@ pub trait Iterator {
 반복자를 소비하지 않습니다. 대신 원본 반복자의 어떤 측면을 바꿔서 다른
 반복자로 제공합니다.
 
-Listing 13-14 shows an example of calling the iterator adaptor method `map`,
-which takes a closure to call on each item as the items are iterated through.
-The `map` method returns a new iterator that produces the modified items. The
-closure here creates a new iterator in which each item from the vector will be
-incremented by 1:
 Listing 13-14는 반복자 어댑터 메서드인 `map`을 호출하는 예를 보여주는데,
 클로저를 인자로 받아서 각 아이템에 대해 호출하여 아이템 전체를 순회합니다.
 `map` 메서드는 수정된 아이템들을 생성하는 새로운 반복자를 반환합니다.

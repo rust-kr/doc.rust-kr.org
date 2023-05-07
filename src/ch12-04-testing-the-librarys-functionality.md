@@ -201,7 +201,6 @@ Listing 12-19와 같이 이 벡터를 반환합니다.
 `run`이 읽어들인 `contents`를 넘겨줘야 합니다. 그러면 `run`은
 `search`가 반환한 각 라인을 출력할 것입니다:
 
-
 <span class="filename">Filename: src/lib.rs</span>
 
 ```rust,ignore

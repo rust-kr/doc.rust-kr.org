@@ -103,7 +103,6 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 상태로 `cargo test`를 다시 실행하면, 문서 테스트 기능이 해당 예제를 찾아내어
 이 코드가 더 이상 기능하지 못함을 알려줄 것입니다!
 
-#### Commenting Contained Items
 #### 주석이 포함된 아이템
 
 문서화 주석 스타일 `//!`은 주석 뒤에 오는 항목을 문서화하는 것이 아닌

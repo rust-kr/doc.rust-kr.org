@@ -69,9 +69,6 @@ API를 노출할 수 있습니다.
 Box<dyn Fn() + Send + 'static>
 ```
 
-Writing this lengthy type in function signatures and as type annotations all
-over the code can be tiresome and error prone. Imagine having a project full of
-code like that in Listing 19-24.
 이 긴 타입을 함수 시그니처 및 코드의 모든 곳에 타입 명시로 작성하는
 것은 지루하고 에러가 발생하기 쉽습니다. Listing 19-24와 같은 코드로
 가득찬 프로젝트가 있다고 상상해보세요.
@@ -219,7 +216,6 @@ code like that in Listing 19-24.
 런타임이 될 때까지 문자열의 길이를 알 수 없으므로 `str` 타입의 변수를
 만들 수도 없고, `str` 타입의 인수를 받을 수도 없습니다. 아래의
 작동하지 않는 코드를 고려해 보세요:
-
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-11-cant-create-str/src/main.rs:here}}
