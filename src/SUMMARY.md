@@ -40,7 +40,7 @@
 - [커져가는 프로젝트를 패키지, 크레이트, 모듈로 관리하기](ch07-00-managing-growing-projects-with-packages-crates-and-modules.md)
     - [패키지, 크레이트](ch07-01-packages-and-crates.md)
     - [모듈을 정의하여 스코프 및 공개 여부 제어하기](ch07-02-defining-modules-to-control-scope-and-privacy.md)
-    - [경로를 사용해 모듈 트리에서 항목 가리키기](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
+    - [경로를 사용해 모듈 트리에서 아이템 가리키기](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
     - [`use` 키워드로 경로를 스코프 내로 가져오기](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
     - [별개의 파일로 모듈 분리하기](ch07-05-separating-modules-into-different-files.md)
 

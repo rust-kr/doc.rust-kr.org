@@ -201,7 +201,7 @@ Listing 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대�
 {{#include ../listings/ch13-functional-features/listing-13-04/output.txt}}
 ```
 
-다음으로 Listing 13-5에서는 클로저의 본문을 바꾸어 `list` 벡터에 원소를
+다음으로 Listing 13-5에서는 클로저의 본문을 바꾸어 `list` 벡터에 요소를
 추가하도록 했습니다. 클로저는 이제 가변 참조자를 캡처합니다:
 
 <span class="filename">Filename: src/main.rs</span>
