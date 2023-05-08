@@ -17,7 +17,7 @@ $ rustup component add rustfmt
 ```
 
 이 명령은 `rustc`와 `cargo`처럼 `rustfmt`와 `cargo-fmt`를 제공합니다.
-어떤 Cargo 프로젝트를 포맷하려면, 다음을 입력하세요:
+어떤 카고 프로젝트를 포맷하려면, 다음을 입력하세요:
 
 ```console
 $ cargo fmt
@@ -108,7 +108,7 @@ Clippy를 설치하려면 다음을 입력하세요:
 $ rustup component add clippy
 ```
 
-Clippy의 린트를 어떤 Cargo 프로젝트에 실행하려면 다음을 입력하세요:
+Clippy의 린트를 어떤 카고 프로젝트에 실행하려면 다음을 입력하세요:
 
 ```console
 $ cargo clippy

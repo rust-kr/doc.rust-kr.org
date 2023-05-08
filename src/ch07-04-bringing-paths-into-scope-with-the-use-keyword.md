@@ -191,7 +191,7 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
 ```
 
-*Cargo.toml* 에 `rand` 를 의존성으로 추가하면 Cargo가
+*Cargo.toml* 에 `rand` 를 의존성으로 추가하면 카고가
 `rand` 패키지를 비롯한 모든 의존성을 [crates.io](https://crates.io/)에서 다운로드하므로
 프로젝트 내에서 `rand` 패키지를 사용할 수 있게 됩니다.
 

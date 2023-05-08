@@ -194,7 +194,7 @@ Ruby, Python, JavaScript 등 명령어 한 줄로 프로그램을 컴파일하�
 
 간단한 프로그램에는 `rustc` 를 사용하는 것도 좋습니다.
 다만 프로젝트가 커질수록 관리할 옵션이 많아지고, 코드 배포도 점점 번거로워지겠죠.
-다음 내용에서 소개할 Cargo 가 바로 이러한 문제를 해결하는,
+다음 내용에서 소개할 카고가 바로 이러한 문제를 해결하는,
 여러분이 앞으로 `rustc` 대신 사용할 도구입니다.
 
 [troubleshooting]: ch01-01-installation.html#troubleshooting

@@ -9,7 +9,7 @@
 - [시작해봅시다](ch01-00-getting-started.md)
     - [러스트 설치](ch01-01-installation.md)
     - [Hello, World!](ch01-02-hello-world.md)
-    - [Cargo를 사용해봅시다](ch01-03-hello-cargo.md)
+    - [카고를 사용해봅시다](ch01-03-hello-cargo.md)
 
 - [추리 게임](ch02-00-guessing-game-tutorial.md)
 
@@ -80,12 +80,12 @@
     - [I/O 프로젝트 개선하기](ch13-03-improving-our-io-project.md)
     - [성능 비교하기: 루프 vs. 반복자](ch13-04-performance.md)
 
-- [Cargo와 Crates.io 더 알아보기](ch14-00-more-about-cargo.md)
+- [카고와 Crates.io 더 알아보기](ch14-00-more-about-cargo.md)
     - [릴리즈 프로필을 통한 빌드 커스터마이징하기](ch14-01-release-profiles.md)
     - [Crates.io에 크레이트 배포하기](ch14-02-publishing-to-crates-io.md)
-    - [Cargo 작업공간](ch14-03-cargo-workspaces.md)
+    - [카고 작업공간](ch14-03-cargo-workspaces.md)
     - [`cargo install`로 Crates.io에 있는 바이너리 설치하기](ch14-04-installing-binaries.md)
-    - [커스텀 명령어로 Cargo 확장하기](ch14-05-extending-cargo.md)
+    - [커스텀 명령어로 카고 확장하기](ch14-05-extending-cargo.md)
 
 - [스마트 포인터](ch15-00-smart-pointers.md)
     - [`Box<T>`를 사용하여 힙에 있는 데이터 가리키기](ch15-01-box.md)

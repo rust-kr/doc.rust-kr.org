@@ -5,7 +5,7 @@
 컴파일을 위한 다양한 옵션을 제어할 수 있습니다. 각 프로필은 다른 프로필과
 독립적으로 설정됩니다.
 
-Cargo는 두 개의 주요 프로필을 가지고 있습니다: `cargo build`를 실행할때
+카고는 두 개의 주요 프로필을 가지고 있습니다: `cargo build`를 실행할때
 쓰는 `dev` 프로필과 `cargo build --release`를 실행할 때 쓰는 `release`
 프로필이 바로 이 둘입니다. `dev` 프로필은 개발에 적합한 기본값으로 정의되었고,
 `release` 프로필은 릴리즈 빌드용 설정을 기본값으로 가집니다.
@@ -28,7 +28,7 @@ $ cargo build --release
 
 여기서의 `dev`와 `release`가 바로 컴파일러에 의해 사용된 이 두 개의 프로필입니다.
 
-Cargo는 프로젝트의 *Cargo.toml* 파일에 `[profile.*]`절을 명시적으로
+카고는 프로젝트의 *Cargo.toml* 파일에 `[profile.*]`절을 명시적으로
 추가하지 않았을 경우 적용되는 각 프로필의 기본 설정을 가지고 있습니다.
 커스터마이징을 원하는 프로필에 대해 `[profile.*]`절을 추가하면 이
 기본 설정을 덮어 씌울 수 있습니다. 여기 예시로 `opt-level` 설정에
@@ -67,9 +67,9 @@ opt-level = 1
 ```
 
 이 코드는 기본 설정인 `0` 을 덮어 씌웁니다. 이제부터 `cargo build`를 실행할
-때는 Cargo가 `dev` 프로필의 기본값과 커스터마이징된 `opt-level`을 사용하게
-될 것입니다. `opt-level` 을 `1`로 설정했으므로 Cargo는 릴리즈 빌드만큼은
+때는 카고가 `dev` 프로필의 기본값과 커스터마이징된 `opt-level`을 사용하게
+될 것입니다. `opt-level` 을 `1`로 설정했으므로 카고는 릴리즈 빌드만큼은
 아니지만 기본값 보다 많은 최적화를 적용할 것입니다.
 
 각 프로필의 설정 옵션 및 기본값의 전체 목록을 보시려면
-[Cargo 공식 문서](https://doc.rust-lang.org/cargo/reference/profiles.html)를 참고해 주시기 바랍니다.
+[카고 공식 문서](https://doc.rust-lang.org/cargo/reference/profiles.html)를 참고해 주시기 바랍니다.
