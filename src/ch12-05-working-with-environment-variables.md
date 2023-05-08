@@ -160,7 +160,7 @@ Listing 12-22에 구현된 것처럼 이 값을 읽어서 `search_case_insensiti
 $ IGNORE_CASE=1 cargo run -- to poem.txt
 ```
 
-여러분이 파워쉘을 사용중이라면, 별도의 커맨드로 환경 변수 설정과 프로그램 실행을
+여러분이 PowerShell을 사용중이라면, 별도의 커맨드로 환경 변수 설정과 프로그램 실행을
 할 필요가 있을 것입니다:
 
 ```console
