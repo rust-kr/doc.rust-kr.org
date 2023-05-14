@@ -351,8 +351,8 @@ Listing 11-7은 매개변수에 `2` 를 더하는 `add_two` 함수를 작성한 
 필수적인 인자들 이후의 인자는 `format!` 매크로로 전달됩니다.
 (`format!` 매크로는 8장의
 [“`+` 연산자나 `format!` 매크로를 이용한 접합”][concatenation-with-the--operator-or-the-format-macro]<!-- ignore -->에서 다루었습니다.)
-여러분은 `{}` placeholder를 갖는 포맷 문자열과
-placeholder에 해당하는 값을 전달할 수 있습니다.
+여러분은 `{}` 자리표시자를 갖는 포맷 문자열과
+자리표시자에 해당하는 값을 전달할 수 있습니다.
 커스텀 메세지는 테스트 단언의 의미를 문서화하는 용도로 유용합니다.
 테스트가 실패할 경우 코드의 문제점이
 무엇인지 알아내기 더 수월해지죠.
@@ -390,7 +390,7 @@ placeholder에 해당하는 값을 전달할 수 있습니다.
 몇 번째 줄에서 실패했는지만 표시합니다.
 실패 메시지에서 `greeting` 함수의 반환 값을 출력해주면 더 유용하겠죠.
 테스트 함수에 커스텀 실패 메세지를 추가해봅시다. `greeting` 함수가
-반환하는 실제 값으로 채워질 자리 표시자를 갖는 포맷 문자열을 작성해보죠.
+반환하는 실제 값으로 채워질 자리표시자를 갖는 포맷 문자열을 작성해보죠.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-07-custom-failure-message/src/lib.rs:here}}
