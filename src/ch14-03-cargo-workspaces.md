@@ -137,7 +137,7 @@ $ cargo new add_one --lib
 카고는 작업 공간 내의 크레이트들이 서로 의존할 것이라고 가정하지 않으므로,
 의존성 관계에 대해 명시할 필요가 있습니다.
 
-다음으로 `adder` 킄레이트에서 (`add_one` 크레이트에 있는) `add_one` 함수를
+다음으로 `adder` 크레이트에서 (`add_one` 크레이트에 있는) `add_one` 함수를
 사용해봅시다. *adder/src/main.rs* 파일을 열어서 제일 윗 줄에 `use`을 추가하여
 스코프로 새로운 `add_one` 라이브러리를 가져옵시다. 그런 다음 Listing 14-7과
 같이 `main` 함수를 수정하여 `add_one` 함수를 호출하세요.
@@ -196,7 +196,7 @@ Hello, world! 10 plus one is 11!
 작업공간 내 모든 크레이트가 동일한 의존성을 사용하도록 만드는 것은
 이 크레이트들이 항상 서로 호환될 것임을 뜻합니다. **add_one/Cargo.toml*
 파일의 `[dependencies]` 절에 `rand` 크레이트를 추가하여 `add_one`
-킄레이트에서 `rand` 크레이트를 사용해봅시다:
+크레이트에서 `rand` 크레이트를 사용해봅시다:
 
 <!-- When updating the version of `rand` used, also update the version of
 `rand` used in these files so they all match:
@@ -357,7 +357,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 작업공간의 크레이트를 [crates.io](https://crates.io/)에 배포한다면,
 작업공간 내 각 크레이트를 별도로 배포할 필요가 있습니다. `cargo test`처럼
 `-p` 플래그와 배포하고자 하는 크레이트의 이름을 지정하여 작업공간 내의
-특정 킄레이트를 배포할 수 있습니다.
+특정 크레이트를 배포할 수 있습니다.
 
 추가 연습으로 `add_one` 크레이트와 비슷한 방식으로 이 작업공간에 `add_two`
 크레이트를 추가하세요!
