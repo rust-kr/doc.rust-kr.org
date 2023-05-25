@@ -51,7 +51,7 @@ $ cargo test -- --test-threads=1
 
 기본적으로, 러스트 테스트 라이브러리는 성공한 테스트의 모든 표준 출력(standard output)을 캡쳐합니다.
 테스트에서 `println!` 매크로를 호출해도, 해당 테스트가 성공하면
-터미널에서 `println!` 의 출력을 찾아볼 수 없습니다.
+터미널에서 `println!`의 출력을 찾아볼 수 없습니다.
 해당 테스트가 성공했다고 표시된 줄만 볼 수 있죠.
 테스트가 실패하면 표준 출력으로 출력됐던 모든 내용이 실패 메세지 아래에 표시됩니다.
 
@@ -64,7 +64,7 @@ Listing 11-10은 매개변수를 출력하고 10을 반환하는 단순한 함�
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-10: `println!` 을 호출하는
+<span class="caption">Listing 11-10: `println!`을 호출하는
 함수 테스트</span>
 
 `cargo test` 명령어를 실행하면 다음 결과가 나타납니다.
@@ -74,8 +74,8 @@ Listing 11-10은 매개변수를 출력하고 10을 반환하는 단순한 함�
 ```
 
 성공한 테스트에서 출력했던
-`I got the value 4` 은 캡쳐되었으므로 찾아볼 수 없습니다.
-실패한 테스트에서 출력한 `I got the value 8` 는 테스트 실패 원인과 함께
+`I got the value 4`은  캡쳐되었으므로 찾아볼 수 없습니다.
+실패한 테스트에서 출력한 `I got the value 8`는  테스트 실패 원인과 함께
 테스트 출력 요약 절에 나타납니다.
 
 성공한 테스트에서 출력한 내용도 보고 싶다면, `--show-output` 옵션을 이용해
@@ -127,7 +127,7 @@ Listing 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
 ```
 
 `one_hundred` 테스트만 실행되었습니다. 나머지 두 테스트는 이름이 맞지 않았습니다.
-테스트 결과는 마지막 요약 줄에서 `2 filtered out` 을 표시하여,
+테스트 결과는 마지막 요약 줄에서 `2 filtered out`을 표시하여,
 실행한 테스트 이외에도 다른 테스트가 존재함을 알려줍니다.
 
 이 방법으로 여러 테스트의 이름을 명시할 수는 없습니다. `cargo test` 명령어는 첫 번째 값만 사용합니다.
@@ -137,13 +137,13 @@ Listing 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
 
 테스트 이름의 일부만 지정하면 해당 값에 맞는 모든 테스트가 실행됩니다.
 예를 들어, `cargo test add` 명령어를 실행하면 우리가 작성한 세 개의 테스트 중
-`add` 가 포함된 두 개가 실행됩니다.
+`add`가 포함된 두 개가 실행됩니다.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/output-only-03-multiple-tests/output.txt}}
 ```
 
-이 명령어는 `add` 가 이름에 포함된 모든 테스트를 실행하고,
+이 명령어는 `add`가 이름에 포함된 모든 테스트를 실행하고,
 `one_hundred` 테스트를 필터링했습니다.
 테스트가 위치한 모듈도 테스트 이름의 일부로 나타나는 점을 기억해두세요.
 모듈 이름으로 필터링하면 해당 모듈 내 모든 테스트를 실행할 수 있습니다.

@@ -152,7 +152,7 @@ Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
 
 `search` 함수의 목적은 `query`를 포함하는 `contents`의 모든 라인을 반환하는
 것임을 상기합시다. Listing 13-16의 `filter` 예제와 유사하게, 이 코드는
-`line.contains(query)`이 `true` 를 반환하는 라인들만 유지하기 위해서
+`line.contains(query)`이 `true`를 반환하는 라인들만 유지하기 위해서
 `filter` 어댑터를 사용 합니다. 그런 다음 `collect`를 사용하여 매칭된 라인들을
 모아 새로운 벡터로 만듭니다. 훨씬 단순하군요! 마찬가지로
 `search_case_insensitive`도 반복자 메서드들을 사용하도록 동일한 변경을

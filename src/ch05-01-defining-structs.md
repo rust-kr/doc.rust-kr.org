@@ -61,7 +61,7 @@
 암묵적으로 새 인스턴스를 생성하고 반환할 수 있습니다.
 
 Listing 5-4 에선 `build_user` 함수가 사용자 이메일과 이름을 전달 받고,
-`acitve`, `sign_in_count` 를 각각 `true`, `1` 로 설정한
+`acitve`, `sign_in_count`를 각각 `true`, `1` 로 설정한
 `User` 인스턴스를 반환하는 모습을 보여줍니다.
 
 <span class="filename">Filename: src/main.rs</span>
@@ -124,7 +124,7 @@ Listing 5-4 처럼 변수명과 구조체 필드명이 같을 땐,
 새로운 `User` 인스턴스를 생성</span>
 
 구조체 갱신 문법을 사용하면 다음 Listing 5-7처럼 더 적은 코드로
-같은 효과를 낼 수 있습니다. `..` 은 따로 명시된 필드를 제외한
+같은 효과를 낼 수 있습니다. `..`은  따로 명시된 필드를 제외한
 나머지 필드를, 주어진 인스턴스의 필드 값으로 설정하는 구문입니다.
 
 <span class="filename">Filename: src/main.rs</span>
@@ -175,7 +175,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs}}
 ```
 
-`black`, `origin` 이 서로 다른 튜플 구조체의 인스턴스이므로,
+`black`, `origin`이 서로 다른 튜플 구조체의 인스턴스이므로,
 타입이 서로 달라진다는 점이 중요합니다.
 구조체 내 필드 구성이 같더라도 각각의 구조체는 별도의 타입이기 때문이죠.
 즉, `Color` 타입과 `Point` 타입은 둘 다 `i32` 값 3 개로 이루어진 타입이지만,
@@ -282,7 +282,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 > ```
 >
 > 위 에러를 해결하여 구조체에 참조자를 저장하는 방법은 10장에서 알아볼 겁니다.
-> 지금 당장은 `&str` 대신 `String` 을 사용함으로써
+> 지금 당장은 `&str` 대신 `String`을 사용함으로써
 > 넘어가도록 하죠.
 
 <!-- manual-regeneration

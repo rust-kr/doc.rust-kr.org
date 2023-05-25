@@ -130,7 +130,7 @@ Listing 7-16은 `as` 키워드를 이용해 Listing 7-15 코드 내
 `as` 키워드로 변경하기</span>
 
 두 번째 `use` 구문에서는, 앞서 스코프 내로 가져온
-`std::fmt` 의 `Result` 와 충돌을 방지하기 위해
+`std::fmt`의 `Result` 와 충돌을 방지하기 위해
 `std::io::Result` 타입의 이름을 `IoResult` 로 새롭게 지정합니다.
 Listing 7-15, Listing 7-16은 둘 다 관용적인 방식이므로, 원하는 방식을 선택하시면 됩니다!
 
@@ -138,12 +138,12 @@ Listing 7-15, Listing 7-16은 둘 다 관용적인 방식이므로, 원하는 �
 
 `use` 키워드로 이름을 가져올 경우,
 해당 이름은 새 위치의 스코프에서 비공개가 됩니다.
-`pub` 와 `use` 를 결합하면 우리 코드를 호출하는 코드가,
+`pub` 와 `use`를 결합하면 우리 코드를 호출하는 코드가,
 해당 스코프에 정의된 것처럼 해당 이름을 참조할 수 있습니다.
 이 기법은 아이템을 스코프로 가져오는 동시에 다른 곳에서 아이템을 가져갈 수 있도록 만들기 때문에,
 *다시 내보내기(Re-exporting)* 라고 합니다.
 
-Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
+Listing 7-17은 Listing 7-11 코드의 `use`를 `pub use` 로
 변경한 예제입니다.
 
 <span class="filename">Filename: src/lib.rs</span>
@@ -166,7 +166,7 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 레스토랑 비유 예제를 예로 들어보죠. 레스토랑을 운영하는
 직원들의 머릿속에서는 '접객 부서'와 '지원 부서'가 나뉘어있습니다.
 하지만 레스토랑을 방문하는 고객들은 레스토랑의 부서를 그런 용어로 나누어 생각하지 않겠죠.
-`pub use` 를 사용하면 코드를 작성할 때의 구조와, 노출할 때의 구조를 다르게 만들 수 있습니다.
+`pub use`를 사용하면 코드를 작성할 때의 구조와, 노출할 때의 구조를 다르게 만들 수 있습니다.
 라이브러리를 제작하는 프로그래머와, 라이브러리를 사용하는 프로그래머
 모두를 위한 라이브러리를 구성하는데 큰 도움이 되죠. `pub use`에 대한
 또다른 예제, 그리고 이것이 여러분의 크레이트에 대한 문서에 어떤 영향을
@@ -191,7 +191,7 @@ Listing 7-17은 Listing 7-11 코드의 `use` 를 `pub use` 로
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
 ```
 
-*Cargo.toml* 에 `rand` 를 의존성으로 추가하면 카고가
+*Cargo.toml* 에 `rand`를 의존성으로 추가하면 카고가
 `rand` 패키지를 비롯한 모든 의존성을 [crates.io](https://crates.io/)에서 다운로드하므로
 프로젝트 내에서 `rand` 패키지를 사용할 수 있게 됩니다.
 
@@ -256,8 +256,8 @@ use std::collections::HashMap;
 
 중첩 경로는 경로의 모든 부위에서 사용할 수 있으며,
 하위 경로가 동일한 `use` 구문이 많을 때 특히 빛을 발합니다.
-다음 Listing 7-19는 두 `use` 구문의 예시입니다. 하나는 `std::io` 를 스코프로 가져오고,
-다른 하나는 `std::io::Write` 를 스코프로 가져옵니다.
+다음 Listing 7-19는 두 `use` 구문의 예시입니다. 하나는 `std::io`를 스코프로 가져오고,
+다른 하나는 `std::io::Write`를 스코프로 가져옵니다.
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -269,7 +269,7 @@ use std::collections::HashMap;
 두 `use` 구문</span>
 
 두 경로에서 중복되는 부분은 `std::io` 입니다.
-또한 `std::io` 는 첫 번째 경로 그 자체이기도 합니다.
+또한 `std::io`는  첫 번째 경로 그 자체이기도 합니다.
 중첩 경로에 `self`를 작성하면 두 경로를 하나의 `use` 구문으로 합칠 수 있습니다.
 
 <span class="filename">Filename: src/lib.rs</span>

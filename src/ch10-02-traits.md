@@ -36,7 +36,7 @@
 <span class="caption">Listing 10-12: `summarize` 메서드가 제공하는
 '요약' 동작으로 구성된 `Summary` 트레잇</span>
 
-`trait` 키워드 다음 트레잇의 이름 `Summary` 를 작성해
+`trait` 키워드 다음 트레잇의 이름 `Summary`를 작성해
 트레잇을 선언했습니다. 또한 트레잇을 `pub`로 선언하여 몇몇
 예제에서 볼 것처럼 이 크레이트에 의존하는 다른 크레이트들이
 이 트레잇을 사용할 수 있도록 하였습니다. 중괄호 안에는 이 트레잇을
@@ -138,7 +138,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 
 `impl` 블록을 비워도 `NewsArticle` 인스턴스에서 `summarize` 메서드를 호출할 수 있습니다.
 `NewsArticle` 에 `summarize` 메서드를 직접적으로 정의하지는 않았지만,
-`NewsArticle` 은 `Summary` 트레잇을 구현하도록 지정되어 있으며,
+`NewsArticle`은  `Summary` 트레잇을 구현하도록 지정되어 있으며,
 `Summary` 트레잇은 `summarize` 메서드의 기본 구현을 제공하기 때문입니다:
 
 ```rust,ignore
@@ -171,7 +171,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:impl}}
 ```
 
-`summarize_author` 를 정의하고 나면 `Tweet` 인스턴스에서 `summarize` 를 호출할 수 있습니다.
+`summarize_author`를 정의하고 나면 `Tweet` 인스턴스에서 `summarize`를 호출할 수 있습니다.
 이러면 `summarize` 기본 구현이 우리가 정의한 `summarize_author` 메서드를 호출할 겁니다.
 우린 `summarize_author` 만 구현하고 추가적인 코드를 전혀 작성하지 않았지만,
 `Summary` 트레잇은 우리에게 `summarize` 메서드의 기능도 제공해주는 것을
@@ -181,7 +181,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/main.rs:here}}
 ```
 
-이 코드는 `1 new tweet: (Read more from @horse_ebooks...)` 를 출력합니다.
+이 코드는 `1 new tweet: (Read more from @horse_ebooks...)`를 출력합니다.
 
 단, 어떤 메서드를 오버라이딩하는 구현을 하면 해당 메서드의 기본 구현을
 호출할 수는 없다는 점을 기억해두세요.
@@ -203,7 +203,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 이 매개변수는 명시된 트레잇을 구현하는 타입이라면 어떤 타입이건 전달받을 수 있습니다.
 `notify` 본문 내에서는 `item` 에 `summarize` 등
 `Summary` 트레잇의 모든 메서드를 호출할 수 있습니다.
-`notify` 는 `NewsArticle` 인스턴스로도, `Tweet` 인스턴스로도 호출할 수 있습니다.
+`notify`는  `NewsArticle` 인스턴스로도, `Tweet` 인스턴스로도 호출할 수 있습니다.
 만약 `notify` 함수를 `Summary` 트레잇을 구현하지 않는
 `String`, `i32` 등의 타입으로 호출하는 코드를 작성한다면 컴파일 에러가 발생합니다.
 
@@ -227,14 +227,14 @@ pub fn notify<T: Summary>(item: &T) {
 
 `impl Trait` 문법은 편리하고 단순한 상황에는 코드를 더 간결하게 만들어 주는
 반면, 트레잇 바운드 문법은 더 복잡한 상황을 표현할 수 있습니다. 예를 들어,
-`Summary` 를 구현하는 두 매개변수를 전달받는 함수를 구현할 때, `impl Trait`
+`Summary`를 구현하는 두 매개변수를 전달받는 함수를 구현할 때, `impl Trait`
 문법으로 표현하면 다음과 같은 모양이 됩니다:
 
 ```rust,ignore
 pub fn notify(item1: &impl Summary, item2: &impl Summary) {
 ```
 
-`item1` 과 `item2` 가 (둘 다 `Summary`를 구현하는 타입이되) 서로 다른
+`item1` 과 `item2`가 (둘 다 `Summary`를 구현하는 타입이되) 서로 다른
 타입이어도 상관없다면 `impl Trait` 문법 사용도 적절합니다. 하지만 만약
 두 매개변수가 같은 타입으로 강제되어야 한다면, 이는 아래와 같이 트레잇
 바운드를 사용해야 합니다:
@@ -251,7 +251,7 @@ pub fn notify<T: Summary>(item1: &T, item2: &T) {
 
 트레잇 바운드는 여러 개 지정할 수도 있습니다. `notify` 에서 `item`의 `summarize`
 메서드뿐만 아니라 출력 포맷팅까지 사용하고 싶다고 가정해 봅시다: `notify` 정의에서
-`item` 이 `Display`, `Summary`를 모두 구현해야하도록 지정해야합니다. `+` 문법을
+`item`이 `Display`, `Summary`를 모두 구현해야하도록 지정해야합니다. `+` 문법을
 사용하면 트레잇을 여러 개 지정할 수 있습니다:
 
 ```rust,ignore
@@ -264,8 +264,8 @@ pub fn notify(item: &(impl Summary + Display)) {
 pub fn notify<T: Summary + Display>(item: &T) {
 ```
 
-두 트레잇 바운드가 지정됐으니, `notify` 본문에서는 `item` 의 `summarize` 메서드를
-호출할 수도 있고 `item` 을 `{}` 으로 포맷팅할 수도 있습니다.
+두 트레잇 바운드가 지정됐으니, `notify` 본문에서는 `item`의 `summarize` 메서드를
+호출할 수도 있고 `item`을 `{}` 으로 포맷팅할 수도 있습니다.
 
 #### `where` 조항으로 트레잇 바운드 정리하기
 
@@ -299,9 +299,9 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-05-returning-impl-trait/src/lib.rs:here}}
 ```
 
-반환 타입에 구체적인 타입명이 아닌 `impl Summary` 를 작성하여
+반환 타입에 구체적인 타입명이 아닌 `impl Summary`를 작성하여
 `returns_summarizable` 함수는 `Summary` 트레잇을 구현하는 어떤 타입을 반환함을 명시했습니다.
-이 경우 `returns_summarizable` 는 `Tweet` 을 반환하지만,
+이 경우 `returns_summarizable`는  `Tweet`을 반환하지만,
 이 함수를 호출하는 쪽의 코드에서는 구체적인 타입을 알 필요가 없습니다.
 
 구현되는 트레잇으로 반환 타입을 명시하는 기능은 13장에서 다룰

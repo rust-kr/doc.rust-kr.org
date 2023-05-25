@@ -167,7 +167,7 @@ Listing 7-7처럼 `add_to_waitlist` 함수도
 상대 경로는 크레이트 루트에서 시작하지 않고, `front_of_house` 로 시작합니다.
 `front_of_house` 모듈은 `eat_at_restaurant` 함수와 동일한 모듈 내에 정의되어 있으므로,
 `eat_at_restaurant` 함수가 정의되어 있는 모듈에서 시작하는 상대 경로를 사용할 수 있습니다.
-이후 `hosting`, `add_to_waitlist` 은 `pub`으로 지정되어 있으므로
+이후 `hosting`, `add_to_waitlist`은  `pub`으로 지정되어 있으므로
 나머지 경로도 문제 없습니다.
 따라서 이 함수 호출도 유효합니다!
 
@@ -225,7 +225,7 @@ Listing 7-8은 셰프가 잘못된 주문을 수정하여
 함수 호출하기</span>
 
 `fix_incorrect_order` 함수는 `back_of_house` 모듈 내에 위치하므로,
-`super` 는 `back_of_house`의 부모 모듈, 즉 루트를 의미합니다.
+`super`는  `back_of_house`의 부모 모듈, 즉 루트를 의미합니다.
 그리고 해당 위치에 `deliver_order`이 존재하니 호출은 성공합니다.
 `back_of_house` 모듈과 `deliver_order` 함수는 크레이트 모듈 구조 변경 시
 서로의 관계를 유지한 채 함께 이동될 가능성이 높습니다.
@@ -290,7 +290,7 @@ Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 명시하지 않는 한 기본적으로 모든 것이 비공개라는 일반적인 규칙을 따릅니다.
 
 남은 `pub` 키워드 관련 내용은 모듈 시스템의 마지막 기능인 `use` 키워드입니다.
-먼저 `use` 키워드 단독 사용법을 다루고, 그다음 `use` 와 `pub` 을 연계하여
+먼저 `use` 키워드 단독 사용법을 다루고, 그다음 `use` 와 `pub`을 연계하여
 사용하는 방법을 다루겠습니다.
 
 [pub]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#pub-키워드로-경로-노출하기

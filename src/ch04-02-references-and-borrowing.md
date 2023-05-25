@@ -1,8 +1,8 @@
 ## 참조자와 Borrow
 
-앞 절 마지막에 등장한 Listing 4-5 에선 `String` 이 `calculate_length` 로
-이동해버린 것 때문에 `calclulate_length` 를 호출한 함수로 `String` 을 반환하여,
-함수 호출 이후에도 `String` 을 사용할 수 있게
+앞 절 마지막에 등장한 Listing 4-5 에선 `String`이 `calculate_length` 로
+이동해버린 것 때문에 `calclulate_length`를 호출한 함수로 `String`을 반환하여,
+함수 호출 이후에도 `String`을 사용할 수 있게
 하였습니다. 이렇게 하는 대신 `String` 값의 참조자를 만들 수 있습니다.
 *참조자 (reference)* 는 해당 주소에 저장된 데이터에 접근할 수 있도록
 해주는 주소값에 해당하는, 포인터와 같은 것입니다; 그 데이터는 다른 어떤
@@ -20,7 +20,7 @@
 
 먼저, 변수 선언부와 함수 반환 값에 위치하던 튜플 코드가 전부 사라진
 것을 볼 수 있습니다. 또한 `calculate_length` 함수에 `s1` 대신 `&s1` 을
-넘기고, 함수 정의에 `String` 대신 `&String` 을 사용했네요. 이 앰퍼센드
+넘기고, 함수 정의에 `String` 대신 `&String`을 사용했네요. 이 앰퍼센드
 (&) 기호가 *참조자*를 나타내고, 어떤 값의 소유권을 가져오지 않고 해당 값을
 참조할 수 있도록 해줍니다. Figure 4-5는 이 개념을 도식화한 것입니다.
 
@@ -28,10 +28,10 @@
 가지고 있습니다. s1 테이블에는 s1에 대한 스택 데이터와 힙 상에 저장된
 문자열을 가리키고 있습니다." src="img/trpl04-05.svg" class="center" />
 
-<span class="caption">Figure 4-5: `&String s` 는 `String s1` 을
+<span class="caption">Figure 4-5: `&String s`는  `String s1` 을
 가리킴</span>
 
-> Note: `&` 를 이용한 참조의 반대는
+> Note: `&`를 이용한 참조의 반대는
 > *역참조(dereferencing)* 라 합니다.
 > 역참조 기호는 `*` 이며, 8장 에서 몇 번 다뤄보고
 > 15장에서 자세한 내용을 배울 예정입니다.
@@ -42,7 +42,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:here}}
 ```
 
-`s1` 에 `&` 를 붙인 `&s1` 구문은 `s1` 값을 참조하나, 해당 값을 소유하지
+`s1` 에 `&`를 붙인 `&s1` 구문은 `s1` 값을 참조하나, 해당 값을 소유하지
 않는 참조자를 생성합니다. 값을 소유하지 않으므로 이 참조자가 가리킨 값은
 참조자가 사용되지 않을 때까지 버려지지 않습니다.
 
@@ -53,7 +53,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-08-reference-with-annotations/src/main.rs:here}}
 ```
 
-변수 `s` 가 유효한 스코프는 여타 함수의 매개변수에 적용되는
+변수 `s`가 유효한 스코프는 여타 함수의 매개변수에 적용되는
 스코프와 동일합니다. 하지만 `s`에는 소유권이 없으므로 `s`가
 더 이상 사용되지 않을 때에도 이 참조자가 가리킨 값이 버려지지
 않습니다. 함수가 실제 값 대신 참조자를 매개변수로 쓴다면
@@ -95,7 +95,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-09-fixes-listing-04-06/src/main.rs}}
 ```
 
-우선 `s` 를 `mut` 로 변경합니다. 그런 다음 `change` 함수를 호출하는 곳에서
+우선 `s`를 `mut` 로 변경합니다. 그런 다음 `change` 함수를 호출하는 곳에서
 `&mut s`로 가변 참조자를 생성하고 이 함수에서 가변 참조자를 넘겨받도록
 `some_string: &mut String` 으로 수정하는 겁니다. 이는 `change` 함수가
 빌린 값을 수정할 수 있음을 매우 명확하게 해줍니다.
@@ -174,8 +174,8 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
 ```
 
-불변 참조자 `rl`, `r2` 의 스코프는 자신들이 마지막으로 사용된
-`println!` 이후로 종료되고, 해당 `println!` 은 가변 참조자 `r3`가
+불변 참조자 `rl`, `r2`의 스코프는 자신들이 마지막으로 사용된
+`println!` 이후로 종료되고, 해당 `println!`은  가변 참조자 `r3`가
 생성되기 이전이니 서로 스코프가 겹치지 않아서 이 코드는 문제가 없는 것이죠:
 컴파일러는 이 참조자가 스코프 끝 이전의 어떤 지점 이후로는 사용되지 않음을
 알 수 있습니다.
@@ -228,12 +228,12 @@ this function's return type contains a borrowed value, but there is no value for
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-15-dangling-reference-annotated/src/main.rs:here}}
 ```
 
-`s` 는 `dangle` 함수 내에서 생성됐기 때문에,
+`s`는  `dangle` 함수 내에서 생성됐기 때문에,
 함수가 끝날 때 할당 해제됩니다.
-하지만 코드에선 `&s` 를 반환하려 했고, 이는 유효하지 않은 `String` 을 가리키는
+하지만 코드에선 `&s`를 반환하려 했고, 이는 유효하지 않은 `String`을 가리키는
 참조자를 반환하는 행위이기 때문에 에러가 발생합니다.
 
-따라서, 이런 경우엔 `String` 을 직접 반환해야 합니다:
+따라서, 이런 경우엔 `String`을 직접 반환해야 합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-16-no-dangle/src/main.rs:here}}

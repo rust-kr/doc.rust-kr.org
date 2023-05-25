@@ -18,12 +18,12 @@
 제대로 작동하지 않는 코드가 어느 부분인지 빠르게 파악하는 것입니다.
 유닛 테스트는 *src* 디렉토리 내의 각 파일에
 테스트 대상이 될 코드와 함께 작성합니다.
-각 파일에 `tests` 모듈을 만들고 `cfg(test)` 를 어노테이션하는 게
+각 파일에 `tests` 모듈을 만들고 `cfg(test)`를 어노테이션하는 게
 일반적인 관례입니다.
 
 #### 테스트 모듈과 `#[cfg(test)]`
 
-테스트 모듈에 어노테이션하는 `#[cfg(test)]` 은 러스트에게 이 코드는
+테스트 모듈에 어노테이션하는 `#[cfg(test)]`은  러스트에게 이 코드는
 `cargo build` 명령어가 아니라 `cargo test` 명령어 실행 시에만 컴파일 및 실행하라는 것을 전달합니다.
 라이브러리 빌드 시 테스트 코드는 제외되므로, 컴파일 소요 시간이 짧아지고,
 컴파일 결과물 크기도 줄어듭니다.
@@ -56,7 +56,7 @@
 다른 언어에서는 비공개 함수를 테스트하기 어렵거나, 불가능하게 만들어두었습니다.
 여러분의 테스트 철학이 어떤지는 모르겠지만, 러스트의 프라이버시 규칙은
 비공개 함수를 테스트하도록 허용합니다.
-Listing 11-12는 비공개 함수 `internal_adder` 를 보여줍니다.
+Listing 11-12는 비공개 함수 `internal_adder`를 보여줍니다.
 
 <span class="filename">Filename: src/lib.rs</span>
 
@@ -121,9 +121,9 @@ adder
 스코프로 우리가 만든 라이브러리를 가져올 필요가 있습니다. 이러한 이유로 코드
 최상단에 `use adder`를 추가했는데, 이는 유닛 테스트에서는 필요없던 것이지요.
 
-*tests/integration_test.rs* 내 코드는 `#[cfg(test)]` 가 필요 없습니다.
+*tests/integration_test.rs* 내 코드는 `#[cfg(test)]`가 필요 없습니다.
 카고는 `tests` 디렉토리를 특별 취급하여, 디렉토리 내 파일을 `cargo test` 시에만 컴파일합니다.
-`cargo test` 를 다시 실행시켜보죠.
+`cargo test`를 다시 실행시켜보죠.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/listing-11-13/output.txt}}
@@ -192,10 +192,10 @@ adder
 ```
 
 우리가 원했던 건 다른 통합 테스트 파일과 일부 코드를 공유하는 것이지,
-테스트 출력 결과에 `common` 과 `running 0 tests` 이 출력되는 게
+테스트 출력 결과에 `common` 과 `running 0 tests`이 출력되는 게
 아니었죠.
 
-테스트 출력 결과에서 `common` 을 제외하려면 *tests/common.rs* 파일 대신
+테스트 출력 결과에서 `common`을 제외하려면 *tests/common.rs* 파일 대신
 *tests/common/mod.rs* 파일을 생성해야 합니다. 프로젝트 디렉토리는 이제
 아래와 같은 모양이 됩니다:
 
@@ -214,7 +214,7 @@ adder
 언급했던 러스트에서 사용 가능한 예전 명명 규칙입니다. 이러한 방식의
 파일명 규칙을 따르는 파일은 통합 테스트 파일로 취급하지 않습니다.
 `setup` 함수를 *tests/common/mod.rs* 파일로 옮기고 *tests/common.rs* 파일을
-삭제하면 더 이상 테스트 결과 출력에 `common` 이 나타나지 않습니다.
+삭제하면 더 이상 테스트 결과 출력에 `common`이 나타나지 않습니다.
 *tests* 디렉토리의 서브 디렉토리 내 파일은 별도 크레이트로
 컴파일되지 않고, 테스트 결과 출력에서 별도의 출력 절이 생성되지도
 않습니다.
@@ -229,7 +229,7 @@ adder
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-13-fix-shared-test-code-problem/tests/integration_test.rs}}
 ```
 
-Listing 7-21에서 배운 모듈 선언대로 `mod common;` 를 선언했습니다.
+Listing 7-21에서 배운 모듈 선언대로 `mod common;`를 선언했습니다.
 선언하고 나면 `common::setup()` 함수를 호출할 수
 있습니다.
 

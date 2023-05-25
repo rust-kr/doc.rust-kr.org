@@ -15,11 +15,11 @@
 <polyline fill="none" stroke="#000000" points="8,-124 80,-124 "/>
 <text text-anchor="start" x="41.2759" y="-129.8" font-family="Times,serif" font-size="14.00" fill="#000000">s</text>
 <polygon fill="none" stroke="#000000" points="8,-104 8,-124 44,-124 44,-104 8,-104"/>
-<text text-anchor="start" x="10.8413" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">name</text>
+<text text-anchor="start" x="15.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">이름</text>
 <polygon fill="none" stroke="#000000" points="44,-104 44,-124 80,-124 80,-104 44,-104"/>
-<text text-anchor="start" x="46.8413" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">value</text>
+<text text-anchor="start" x="56.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">값</text>
 <polygon fill="none" stroke="#000000" points="8,-84 8,-104 44,-104 44,-84 8,-84"/>
-<text text-anchor="start" x="18.2241" y="-89.8" font-family="Times,serif" font-size="14.00" fill="#000000">ptr</text>
+<text text-anchor="start" x="10.0" y="-89.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">포인터</text>
 <polygon fill="none" stroke="#000000" points="44,-84 44,-104 80,-104 80,-84 44,-84"/>
 </g>
 <!-- table1 -->
@@ -28,18 +28,18 @@
 <polyline fill="none" stroke="#000000" points="132,-124 220,-124 "/>
 <text text-anchor="start" x="169.7759" y="-129.8" font-family="Times,serif" font-size="14.00" fill="#000000">s1</text>
 <polygon fill="none" stroke="#000000" points="132,-104 132,-124 184,-124 184,-104 132,-104"/>
-<text text-anchor="start" x="142.8413" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">name</text>
+<text text-anchor="start" x="147.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">이름</text>
 <polygon fill="none" stroke="#000000" points="184,-104 184,-124 220,-124 220,-104 184,-104"/>
-<text text-anchor="start" x="186.8413" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">value</text>
+<text text-anchor="start" x="196.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">값</text>
 <polygon fill="none" stroke="#000000" points="132,-84 132,-104 184,-104 184,-84 132,-84"/>
-<text text-anchor="start" x="150.2241" y="-89.8" font-family="Times,serif" font-size="14.00" fill="#000000">ptr</text>
+<text text-anchor="start" x="141.5" y="-89.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">포인터</text>
 <polygon fill="none" stroke="#000000" points="184,-84 184,-104 220,-104 220,-84 184,-84"/>
 <polygon fill="none" stroke="#000000" points="132,-64 132,-84 184,-84 184,-64 132,-64"/>
-<text text-anchor="start" x="149.4482" y="-69.8" font-family="Times,serif" font-size="14.00" fill="#000000">len</text>
+<text text-anchor="start" x="147.0" y="-69.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">길이</text>
 <polygon fill="none" stroke="#000000" points="184,-64 184,-84 220,-84 220,-64 184,-64"/>
 <text text-anchor="start" x="198.5" y="-69.8" font-family="Times,serif" font-size="14.00" fill="#000000">5</text>
 <polygon fill="none" stroke="#000000" points="132,-44 132,-64 184,-64 184,-44 132,-44"/>
-<text text-anchor="start" x="134.6826" y="-49.8" font-family="Times,serif" font-size="14.00" fill="#000000">capacity</text>
+<text text-anchor="start" x="147.0" y="-49.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">용량</text>
 <polygon fill="none" stroke="#000000" points="184,-44 184,-64 220,-64 220,-44 184,-44"/>
 <text text-anchor="start" x="198.5" y="-49.8" font-family="Times,serif" font-size="14.00" fill="#000000">5</text>
 </g>
@@ -53,9 +53,9 @@
 <g id="node3" class="node">
 <title>table2</title>
 <polygon fill="none" stroke="#000000" points="272.5,-104 272.5,-124 309.5,-124 309.5,-104 272.5,-104"/>
-<text text-anchor="start" x="275.4482" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">index</text>
+<text text-anchor="start" x="275.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">인덱스</text>
 <polygon fill="none" stroke="#000000" points="309.5,-104 309.5,-124 345.5,-124 345.5,-104 309.5,-104"/>
-<text text-anchor="start" x="312.3413" y="-109.8" font-family="Times,serif" font-size="14.00" fill="#000000">value</text>
+<text text-anchor="start" x="321.0" y="-109.8" font-family="Arial,sans-serif" font-size="11.00" fill="#000000">값</text>
 <polygon fill="none" stroke="#000000" points="272.5,-84 272.5,-104 309.5,-104 309.5,-84 272.5,-84"/>
 <text text-anchor="start" x="287.5" y="-89.8" font-family="Times,serif" font-size="14.00" fill="#000000">0</text>
 <polygon fill="none" stroke="#000000" points="309.5,-84 309.5,-104 345.5,-104 345.5,-84 309.5,-84"/>

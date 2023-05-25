@@ -247,7 +247,7 @@ Box<dyn Fn() + Send + 'static>
 이런 것을 본적이 있습니다: 바로 트레잇입니다. 모든 트레잇은 그 트레잇의 이름을
 사용하여 참조할 수 있는 동적 크기 타입입니다. 17장의
 [“트레잇 객체를 사용하여 다른 타입의 값
-허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- 무시 -->절에서,
+허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절에서,
 트레잇을 트레잇 객체로 사용하려면 `&dyn Trait` 또는 `Box<dyn Trait>`와
 같은 포인터 뒤에 넣어야 한다고 언급했습니다 (`Rc<dyn Trait>`도
 가능합니다).

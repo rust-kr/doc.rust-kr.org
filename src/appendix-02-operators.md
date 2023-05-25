@@ -199,7 +199,7 @@ Table B-10은 대괄호를 사용하는 컨텍스트를 보여줍니다.
 | 컨텍스트 | 설명 |
 |---------|-------------|
 | `[...]` | 배열 리터럴 |
-| `[expr; len]` | `expr` 값을 `len`개 복제한 배열 리터럴 |
+| `[expr; len]` | `expr` 값을 `len`개 복사한 배열 리터럴 |
 | `[type; len]` | `type`의 인스턴스를 `len`개만큼 담는 배열 타입 |
 | `expr[expr]` | 컬렉션 인덱싱. 오버로드 가능 (`Index`, `IndexMut`) |
 | `expr[..]`, `expr[a..]`, `expr[..b]`, `expr[a..b]` | 컬렉션 슬라이싱 모양의 컬렉션 인덱싱. “인덱스”로 `Range`, `RangeFrom`, `RangeTo`, 혹은 `RangeFull` 사용  |
