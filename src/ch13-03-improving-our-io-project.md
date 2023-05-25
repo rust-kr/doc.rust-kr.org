@@ -7,19 +7,19 @@
 
 ### 반복자를 사용하여 `clone` 제거하기
 
-Listing 12-6에서는 `String` 값의 슬라이스를 받아서 슬라이스에 인덱스로
+예제 12-6에서는 `String` 값의 슬라이스를 받아서 슬라이스에 인덱스로
 접근하고 복사하는 방식으로 `Config` 구조체의 인스턴스를 생성하는 코드를
-넣었고, `Config` 구조체가 이 값들을 소유하도록 했습니다. Listing 13-17에서는
-`COnfig::build` 함수의 구현체를 Listing 12-23에 있던 것처럼 재현한
+넣었고, `Config` 구조체가 이 값들을 소유하도록 했습니다. 예제 13-17에서는
+`COnfig::build` 함수의 구현체를 예제 12-23에 있던 것처럼 재현한
 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch13-functional-features/listing-12-23-reproduced/src/lib.rs:ch13}}
 ```
 
-<span class="caption">Listing 13-17: Listing 12-23의 `Config::build`
+<span class="caption">예제 13-17: 예제 12-23의 `Config::build`
 함수 재현</span>
 
 그때는 비효율적인 `clone` 호출에 대해서, 나중에 제거할테니 걱정하지 말라고
@@ -44,23 +44,23 @@ Listing 12-6에서는 `String` 값의 슬라이스를 받아서 슬라이스에 
 
 여러분의 I/O 프로젝트에 있는 *src/main.rs* 파일을 열어보면, 아래와 같이 생겼을 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch13-functional-features/listing-12-24-reproduced/src/main.rs:ch13}}
 ```
 
-먼저 Listing 12-24에 있던 `main` 함수의 시작점을 수정하여 Listing
-13-18의 코드로 바꾸려고 하는데, 이번에는 반복자를 사용합니다.
+먼저 예제 12-24에 있던 `main` 함수의 시작점을 수정하여 예제 13-18의
+코드로 바꾸려고 하는데, 이번에는 반복자를 사용합니다.
 `Config::build`도 마찬가지로 업데이트할 때까지는 컴파일 되지 않습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-18: `env::args`의 반환값을 `Config::build`로
+<span class="caption">예제 13-18: `env::args`의 반환값을 `Config::build`로
 넘기기</span>
 
 `env::args` 함수는 반복자를 반환합니다! 반복자의 값들을 벡터로 모아서
@@ -69,17 +69,17 @@ Listing 12-6에서는 `String` 값의 슬라이스를 받아서 슬라이스에 
 있습니다.
 
 다음으로는 `Config::build`의 정의를 업데이트할 필요가 있습니다. 여러분의
-I/O 프로젝트에 있는 *src/lib.rs* 파일에서, Listing 13-19와 같이
+I/O 프로젝트에 있는 *src/lib.rs* 파일에서, 예제 13-19와 같이
 `Config::build`의 시그니처를 변경합시다. 함수 본문을 업데이트해야 하기
 때문이 여전히 컴파일 되지 않습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-19/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-19: 반복자를 받도록 `Config::build`의 시그니처
+<span class="caption">예제 13-19: 반복자를 받도록 `Config::build`의 시그니처
 업데이트하기</span>
 
 `env::args` 함수에 대한 표준 라이브러리 문서에는 반환되는 반복자의
@@ -101,15 +101,15 @@ I/O 프로젝트에 있는 *src/lib.rs* 파일에서, Listing 13-19와 같이
 
 다음으로 `Config::build`의 본문을 수정하겠습니다. `args`가 `Iterator` 트레잇을
 구현하고 있으므로, 여기에 `next` 메서드를 호출할 수 있다는 것을 알고 있지요!
-Listing 13-20은 Listing 12-23의 코드를 `next` 메서드를 사용하여 업데이트한 것입니다:
+예제 13-20은 예제 12-23의 코드를 `next` 메서드를 사용하여 업데이트한 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-20: 반복자 메서드를 사용하여
+<span class="caption">예제 13-20: 반복자 메서드를 사용하여
 `Config::build`의 본문 변경하기</span>
 
 `env::args` 반환값의 첫번째 값이 프로그램의 이름이라는 점을 기억해둡시다.
@@ -123,15 +123,15 @@ Listing 13-20은 Listing 12-23의 코드를 `next` 메서드를 사용하여 업
 ### 반복자 어댑터로 더 간결한 코드 만들기
 
 I/O 프로젝트의 `search` 함수에도 반복자의 장점을 활용할 수 있는데,
-Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
+예제 12-19의 코드가 예제 13-21에 재현되어 있습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:ch13}}
 ```
 
-<span class="caption">Listing 13-21: Listing 12-19의 `search`
+<span class="caption">예제 13-21: 예제 12-19의 `search`
 함수 구현</span>
 
 반복자 어댑터 메서드를 사용하면 이 코드를 더 간결한 방식으로 작성할 수 있습니다.
@@ -139,19 +139,19 @@ Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
 함수형 프로그래밍 스타일은 더 명확한 코드를 만들기 위해 변경 가능한 상태의 양을
 최소화하는 것을 선호합니다. 가변 상태를 제거하면 추후에 검색을 병렬로 수행하도록 하는
 향상이 가능해지는데, 이는 `results` 벡터에 대한 동시 접근을 관리하지 않아도 되기
-때문입니다. Listing 13-22는 이러한 변경을 보여줍니다:
+때문입니다. 예제 13-22는 이러한 변경을 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-22: `search` 함수 구현에서 반복자 어댑터
+<span class="caption">예제 13-22: `search` 함수 구현에서 반복자 어댑터
 메서드 사용하기</span>
 
 `search` 함수의 목적은 `query`를 포함하는 `contents`의 모든 라인을 반환하는
-것임을 상기합시다. Listing 13-16의 `filter` 예제와 유사하게, 이 코드는
+것임을 상기합시다. 예제 13-16의 `filter` 예제와 유사하게, 이 코드는
 `line.contains(query)`이 `true`를 반환하는 라인들만 유지하기 위해서
 `filter` 어댑터를 사용 합니다. 그런 다음 `collect`를 사용하여 매칭된 라인들을
 모아 새로운 벡터로 만듭니다. 훨씬 단순하군요! 마찬가지로
@@ -161,7 +161,7 @@ Listing 12-19의 코드가 Listing 13-21에 재현되어 있습니다:
 ### 루프와 반복자 중 선택하기
 
 그렇다면 여러분의 코드에서 어떤 스타일을 선택하는 것이 좋은지와 그 이유에 대한
-질문이 논리적으로 뒤따르겠지요: Listing 13-21에 있는 원래 구현과 Listing 13-29에
+질문이 논리적으로 뒤따르겠지요: 예제 13-21에 있는 원래 구현과 예제 13-29에
 있는 반복자를 사용하는 버전 중 어떤 것이 좋을까요? 대부분의 러스트 프로그래머는
 반복자 스타일을 선호 합니다. 처음 사용하기는 다소 어렵습니다만, 다양한 반복자
 어댑터와 어떤 일을 하는지에 대해 일단 감을 잡으면 반복자들을 이해하기

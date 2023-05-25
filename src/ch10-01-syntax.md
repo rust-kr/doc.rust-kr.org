@@ -12,20 +12,20 @@
 이렇게 작성된 코드는 더 유연해지고, 우리 함수를 호출하는 쪽에서
 더 많은 기능을 사용할 수 있도록 하며 코드 중복 또한 방지합니다.
 
-`largest` 함수를 이용해 계속해보겠습니다. Listing 10-4는 슬라이스에서
+`largest` 함수를 이용해 계속해보겠습니다. 예제 10-4는 슬라이스에서
 가장 큰 값을 찾는 두 함수를 보여줍니다. 제네릭 사용하여 이 함수들을
 하나의 함수로 묶어보겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-4: 이름과 타입 시그니처만 다른
+<span class="caption">예제 10-4: 이름과 타입 시그니처만 다른
 두 함수</span>
 
-함수 `largest_i32`는  Listing 10-3에서 봤던 슬라이스에서 가장 큰 `i32`를 찾는 함수이고,
+함수 `largest_i32`는  예제 10-3에서 봤던 슬라이스에서 가장 큰 `i32`를 찾는 함수이고,
 `largest_char` 함수는 슬라이스에서 가장 큰 `char`를 찾는 함수입니다.
 이 두 함수의 본문은 완벽히 동일하니, 제네릭을 이용해
 이 두 함수를 하나로 만들어서 코드 중복을 제거해보겠습니다.
@@ -53,18 +53,18 @@ fn largest<T>(list: &[T]) -> &T {
 가지며, 동일한 `T` 타입의 값에 대한 참조자를
 반환합니다.
 
-Listing 10-5는 제네릭 데이터 타입을 사용해 하나로 통합한 `largest` 함수 정의를 나타냅니다.
+예제 10-5는 제네릭 데이터 타입을 사용해 하나로 통합한 `largest` 함수 정의를 나타냅니다.
 코드에서 볼 수 있듯, 우린 이 함수를 `i32` 값들의 슬라이스로 호출할 수도 있고
 `char` 값들의 슬라이스로도 호출할 수 있습니다.
 다만 이 코드는 컴파일되지 않으니 유의해주세요! 에러 해결법은 이번 장에서 천천히 알아보겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-5: 제네릭 타입 매개변수를 이용한 `largest` 함수;
+<span class="caption">예제 10-5: 제네릭 타입 매개변수를 이용한 `largest` 함수;
 아직 컴파일되지는 않습니다</span>
 
 이 코드를 지금 바로 컴파일해 보면 다음과 같은 에러가 나타납니다:
@@ -87,16 +87,16 @@ Listing 10-5는 제네릭 데이터 타입을 사용해 하나로 통합한 `lar
 ### 제네릭 구조체 정의
 
 `<>` 문법으로 구조체 필드에서 제네릭 타입 매개변수를 사용하도록
-구조체를 정의할 수도 있습니다. Listing 10-6은 임의의 타입으로 된
+구조체를 정의할 수도 있습니다. 예제 10-6은 임의의 타입으로 된
 `x`, `y`를 갖는 `Point<T>` 구조체를 정의합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-6: `T` 타입의 값 `x`, `y`를 갖는
+<span class="caption">예제 10-6: `T` 타입의 값 `x`, `y`를 갖는
 `Point<T>` 구조체</span>
 
 문법은 함수 정의에서 제네릭을 사용하는 것과 유사합니다.
@@ -107,16 +107,16 @@ Listing 10-5는 제네릭 데이터 타입을 사용해 하나로 통합한 `lar
 `Point<T>` 선언에 하나의 제네릭 타입만 사용했으므로,
 이 선언은 `Point<T>`가 어떤 타입 `T` 에 대한 제네릭이며
 `x`, `y` 필드는 실제 타입이 무엇이건 간에 *서로* 동일한 타입이라는 것을 의미합니다.
-만약 Listing 10-7처럼 서로 다른 타입의 값을 갖는 `Point<T>` 인스턴스를 생성하려고 할 경우,
+만약 예제 10-7처럼 서로 다른 타입의 값을 갖는 `Point<T>` 인스턴스를 생성하려고 할 경우,
 코드는 컴파일되지 않습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-7: `x`와 `y` 필드는 둘 다 동일한
+<span class="caption">예제 10-7: `x`와 `y` 필드는 둘 다 동일한
 제네릭 데이터 타입 `T` 이므로, 서로 동일한 타입이어야 합니다</span>
 
 컴파일러는 우리가 `x` 에 정수 값 5를 대입할 때 `Point<T>` 인스턴스의
@@ -130,16 +130,16 @@ Listing 10-5는 제네릭 데이터 타입을 사용해 하나로 통합한 `lar
 
 제네릭 `Point` 구조체의 `x`, `y`가 서로 다른 타입일 수 있도록
 정의하고 싶다면 여러 개의 제네릭 타입 매개변수를 사용해야 합니다.
-Listing 10-8에서는 `x`는 `T` 타입으로, `y`는 `U` 타입으로 정의한
+예제 10-8에서는 `x`는 `T` 타입으로, `y`는 `U` 타입으로 정의한
 제네릭 `Point` 정의를 나타냅니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-08/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-8: 두 타입의 제네릭을 사용하여,
+<span class="caption">예제 10-8: 두 타입의 제네릭을 사용하여,
 `x`와 `y`가 서로 다른 타입의 값이 될 수 있는 `Point<T, U>`</span>
 
 이제 위와 같이 모든 `Point` 인스턴스를 생성할 수 있습니다!
@@ -183,7 +183,7 @@ enum Result<T, E> {
 제네릭으로 정의되어있는 덕분에,
 `Result` 열거형을 연산이 성공할지(따라서 `T` 타입 값을 반환할지)
 실패할지(`E` 타입 값을 반환할지) 알 수 없는 어떤 곳에서든 편리하게 사용할 수 있습니다.
-우리가 Listing 9-3 에서 파일을 열 때도 사용했었죠.
+우리가 예제 9-3 에서 파일을 열 때도 사용했었죠.
 이때는 파일을 여는 데 성공하면 `T`는  `std::fs::File` 타입이 되고,
 파일을 열다가 문제가 생기면 `E`는  `std::io::Error` 타입이 됐었습니다.
 
@@ -194,16 +194,16 @@ enum Result<T, E> {
 ### 제네릭 메서드 정의
 
 5장에서 했던 것처럼 구조체나 열거형에 메서드를 구현하되,
-제네릭 타입을 이용해 정의할 수도 있습니다. Listing 10-9는
-Listing 10-6에서 정의했던 `Point<T>` 구조체에 `x` 메서드를 구현한 모습입니다.
+제네릭 타입을 이용해 정의할 수도 있습니다. 예제 10-9는
+예제 10-6에서 정의했던 `Point<T>` 구조체에 `x` 메서드를 구현한 모습입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-09/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-9: `T` 타입의 `x` 필드에 대한
+<span class="caption">예제 10-9: `T` 타입의 `x` 필드에 대한
 참조자를 반환하는 `x` 메서드를 `Point<T>` 에
 정의</span>
 
@@ -222,16 +222,16 @@ Listing 10-6에서 정의했던 `Point<T>` 구조체에 `x` 메서드를 구현�
 
 이 타입의 메서드를 정의할 때 제네릭 타입에 대한 제약을 지정할 수도 있습니다.
 예를 들면, 어떠한 제네릭 타입의 `Point<T>` 인스턴스 말고 오직 `Point<f32>`
-인스턴스에 대한 메서드를 정의할 수 있습니다. Listing 10-10에서는 구체적
+인스턴스에 대한 메서드를 정의할 수 있습니다. 예제 10-10에서는 구체적
 타입 `f32`을 사용하였는데, `impl` 뒤에는 어떤 타입도 선언하지 않았습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-10: 구조체의 제네릭 타입 매개변수 `T`가
+<span class="caption">예제 10-10: 구조체의 제네릭 타입 매개변수 `T`가
 특정 구체적 타입인 경우에만 적용되는 `impl` 블록</span>
 
 이 코드에서 `Point<f32>` 타입 인스턴스는 `distance_from_origin`
@@ -241,19 +241,19 @@ Listing 10-6에서 정의했던 `Point<T>` 구조체에 `x` 메서드를 구현�
 사용 가능한 수학적 연산을 이용합니다.
 
 구조체 정의에서 사용한 제네릭 타입 매개변수와, 구조체의 메서드 시그니처 내에서 사용하는
-제네릭 타입 매개변수가 항상 같은 것은 아닙니다. Listing 10-11을 보면 예제를 명료하게
+제네릭 타입 매개변수가 항상 같은 것은 아닙니다. 예제 10-11을 보면 예제를 명료하게
 만들기 위해 `Point` 구조체에 대해서는 `X1`와 `Y1`이라는 제네릭 타입을, 그리고 `mixup`
 메서드에 대해서는 `X2`와 `Y2`라는 제네릭 타입을 사용했습니다. 이 메서드는 `self`
 `Point`의 (`X1` 타입인) `x`값과, 매개변수로 넘겨받은 `Point`의 (`Y2` 타입인) `y`값으로
 새로운 `Point` 인스턴스를 생성합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-11/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-11: 구조체 정의와 다른 제네릭 타입을
+<span class="caption">예제 10-11: 구조체 정의와 다른 제네릭 타입을
 사용하는 메서드</span>
 
 `main` 에서, 우린 `i32` 타입 `x` (`5`)와
@@ -280,7 +280,7 @@ Listing 10-6에서 정의했던 `Point<T>` 구조체에 `x` 메서드를 구현�
 러스트는 컴파일 타임에 제네릭을 사용하는 코드를
 *단형성화(monomorphization)* 합니다. 단형성화란 제네릭 코드를,
 실제로 채워질 구체적인 타입으로 된 특정 코드로 바꾸는 과정을
-말합니다. 이 과정에서, 컴파일러는 우리가 Listing 10-5에서
+말합니다. 이 과정에서, 컴파일러는 우리가 예제 10-5에서
 제네릭 함수를 만들 때 거친 과정을 정반대로 수행합니다.
 컴파일러는 제네릭 코드가 호출된 곳을 전부 찾고, 제네릭 코드가
 호출할 때 사용된 구체적인 타입으로 코드를 생성합니다.
@@ -303,7 +303,7 @@ let float = Some(5.0);
 단형성화된 코드는 다음과 같습니다.
 제네릭 `Option<T>`는  컴파일러에 의해 생성된 명시적인 정의로 변경되었습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 enum Option_i32 {

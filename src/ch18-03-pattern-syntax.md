@@ -23,19 +23,19 @@
 때는 복잡한 문제가 있습니다. `match`는 새로운 스코프를 시작하기
 때문에, `match` 표현식 내부에서 패턴의 일부로써 선언된 변수는 모든
 변수의 경우와 마찬가지로 `match` 구조 외부에 있는 같은 이름의 변수를
-가리게 될 것입니다. Listing 18-11에서는 값 `Some(5)`을 가진 변수
+가리게 될 것입니다. 예제 18-11에서는 값 `Some(5)`을 가진 변수
 `x`와 값 `10`을 가진 변수 `y`를 선언합니다. 그 다음 값 `x`에
 `match` 표현식을 만듭니다. 이 코드를 실행하거나 뒷부분을 더 읽기
 전에 매치 갈래의 패턴과 마지막에 있는 `println!`을 보고 코드가
 무엇을 출력할지 알아보세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-11: 쉐도잉된 변수 `y`가 도입된
+<span class="caption">예제 18-11: 쉐도잉된 변수 `y`가 도입된
 갈래를 갖는 `match` 표현식</span>
 
 `match` 표현식이 실행되면 어떤 일이 일어하는지 살펴봅시다.
@@ -116,16 +116,16 @@
 
 #### 구조체 해체하기
 
-Listing 18-12는 `x` 와 `y` 두 개의 필드를 가진 `Point` 구조체를
+예제 18-12는 `x` 와 `y` 두 개의 필드를 가진 `Point` 구조체를
 보여주며, `let` 구문에 패턴을 사용해 분해할 수 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-12: 구조체 필드를 별도의 변수로
+<span class="caption">예제 18-12: 구조체 필드를 별도의 변수로
 분해하기</span>
 
 이 코드는 `p` 구조체의 `x`와 `y` 필드 값에 매칭되는 변수
@@ -136,17 +136,17 @@ Listing 18-12는 `x` 와 `y` 두 개의 필드를 가진 `Point` 구조체를
 사용법과 `let Point { x: x, y: y } = p;`라고 작성하는 것이 많은
 중복을 발생시키는 이유로, 러스트에는 구조체 필드와 일치하는 패턴에
 대한 축약법이 있습니다: 구조체 필드 이름만 나열하면 패턴에서
-생성된 변수는 동일한 이름을 갖습니다. Listing 18-13은 Listing
-18-12의 코드와 동일한 방식으로 동작하지만, `let` 패턴에서 생성된
+생성된 변수는 동일한 이름을 갖습니다. 예제 18-13은 예제 18-12의
+코드와 동일한 방식으로 동작하지만, `let` 패턴에서 생성된
 변수는 `a`와 `b` 대신 `x`와 `y`입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-13/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-13: 구조체 필드 축약법을 사용한
+<span class="caption">예제 18-13: 구조체 필드 축약법을 사용한
 구조체 필드 해체하기</span>
 
 이 코드는 `p` 변수의 `x` 및 `y` 필드와 매칭되는 변수 `x` 및
@@ -158,17 +158,17 @@ Listing 18-12는 `x` 와 `y` 두 개의 필드를 가진 `Point` 구조체를
 필드에서 특정 값을 테스트하는 동시에 다른 필드를 해체하여
 변수를 생성할 수 있습니다.
 
-Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
+예제 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
 표현식이 있습니다: `x` 축 위의 점 (`y = 0`이 참인 경우),
 `y` 축 위의 점 (`x = 0`), 그 외의 경우입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-14: 패턴 하나로 리터럴 값과 매칭
+<span class="caption">예제 18-14: 패턴 하나로 리터럴 값과 매칭
 하면서 해체하기</span>
 
 첫 번째 갈래는 `y` 필드의 값이 리터럴 `0`과 매칭되는 경우를 지정하여
@@ -189,19 +189,19 @@ Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
 
 #### 열거형 해체하기
 
-이 책에서 열거형을 분해해 봤지만 (예를 들면 6장의 Listing 6-5),
+이 책에서 열거형을 분해해 봤지만 (예를 들면 6장의 예제 6-5),
 열거형을 분해하는 패턴이 열거형 내에 저장되는 데이터가 정의되는
 방식과 일치한다는 것을 아직 명시적으로 논의하지는 않았습니다.
-예를 들어, Listing 18-15에서는 Listing 6-2의 `Message` 열거형을
+예를 들어, 예제 18-15에서는 예제 6-2의 `Message` 열거형을
 사용하여 각 내부 값을 해체하는 패턴으로 `match`를 작성합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-15/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-15: 다른 종류의 값을 가진 열거형
+<span class="caption">예제 18-15: 다른 종류의 값을 가진 열거형
 배리언트 해체하기</span>
 
 이 코드는 `Change the color to red 0, green 160, and blue 255`를 출력할
@@ -214,7 +214,7 @@ Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
 `Message::Move`처럼 구조체형 열거형 배리언트의 경우, 구조체와
 매칭되도록 지정한 패턴과 유사한 패턴을 사용할 수 있습니다. 배리언트 이름
 뒤에 중괄호를 넣은 다음 변수가 있는 필드를 나열하여 이 갈래에 대한
-코드에서 사용할 부분을 분해합니다. 여기서는 Listing 18-13에서 했던 것처럼
+코드에서 사용할 부분을 분해합니다. 여기서는 예제 18-13에서 했던 것처럼
 축약형을 사용합니다.
 
 하나의 요소로 이루어진 튜플을 갖는 `Message::Write`와 세 개의 요소로
@@ -226,15 +226,15 @@ Listing 18-14에는 `Point` 값을 세 가지 경우로 나눈 `match`
 #### 중첩된 구조체와 열거형 해체하기
 
 지금까지의 예제는 모두 한 단계 깊이의 구조체나 열거형을 매칭시켰지만,
-중첩된 아이템에 대해서도 매칭시킬 수 있습니다! 예를 들어, Listing
-18-15의 코드를 리팩토링하여 Listing 18-16과 같이 `ChangeColor` 메시지에서
+중첩된 아이템에 대해서도 매칭시킬 수 있습니다! 예를 들어, 예제 18-15의
+코드를 리팩토링하여 예제 18-16과 같이 `ChangeColor` 메시지에서
 RGB 및 HSV 색상을 지원할 수 있습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-16/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-16: 중첩된 열거형에 대한 매칭</span>
+<span class="caption">예제 18-16: 중첩된 열거형에 대한 매칭</span>
 
 `match` 표현식에서 첫 번째 갈래의 패턴이 `Color::Rgb` 배리언트를 포함하는
 `Message::ChangeColor` 열거형 배리언트와 매칭합니다; 그런 다음 이 패턴은
@@ -273,16 +273,16 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 
 밑줄은 어떤 값과도 일치하지만 값에 바인딩되지는 않는 와일드카드
 패턴으로 사용했습니다. 이는 `match` 표현식의 마지막 갈래로 특히
-유용하지만, Listing 18-17처럼 함수 매개변수를 포함한 모든 패턴에
+유용하지만, 예제 18-17처럼 함수 매개변수를 포함한 모든 패턴에
 사용할 수도 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-17/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-17: 함수 시그니처에 `_` 하기</span>
+<span class="caption">예제 18-17: 함수 시그니처에 `_` 하기</span>
 
 이 코드는 첫 번째 인자로 전달된 값 `3`을 완전히 무시하고
 `This code only uses the y parameter: 4`를 출력합니다.
@@ -299,7 +299,7 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 
 다른 패턴 내에서 `_`를 사용하여 값의 일부만 무시할 수도 있습니다.
 예를 들어, 값의 일부만 테스트하고 싶지만 다른 부분은 실행하고자 하는
-해당 코드에서 사용되는 곳이 없는 경우입니다. Listing 18-18은 설정 값
+해당 코드에서 사용되는 곳이 없는 경우입니다. 예제 18-18은 설정 값
 관리를 담당하는 코드를 보여줍니다. 비즈니스 요구사항은 사용자가
 기존 커스터마이징 값을 덮어쓸 수는 없지만 설정값을 해제할 수는 있으며
 해제된 상태라면 값을 지정할 수 있어야 한다는 것입니다.
@@ -308,7 +308,7 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-18: `Some` 배리언트에 매칭되는
+<span class="caption">예제 18-18: `Some` 배리언트에 매칭되는
 패턴에서 `Some` 내부 값을 사용할 필요가 없을 경우 패턴 내에 밑줄
 사용하기</span>
 
@@ -324,14 +324,14 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 `setting_value`가 될 수 있도록 허용하고자 합니다.
 
 또한 하나의 패턴 내에서 여러 위치에 밑줄을 사용하여 특정 값을
-무시할 수도 있습니다. Listing 18-19는 다섯 개의 아이템으로 구성된
+무시할 수도 있습니다. 예제 18-19는 다섯 개의 아이템으로 구성된
 튜플에서 두 번째 및 네 번째 값을 무시하는 예제를 보여줍니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-19/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-19: 튜플의 여러 부분 무시하기</span>
+<span class="caption">예제 18-19: 튜플의 여러 부분 무시하기</span>
 
 이 코드는 `Some numbers: 2, 8, 32`를 출력하고 값 4와 16은 무시될
 것입니다.
@@ -343,16 +343,16 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 중이거나 프로젝트를 막 시작할 때와 같이, 아직 사용하지 않을 변수를 생성하는
 것이 유용할 때도 있습니다. 이런 상황에서는 변수 이름을 밑줄로 시작하는
 것으로 사용하지 않는 변수에 대해 경고하지 않도록 러스트에게 지시할 수
-있습니다. Listing 18-20에서는 사용하지 않는 변수를 두 개 생성했지만,
+있습니다. 예제 18-20에서는 사용하지 않는 변수를 두 개 생성했지만,
 이 코드를 컴파일할 때는 이 중 하나에 대해서만 경고를 받게 됩니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-20/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-20: 밑줄로 시작하는 변수명으로
+<span class="caption">예제 18-20: 밑줄로 시작하는 변수명으로
 사용하지 않는 변수에 대한 경고 피하기</span>
 
 여기서는 변수 `y`가 사용되지 않는 것에 대한 경고를 받지만, `_x`가
@@ -361,25 +361,25 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 `_`만 사용하는 것과 밑줄로 시작하는 이름을 사용하는 것 사이에는
 미묘한 차이가 있다는 점을 유의하세요. 문법 `_x`는 여전히 변수에 값을
 바인딩하는 반면, `_`는 전혀 바인딩하지 않습니다. 이 구분이 중요한 경우를
-보여드리기 위해서, Listing 18-21는 에러가 발생할 것입니다.
+보여드리기 위해서, 예제 18-21는 에러가 발생할 것입니다.
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-21: 밑줄로 시작하는 사용하지 않는
+<span class="caption">예제 18-21: 밑줄로 시작하는 사용하지 않는
 변수는 여전히 값을 바인딩하여 값의 소유권을 가져갈 수 있습니다</span>
 
 `s` 값이 여전히 `_s`로 이동되는데, 이는 `s`를 다시 사용할 수 없도록
 하기 때문에 에러가 발생합니다. 그러나 밑줄만 단독으로 사용하면
-값이 바인딩되지 않습니다. Listing 18-22는 `s`가 `_`로 이동되지
+값이 바인딩되지 않습니다. 예제 18-22는 `s`가 `_`로 이동되지
 않기 때문에 에러없이 컴파일됩니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-22: 밑줄을 사용하는 것은 값을 바인딩하지
+<span class="caption">예제 18-22: 밑줄을 사용하는 것은 값을 바인딩하지
 않습니다</span>
 
 이 코드는 `s`를 어디에도 바인딩하지 않았기 때문에, 즉 이동되지 않았았으므로 잘 작동합니다.
@@ -390,7 +390,7 @@ RGB 및 HSV 색상을 지원할 수 있습니다.
 부분만 사용하고 나머지는 무시할 수 있으므로 무시된 각 값에
 밑줄을 나열할 필요가 없습니다. `..` 패턴은 나머지 패턴에서
 명시적으로 매칭시키지 않은 값의 모든 부분을 무시합니다.
-Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
+예제 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 있습니다. `match` 표현식에서 `x` 좌표에 대해서만 연산하고
 `y` 및 `z` 필드의 값은 무시하려고 합니다.
 
@@ -398,7 +398,7 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-23/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-23: `..`를 사용하여 `x`를 제외한 `Point`의
+<span class="caption">예제 18-23: `..`를 사용하여 `x`를 제외한 `Point`의
 모든 필드 무시하기</span>
 
 `x` 값을 나열한 다음 그냥 `..` 패턴만 포함시켰습니다. 이는
@@ -406,16 +406,16 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 있는 구조체로 작업하는 데 한두 개의 필드만 관련 있는 상황에서
 유용합니다.
 
-`..` 문법은 필요한 만큼의 값으로 확장됩니다. Listing 18-24는
+`..` 문법은 필요한 만큼의 값으로 확장됩니다. 예제 18-24는
 튜플에 `..`를 사용하는 방법을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-24/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-24: 튜플에서 첫 번째와 마지막
+<span class="caption">예제 18-24: 튜플에서 첫 번째와 마지막
 값만 매칭하고 나머지 모든 값들 무시하기</span>
 
 이 코드에서는 첫 번째와 마지막 값이 `first`와 `last`로 매칭됩니다.
@@ -423,16 +423,16 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 
 그러나, `..`을 사용하는 것은 모호하지 않아야 합니다. 어떤 값을
 매칭시키고 어떤 값을 무시해야 하는지 불분명하다면, 러스트는 에러를
-발생시킵니다. Listing 18-25는 `..`를 모호하게 사용하는 예제를 보여주며,
+발생시킵니다. 예제 18-25는 `..`를 모호하게 사용하는 예제를 보여주며,
 컴파일되지 않습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-25/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-25: `..`를 모호한 방법으로 사용
+<span class="caption">예제 18-25: `..`를 모호한 방법으로 사용
 시도하기</span>
 
 이 예제를 컴파일하면 아래와 같은 에러가 발생합니다:
@@ -455,7 +455,7 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 조건으로, 해당 갈래가 선택되려면 이 조건도 매칭되어야 합니다. 매치 가드는
 패턴만 가지고는 할 수 없는 더 복잡한 아이디어를 표현할 때 유용합니다.
 
-조건은 패턴에서 생성된 변수를 사용할 수 있습니다. Listing 18-26은
+조건은 패턴에서 생성된 변수를 사용할 수 있습니다. 예제 18-26은
 첫 번째 갈래에 `Some(x)` 패턴이 있고 `if x % 2 == 0`의 매치 가드
 (숫자가 짝수이면 참) 가 있는 `match`를 보여줍니다.
 
@@ -463,7 +463,7 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-26/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-26: 패턴에 매치 가드 추가하기</span>
+<span class="caption">예제 18-26: 패턴에 매치 가드 추가하기</span>
 
 이 예제는 `The number 4 is even`를 출력합니다. `Some(4)`가 `Some(x)`에
 매칭되기 때문에, `num`이 첫 번째 갈래의 패턴과 비교될때 매칭됩니다.
@@ -480,20 +480,20 @@ Listing 18-23에는 3차원 공간 좌표를 갖는 `Point` 구조체가
 능력의 단점은 매치 가드 표현식이 포함되면 컴파일러가 완전성을
 확인하려고 하지 않는다는 것입니다.
 
-Listing 18-11에서 패턴 쉐도잉 문제를 해결하기 위해 매치 가드를
+예제 18-11에서 패턴 쉐도잉 문제를 해결하기 위해 매치 가드를
 사용할 수 있다고 언급했습니다. `match` 외부의 변수를 사용하는 대신
 `match` 표현식의 패턴 내부에 새 변수가 만들어졌던 것을 상기합시다.
 이 새로운 변수는 외부 변수의 값에 대한 테스트를 할 수 없다는 것을
-의미했습니다. Listing 18-27은 이 문제를 해결하기 위해 매치 가드를
+의미했습니다. 예제 18-27은 이 문제를 해결하기 위해 매치 가드를
 사용하는 방법을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-27/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-27: 매치 가드를 사용하여 외부 변수
+<span class="caption">예제 18-27: 매치 가드를 사용하여 외부 변수
 값과 같은지 테스트하기</span>
 
 이제 이 코드는 `Default case, x = Some(5)`를 출력합니다. 두 번째 매치
@@ -509,8 +509,8 @@ Listing 18-11에서 패턴 쉐도잉 문제를 해결하기 위해 매치 가드
 있습니다.
 
 매치 가드에 *또는* 연산자 `|`를 사용하여 여러 패턴을 지정할 수도
-있습니다; 매치 가드 조건은 모든 패턴에 적용될 것입니다. Listing
-18-28은 `|`를 사용하는 패턴과 매치 가드를 조합할 때의 우선순위를
+있습니다; 매치 가드 조건은 모든 패턴에 적용될 것입니다. 예제 18-28은
+`|`를 사용하는 패턴과 매치 가드를 조합할 때의 우선순위를
 보여줍니다. 이 예제의 중요한 부분은 `if y` 매치 가드가 `6`에만
 적용되는 것처럼 보일지라도 `4`, `5`, *및* `6`에도 적용된다는
 것입니다.
@@ -519,7 +519,7 @@ Listing 18-11에서 패턴 쉐도잉 문제를 해결하기 위해 매치 가드
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-28/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-28: 다중 패턴에 매치 가드
+<span class="caption">예제 18-28: 다중 패턴에 매치 가드
 조합하기</span>
 
 매치 조건은 `x`의 값이 `4`, `5` 또는 `6` *이면서* `y`가 `true`면
@@ -549,7 +549,7 @@ rather than this:
 ### `@` 바인딩
 
 *at* 연산자 `@`을 사용하면 값에 대한 패턴 매칭 여부를 테스트하는
-동시에 해당 값을 값는 변수를 만들 수 있습니다. Listing 18-29에서는
+동시에 해당 값을 값는 변수를 만들 수 있습니다. 예제 18-29에서는
 `Message::Hello` `id` 필드가 `3..=7` 범위 내에 있는지 테스트하려고
 합니다. 또한 이 값을 `id_variable` 변수에 바인딩하여 갈래와 관련된
 코드에서 사용하고 싶습니다. 이 변수의 이름을 필드와 동일한 `id`로
@@ -559,7 +559,7 @@ rather than this:
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-29/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-29: `@`를 사용하여 값을 테스트하는 동시에
+<span class="caption">예제 18-29: `@`를 사용하여 값을 테스트하는 동시에
 값 바인딩도 하기</span>
 
 이 예제는 `Found an id in range: 5`를 출력합니다. 범위 `3..=7` 앞에

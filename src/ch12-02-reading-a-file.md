@@ -2,30 +2,30 @@
 
 이제는 `file_path` 인자에 명시된 파일을 읽는 기능을 추가해보겠습니다.
 우선 테스트에 사용할 샘플 파일이 필요합니다: 여러 줄의 몇 개의 반복된
-단어들로 구성된 작은 양의 텍스트로 된 파일을 사용하겠습니다. Listing 12-3은
+단어들로 구성된 작은 양의 텍스트로 된 파일을 사용하겠습니다. 예제 12-3은
 딱 맞게 사용될 에밀리 딕킨슨(Emily Dickinson)의 시가 있습니다! 프로젝트의
 루트 레벨에 *poem.txt*이라는 이름의 파일을 만들고, 시 “I’m Nobody! Who are
 you?”를 입력하세요.
 
-<span class="filename">Filename: poem.txt</span>
+<span class="filename">파일명: poem.txt</span>
 
 ```text
 {{#include ../listings/ch12-an-io-project/listing-12-03/poem.txt}}
 ```
 
-<span class="caption">Listing 12-3: 에밀리 딕킨슨의 시는 좋은 테스트 케이스를
+<span class="caption">예제 12-3: 에밀리 딕킨슨의 시는 좋은 테스트 케이스를
 만들어줍니다</span>
 
-텍스트를 채워넣었다면 Listing 12-4에서 보는 것처럼 *src/main.rs*에 파일을
+텍스트를 채워넣었다면 예제 12-4에서 보는 것처럼 *src/main.rs*에 파일을
 읽는 코드를 추가하세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-4: 두번째 인자로 명시된 파일의
+<span class="caption">예제 12-4: 두번째 인자로 명시된 파일의
 내용물 읽기</span>
 
 먼저 `use` 구문을 사용하여 표준 라이브러리의 연관된 부분을 가져옵니다:

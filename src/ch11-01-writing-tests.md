@@ -44,7 +44,7 @@ $ cd adder
 `adder` 라이브러리의 *src/lib.rs* 파일 내용은
 다음과 같습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 <!-- manual-regeneration
 cd listings/ch11-writing-automated-tests
@@ -60,7 +60,7 @@ cd ../../..
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-1: `cargo new` 명령어로 자동 생성된
+<span class="caption">예제 11-1: `cargo new` 명령어로 자동 생성된
 테스트 모듈과 함수</span>
 
 맨 위 두 줄은 무시하고 함수에 집중합시다. `#[test]` 어노테이션을 주목해주세요:
@@ -75,13 +75,13 @@ cd ../../..
 통과되는지 확인해보죠.
 
 `cargo test` 명령어는 프로젝트 내 모든 테스트를 실행합니다.
-결과는 Listing 11-2처럼 나타납니다.
+결과는 예제 11-2처럼 나타납니다.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/listing-11-01/output.txt}}
 ```
 
-<span class="caption">Listing 11-2: 자동 생성된 테스트
+<span class="caption">예제 11-2: 자동 생성된 테스트
 실행 결과</span>
 
 카고가 테스트를 컴파일하고 실행했습니다. `running 1 test` 줄이
@@ -113,7 +113,7 @@ cd ../../..
 우리의 요구사항에 맞춰서 테스트 커스터마이징을 시작해봅시다. 먼저 다음과 같이
 `it_works` 함수의 이름을 `exploration` 같은 다른 이름으로 변경해봅시다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-01-changing-test-name/src/lib.rs}}
@@ -130,26 +130,26 @@ cd ../../..
 테스트 함수 내에서 패닉이 발생하면 테스트는 실패합니다. 각각의 테스트는
 새로운 스레드에서 실행되며, 메인 스레드에서 테스트 스레드가 죽은 것을
 알게 되면 해당 테스트는 실패한 것으로 처리됩니다. 9장에서, 가장 쉽게 패닉을
-일으키는 방법은 `panic` 매크로를 호출하는 것이라고 이야기 했습니다. Listing 11-3처럼
+일으키는 방법은 `panic` 매크로를 호출하는 것이라고 이야기 했습니다. 예제 11-3처럼
 *src/lib.rs* 파일에 `another` 라는 테스트를 새로 추가해봅시다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,panics,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-03/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 11-3: `panic!` 매크로를 호출하여 실패하도록 만든
+<span class="caption">예제 11-3: `panic!` 매크로를 호출하여 실패하도록 만든
 테스트 추가</span>
 
-`cargo test`를 다시 실행해보죠. 출력 결과는 Listing 11-4처럼
+`cargo test`를 다시 실행해보죠. 출력 결과는 예제 11-4처럼
 `exploration` 테스트는 통과하고 `another` 테스트는 실패했다고 나타날 겁니다.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/listing-11-03/output.txt}}
 ```
 
-<span class="caption">Listing 11-4: 테스트 하나는 통과하고 다른 하나는 실패했을 때의
+<span class="caption">예제 11-4: 테스트 하나는 통과하고 다른 하나는 실패했을 때의
 테스트 결과</span>
 
 `test tests::another` 줄은 `ok`가 아니라 `FAILED` 로 표시됩니다.
@@ -178,32 +178,32 @@ cd ../../..
 호출하여 테스트는 실패하도록 만듭니다. 우리가 작성한 코드가 의도대로 기능하는지
 검사할 때 `assert!` 매크로를 유용하게 사용할 수 있습니다.
 
-5장 Listing 5-15에서 `Rectangle` 구조체랑 `can_hold` 메서드를 사용했었죠.
-(Listing 11-5로 다시 보여드립니다.) 이 코드를 *src/lib.rs* 파일에
+5장 예제 5-15에서 `Rectangle` 구조체랑 `can_hold` 메서드를 사용했었죠.
+(예제 11-5로 다시 보여드립니다.) 이 코드를 *src/lib.rs* 파일에
 작성하고, 그 다음 `assert!` 매크로로 테스트를 작성해봅시다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-05/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 11-5: 5장 `Rectangle` 구조체와
+<span class="caption">예제 11-5: 5장 `Rectangle` 구조체와
 `can_hold` 메서드</span>
 
 `can_hold` 메서드는 Boolean 값을 반환하니
 `assert` 매크로 사용 예시로 쓰기에 딱 알맞습니다.
-Listing 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모습입니다.
+예제 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모습입니다.
 너비 8, 높이 7 `Rectangle` 인스턴스를 생성하고,
 이 인스턴스는 너비 5, 높이 1 `Rectangle` 인스턴스를 포함할 수 있음을 단언합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-06/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 11-6: 큰 사각형이 작은 사각형을 정말로
+<span class="caption">예제 11-6: 큰 사각형이 작은 사각형을 정말로
 포함할 수 있는지 검사하는 `can_hold` 메서드 테스트</span>
 
 `tests` 모듈에 `use super::*;` 줄이 추가되었습니다.
@@ -227,7 +227,7 @@ Listing 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모�
 통과됐네요! 이번에는 작은 사각형이 큰 사각형을 포함할 수 없음을
 단언하는 테스트를 추가해봅시다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-02-adding-another-rectangle-test/src/lib.rs:here}}
@@ -273,16 +273,16 @@ Listing 11-6는 `can_hold` 메서드를 시험하는 테스트를 작성한 모�
 `assert!` 매크로는 `==` 표현식이 `false` 값임을 알려줄 뿐,
 어떤 값으로 인해 `false` 값이 나왔는지 출력하지는 않습니다.
 
-Listing 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 다음,
+예제 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 다음,
 `assert_eq!` 매크로를 이용해 테스트하는 예제입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-07/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-7: `assert_eq!` 매크로를 이용한
+<span class="caption">예제 11-7: `assert_eq!` 매크로를 이용한
 `add_two` 함수 테스트</span>
 
 테스트를 통과하는지 확인해봅시다!
@@ -339,7 +339,7 @@ Listing 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 �
 여러분이 직접 정의한 구조체나 열거형에는 `PartialEq` 트레잇을 구현하여
 해당 타입의 값이 같음을 단언할 수 있도록 할 필요가 있습니다. 또한
 단언 실패 시 값이 출력될 수 있도록 `Debug` 트레잇도 구현해야 합니다.
-5장 Listing 5-12에서 설명했듯 두 트레잇 모두 파생 가능한 트레잇이기 때문에,
+5장 예제 5-12에서 설명했듯 두 트레잇 모두 파생 가능한 트레잇이기 때문에,
 구조체, 열거형 정의에 `#[derive(PartialEq, Debug)]`를 어노테이션하는것이 일반적입니다.
 이에 대한 추가 내용 및 파생 가능한 나머지 트레잇은
 부록 C [“Derivable Traits,”][derivable-traits]<!-- ignore -->를 참고해주세요.
@@ -360,7 +360,7 @@ Listing 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 �
 예시로, 이름을 불러 사람을 환영하는 함수가 있다고 가정해봅시다.
 함수에 전달한 이름이 출력 내에 존재하는지 확인하는 테스트를 작성하고자 합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-05-greeter/src/lib.rs}}
@@ -408,7 +408,7 @@ Listing 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 �
 ### `should_panic` 매크로로 패닉 발생 검사하기
 
 반환값을 검사하는 것에 더하여, 코드가 우리의 예상대로 에러 조건을
-잘 처리하는지 검사하는 것도 중요합니다. 예를 들어 9장의 Listing 9-10에서
+잘 처리하는지 검사하는 것도 중요합니다. 예를 들어 9장의 예제 9-10에서
 만들었던 `Guess` 타입을 생각해보세요. `Guess` 타입을 사용하는 다른 코드는
 `Guess` 인스턴스가 1에서 100사이 값만 갖는다는 보장에 의존적입니다.
 이런 경우, 범위를 벗어난 값으로 `Guess` 인스턴스를 만들면
@@ -418,16 +418,16 @@ Listing 11-7은 매개변수에 `2`를 더하는 `add_two` 함수를 작성한 �
 이 테스트는 내부에서 패닉이 발생해야 통과되고,
 패닉이 발생하지 않으면 실패합니다.
 
-Listing 11-8은 `Guess::new`의 에러 조건이 의도대로 작동하는지
+예제 11-8은 `Guess::new`의 에러 조건이 의도대로 작동하는지
 검사하는 테스트를 보여줍니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-08/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-8: `panic!` 발생
+<span class="caption">예제 11-8: `panic!` 발생
 테스트</span>
 
 `#[should_panic]` 속성은 `#[test]` 속성과
@@ -445,7 +445,7 @@ Listing 11-8은 `Guess::new`의 에러 조건이 의도대로 작동하는지
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/src/lib.rs:here}}
 ```
 
-Listing 11-8 테스트를 실행하면 다음과 같이 실패합니다.
+예제 11-8 테스트를 실행하면 다음과 같이 실패합니다.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/output.txt}}
@@ -460,17 +460,17 @@ Listing 11-8 테스트를 실행하면 다음과 같이 실패합니다.
 `should_panic` 테스트는 통과할 것입니다. `should_panic`
 속성에 `expected` 매개변수를 추가해, 포함되어야 하는 실패
 메세지를 지정하면 더 꼼꼼한 `should_panic` 테스트를 작성할
-수 있습니다. Listing 11-9는 `new` 함수에서 값이 너무 작은
+수 있습니다. 예제 11-9는 `new` 함수에서 값이 너무 작은
 경우와 큰 경우에 서로 다른 메세지로 `panic!`을 발생시키도록
 수정한 `Guess` 코드입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-09/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 11-9: 특정한 부분 문자열을 포함하는 패닉 메세지를
+<span class="caption">예제 11-9: 특정한 부분 문자열을 포함하는 패닉 메세지를
 사용한 `panic!`에 대한 테스트</span>
 
 `should_panic` 속성의 `expected` 매개변수 값이
@@ -505,7 +505,7 @@ Listing 11-8 테스트를 실행하면 다음과 같이 실패합니다.
 ### `Result<T, E>`를 이용한 테스트
 
 여태까지는 실패 시 패닉을 발생시키는 테스트만 작성했습니다. 테스트는
-`Result<T, E>`를 사용해 작성할 수도 있습니다. 다음은 Listing 11-1 테스트를
+`Result<T, E>`를 사용해 작성할 수도 있습니다. 다음은 예제 11-1 테스트를
 `Result<T, E>`를 사용하도록 수정한 예시입니다. 패닉을 발생시키는 대신 `Err`을 반환합니다.
 
 ```rust,noplayground

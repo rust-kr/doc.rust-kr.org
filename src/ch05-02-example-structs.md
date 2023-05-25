@@ -6,16 +6,16 @@
 
 카고를 사용해 *rectangles* 라는 새로운 바이너리 프로젝트를 만들어줍시다.
 이 프로그램은 픽셀 단위로 명시된 사각형의 너비와 높이로 넓이를 계산할 겁니다.
-Listing 5-8 은 *src/main.rs* 에 이 기능을 간단하게 구현한
+예제 5-8 은 *src/main.rs* 에 이 기능을 간단하게 구현한
 모습입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
 ```
 
-<span class="caption">Listing 5-8: 각 변수에 지정된 너비와 높이로
+<span class="caption">예제 5-8: 각 변수에 지정된 너비와 높이로
 사각형 넓이 계산</span>
 
 `cargo run` 으로 실행해보죠:
@@ -43,15 +43,15 @@ Listing 5-8 은 *src/main.rs* 에 이 기능을 간단하게 구현한
 
 ### 튜플로 리팩토링하기
 
-다음 Listing 5-9 는 튜플을 사용한 모습입니다.
+다음 예제 5-9 는 튜플을 사용한 모습입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-9: 사각형의 너비와 높이를
+<span class="caption">예제 5-9: 사각형의 너비와 높이를
 튜플로 명시하는 코드</span>
 
 튜플을 사용함으로써 더 짜임새 있는 코드가 됐고,
@@ -69,16 +69,16 @@ Listing 5-8 은 *src/main.rs* 에 이 기능을 간단하게 구현한
 ### 구조체로 리팩토링하여 코드에 더 많은 의미를 담기
 
 구조체는 데이터에 이름표를 붙여서 의미를 나타낼 수 있습니다.
-Listing 5-10 처럼, 기존에 사용하던 튜플을 구조체로 바꿔
+예제 5-10 처럼, 기존에 사용하던 튜플을 구조체로 바꿔
 각 구성 요소에 이름을 지어줍시다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-10: `Rectangle` 구조체 정의</span>
+<span class="caption">예제 5-10: `Rectangle` 구조체 정의</span>
 
 `Rectangle` 이라는 구조체를 정의하고,
 중괄호 내에 `width`, `height` 필드를 `u32` 타입으로 정의했습니다.
@@ -104,17 +104,17 @@ Listing 5-10 처럼, 기존에 사용하던 튜플을 구조체로 바꿔
 ## 트레잇 파생 (derive) 으로 유용한 기능 추가하기
 
 프로그램을 디버깅하는 동안 `Rectangle` 인스턴스 내 모든 필드 값을
-출력해서 확인할 수 있다면 좋을 것 같군요. Listing 5-11는 앞서 다뤄본
+출력해서 확인할 수 있다면 좋을 것 같군요. 예제 5-11는 앞서 다뤄본
 [`println!` 매크로][println]<!-- ignore -->를 사용해 본 예시이나,
 작동하진 않습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-11: `Rectangle` 인스턴스
+<span class="caption">예제 5-11: `Rectangle` 인스턴스
 출력을 시도해본 모습</span>
 
 이 코드를 컴파일하면 다음과 같은 메시지가 나타납니다:
@@ -160,16 +160,16 @@ Listing 5-10 처럼, 기존에 사용하던 튜플을 구조체로 바꿔
 
 러스트는 디버깅 정보를 출력하는 기능을 *자체적으로 가지고 있습니다*.
 하지만 우리가 만든 구조체에 해당 기능을 적용하려면 명시적인 동의가 필요하므로,
-Listing 5-12 처럼 구조체 정의 바로 이전에 `#[derive(Debug)]`
+예제 5-12 처럼 구조체 정의 바로 이전에 `#[derive(Debug)]`
 외부 속성(outer attirbute)을 작성해주어야 합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-12: `Rectangle` 인스턴스를 디버그 출력 형식으로
+<span class="caption">예제 5-12: `Rectangle` 인스턴스를 디버그 출력 형식으로
 사용하기 위해, 속성을 추가하여 `Debug` 트레잇 파생하기</span>
 
 이제 프로그램을 실행해 보면 더 이상 에러가 나타나지 않고,

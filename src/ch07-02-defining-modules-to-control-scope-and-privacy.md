@@ -66,7 +66,7 @@ backyard
 
 지금의 경우 크레이트 루트 파일은 *src/main.rs*이고, 내용은 아래와 같습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,noplayground,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/quick-reference-example/src/main.rs}}
@@ -75,7 +75,7 @@ backyard
 `pub mod garden;` 라인이 컴파일러에게 *src/garden.rs*에 있는 코드를 포함할 것을
 알려주고, *src/garden.rs*는 아래와 같습니다:
 
-<span class="filename">Filename: src/garden.rs</span>
+<span class="filename">파일명: src/garden.rs</span>
 
 ```rust,noplayground,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/quick-reference-example/src/garden.rs}}
@@ -112,23 +112,23 @@ backyard
 
 중첩 (nested) 모듈 안에 함수를 집어넣어 구성하면 크레이트 구조를 실제 레스토랑이
 일하는 방식과 동일하게 구성할 수 있습니다. `cargo new --lib restaurant` 명령어를
-실행하여 `restaurant` 라는 새 라이브러리를 생성하고, Listing 7-1 코드를 *src/lib.rs*에
+실행하여 `restaurant` 라는 새 라이브러리를 생성하고, 예제 7-1 코드를 *src/lib.rs*에
 작성하여 모듈, 함수 시그니처를 정의합시다. 아래는 접객 부서 쪽 코드입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-01/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-1: 함수를 포함하는 별도의 모듈을 포함한
+<span class="caption">예제 7-1: 함수를 포함하는 별도의 모듈을 포함한
 `front_of_house` 모듈</span>
 
 `mod` 키워드와 모듈 이름 (위의 경우 `front_of_house`)을 명시하여
 모듈을 정의합니다. 모듈의 본문은 중괄호로 감싸져 있습니다.
 `hosting`, `serving` 모듈처럼, 모듈 내에는 다른 모듈을 넣을
 수 있습니다. 모듈에는 구조체, 열거형, 상수, 트레잇,
-함수(Listing 7-1처럼) 등의 아이템 정의 또한 가질 수
+함수(예제 7-1처럼) 등의 아이템 정의 또한 가질 수
 있습니다.
 
 모듈을 사용함으로서 관련된 정의드를 하나로 묶고 어떤 연관성이 있는지 이름을
@@ -142,7 +142,7 @@ backyard
 불리우는 크레이트 모듈 구조의 최상위(root)에 위치한 `crate` 라는 이름을 갖는
 일종의 모듈을 형성하기 때문입니다.
 
-Listing 7-2는 Listing 7-1의 구조를 모듈 트리로 나타낸 모습입니다.
+예제 7-2는 예제 7-1의 구조를 모듈 트리로 나타낸 모습입니다.
 
 ```text
 crate
@@ -156,7 +156,7 @@ crate
          └── take_payment
 ```
 
-<span class="caption">Listing 7-2: Listing 7-1 코드를 모듈 트리로
+<span class="caption">예제 7-2: 예제 7-1 코드를 모듈 트리로
 나타낸 모습</span>
 
 트리는 모듈이 서로 어떻게 중첩되어 있는지 보여줍니다; 에를 들어 `hosting`

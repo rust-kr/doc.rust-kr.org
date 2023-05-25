@@ -34,7 +34,7 @@ $ cargo build --release
 기본 설정을 덮어 씌울 수 있습니다. 여기 예시로 `opt-level` 설정에
 대한 `dev` 와 `release` 프로필의 기본 설정 값을 보여드리겠습니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [profile.dev]
@@ -59,7 +59,7 @@ opt-level = 3
 싶다면, 프로젝트의 *Cargo.toml*에 아래의 두 줄을 추가하면
 됩니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [profile.dev]

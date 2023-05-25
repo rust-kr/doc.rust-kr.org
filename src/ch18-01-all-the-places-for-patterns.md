@@ -19,7 +19,7 @@ match VALUE {
 }
 ```
 
-예를 들면 아래는 Listing 6-5에서 변수 `x`에 있는 `Option<i32>` 값을
+예를 들면 아래는 예제 6-5에서 변수 `x`에 있는 `Option<i32>` 값을
 매칭시키는 `match` 표현식입니다:
 
 ```rust,ignore
@@ -52,24 +52,24 @@ match x {
 `if let`은 `if let`의 패턴에 값이 매칭되지 않을 때 실행되는
 코드가 포함된 `else`를 가질 수 있습니다.
 
-Listing 18-1은 `if let`, `else if`, `else if let` 표현식을 섞어서
+예제 18-1은 `if let`, `else if`, `else if let` 표현식을 섞어서
 매칭할 수 있음을 알려주는 코드입니다. 그렇게 하면 패턴과 비교할
 값을 하나만 표현할 수 있는 `match` 표현식보다 더 유연하게 사용할
 수 있습니다. 또한 러스트에서는 일련의 `if let`, `else if`,
 `else if let` 갈래들의 조건식이 서로 관련될 필요도 없습니다.
 
-Listing 18-1의 코드는 여러 개의 조건을 연속적으로 검사하여
+예제 18-1의 코드는 여러 개의 조건을 연속적으로 검사하여
 배경의 색상을 결정합니다. 이 예제에서는 실제 프로그램에서
 사용자 입력으로 받을 수 있는 하드코딩된 값이 들어있는 변수를
 만들었습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-1: `if let`, `else if`, `else if let`, `else`의
+<span class="caption">예제 18-1: `if let`, `else if`, `else if let`, `else`의
 혼합</span>
 
 사용자가 즐겨찾는 색을 지정한 경우 그 색상이 배경으로 사용됩니다.
@@ -99,15 +99,15 @@ Listing 18-1의 코드는 여러 개의 조건을 연속적으로 검사하여
 ### `while let` 조건 루프
 
 `if let`과 구조가 비슷한 `while let` 조건 루프는 패턴이 계속
-매칭되는 동안 `while` 루프를 실행할 수 있게 해줍니다. Listing
-18-2에서는 벡터를 스택처럼 사용하여 벡터의 값을 푸시된 역순으로
+매칭되는 동안 `while` 루프를 실행할 수 있게 해줍니다. 예제 18-2에서는
+벡터를 스택처럼 사용하여 벡터의 값을 푸시된 역순으로
 출력하는 `while let` 루프를 코딩했습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-2: `while let`을 사용하여 `stack.pop()`이
+<span class="caption">예제 18-2: `while let`을 사용하여 `stack.pop()`이
 `Some`을 반환하는 한 값을 출력하기</span>
 
 이 예제는 3, 2, 1을 출력합니다. `pop` 메서드는 벡터에서 마지막 요소를
@@ -119,7 +119,7 @@ Listing 18-1의 코드는 여러 개의 조건을 연속적으로 검사하여
 ### `for` 루프
 
 `for` 루프에서 키워드 `for` 바로 뒤에 오는 값은 패턴입니다.
-예를 들어 `for x in y`에서는 `x`가 패턴입니다. Listing 18-3은
+예를 들어 `for x in y`에서는 `x`가 패턴입니다. 예제 18-3은
 `for` 루프에서 패턴을 사용하여 `for` 루프의 일부로서 튜플을
 해체 혹은 분해하는 방법을 보여줍니다.
 
@@ -127,10 +127,10 @@ Listing 18-1의 코드는 여러 개의 조건을 연속적으로 검사하여
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-3: `for` 루프에서 패턴을 사용하여
+<span class="caption">예제 18-3: `for` 루프에서 패턴을 사용하여
 튜플 분해하기</span>
 
-Listing 18-3의 코드는 다음을 출력할 것입니다:
+예제 18-3의 코드는 다음을 출력할 것입니다:
 
 ```console
 {{#include ../listings/ch18-patterns-and-matching/listing-18-03/output.txt}}
@@ -169,13 +169,13 @@ let PATTERN = EXPRESSION;
 “값이 무엇이든간에 전부 변수 `x`에 바인딩해라”라는 뜻이 됩니다.
 
 패턴 매칭의 관점에서 `let` 좀 더 명확하게 보기 위해서, `let`으로
-튜플을 분해하는 패턴을 사용하는 Listing 18-4을 살펴봅시다.
+튜플을 분해하는 패턴을 사용하는 예제 18-4을 살펴봅시다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-4: 패턴을 사용해 튜플을 분해하여
+<span class="caption">예제 18-4: 패턴을 사용해 튜플을 분해하여
 세 변수를 한번에 만들기</span>
 
 여기서는 튜플을 패턴에 매칭합니다. 러스트는 값 `(1, 2, 3)`을 패턴
@@ -185,14 +185,14 @@ let PATTERN = EXPRESSION;
 
 패턴의 요소 개수가 주어진 튜플의 요소 개수와 다르면, 전체
 타입이 일치하지 않아서 컴파일러 에러가 발생합니다. 예를 들어
-Listing 18-5는 세 개의 요소가 있는 튜플을 두 개의 변수로 해체하는
+예제 18-5는 세 개의 요소가 있는 튜플을 두 개의 변수로 해체하는
 시도를 보여주는데, 이는 작동하지 않을 것입니다.
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-5: 변수 개수가 튜플의 요소 개수와
+<span class="caption">예제 18-5: 변수 개수가 튜플의 요소 개수와
 맞지 않는 부정확한 패턴 구성</span>
 
 이 코드의 컴파일을 시도하면 아래와 같은 타입 에러가 발생합니다:
@@ -210,7 +210,7 @@ Listing 18-5는 세 개의 요소가 있는 튜플을 두 개의 변수로 해�
 
 ### 함수 매개변수
 
-함수 매개변수도 패턴이 될 수 있습니다. Listing 18-6의 코드는
+함수 매개변수도 패턴이 될 수 있습니다. 예제 18-6의 코드는
 `foo`라는 이름의 함수를 선언하고 타입 `i32`인 `x`라는 매개변수 하나를
 받는데, 이제 친숙하게 보일 것입니다.
 
@@ -218,20 +218,20 @@ Listing 18-5는 세 개의 요소가 있는 튜플을 두 개의 변수로 해�
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-6: 매개변수에서 패턴을 사용하는
+<span class="caption">예제 18-6: 매개변수에서 패턴을 사용하는
 함수 시그니처</span>
 
 `x` 부분이 패턴입니다! `let`에서 했던 것처럼 함수 인자의 튜플을 패턴과
-매치시킬 수 있습니다. Listing 18-7은 함수에 값을 넘길때 튜플의 값을
+매치시킬 수 있습니다. 예제 18-7은 함수에 값을 넘길때 튜플의 값을
 분할합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 18-7: 튜플을 분해하는 매개변수를 가진
+<span class="caption">예제 18-7: 튜플을 분해하는 매개변수를 가진
 함수</span>
 
 이 코드는 `Current location: (3, 5)`를 출력합니다. 값 `&(3, 5)`는

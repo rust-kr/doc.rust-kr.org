@@ -14,7 +14,7 @@
 
 뉴타입 패턴은 지금까지 설명한 것 이외의 작업에도 유용한데, 여기에는
 값이 혼동되지 않도록 정적으로 강제하는 것과 값의 단위를 표시하는
-것들이 포함됩니다. Listing 19-15에서 뉴타입을 사용하여 단위를 표시하는
+것들이 포함됩니다. 예제 19-15에서 뉴타입을 사용하여 단위를 표시하는
 예제를 보았습니다: `Millimeters` 및 `Meters` 구조체가 `u32` 값을
 뉴타입으로 감싸고 있었음을 상기하세요. `Millimeters` 타입의
 매개변수가 있는 함수를 작성했다면, 실수로 `Meters` 또는 보통의
@@ -46,7 +46,7 @@ API를 노출할 수 있습니다.
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:here}}
 ```
 
-이제 별칭 `Kilometers`는 `i32`의 *동의어* 입니다; Listing 19-15에서
+이제 별칭 `Kilometers`는 `i32`의 *동의어* 입니다; 예제 19-15에서
 만든 `Millimeters` 및 `Meters` 타입과는 달리, `Kilometers`는 별도의
 새로운 타입은 아닙니다. `Kilometers` 타입을 가진 값은 `i32` 타입의 값과
 동일하게 처리됩니다:
@@ -70,24 +70,24 @@ Box<dyn Fn() + Send + 'static>
 ```
 
 이 긴 타입을 함수 시그니처 및 코드의 모든 곳에 타입 명시로 작성하는
-것은 지루하고 에러가 발생하기 쉽습니다. Listing 19-24와 같은 코드로
+것은 지루하고 에러가 발생하기 쉽습니다. 예제 19-24와 같은 코드로
 가득찬 프로젝트가 있다고 상상해보세요.
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-24/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-24: 수많은 곳에 긴 타입 사용하기</span>
+<span class="caption">예제 19-24: 수많은 곳에 긴 타입 사용하기</span>
 
-타입 별칭은 반복을 줄여 이 코드를 관리하기 쉽게 만듭니다. Listing
-19-25에서는 이 장황한 타입에 대해 `Thunk`라는 별칭을 만들고 이 타입이
+타입 별칭은 반복을 줄여 이 코드를 관리하기 쉽게 만듭니다. 예제 19-25에서는
+이 장황한 타입에 대해 `Thunk`라는 별칭을 만들고 이 타입이
 사용된 모든 곳을 짧은 별칭 `Thunk`으로 대체했습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-25/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-25: 타입 별칭 `Thunk`을 도입하여
+<span class="caption">예제 19-25: 타입 별칭 `Thunk`을 도입하여
 반복 줄이기</span>
 
 이 코드는 읽고 작성하기 훨씬 쉽습니다! 또한 타입 별칭에 의미 있는
@@ -144,14 +144,14 @@ Box<dyn Fn() + Send + 'static>
 만들 수 없으므로, `bar`는 결코 반환할 수 없습니다.
 
 그런데 값을 결코 만들 수 없는 타입은 어디에 뜨는거죠? 숫자 추리 게임의
-부분인 Listing 2-5의 코드를 기억해 보세요; 여기에 Listing 19-26에서
+부분인 예제 2-5의 코드를 기억해 보세요; 여기에 예제 19-26에서
 다시 일부를 재현해 두었습니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:ch19}}
 ```
 
-<span class="caption">Listing 19-26: `continue`로 끝나는 갈래가
+<span class="caption">예제 19-26: `continue`로 끝나는 갈래가
 있는 `match`</span>
 
 이 시점에서는 이 코드에서 몇 가지 세부 사항을 건너 뛰었습니다. 6장의
@@ -165,7 +165,7 @@ Box<dyn Fn() + Send + 'static>
 
 `guess`의 타입은 정수 *그리고* 문자열이어야 하며, 러스트는
 `guess`가 하나의 타입만 가져야 한다고 요구합니다. 그럼 `continue`가
-무엇을 반환할까요? 어떻게 Listing 19-26에서 한 쪽 갈래는 `u32`를
+무엇을 반환할까요? 어떻게 예제 19-26에서 한 쪽 갈래는 `u32`를
 반환하면서 다른 갈래는 `continue`로 끝나는 것이 허용되었을까요?
 
 짐작하셨겠지만, `continue`는 `!` 값을 가집니다. 즉, 러스트가 `guess`의
@@ -187,7 +187,7 @@ Box<dyn Fn() + Send + 'static>
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-09-unwrap-definition/src/lib.rs:here}}
 ```
 
-이 코드에서도 Listing 19-26의 `match`에서와 같은 일이 발생합니다: `val`이
+이 코드에서도 예제 19-26의 `match`에서와 같은 일이 발생합니다: `val`이
 `T` 타입을 가지고 있고 `panic!`이 `!` 타입을 가지고 있으므로, 러스트는 전체
 `match` 표현식의 결과가 `T`라는 것을 알 수 있습니다. 이 코드는 `panic!`이
 값을 생성하지 않기 때문에 작동합니다; 패닉은 프로그램을 종료하니까요. `None`의

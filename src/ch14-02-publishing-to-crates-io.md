@@ -23,16 +23,16 @@
 
 문서화 주석은 슬래시 두 개가 아니라 세 개 `///`를 이용하며 텍스트 서식을
 위한 마크다운 표기법을 지원합니다. 문서화할 아이템 바로 앞에 문서화 주석을
-배치하세요. Listing 14-1 은 `my_crate`라는 이름의 크레이트에 있는
+배치하세요. 예제 14-1 은 `my_crate`라는 이름의 크레이트에 있는
 `add_one` 함수에 대한 문서화 주석을 보여줍니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-01/src/lib.rs}}
 ```
 
-<span class="caption">Listing 14-1: 함수에 대한 문서화
+<span class="caption">예제 14-1: 함수에 대한 문서화
 주석</span>
 
 여기서 `add_one` 함수가 무슨 일을 하는지에 대한 설명을 적었고,
@@ -45,17 +45,17 @@
 편의성의 위하여 `cargo doc --open`을 실행시키면 여러분의 현재 크레이트의
 문서에 대해 (심지어 여러분의 크레이트가 가진 모든 의존성들의 문서까지)
 HTML을 생성하고 그 결과를 웹 브라우저에 띄워줄 겁니다. 이제 `add_one`
-함수를 찾아보면 Figure 14-1에 보시는 것처럼 문서화 주석의 텍스트가 어떤
+함수를 찾아보면 그림 14-1에 보시는 것처럼 문서화 주석의 텍스트가 어떤
 식으로 렌더링되는지 알 수 있을 겁니다:
 
 <img alt="Rendered HTML documentation for the `add_one` function of `my_crate`" src="img/trpl14-01.png" class="center" />
 
-<span class="caption">Figure 14-1: `add_one` 함수에 대한 HTML
+<span class="caption">그림 14-1: `add_one` 함수에 대한 HTML
 문서</span>
 
 #### 자주 사용되는 절
 
-Listing 14-1에서는 HTML에 "Examples" 제목을 가진 절을 만들기 위해
+예제 14-1에서는 HTML에 "Examples" 제목을 가진 절을 만들기 위해
 `# Examples` 마크다운 제목을 사용했습니다. 이외에 크레이트 저자가
 문서에서 자주 사용하는 구절은 다음과 같습니다:
 
@@ -81,7 +81,7 @@ Listing 14-1에서는 HTML에 "Examples" 제목을 가진 절을 만들기 위�
 실행하면 여러분의 문서에 들어있던 예시 코드들이 테스트로서 실행됩니다!
 예시를 포함한 문서보다 좋은 문서는 없습니다. 하지만 문서가 작성된 이후
 코드가 변경되어 작동하지 않게 되버린 예제보다 나쁜 것도 없습니다.
-Listing 14-1의 `add_one` 함수에 대한 문서를 가지고 `cargo test`를
+예제 14-1의 `add_one` 함수에 대한 문서를 가지고 `cargo test`를
 실행하면 다음과 같이 테스트 결과 절을 볼 수 있습니다:
 
 <!-- manual-regeneration
@@ -111,17 +111,17 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 크레이트 혹은 모듈 전체에 대한 문서를 작성하는데 씁니다.
 
 예를 들어 `add_one` 함수를 담고 있는 `my_crate` 크레이트의
-목적을 설명하는 문서를 추가하려면 Listing 14-2와 같이
+목적을 설명하는 문서를 추가하려면 예제 14-2와 같이
 *src/lib.rs* 파일의 시작 지점에 `//!`로 시작하는 문서화 주석을
 추가합니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-02/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-2: `my_crate` 크레이트 전체에 대한
+<span class="caption">예제 14-2: `my_crate` 크레이트 전체에 대한
 문서</span>
 
 `//!`로 시작하는 라인 중 마지막 라인 이후에 아무 코드도 없음을 주목하세요.
@@ -130,13 +130,13 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 그 아이템은 *src/lib.rs* 파일이고, 이는 크레이트 루트입니다. 이 주석은
 크레이트 전체를 설명합니다
 
-`cargo doc --open`을 실행하면 Figure 14-2와 같이 문서
+`cargo doc --open`을 실행하면 그림 14-2와 같이 문서
 첫 페이지 내용 중 크레이트의 공개 아이템 리스트 상단에
 이 주석의 내용이 나타날 것입니다:
 
 <img alt="전체 크레이트를 위한 주석을 포함하는 렌더링된 HTML 문서" src="img/trpl14-02.png" class="center" />
 
-<span class="caption">Figure 14-2: 전체 크레이트를 설명하는 주석이 포함된
+<span class="caption">그림 14-2: 전체 크레이트를 설명하는 주석이 포함된
 `my_crate`의 렌더링된 문서</span>
 
 아이템 내 문서화 주석은 특히 크레이트와 모듈에 대해 기술할 때
@@ -168,25 +168,25 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 위치의 공개 아이템으로 만듭니다.
 
 예를 들어, 예술적인 개념을 모델링하기 위해 `art`라는 라이브러리를 만들었다고
-가정해 봅시다. 이 라이브러리에는 두 모듈이 들어 있습니다: Listing 14-3과 같이,
+가정해 봅시다. 이 라이브러리에는 두 모듈이 들어 있습니다: 예제 14-3과 같이,
 `kinds` 모듈은 `PrimaryColor`와 `SecondaryColor` 열거형을 가지고 있고,
 `utils` 모듈은 `mix`라는 이름의 함수를 가지고 있습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-3: `kinds`와 `utils` 모듈에 아이템을 구성한
+<span class="caption">예제 14-3: `kinds`와 `utils` 모듈에 아이템을 구성한
 `art` 라이브러리</span>
 
-Figure 14-3은 이 크레이트에 대하여 `cargo doc`으로 생성시킨 문서의
+그림 14-3은 이 크레이트에 대하여 `cargo doc`으로 생성시킨 문서의
 첫 화면입니다:
 
 <img alt="`kinds`와 `utils` 모듈이 리스트에 올라와 있는 `art` 크레이트에 대한 렌더링된 문서" src="img/trpl14-03.png" class="center" />
 
-<span class="caption">Figure 14-3: `kinds`와 `utils` 모듈이 리스트에 나타난
+<span class="caption">그림 14-3: `kinds`와 `utils` 모듈이 리스트에 나타난
 `art`의 문서 첫 화면</span>
 
 `PrimaryColor`와 `SecondaryColor` 타입도, `mix` 함수도 리스트에
@@ -195,19 +195,19 @@ Figure 14-3은 이 크레이트에 대하여 `cargo doc`으로 생성시킨 문�
 
 이 라이브러리를 의존성으로 가지고 있는 다른 크레이트에서는 `art`의 아이템을
 스코프 내로 가져오는 `use`를 사용할 필요가 있는데, 현재 정의된 모듈의 구조대로
-명시해야 합니다. Listing 14-4는 어떤 크레이트에서 `art` 크레이트의
+명시해야 합니다. 예제 14-4는 어떤 크레이트에서 `art` 크레이트의
 `PrimaryColor`와 `mix`를 이용하는 예시를 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 14-4: `art` 크레이트의 내부 구조에서 내보내진 
+<span class="caption">예제 14-4: `art` 크레이트의 내부 구조에서 내보내진 
 아이템을 이용하는 크레이트</span>
 
-Listing 14-4 코드의 저자, 즉 `art` 크레이트를 사용하는 사람은
+예제 14-4 코드의 저자, 즉 `art` 크레이트를 사용하는 사람은
 `PrimaryColor`가 `kinds` 모듈에 들어있고 `mix`가 `utils` 모듈에
 들어있다는 사실을 알아내야 합니다. `art` 크레이트의 구조는 크레이트를
 사용하는 사람보다 크레이트를 개발하는 사람에게 더 적합합니다. 내부 구조는
@@ -216,39 +216,39 @@ Listing 14-4 코드의 저자, 즉 `art` 크레이트를 사용하는 사람은
 어디를 찾아봐야 하는지알아내야 하고 `use` 구문에 모듈 이름들을
 명시해야하기 때문입니다.
 
-공개 API로부터 내부 구조를 제거하기 위해서는 Listing 14-5와 같이
-Listing 14-3의 `art` 크레이트 코드에 `pub use` 구문을 추가하여
+공개 API로부터 내부 구조를 제거하기 위해서는 예제 14-5와 같이
+예제 14-3의 `art` 크레이트 코드에 `pub use` 구문을 추가하여
 아이템들을 최상위 단계로 다시 내보내야 합니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-05/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 14-5: `pub use` 구문을 추가하여 아이템을 다시
+<span class="caption">예제 14-5: `pub use` 구문을 추가하여 아이템을 다시
 내보내기</span>
 
-`cargo doc`이 생성한 이 크레이트의 API 문서는 이제 Figure 14-4와 같이 다시 내보내진
+`cargo doc`이 생성한 이 크레이트의 API 문서는 이제 그림 14-4와 같이 다시 내보내진
 아이템을 첫 화면의 리스트에 보여주고 링크를 걸어줄 것이며, 이로써 `PrimaryColor`와
 `SecondaryColor` 타입과 `mix` 함수를 더 쉽게 찾도록 만들어 줍니다.
 
 <img alt="첫 화면에 다시 내보내진 아이템이 있는 `art` 크레이트의 렌더링된 문서" src="img/trpl14-04.png" class="center" />
 
-<span class="caption">Figure 14-4: 다시 내보내진 아이템이 리스트에 있는 `art`
+<span class="caption">그림 14-4: 다시 내보내진 아이템이 리스트에 있는 `art`
 문서 첫 화면</span>
 
-`art` 크레이트 사용자는 Listing 14-4에서 봤던 것처럼 Listing 14-3의 내부
-구조를 여전히 보고 이용할 수 있고, 혹은 Listing 14-6과 같이 Listing 14-5의
+`art` 크레이트 사용자는 예제 14-4에서 봤던 것처럼 예제 14-3의 내부
+구조를 여전히 보고 이용할 수 있고, 혹은 예제 14-6과 같이 예제 14-5의
 더 편리해진 구조를 사용할 수도 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 14-6: `art` 크레이트의 다시 내보내진 아이템을 사용하는
+<span class="caption">예제 14-6: `art` 크레이트의 다시 내보내진 아이템을 사용하는
 프로그램</span>
 
 중첩된 모듈이 많이 있는 경우, `pub use`를 사용하여 최상위 단계로
@@ -300,7 +300,7 @@ $ cargo login abcdefghijklmnopqrstuvwxyz012345
 파일 안의 `[package]` 절 아래에 다음과 같이 `name` 필드를 수정하여 배포를
 위한 새로운 이름을 사용할 필요가 있을 것입니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [package]
@@ -337,7 +337,7 @@ Caused by:
 사용할 수 있는 식별자 리스트가 있습니다. 예를 들어 여러분의 크레이트에 MIT
 라이센스를 적용하고 싶다면, `MIT` 식별자를 추가합니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [package]
@@ -359,7 +359,7 @@ SPDX에 없는 라이센스를 사용하고 싶다면, 그 라이센스에 대�
 고유한 이름, 버전, 설명, 그리고 라이센스가 추가된 상태에서 배포할
 준비가 된 프로젝트의 *Cargo.toml* 파일은 아래처럼 생겼습니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [package]

@@ -15,9 +15,9 @@
 절대 경로, 상대 경로 뒤에는 `::`으로 구분된 식별자가
 하나 이상 따라옵니다.
 
-Listing 7-1로 돌아와서, `add_to_waitlist` 함수를 하고 싶다고 칩시다.
+예제 7-1로 돌아와서, `add_to_waitlist` 함수를 하고 싶다고 칩시다.
 이는 다음 질문과 같습니다: `add_to_waitlist` 함수의 경로는 무엇일까요?
-Listing 7-3은 Listing 7-1의 일부 모듈과 함수를 제거한 내용을 담고
+예제 7-3은 예제 7-1의 일부 모듈과 함수를 제거한 내용을 담고
 있습니다.
 
 예제는 크레이트 루트에 정의된 `eat_at_restaurant` 라는 새로운 함수에서
@@ -29,13 +29,13 @@ Listing 7-3은 Listing 7-1의 일부 모듈과 함수를 제거한 내용을 담
 하나입니다. 따라서 `pub` 키워드로 지정되어 있습니다. `pub`에 대해서는
 [“`pub` 키워드로 경로 노출하기”][pub]<!-- ignore --> 절에서 자세히 알아볼 예정입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-03/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-3: 절대 경로, 상대 경로로
+<span class="caption">예제 7-3: 절대 경로, 상대 경로로
 `add_to_waitlist` 함수 호출하기</span>
 
 `eat_at_restaurant` 함수에서 처음 `add_to_waitlist` 함수를 호출할 때는 절대
@@ -66,14 +66,14 @@ Listing 7-3은 Listing 7-1의 일부 모듈과 함수를 제거한 내용을 담
 경로는 절대 경로입니다. 아이템을 정의하는 코드와 호출하는 코드는 분리되어 있을
 가능성이 높기 때문입니다.
 
-이제 Listing 7-3이 컴파일 불가능한 이유를 알아봅시다!
-컴파일 시 나타나는 에러는 Listing 7-4와 같습니다.
+이제 예제 7-3이 컴파일 불가능한 이유를 알아봅시다!
+컴파일 시 나타나는 에러는 예제 7-4와 같습니다.
 
 ```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 
-<span class="caption">Listing 7-4: Listing 7-3 코드 컴파일 시
+<span class="caption">예제 7-4: 예제 7-3 코드 컴파일 시
 발생하는 에러</span>
 
 에러 메시지는 `hosting` 모듈이 비공개(private) 모듈이라는 내용입니다.
@@ -99,28 +99,28 @@ Listing 7-3은 Listing 7-1의 일부 모듈과 함수를 제거한 내용을 담
 
 ### `pub` 키워드로 경로 노출하기
 
-`hosting` 모듈이 비공개임을 의미하던 Listing 7-4 에러로 돌아와보죠.
+`hosting` 모듈이 비공개임을 의미하던 예제 7-4 에러로 돌아와보죠.
 부모 모듈 내 `eat_at_restaurant` 함수가 자식 모듈 내 `add_to_waitlist`
 함수에 접근해야 하니, `hosting` 모듈에 `pub` 키워드를 작성했습니다.
-작성한 모습은 Listing 7-5 와 같습니다.
+작성한 모습은 예제 7-5 와 같습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-05/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-5: `eat_at_restaurant` 함수에서 `hosting` 모듈을
+<span class="caption">예제 7-5: `eat_at_restaurant` 함수에서 `hosting` 모듈을
 사용할 수 있도록 `pub` 으로 선언</span>
 
-안타깝게도, Listing 7-5 코드 또한
-Listing 7-6과 같은 에러가 발생합니다.
+안타깝게도, 예제 7-5 코드 또한
+예제 7-6과 같은 에러가 발생합니다.
 
 ```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 
-<span class="caption">Listing 7-6: Listing 7-5 코드 컴파일 시 발생하는
+<span class="caption">예제 7-6: 예제 7-5 코드 컴파일 시 발생하는
 에러</span>
 
 어떻게 된 걸까요? 우린 `mod hosting` 앞에 `pub` 키워드를 추가하여 모듈을 공개했습니다.
@@ -132,20 +132,20 @@ Listing 7-6과 같은 에러가 발생합니다.
 별로 없습니다; 더 나아가서 모듈이 가지고 있는 하나 이상의 아이템 또한
 마찬가지로 공개할 필요가 있습니다.
 
-Listing 7-6의 에러는 `add_to_waitlist` 함수가 비공개라는 내용을 담고 있습니다.
+예제 7-6의 에러는 `add_to_waitlist` 함수가 비공개라는 내용을 담고 있습니다.
 비공개 규칙은 구조체, 열거형, 함수, 메서드, 모듈 모두
 적용됩니다.
 
-Listing 7-7처럼 `add_to_waitlist` 함수도
+예제 7-7처럼 `add_to_waitlist` 함수도
 정의에 `pub` 키워드를 추가해 공개해봅시다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-7: `mod hosting`, `fn add_to_waitlist` 에
+<span class="caption">예제 7-7: `mod hosting`, `fn add_to_waitlist` 에
 `pub` 키워드를 추가해 `eat_at_restaurant` 함수에서
 호출 가능하도록 만들기</span>
 
@@ -209,19 +209,19 @@ Listing 7-7처럼 `add_to_waitlist` 함수도
 모듈 트리의 다른 어딘가로 옮겨질지도 모르는 경우 모듈 트리의
 재조정을 편하게 만들어 줍니다.
 
-Listing 7-8은 셰프가 잘못된 주문을 수정하여
+예제 7-8은 셰프가 잘못된 주문을 수정하여
 고객에게 직접 전달하는 상황을 묘사한 코드입니다.
 `back_of_house` 모듈에 정의된 `fix_incorrect_order` 함수는
 `super`로 시작하는 `deliver_order`로의 경로를 특정하는 것으로
 부모 모듈에 정의된 `deliver_order` 함수를 호출합니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-8: `super`로 시작하는 상대 경로를 사용해
+<span class="caption">예제 7-8: `super`로 시작하는 상대 경로를 사용해
 함수 호출하기</span>
 
 `fix_incorrect_order` 함수는 `back_of_house` 모듈 내에 위치하므로,
@@ -239,20 +239,20 @@ Listing 7-8은 셰프가 잘못된 주문을 수정하여
 이를 활용하기 전에 알아두어야 할 몇 가지 추가사항이 있습니다.
 구조체 정의에 `pub`를 사용하면 구조체는 공개되지만, 구조체 내
 필드는 비공개로 유지됩니다. 공개 여부는 각 필드마다 정할 수 있습니다.
-Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
+예제 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 `toast` 필드는 공개하지만 `seasonal_fruit` 필드는 비공개로 둔 예제입니다.
 이는 레스토랑에서 고객이 식사와 같이 나올 빵 종류를 선택하고,
 셰프가 계절과 재고 상황에 맞춰서 식사에 포함할 과일을 정하는 상황을 묘사한 예제입니다.
 과일은 빈번히 변경되므로, 고객은 직접 과일을 선택할 수 없으며
 어떤 과일을 받을지도 미리 알 수 없습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-9: 일부 필드는 공개하고,
+<span class="caption">예제 7-9: 일부 필드는 공개하고,
 일부 필드는 비공개인 구조체</span>
 
 `back_of_house::Breakfast` 구조체 내 `toast` 필드는
@@ -269,15 +269,15 @@ Listing 7-9는 공개 구조체 `back_of_house::Breakfast`를 정의하고
 지정할 방법이 없기 때문입니다.
 
 반대로, 열거형은 공개로 지정할 경우 모든 배리언트가 공개됩니다. 열거형을 공개하는 방법은
-`enum` 키워드 앞에 `pub` 키워드만 작성하면 됩니다. 작성한 모습은 Listing 7-10과 같습니다.
+`enum` 키워드 앞에 `pub` 키워드만 작성하면 됩니다. 작성한 모습은 예제 7-10과 같습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-10: 열거형과, 열거형의 모든 배리언트를
+<span class="caption">예제 7-10: 열거형과, 열거형의 모든 배리언트를
 공개로 지정하기</span>
 
 `Appetizer` 열거형을 공개하였으니, `eat_at_restaurant` 함수에서

@@ -4,7 +4,7 @@
 큰 모듈이라면, 정의를 여러 파일로 나누어 코드를 쉽게 찾아갈 수 있도록
 만들어야 하겠죠.
 
-예를 들어 여러 개의 레스토랑 관련 모듈을 가지고 있는 Listing 7-17 코드로
+예를 들어 여러 개의 레스토랑 관련 모듈을 가지고 있는 예제 7-17 코드로
 시작해봅시다. 크레이트 루트 파일에 모든 모듈이 정의되는 형태 대신
 이 모듈들을 파일로 추출할 것입니다. 이 경우 크레이트 루트 파일은
 *src/lib.rs*지만, 이러한 절차는 크레이트 루트 파일이 *src/main.rs*인
@@ -12,31 +12,31 @@
 
 먼저 `front_of_house` 모듈을 파일로 추출하겠습니다. `front_of_house`
 모듈에 대한 중괄호 내부의 코드를 지우고 `mod front_of_house;` 선언
-부분만 남겨서, *src/lib.rs*가 Listing 7-21의 코드만 있도록 해봅시다.
-Listing 7-22의 *src/front_of_house.rs* 파일을 만들기 전까지는
+부분만 남겨서, *src/lib.rs*가 예제 7-21의 코드만 있도록 해봅시다.
+예제 7-22의 *src/front_of_house.rs* 파일을 만들기 전까지는
 컴파일되지 않음을 유의하세요.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-21: 본문이 *src/front_of_house.rs* 에 위치할
+<span class="caption">예제 7-21: 본문이 *src/front_of_house.rs* 에 위치할
 `front_of_house` 모듈 선언</span>
 
-다음으로 Listing 7-22처럼 *src/front_of_house.rs*이라는 새 파일을
+다음으로 예제 7-22처럼 *src/front_of_house.rs*이라는 새 파일을
 만들어 중괄호 안에 있던 코드를 위치시킵니다. 크레이트 루트에
 `front_of_house`라는 이름의 모듈 선언이 나왔으므로 컴파일러는
 이 파일을 살펴봐야 한다는 것을 알게 됩니다.
 
-<span class="filename">Filename: src/front_of_house.rs</span>
+<span class="filename">파일명: src/front_of_house.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/front_of_house.rs}}
 ```
 
-<span class="caption">Listing 7-22: *src/front_of_house.rs* 파일에
+<span class="caption">예제 7-22: *src/front_of_house.rs* 파일에
 `front_of_house` 모듈 본문 정의</span>
 
 모듈 트리에서 `mod` 선언을 *한번만* 사용하여 파일을 로딩할 필요가
@@ -56,7 +56,7 @@ Listing 7-22의 *src/front_of_house.rs* 파일을 만들기 전까지는
 `hosting`을 옮기는 작업을 시작하기 위하여, *src/front_of_house.rs*에는
 `hosting` 모듈의 선언만 있도록 수정합니다:
 
-<span class="filename">Filename: src/front_of_house.rs</span>
+<span class="filename">파일명: src/front_of_house.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house.rs}}
@@ -65,7 +65,7 @@ Listing 7-22의 *src/front_of_house.rs* 파일을 만들기 전까지는
 그러면 *src/front_of_house* 디렉토리를 만들고 그 안에 *hosting.rs*
 파일을 생성한 다음 `hosting` 모듈 내용을 작성합니다:
 
-<span class="filename">Filename: src/front_of_house/hosting.rs</span>
+<span class="filename">파일명: src/front_of_house/hosting.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house/hosting.rs}}

@@ -1,24 +1,24 @@
 ## `use` 키워드로 경로를 스코프 내로 가져오기
 
 함수 호출을 위해서 경로를 작성하는 것은 불편하고 반복적인 느낌이 들 수
-있습니다. Listing 7-7에서는 절대 경로를 사용하건 상대 경로를 사용하건,
+있습니다. 예제 7-7에서는 절대 경로를 사용하건 상대 경로를 사용하건,
 `add_to_waitlist` 호출할 때마다 `front_of_house`, `hosting` 모듈을 매번
 명시해 주어야 하죠. 다행히도 이 과정을 단축할 방법이 있습니다: `use` 키워드를
 한번 사용하여 어떤 경로의 숏컷을 만들 수 있고, 그러면 스코프 내의 어디에서라도
 짧은 이름을 사용할 수 있습니다. 
 
-Listing 7-11은 `crate::front_of_house::hosting` 모듈을
+예제 7-11은 `crate::front_of_house::hosting` 모듈을
 `eat_at_restaurant` 함수가 존재하는 스코프로 가져와,
 `eat_at_restaurant` 함수 내에서 `add_to_waitlist` 함수를
 `hosting::add_to_waitlist` 경로만으로 호출하는 예제입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-11/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-11: `use` 키워드로 모듈을 스코프 내로
+<span class="caption">예제 7-11: `use` 키워드로 모듈을 스코프 내로
 가져오기</span>
 
 스코프에 `use` 키워드와 경로를 작성하는 건
@@ -28,17 +28,17 @@ Listing 7-11은 `crate::front_of_house::hosting` 모듈을
 `use` 키워드로 가져온 경우 또한 다른 경로와 마찬가지로 비공개 규칙이 적용됩니다.
 
 `use`가 사용된 특정한 스코프에 대해서만 숏컷이 만들어진다는 점을
-유의하세요. Listing 7-12에서는 `eat_at_restaurant` 함수를 새로운
+유의하세요. 예제 7-12에서는 `eat_at_restaurant` 함수를 새로운
 자식 모듈 `customer`로 옮겼는데, 이러면 `use` 구문과 다른 스코프가
 되므로, 이 함수는 컴파일 되지 않습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness,does_not_compile,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-12: `use` 구문은 사용된 스코프 내에서만
+<span class="caption">예제 7-12: `use` 구문은 사용된 스코프 내에서만
 적용됩니다</span>
 
 컴파일러는 `customer` 모듈 내에 더 이상 숏컷이 적용되지 않음을
@@ -55,40 +55,40 @@ Listing 7-11은 `crate::front_of_house::hosting` 모듈을
 
 ### 보편적인 `use` 경로 작성법
 
-Listing 7-11에서 `add_to_waitlist` 함수까지 경로를 전부 작성하지 않고,
+예제 7-11에서 `add_to_waitlist` 함수까지 경로를 전부 작성하지 않고,
 `use crate::front_of_house::hosting` 까지만 작성한 뒤
 `hosting::add_to_waitlist` 코드로 함수를 호출하는 점이 의아하실 수도 있습니다.
-Listing 7-13 처럼 작성하면 안 되는 걸까요?
+예제 7-13 처럼 작성하면 안 되는 걸까요?
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-13/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-13: `use` 키워드로 `add_to_waitlist` 함수를 직접 가져오기
+<span class="caption">예제 7-13: `use` 키워드로 `add_to_waitlist` 함수를 직접 가져오기
 (보편적이지 않은 작성 방식)</span>
 
-Listing 7-11과 7-13의 동작은 동일하지만, Listing 7-11 코드가
+예제 7-11과 7-13의 동작은 동일하지만, 예제 7-11 코드가
 `use` 키워드로 스코프에 함수를 가져올 때의 관용적인 코드입니다.
 함수의 부모 모듈을 `use` 키워드로 가져오는 것은 함수를 호출할 때 부모
 모듈을 특정해야 한다는 것을 의미합니다. 함수 호출 시 부모 모듈을 특정하면
 전체 경로를 반복하는 것을 최소화하면서도 함수가 지역적으로 정의되어 있지
-않음을 확실히 보여주게 됩니다. Listing 7-13의 코드는 `add_to_waitlist`가
+않음을 확실히 보여주게 됩니다. 예제 7-13의 코드는 `add_to_waitlist`가
 어디에 정의되어 있는지 불분명합니다.
 
 한편, `use` 키워드로 구조체나 열거형 등의 타 아이템을
 가져올 시에는 전체 경로를 작성하는 것이 보편적입니다.
-Listing 7-14는 `HashMap` 표준 라이브러리 구조체를
+예제 7-14는 `HashMap` 표준 라이브러리 구조체를
 바이너리 크레이트의 스코프로 가져오는 관용적인 코드 예시입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 7-14: 보편적인 방식으로 `HashMap`을
+<span class="caption">예제 7-14: 보편적인 방식으로 `HashMap`을
 스코프로 가져오기</span>
 
 이러한 관용이 탄생하게 된 명확한 이유는 없습니다.
@@ -96,16 +96,16 @@ Listing 7-14는 `HashMap` 표준 라이브러리 구조체를
 
 하지만, 동일한 이름의 아이템을 여럿 가져오는 경우는 이 방식을 사용하지 않습니다.
 러스트가 허용하기 않기 때문이죠.
-Listing 7-15는 각각 다른 모듈 내에 위치하지만 이름이 같은 두 개의
+예제 7-15는 각각 다른 모듈 내에 위치하지만 이름이 같은 두 개의
 `Result` 타입을 스코프로 가져와 사용하는 예시입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-15/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 7-15: 이름이 같은 두 개의 타입을 동일한 스코프에 가져오려면
+<span class="caption">예제 7-15: 이름이 같은 두 개의 타입을 동일한 스코프에 가져오려면
 부모 모듈을 반드시 명시해야 합니다.</span>
 
 보시다시피 부모 모듈을 명시하여 두 개의 `Result` 타입을 구별하고 있습니다.
@@ -117,22 +117,22 @@ Listing 7-15는 각각 다른 모듈 내에 위치하지만 이름이 같은 두
 
 `use` 키워드로 동일한 이름의 타입을 스코프로 여러 개 가져올 경우의 또 다른 해결 방법이 있습니다.
 경로 뒤에 `as` 키워드를 작성하고, 새로운 이름이나 타입 별칭을 작성을 작성하면 됩니다.
-Listing 7-16은 `as` 키워드를 이용해 Listing 7-15 코드 내
+예제 7-16은 `as` 키워드를 이용해 예제 7-15 코드 내
 `Result` 타입 중 하나의 이름을 변경한 예제입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-16/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 7-16: 스코프 내로 가져온 타입의 이름을
+<span class="caption">예제 7-16: 스코프 내로 가져온 타입의 이름을
 `as` 키워드로 변경하기</span>
 
 두 번째 `use` 구문에서는, 앞서 스코프 내로 가져온
 `std::fmt`의 `Result` 와 충돌을 방지하기 위해
 `std::io::Result` 타입의 이름을 `IoResult` 로 새롭게 지정합니다.
-Listing 7-15, Listing 7-16은 둘 다 관용적인 방식이므로, 원하는 방식을 선택하시면 됩니다!
+예제 7-15, 예제 7-16은 둘 다 관용적인 방식이므로, 원하는 방식을 선택하시면 됩니다!
 
 ### `pub use` 로 다시 내보내기
 
@@ -143,16 +143,16 @@ Listing 7-15, Listing 7-16은 둘 다 관용적인 방식이므로, 원하는 �
 이 기법은 아이템을 스코프로 가져오는 동시에 다른 곳에서 아이템을 가져갈 수 있도록 만들기 때문에,
 *다시 내보내기(Re-exporting)* 라고 합니다.
 
-Listing 7-17은 Listing 7-11 코드의 `use`를 `pub use` 로
+예제 7-17은 예제 7-11 코드의 `use`를 `pub use` 로
 변경한 예제입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-17/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-17: 다른 스코프의 코드에서 사용할 수 있도록
+<span class="caption">예제 7-17: 다른 스코프의 코드에서 사용할 수 있도록
 `pub use` 사용</span>
 
 위의 변경 전이라면 외부 코드에서는 `add_to_waitlist` 함수를 호출하기 위해
@@ -185,7 +185,7 @@ Listing 7-17은 Listing 7-11 코드의 `use`를 `pub use` 로
 * ch14-03-cargo-workspaces.md
 -->
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
@@ -227,10 +227,10 @@ use std::collections::HashMap;
 
 동일한 크레이트나, 동일한 모듈 내에 정의된 아이템을 여럿 사용할 경우,
 각 아이템당 한 줄씩 코드를 나열하면 수직 방향으로 너무 많은 영역을 차지합니다.
-예시로 살펴봅시다. 추리 게임 Listing 2-4에서 작성했던
+예시로 살펴봅시다. 추리 게임 예제 2-4에서 작성했던
 다음 두 `use` 문은 `std` 내 아이템을 스코프로 가져옵니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-01-use-std-unnested/src/main.rs:here}}
@@ -239,15 +239,15 @@ use std::collections::HashMap;
 중첩 경로를 사용하면 한 줄로 작성할 수 있습니다.
 경로의 공통된 부분을 작성하고, `::` 와 중괄호 내에
 경로가 각각 다른 부분을 나열합니다.
-예시는 Listing 7-18와 같습니다.
+예시는 예제 7-18와 같습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 7-18: 중첩 경로를 사용해, 경로의 앞부분이 같은
+<span class="caption">예제 7-18: 중첩 경로를 사용해, 경로의 앞부분이 같은
 여러 아이템을 스코프로 가져오기</span>
 
 규모가 큰 프로그램이라면, 동일한 크레이트나 모듈에서 여러 아이템을 가져오는 데에
@@ -256,29 +256,29 @@ use std::collections::HashMap;
 
 중첩 경로는 경로의 모든 부위에서 사용할 수 있으며,
 하위 경로가 동일한 `use` 구문이 많을 때 특히 빛을 발합니다.
-다음 Listing 7-19는 두 `use` 구문의 예시입니다. 하나는 `std::io`를 스코프로 가져오고,
+다음 예제 7-19는 두 `use` 구문의 예시입니다. 하나는 `std::io`를 스코프로 가져오고,
 다른 하나는 `std::io::Write`를 스코프로 가져옵니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-19/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-19: 하위 경로가 같은
+<span class="caption">예제 7-19: 하위 경로가 같은
 두 `use` 구문</span>
 
 두 경로에서 중복되는 부분은 `std::io` 입니다.
 또한 `std::io`는  첫 번째 경로 그 자체이기도 합니다.
 중첩 경로에 `self`를 작성하면 두 경로를 하나의 `use` 구문으로 합칠 수 있습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-20/src/lib.rs}}
 ```
 
-<span class="caption">Listing 7-20: Listing 7-19의 두 경로를
+<span class="caption">예제 7-20: 예제 7-19의 두 경로를
 `use` 구문 하나로 합치기</span>
 
 한 줄로 `std::io`, `std::io::Write` 둘 다 스코프로 가져올 수 있습니다.

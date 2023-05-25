@@ -127,15 +127,15 @@
 어플리케이션 내에 집어넣거나, 이메일을 보내거나, 문자 메세지를 보내거나, 혹은 그
 밖의 것들을 할 수 있습니다. 라이브러리는 그런 자세한 사항을 알 필요가 없습니다.
 필요한 모든 것은 우리가 제공하게 될 `Messenger`라는 이름의 트레잇을 구현하는 것입니다.
-Listing 15-20는 라이브러리 코드를 보여줍니다:
+예제 15-20는 라이브러리 코드를 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-20/src/lib.rs}}
 ```
 
-<span class="caption">Listing 15-20: 어떤 값이 최대값에 얼마나 근접하는지를
+<span class="caption">예제 15-20: 어떤 값이 최대값에 얼마나 근접하는지를
 추적하고 특정 수준에 값이 있으면 경고해주는 라이브러리</span>
 
 이 코드에서 한가지 중요한 부분은 `Messenger` 트레잇이 `self`에 대한
@@ -153,16 +153,16 @@ Listing 15-20는 라이브러리 코드를 보여줍니다:
 언급하는 메세지만 추적할 목 객체가 필요합니다. 목 객체의 새 인스턴스를
 생성하고, 이 목 객체를 사용하는 `LimitTracker`를 만들고, `LimitTracker`의
 `set_value` 메서드를 호출한 다음, 목 객체가 예상한 메세지를 가지고
-있는지 검사할 수 있겠습니다. Listing 15-21이 바로 이런 일을 하기 위한
+있는지 검사할 수 있겠습니다. 예제 15-21이 바로 이런 일을 하기 위한
 목 객체 구현 시도이지만, 빌림 검사기가 이를 허용하지 않을 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-21/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 15-21: 빌림 검사기가 허용하지 않는
+<span class="caption">예제 15-21: 빌림 검사기가 허용하지 않는
 `MockMessenger` 구현 시도</span>
 
 이 테스트 코드는 보냈다고 알려주는 메세지를 추적하기 위한 `String`
@@ -197,16 +197,16 @@ Listing 15-20는 라이브러리 코드를 보여줍니다:
 
 지금이 내부 가변성의 도움을 받을 수 있는 상황입니다! `sent_messages`가
 `RefCell<T>` 내에 저장되게 하면, `send` 메서드는 `sent_message`를
-수정하여 우리에게 보여지는 메세지를 저장할 수 있게 될 것입니다. Listing
-15-22는 이것이 어떤 형태인지를 보여줍니다: 
+수정하여 우리에게 보여지는 메세지를 저장할 수 있게 될 것입니다. 예제 15-22는
+이것이 어떤 형태인지를 보여줍니다: 
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-22/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 15-22: `RefCell<T>`를 사용하여 바깥쪽에서는
+<span class="caption">예제 15-22: `RefCell<T>`를 사용하여 바깥쪽에서는
 불변으로 간주되는 한편 내부 값 변경하기</span>
 
 `sent_message` 필드는 이제 `Vec<String>` 대신 `RefCell<Vec<String>>`
@@ -244,24 +244,24 @@ Listing 15-20는 라이브러리 코드를 보여줍니다:
 
 만일 이 규칙들을 위반한다면, `RefCell<T>`의 구현체는 참조자에 대해 그렇게
 했을 때처럼 컴파일 에러를 내는 것이 아니라, 런타임에 `panic!`을 일으킬
-것입니다. Listing 15-23은 Listing 15-22의 `send` 구현을 수정한
+것입니다. 예제 15-23은 예제 15-22의 `send` 구현을 수정한
 것입니다. 고의로 같은 스코프에서 두 개의 가변 빌림을 만드는 시도를 하여
 `RefCell<T>`가 이렇게 하는 것을 런타임에 방지한다는 것을 보여주고
 있습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,panics
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-23/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 15-23: 두 개의 가변 참조자를 같은 스코프에서
+<span class="caption">예제 15-23: 두 개의 가변 참조자를 같은 스코프에서
 만들어서 `RefCell<T>`이 패닉을 일으키는 것을 보기</span>
 
 `borrow_mut`로부터 반환되는 `RefMut<T>` 스마트 포인터를 위한 `one_borrow`
 변수가 만들어졌습니다. 그런 다음 또다른 가변 빌림을 같은 방식으로 `two_borrow` 변수에
 만들어 넣었습니다. 이는 같은 스코프에 두개의 가변 참조자를 만드는 것이고, 허용되지
-않습니다. 라이브러리를 위한 테스트를 실행하면 Listing 15-23의 코드는 어떠한
+않습니다. 라이브러리를 위한 테스트를 실행하면 예제 15-23의 코드는 어떠한
 에러 없이 컴파일되겠지만, 테스트는 실패할 것입니다:
 
 ```console
@@ -290,21 +290,21 @@ Listing 15-20는 라이브러리 코드를 보여줍니다:
 것을 상기하세요. 만일 `RefCell<T>`을 들고 있는 `Rc<T>`를 가지게 되면, 변경
 가능*하면서* 복수의 소유자를 갖는 값을 얻을 수 있는 것이죠!
 
-예를 들면, Listing 15-18에서 `Rc<T>`를 사용하여 여러 개의 리스트가
+예를 들면, 예제 15-18에서 `Rc<T>`를 사용하여 여러 개의 리스트가
 어떤 리스트의 소유권을 공유하도록 해주는 cons 리스트 예제를 상기해보세요.
 `Rc<T>`가 오직 불변의 값만을 가질 수 있기 때문에, 일단 이것들을 만들면
 리스트 안의 값들을 변경하는 것은 불가능했습니다. `RefCell<T>`를 추가하여
-이 리스트 안의 값을 변경하는 능력을 얻어봅시다. Listing 15-24는 `Cons` 정의
+이 리스트 안의 값을 변경하는 능력을 얻어봅시다. 예제 15-24는 `Cons` 정의
 내에 `RefCell<T>`를 사용하는 것으로 모든 리스트 내에 저장된 값이 변경될 수
 있음을 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-24/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-24: `Rc<RefCell<i32>>`을 사용하여
+<span class="caption">예제 15-24: `Rc<RefCell<i32>>`을 사용하여
 변경 가능한 `List` 생성하기</span>
 
 먼저 `Rc<RefCell<i32>>`의 인스턴스 값을 생성하고 `value`라는 이름의 변수
@@ -315,7 +315,7 @@ Listing 15-20는 라이브러리 코드를 보여줍니다:
 소유권을 갖도록 할 필요가 있습니다.
 
 리스트 `a`는 `Rc<T>`로 감싸져서, `b`와 `c` 리스트를 만들 때는 둘 다 `a`를
-참조할 수 있는데, 이는 Listing 15-18에서 해본 것입니다.
+참조할 수 있는데, 이는 예제 15-18에서 해본 것입니다.
 
 `a`, `b`와 `c` 리스트가 생성된 이후, `value`의 값에 10을 더하려고
 합니다. 이는 `value`의 `borrow_mut`를 호출하는 식으로 수행되었는데,

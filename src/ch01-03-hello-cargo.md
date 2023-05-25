@@ -56,9 +56,9 @@ $ cd hello_cargo
 > 그 외의 다른 옵션들은 `cargo new --help` 로 확인할 수 있습니다.
 
 이제 텍스트 에디터로 *Cargo.toml* 을 열어보세요.
-Listing 1-2 처럼 나오면 정상입니다.
+예제 1-2 처럼 나오면 정상입니다.
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 [package]
@@ -71,7 +71,7 @@ edition = "2021"
 [dependencies]
 ```
 
-<span class="caption">Listing 1-2: `cargo new` 로 생성한
+<span class="caption">예제 1-2: `cargo new` 로 생성한
 *Cargo.toml* 파일의 내용</span>
 
 이 파일은 [*TOML*](https://toml.io)<!-- ignore --> (*Tom’s Obvious, Minimal
@@ -92,7 +92,7 @@ Language*) 포맷으로 되어있고, 이 포맷은 카고 설정에서 사용�
 
 이제 *src/main.rs*를 열어 살펴봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn main() {
@@ -101,7 +101,7 @@ fn main() {
 ```
 
 카고가 “Hello, world!” 프로그램을 만들어 놨네요.
-Listing 1-1에서 만든 프로젝트와 다른 점은
+예제 1-1에서 만든 프로젝트와 다른 점은
 이번엔 코드 위치가 *src* 디렉토리라는 점과
 최상위 디렉토리에 *Cargo.toml* 설정 파일이 존재한다는 점입니다.
 

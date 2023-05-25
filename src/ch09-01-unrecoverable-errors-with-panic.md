@@ -31,7 +31,7 @@
 
 단순한 프로그램 내에서 `panic!`을 호출해 봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,panics
 {{#rustdoc_include ../listings/ch09-error-handling/no-listing-01-panic/src/main.rs}}
@@ -61,16 +61,16 @@
 
 다른 예제를 통해서, 우리 코드가 직접 매크로를 호출하는 대신 우리
 코드의 버그 때문에 `panic!` 호출이 라이브러리로부터 발생할 때는
-어떻게 되는지 살펴봅시다. Listing 9-1은 유효한 인덱스 범위를 넘어선
+어떻게 되는지 살펴봅시다. 예제 9-1은 유효한 인덱스 범위를 넘어선
 인덱스로 벡터에 접근 시도하는 코드입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,panics
 {{#rustdoc_include ../listings/ch09-error-handling/listing-09-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 9-1: `panic!`을 일으키는 벡터의 끝을 넘어선
+<span class="caption">예제 9-1: `panic!`을 일으키는 벡터의 끝을 넘어선
 요소에 대한 접근 시도</span>
 
 여기서 우리는 벡터의 100번째 요소(0부터 시작하므로 99입니다)에 접근하기를
@@ -106,7 +106,7 @@ C에서 구조체의 끝을 넘어서 읽는 시도는 정의되지 않은 동�
 코드를 호출한 코드입니다. 이 전후의 줄에는 핵심(core) 러스트 코드, 표준
 라이브러리, 여러분이 이용하고 있는 크레이트가 포함될 수 있습니다.
 한번 `RUST_BACKTRACE` 환경변수를 0이 아닌 값으로 설정하여 백트레이스를
-얻어봅시다. Listing 9-2는 여러분이 보게 될 것과 유사한 출력을 나타냅니다.
+얻어봅시다. 예제 9-2는 여러분이 보게 될 것과 유사한 출력을 나타냅니다.
 
 <!-- manual-regeneration
 cd listings/ch09-error-handling/listing-09-01
@@ -138,7 +138,7 @@ stack backtrace:
 note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
 ```
 
-<span class="caption">Listing 9-2: 환경 변수 `RUST_BACKTRACE`가 설정되었을 때 `panic!`의
+<span class="caption">예제 9-2: 환경 변수 `RUST_BACKTRACE`가 설정되었을 때 `panic!`의
 호출에 의해 발생하는 백트레이스 출력</span>
 
 출력이 엄청 많군요! 여러분이 보는 실제 출력값은 여러분의 운영 체제 및
@@ -147,11 +147,11 @@ note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose bac
 여러분이 `cargo build`나 `cargo run`을 `--release` 플래그 없이 실행했을 때
 기본적으로 활성화됩니다.
 
-Listing 9-2 출력 내용은, 백트레이스의 6번 줄이 문제를 일으킨
+예제 9-2 출력 내용은, 백트레이스의 6번 줄이 문제를 일으킨
 우리 프로젝트의 *src/main.rs*, 4번 줄을 가리키고 있습니다.
 만일 프로그램이 패닉에 빠지지 않도록 하고 싶다면, 우리가 작성한
 파일이 언급된 첫 줄부터 조사해야 합니다. 고의로 패닉을 일으키도록
-코드를 작성한 Listing 9-1에서 패닉을 고칠 방법은, 범위를 벗어난
+코드를 작성한 예제 9-1에서 패닉을 고칠 방법은, 범위를 벗어난
 벡터 인덱스로 요소를 요청하지 않도록 하는 것입니다. 추후 여러분의
 코드에서 패닉이 발생할 때, 여러분은 어떤 코드가 패닉을 일으키는지,
 코드를 어떻게 고쳐야 할지를 알아야 합니다.

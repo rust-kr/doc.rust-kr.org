@@ -47,20 +47,20 @@ Problem parsing arguments: not enough arguments
 
 ### 표준 에러로 에러 출력하기
 
-에러 메세지 출력 방식을 변경하기 위해 Listing 12-24의 코드를 사용해
+에러 메세지 출력 방식을 변경하기 위해 예제 12-24의 코드를 사용해
 보겠습니다. 이 장에서 앞서 했던 리팩토링 덕분에 에러 메세지를 출력하는
 모든 코드는 단 하나의 함수 `main` 내에 있습니다. 표준 라이브러리는
 표준 에러 스트림으로 출력하는 `eprintln!` 매크로를 제공하므로, 에러
 출력을 위해 `println!`을 호출하고 있는 두 군데를 `eprintln!`로
 바꿔봅시다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-24/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-24: `eprintln!`를 사용하여 표준 출력 대신
+<span class="caption">예제 12-24: `eprintln!`를 사용하여 표준 출력 대신
 표준 에러로 에러 메세지 작성하기</span>
 
 이제 동일한 방식, 즉 아무런 인자 없이 `>`로 표준 출력을 리디렉션하여
@@ -84,7 +84,7 @@ $ cargo run -- to poem.txt > output.txt
 터미널에는 아무런 출력을 볼 수 없고, *output.txt*에는 결과물이
 담겨 있을 것입니다:
 
-<span class="filename">Filename: output.txt</span>
+<span class="filename">파일명: output.txt</span>
 
 ```text
 Are you nobody, too?

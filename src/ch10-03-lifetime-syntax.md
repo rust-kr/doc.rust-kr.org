@@ -23,17 +23,17 @@
 
 라이프타임의 주목적은 *댕글링 참조자(dangling reference)* 방지입니다.
 댕글링 참조자는 프로그램이 프로그래머가 의도한 데이터가 아닌
-엉뚱한 데이터를 참조하게 되는 원인입니다. Listing 10-16처럼
+엉뚱한 데이터를 참조하게 되는 원인입니다. 예제 10-16처럼
 내부 스코프와 외부 스코프를 갖는 프로그램을 생각해봅시다:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-16/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-16: 스코프 밖으로 벗어난 값을
+<span class="caption">예제 10-16: 스코프 밖으로 벗어난 값을
 참조하는 코드</span>
 
-> Note: Listings 10-16, 10-17, 10-23 예제는 변수를 초기 값 없이 선언하여,
+> Note: 예제 10-16, 10-17, 10-23 예제는 변수를 초기 값 없이 선언하여,
 > 스코프 밖에 변수명을 위치시킵니다.
 > null 값을 갖지 않는 러스트가 이런 형태의 코드를 허용하는 게 이상하다고 생각하실 수도 있지만,
 > 만약 값을 넣기 전에 변수를 사용하는 코드를 실제로 작성할 경우에는
@@ -62,14 +62,14 @@
 ### Borrow 검사기
 
 러스트 컴파일러는 *borrow 검사기* 로 스코프를 비교해 borrow의
-유효성을 판단합니다. Listing 10-17은 Listing 10-16 코드의
+유효성을 판단합니다. 예제 10-17은 예제 10-16 코드의
 변수 라이프타임을 주석으로 표시한 모습입니다:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-17/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-17: `r`, `x`의 라이프타임을 각각
+<span class="caption">예제 10-17: `r`, `x`의 라이프타임을 각각
 `'a`, `'b` 로 표현한 주석</span>
 
 `r`의 라이프타임은 `'a`, `x`의 라이프타임은 `'b` 로 표현했습니다.
@@ -79,14 +79,14 @@
 하지만 `'b`가 `'a` 보다 짧으니, 즉 참조 대상이 참조자보다
 오래 살지 못하니 러스트 컴파일러는 이 프로그램을 컴파일하지 않습니다.
 
-Listing 10-18는 댕글링 참조자를 만들지 않고 정상적으로
+예제 10-18는 댕글링 참조자를 만들지 않고 정상적으로
 컴파일되도록 수정한 코드입니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-18/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-18: 데이터의 라이프타임이
+<span class="caption">예제 10-18: 데이터의 라이프타임이
 참조자의 라이프타임보다 길어서 문제없는 코드</span>
 
 여기서 `x`의 라이프타임 `'b`는  `'a` 보다 더 깁니다.
@@ -101,35 +101,35 @@ Listing 10-18는 댕글링 참조자를 만들지 않고 정상적으로
 
 두 문자열 슬라이스 중 긴 쪽을 반환하는 함수를 작성해 보겠습니다.
 이 함수는 두 문자열 슬라이스를 전달받고 하나의 문자열 슬라이스를 반환합니다.
-`longest` 함수를 구현하고 나면 Listing 10-19 코드로
+`longest` 함수를 구현하고 나면 예제 10-19 코드로
 `The longest string is abcd`가 출력되어야 합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-19/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-19: 두 문자열 슬라이스 중 긴 쪽을 찾기 위해
+<span class="caption">예제 10-19: 두 문자열 슬라이스 중 긴 쪽을 찾기 위해
 `longest` 함수를 호출하는 `main` 함수</span>
 
 `longest` 함수가 매개변수의 소유권을 얻지 않도록, 문자열 대신
 참조자인 문자열 슬라이스를 전달한다는 점을 주목하세요.
-어째서 Listing 10-19처럼 문자열을
+어째서 예제 10-19처럼 문자열을
 매개변수로 전달하는지는 4장의
 ["문자열 슬라이스를 매개변수로 사용하기"][string-slices-as-parameters]<!-- ignore -->
 절을 참고해주세요.
 
-Listing 10-20처럼 `longest` 함수를 구현할 경우,
+예제 10-20처럼 `longest` 함수를 구현할 경우,
 컴파일 에러가 발생합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-20/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-20: 두 문자열 슬라이스 중
+<span class="caption">예제 10-20: 두 문자열 슬라이스 중
 긴 쪽을 반환하는 `longest` 함수
 (컴파일되지 않음)</span>
 
@@ -149,7 +149,7 @@ Listing 10-20처럼 `longest` 함수를 구현할 경우,
 함수가 전달받을 구체적인 값을 알 수 없으니,
 `if` 케이스가 실행될지 `else` 케이스가 실행될지도 알 수 없습니다.
 전달받는 참조자의 구체적인 라이프타임도 알 수 없습니다.
-그러니 Listing 10-17, Listing 10-18에서처럼 스코프를 살펴보는 것만으로는
+그러니 예제 10-17, 예제 10-18에서처럼 스코프를 살펴보는 것만으로는
 우리가 반환할 참조자의 유효성을 확신할 수 없습니다.
 borrow 검사기도 `x`, `y` 라이프타임이 반환 값의 라이프타임과
 어떤 연관이 있는지 알지 못하니 마찬가지입니다.
@@ -194,20 +194,20 @@ borrow 검사기가 분석할 수 있도록 해야 합니다.
 시그니처에서는 다음과 같은 제약사항을 표현하려고 합니다: 두 매개변수의
 참조자 모두가 유효한 동안에는 반환된 참조자도 유효할 것이라는 점이지요.
 이는 매개변수들과 반환값의 라이프타임 간의 관계입니다.
-Listing 10-21와 같이 이 라이프타임에 `'a`라는 이름을 붙여
+예제 10-21와 같이 이 라이프타임에 `'a`라는 이름을 붙여
 각 참조자에 추가하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-21: 시그니처 내 모든 참조자가
+<span class="caption">예제 10-21: 시그니처 내 모든 참조자가
 동일한 라이프타임 `'a`를 가져야 함을 나타낸 `longest` 함수
 정의</span>
 
-이 코드는 정상적으로 컴파일되며, Listing 10-19의 `main` 코드로
+이 코드는 정상적으로 컴파일되며, 예제 10-19의 `main` 코드로
 실행하면 우리가 원했던 결과가 나옵니다.
 
 이 함수 시그니처는 러스트에게, 함수는 두 매개변수를 갖고 
@@ -246,16 +246,16 @@ Listing 10-21와 같이 이 라이프타임에 `'a`라는 이름을 붙여
 참조자의 유효함을 보장할 수 있습니다.
 
 서로 다른 구체적인 라이프타임을 가진 참조자를 `longest` 함수에 넘겨보면서,
-라이프타임 명시가 어떤 효과를 내는지 알아봅시다. Listing 10-22에
+라이프타임 명시가 어떤 효과를 내는지 알아봅시다. 예제 10-22에
 간단한 예제가 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-22: 서로 다른 구체적인 라이프타임을 가진
+<span class="caption">예제 10-22: 서로 다른 구체적인 라이프타임을 가진
 `String` 값의 참조자로 `longest` 함수 호출하기</span>
 
 `string1`은  바깥쪽 스코프가 끝나기 전까지,
@@ -270,15 +270,15 @@ Listing 10-21와 같이 이 라이프타임에 `'a`라는 이름을 붙여
 값의 대입은 `string2`가 있는 안쪽 스코프에 남겨보겠습니다.
 그리고 `result`를 사용하는 `println!` 구문을 안쪽 스코프가
 끝나고 난 이후의 바깥쪽 스코프로 옮겨보겠습니다.
-이렇게 수정한 Listing 10-23 코드는 컴파일할 수 없습니다.
+이렇게 수정한 예제 10-23 코드는 컴파일할 수 없습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-23/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-24: `string2`가 스코프 밖으로 벗어나고 나서
+<span class="caption">예제 10-24: `string2`가 스코프 밖으로 벗어나고 나서
 `result` 사용해보기</span>
 
 컴파일하면 다음과 같은 에러가 발생합니다:
@@ -298,7 +298,7 @@ Listing 10-21와 같이 이 라이프타임에 `'a`라는 이름을 붙여
 `string1`의 참조자는 유효하니까요. 하지만 컴파일러는 이 점을 알아챌 수 없습니다.
 우리가 러스트에 전달한 건 '`longest` 함수가 반환할 참조자의 라이프타임은
 매개변수의 라이프타임 중 작은 것과 동일하다' 라는 내용이었으니,
-borrow 검사기는 Listing 10-23 코드가 잠재적으로 유효하지 않은 참조자를
+borrow 검사기는 예제 10-23 코드가 잠재적으로 유효하지 않은 참조자를
 가질 수도 있다고 판단합니다.
 
 `longest` 함수에 다양한 값, 다양한 라이프타임의 참조자를 넘겨보고,
@@ -314,7 +314,7 @@ borrow 검사기는 Listing 10-23 코드가 잠재적으로 유효하지 않은 
 그러면 이제 `y` 매개변수에는 라이프타임을 지정할 필요가 없습니다.
 다음 코드는 정상적으로 컴파일됩니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-08-only-one-reference-with-lifetime/src/main.rs:here}}
@@ -332,7 +332,7 @@ borrow 검사기는 Listing 10-23 코드가 잠재적으로 유효하지 않은 
 될 것입니다. 다음과 같이 `longest` 함수를 구현하면 컴파일할 수
 없습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/src/main.rs:here}}
@@ -364,23 +364,23 @@ borrow 검사기는 Listing 10-23 코드가 잠재적으로 유효하지 않은 
 
 여태까지 우리가 정의해 본 구조체들은 모두 소유권 있는 타입을 들고 있었습니다.
 구조체가 참조자를 들고 있도록 할 수도 있지만, 이 경우 구조체 정의 내 모든
-참조자에 라이프타임을 명시해야합니다. Listing 10-24는 문자열 슬라이스를
+참조자에 라이프타임을 명시해야합니다. 예제 10-24는 문자열 슬라이스를
 보유하는 `ImportantExcerpt` 구조체를 나타냅니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-24: 참조자를 보유하여
+<span class="caption">예제 10-24: 참조자를 보유하여
 라이프타임 명시가 필요한 구조체</span>
 
 이 구조체는 문자열 슬라이스를 보관하는 `part` 참조자 필드 하나를 갖습니다.
 선언 방법은 제네릭 데이터 타입과 마찬가지입니다.
 제네릭 라이프타임 매개변수 이름을 구조체 이름 뒤 꺾쇠괄호 내에 선언하고
 구조체 정의 본문에서 라이프타임 매개변수를 이용합니다.
-Listing 10-25의 라이프타임 명시는 '`ImportantExcerpt` 인스턴스는
+예제 10-25의 라이프타임 명시는 '`ImportantExcerpt` 인스턴스는
 `part` 필드가 보관하는 참조자의 라이프타임만큼 살아있다' 라는 의미입니다.
 
 `main` 함수에서는 `novel` 변수가 소유하는 `String`의
@@ -394,16 +394,16 @@ Listing 10-25의 라이프타임 명시는 '`ImportantExcerpt` 인스턴스는
 
 여러분은 모든 참조자는 라이프타임을 가지며, 참조자를 사용하는 함수나
 구조체는 라이프타임 매개변수를 명시해야 한다고 배웠습니다.
-하지만 4장에서 본 Listing 4-9의 함수(Listing 10-25에서 다시 보여드립니다)는
+하지만 4장에서 본 예제 4-9의 함수(예제 10-25에서 다시 보여드립니다)는
 라이프타임 명시가 없음에도 컴파일 할 수 있습니다. 어찌 된 일일까요?
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-25/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-25: 4장에서 정의했던,
+<span class="caption">예제 10-25: 4장에서 정의했던,
 매개변수, 반환 타입이 참조자인데도 라이프타임 명시 없이
 컴파일 가능한 함수</span>
 
@@ -463,7 +463,7 @@ borrow 검사기가 추론할 수 있도록 하였습니다.
 `self`의 라이프타임이 모든 출력 라이프타임 매개변수에 대입됩니다.
 이 규칙은 메서드 코드를 깔끔하게 만드는 데 기여합니다.
 
-한번 우리가 컴파일러라고 가정해보고, Listing 10-25의
+한번 우리가 컴파일러라고 가정해보고, 예제 10-25의
 `first_word` 함수 시그니처 속 참조자의 라이프타임을
 이 규칙들로 알아내 봅시다. 시그니처는 참조자에 관련된
 어떤 라이프타임 명시도 없이 시작됩니다:
@@ -492,7 +492,7 @@ fn first_word<'a>(s: &'a str) -> &'a str {
 컴파일러는 프로그래머에게 이 함수의 라이프타임 명시를 요구하지 않고도
 계속 코드를 분석할 수 있습니다.
 
-이번엔 다른 예제로 해보죠. Listing 10-20 에서의 아무런 라이프타임
+이번엔 다른 예제로 해보죠. 예제 10-20 에서의 아무런 라이프타임
 매개변수 없는 `longest` 함수를 이용해보겠습니다:
 
 ```rust,ignore
@@ -509,7 +509,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &str {
 입력 라이프타임이 하나가 아니니 두 번째 규칙은 적용하지 않습니다.
 `longest` 함수는 메서드가 아니니, 세 번째 규칙도 적용할 수 없습니다.
 세 가지 규칙을 모두 적용했는데도 반환 타입의 라이프타임을 알아내지 못했습니다.
-Listing 10-20의 코드를 컴파일하면 에러가 발생하는 이유가 바로 이 때문입니다.
+예제 10-20의 코드를 컴파일하면 에러가 발생하는 이유가 바로 이 때문입니다.
 컴파일러가 라이프타임 생략 규칙을 적용해보았지만,
 이 시그니처 내 모든 참조자의 라이프타임을
 알아내지 못했습니다.
@@ -521,7 +521,7 @@ Listing 10-20의 코드를 컴파일하면 에러가 발생하는 이유가 바�
 ### 메서드 정의에서 라이프타임 명시하기
 
 라이프타임을 갖는 메서드를 구조체에 구현하는 문법은
-Listing 10-11에서 본 제네릭 타입 매개변수 문법과 같습니다.
+예제 10-11에서 본 제네릭 타입 매개변수 문법과 같습니다.
 라이프타임 매개변수를 선언하고 사용하는 위치는
 구조체 필드나 메서드 매개변수 및 반환 값과 연관이 있느냐 없느냐에 따라 달라집니다.
 
@@ -533,7 +533,7 @@ Listing 10-11에서 본 제네릭 타입 매개변수 문법과 같습니다.
 참조자의 라이프타임과 관련되어있을 수도 있고, 독립적일 수도 있습니다.
 게다가 라이프타임 생략 규칙으로 인해 메서드 시그니처에
 라이프타임을 명시하지 않아도 되는 경우도 있습니다.
-Listing 10-24의 `ImportantExcerpt` 구조체로 예시를 들어보겠습니다.
+예제 10-24의 `ImportantExcerpt` 구조체로 예시를 들어보겠습니다.
 
 먼저 `level` 이라는 메서드가 있습니다.
 이 메서드의 매개변수는 `self` 참조자 하나뿐이며, 반환 값은 참조자가 아닌 그냥 `i32` 값입니다.
@@ -588,7 +588,7 @@ let s: &'static str = "I have a static lifetime.";
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-11-generics-traits-and-lifetimes/src/main.rs:here}}
 ```
 
-Listing 10-21에서 본 두 개의 문자열 슬라이스 중 긴 쪽을 반환하는
+예제 10-21에서 본 두 개의 문자열 슬라이스 중 긴 쪽을 반환하는
 `longest` 함수입니다. 하지만 이번에는 `where` 구문에 명시한 바와 같이
 `Display` 트레잇을 구현하는 제네릭 타입 `T` 타입의 `ann` 매개변수를
 추가했습니다. 이 추가 매개변수는 `{}`를 사용하여 출력될 것인데,

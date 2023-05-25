@@ -11,39 +11,39 @@
 
 ### 순환 참조 만들기
 
-Listing 15-25의 `List` 열거형과 `tail` 메서드 정의를 시작으로
+예제 15-25의 `List` 열거형과 `tail` 메서드 정의를 시작으로
 어떻게 순환 참조가 생길 수 있고, 이를 어떻게 방지하는지
 알아봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-25/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-25: `RefCell<T>`를 가지고 있어서
+<span class="caption">예제 15-25: `RefCell<T>`를 가지고 있어서
 `Cons` 배리언트가 참조하는 것을 변경할 수 있는 cons 리스트 정의</span>
 
-Listing 15-5의 `List` 정의의 또다른 변형이 이용되고 있습니다.
+예제 15-5의 `List` 정의의 또다른 변형이 이용되고 있습니다.
 이제 `Cons` 배리언트 내의 두번째 요소는 `RefCell<Rc<List>>`인데,
-이는 Listing 15-24에서 했던 것처럼 `i32` 값을 변경하는 능력을 갖는 대신,
+이는 예제 15-24에서 했던 것처럼 `i32` 값을 변경하는 능력을 갖는 대신,
 `Cons` 배리언트가 가리키고 있는 `List` 값을 변경하길 원한다는 의미입니다.
 또한 `tail` 메서드를 추가하여 `Cons` 배리언트를 갖고 있다면 두번째 아이템에
 접근하기 편하게 만들었습니다.
 
-Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하고 있습니다.
+예제 15-26에서는 예제 15-25에서 사용한 `main` 함수를 추가하고 있습니다.
 이 코드는 `a`에 리스트를 만들고 `b`에는 `a`의 리스트를 가리키고 있는 리스트를
 만들어 넣었습니다. 그 다음 `a`의 리스트가 `b`를 가리키도록 수정하는데, 이것이
 순환 참조를 생성합니다. 이 과정에서 참조 카운트가 얼마인지 여러 곳에서 확인하기
 위해 곳곳에 `println!` 구문들을 넣었습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-26/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-26: 두 개의 `List` 값이 서로를 가리키는
+<span class="caption">예제 15-26: 두 개의 `List` 값이 서로를 가리키는
 순환 참조 생성하기</span>
 
 초기값 리스트 `5, Nil`를 가진 `List` 값을 갖는 `Rc<List>` 인스턴스를
@@ -72,12 +72,12 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 `Rc<List>` 인스턴스가 가진 참조 카운트를 2에서 1로 줄입니다. 이 인스턴스의
 메모리 또한 버러질 수 없는데, 왜냐하면 이쪽의 `Rc<List>` 인스턴스도 여전히
 무언가를 참조하기 때문입니다. 리스트에 할당된 메모리는 정리되지 않은 채
-영원히 남을 것입니다. 이러한 순환 참조를 시각화하기 위해 Figure 15-4의
+영원히 남을 것입니다. 이러한 순환 참조를 시각화하기 위해 그림 15-4의
 다이어그램을 만들었습니다.
 
 <img alt="Reference cycle of lists" src="img/trpl15-04.svg" class="center" />
 
-<span class="caption">Figure 15-4: 리스트 `a`와 `b`가 서로를 가리키고
+<span class="caption">그림 15-4: 리스트 `a`와 `b`가 서로를 가리키고
 있는 순환 참조</span>
 
 만일 여러분이 마지막 `println!`의 주석을 해제하고 프로그램을 실행해보면, 러스트는
@@ -103,7 +103,7 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 참조자는 소유권을 갖고 어떤 참조자는 그렇지 않도록 하는 것입니다.
 결과적으로 몇 개의 소유권 관계와 몇 개의 소유권 없는 관계로 이루어진
 순환을 만들수 있으며, 소유권 관계들만이 값을 버릴지 말지에 관해
-영향을 주게 됩니다. Listing 15-25에서는 `Cons` 배리언트가 언제나
+영향을 주게 됩니다. 예제 15-25에서는 `Cons` 배리언트가 언제나
 리스트를 소유하기를 원하므로, 데이터 구조를 재구성하는 것은 불가능합니다.
 부모 노드와 자식 노드로 구성된 그래프를 이용한 예제를 살펴보면서
 소유권 없는 관계가 순환 참조를 방지하는 적절한 방법이 되는 때가
@@ -147,7 +147,7 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 보겠습니다. `i32`값과 함께 자식 `Node` 값들의 참조자들도 가지고 있는 `Node`라는
 이름의 구조체를 만들겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-27/src/main.rs:here}}
@@ -159,17 +159,17 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 다른 노드의 자식이 되도록 수정하려고 `Vec<Rc<Node>>`를 `RefCell<T>`로
 감싼 `children`을 갖도록 하였습니다.
 
-그 다음 Listing 15-27처럼 이 구조체 정의를 이용하여 3 값과 자식 노드가 없는
+그 다음 예제 15-27처럼 이 구조체 정의를 이용하여 3 값과 자식 노드가 없는
 `leaf`라는 이름의 `Node` 인스턴스, 그리고 5 값과 `leaf`를 자식으로 갖는
 `branch`라는 이름의 인스턴스를 만들도록 하겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-27/src/main.rs:there}}
 ```
 
-<span class="caption">Listing 15-27: 자식이 없는 `leaf` 노드와
+<span class="caption">예제 15-27: 자식이 없는 `leaf` 노드와
 이 `leaf`를 자식으로 갖는 `branch` 노드 만들기</span>
 
 `leaf`의 `Rc<Node>`를 복제하여 이를 `branch` 내에 저장했는데, 이는 `leaf`에
@@ -197,26 +197,26 @@ Listing 15-26에서는 Listing 15-25에서 사용한 `main` 함수를 추가하�
 이용하여 `parent`의 타입을 만들겠습니다. 이제 `Node` 구조체 정의는 아래와
 같이 생겼습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-28/src/main.rs:here}}
 ```
 
 노드는 자신의 부모 노드를 참조할 수 있게 되겠지만 그 부모를 소유하지는 않습니다.
-Listing 15-28에서는 `main`을 갱신하여 이 새로운 정의를 사용하도록 해서 `leaf`
+예제 15-28에서는 `main`을 갱신하여 이 새로운 정의를 사용하도록 해서 `leaf`
 노드가 자신의 부모인 `branch`를 참조할 수 있는 방법을 갖도록 합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-28/src/main.rs:there}}
 ```
 
-<span class="caption">Listing 15-28: 부모 노드 `branch`의 약한 참조를
+<span class="caption">예제 15-28: 부모 노드 `branch`의 약한 참조를
 갖는 `leaf` 노드</span>
 
-`leaf` 노드를 만드는 것이 `parent` 필드를 제외하고는 Listing 15-27와
+`leaf` 노드를 만드는 것이 `parent` 필드를 제외하고는 예제 15-27와
 비슷해 보입니다: `leaf`는 부모없이 시작되서, 새 비어있는 `Weak<Node>`
 참조자 인스턴스를 생성하였습니다.
 
@@ -239,7 +239,7 @@ leaf parent = None
 
 `leaf`의 부모를 다시 한번 출력할 때는 `branch`를 가지고 있는 `Some` 배리언트를
 얻게될 것입니다: 이제 `leaf`는 자신의 부모에 접근할 수 있습니다! `leaf`를 출력할
-때 Listing 15-26에서와 같이 궁극적으로 스택 오버플로우로 끝나버리는 그 순환 문제도
+때 예제 15-26에서와 같이 궁극적으로 스택 오버플로우로 끝나버리는 그 순환 문제도
 피하게 되었습니다; `Weak<Node>` 참조자는 `(Weak)`로 출력됩니다:
 
 ```text
@@ -258,15 +258,15 @@ children: RefCell { value: [] } }] } })
 `Rc<Node>` 인스턴스의 `strong_count`와 `weak_count` 값이 어떻게
 변하는지 살펴봅시다. 그렇게 하면 `branch`가 만들어질 때와, 그 후 스코프
 밖으로 벗어났을 때 어떤일이 생기는지 알 수 있습니다. 수정본은
-Listing 15-29와 같습니다:
+예제 15-29와 같습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-29/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-29: Creating `branch` in an inner scope and
+<span class="caption">예제 15-29: Creating `branch` in an inner scope and
 examining strong and weak reference counts</span>
 
 `leaf`가 생성된 다음, 이것의 `Rc<Node>`는 강한 참조 카운트 1개와 약한 참조 카운트

@@ -30,17 +30,17 @@ $ cargo new hello
 $ cd hello
 ```
 
-이제 Listing 20-1의 코드를 *src/main.rs*에 입력하여 시작하세요. 이 코드는
+이제 예제 20-1의 코드를 *src/main.rs*에 입력하여 시작하세요. 이 코드는
 로컬 주소 `127.0.0.1:7878`에서 들어오는 TCP 스트림을 수신 대기할 것입니다.
 들어오는 스트림을 받으면 `Connection established!`을 출력합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 20-1: 들어오는 스트림 수신 대기하기 및
+<span class="caption">예제 20-1: 들어오는 스트림 수신 대기하기 및
 스트림을 받았을 때 메세지 출력하기</span>
 
 `TcpListener`를 사용하면 `127.0.0.1:7878` 주소에서 TCP 연결을 수신 대기할
@@ -78,7 +78,7 @@ $ cd hello
 
 현재의 스트림 처리는 스트림에 에러가 있는 경우 'unwrap'을
 호출하여 프로그램을 종료합니다; 에러가 없으면 프로그램은 메시지를
-출력합니다. 다음 Listing에서 성공 사례에 대한 더 많은 기능을
+출력합니다. 다음 예제에서 성공 사례에 대한 더 많은 기능을
 추가하겠습니다. 클라이언트가 서버에 연결할 때 `incoming` 메서드에서
 에러가 발생할 수 있는 이유는 실제로는 연결에 대한 반복작업이
 아니기 때문입니다. 대신 *연결 시도*에 대한 반복작업을 하고
@@ -125,15 +125,15 @@ Connection established!
 연결 처리를 위한 새로운 함수를 시작하겠습니다. 이 새로운
 `handle_connection` 함수에서는 TCP 스트림에서 데이터를 읽고
 출력하여 브라우저에서 전송되는 데이터를 볼 수 있도록 하겠습니다.
-코드를 Listing 20-2와 같이 변경하세요.
+코드를 예제 20-2와 같이 변경하세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-02/src/main.rs}}
 ```
 
-<span class="caption">Listing 20-2: `TcpStream`을 읽고 데이터
+<span class="caption">예제 20-2: `TcpStream`을 읽고 데이터
 출력하기</span>
 
 스트림에서 읽고 쓸 수 있는 트레잇과 타입에 접근하기 위해서
@@ -270,16 +270,16 @@ HTTP/1.1 200 OK\r\n\r\n
 상태 코드 200은 표준 성공 응답입니다. 텍스트는 작은 HTTP
 성공 응답입니다. 이것을 요청 성공에 대한 응답으로 스트림에
 작성해 봅시다! `handle_connection` 함수에서 요청 데이터를
-출력했던 `println!`을 제거하고 Listing 20-3의 코드로
+출력했던 `println!`을 제거하고 예제 20-3의 코드로
 바꾸세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-3: 작은 HTTP 성공 응답을 스트림에
+<span class="caption">예제 20-3: 작은 HTTP 성공 응답을 스트림에
 작성하기</span>
 
 새롭게 작성한 첫 번째 라인은 성공 메시지의 데이터를 담고 있는 `response`
@@ -299,35 +299,35 @@ HTTP/1.1 200 OK\r\n\r\n
 
 빈 페이지 그 이상의 것을 반환하는 기능을 구현해 봅시다. *src* 디렉토리
 말고 프로젝트 루트 디렉토리에 *hello.html* 파일을 새로 만듭니다.
-여러분이 원하는 HTML을 여기 입력할 수 있습니다; Listing 20-4는
+여러분이 원하는 HTML을 여기 입력할 수 있습니다; 예제 20-4는
 한 가지 예시를 보여줍니다.
 
-<span class="filename">Filename: hello.html</span>
+<span class="filename">파일명: hello.html</span>
 
 ```html
 {{#include ../listings/ch20-web-server/listing-20-05/hello.html}}
 ```
 
-<span class="caption">Listing 20-4: 응답에 넣기 위한 샘플
+<span class="caption">예제 20-4: 응답에 넣기 위한 샘플
 HTML 파일</span>
 
 이것은 제목과 텍스트 약간이 포함된 최소한의 HTML5 문서입니다. 요청이
-수신될 때 서버에서 이걸 반환하기 위해서 Listing 20-5에 나온 것처럼
+수신될 때 서버에서 이걸 반환하기 위해서 예제 20-5에 나온 것처럼
 `handle_connection`을 수정하여 HTML 파일을 읽고 응답에 본문으로 추가한
 후 전송하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-5: *hello.html*의 내용을 응답의
+<span class="caption">예제 20-5: *hello.html*의 내용을 응답의
 본문으로 보내기</span>
 
 `use` 구문에 `fs`를 추가하여 표준 라이브러리의 파일 시스템 모듈을
 스코프 안으로 가져왔습니다. 파일의 내용을 문자열로 읽는 코드는
-익숙할 것입니다; 12장 I/O 프로젝트의 Listing 12-4에서 파일
+익숙할 것입니다; 12장 I/O 프로젝트의 예제 12-4에서 파일
 내용을 읽을 때 이 코드를 사용했습니다.
 
 다음으로 `format!`을 사용하여 파일의 내용을 성공 응답의 본문으로
@@ -351,25 +351,25 @@ HTML 파일</span>
 현재 우리의 웹 서버는 클라이언트가 무엇을 요청하든 파일에 있는
 HTML을 반환합니다. HTML 파일을 반환하기 전에 브라우저가 */*를
 요청하고 있는지 확인하고 브라우저가 다른 것을 요청하면 오류를 반환하는
-기능을 추가해 봅시다. 이를 위해 Listing 20-6에 나온 것처럼 `handle_connection`을
+기능을 추가해 봅시다. 이를 위해 예제 20-6에 나온 것처럼 `handle_connection`을
 수정할 필요가 있습니다. 이 새로운 코드는 알고 있는 */*에 대한 요청의
 생김새와 수신된 요청의 내용을 비교 검사하고 요청을 다르게 처리하기 위해
 `if`와 `else` 블록을 추가합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-6: */*에 대한 요청과 다른 요청을
+<span class="caption">예제 20-6: */*에 대한 요청과 다른 요청을
 다르게 처리하기</span>
 
 HTTP 요청의 첫 번째 라인만 살펴볼 것이므로, 전체 요청을 벡터로
 읽는 대신 `next`를 호출하여 이터레이터에서 첫 번째 아이템을
 가져옵니다. 첫 번째 `unwrap`은 `Option`을 처리하고 반복자에
 아이템이 없으면 프로그램을 중지시킵니다. 두 번째 `unwrap`은
-`Result`를 처리하며 Listing 20-2에 추가된 `map`에 있던 `unwrap`과
+`Result`를 처리하며 예제 20-2에 추가된 `map`에 있던 `unwrap`과
 동일한 효과를 갖습니다.
 
 다음으로 `request_line`을 검사하여 이것이 */* 경로에 대한 GET 요청
@@ -382,36 +382,36 @@ HTTP 요청의 첫 번째 라인만 살펴볼 것이므로, 전체 요청을 벡
 
 이제 이 코드를 실행하고 *127.0.0.1:7878*를 요청해보세요; *hello.html*의
 HTML이 나올 것입니다. 만일 *127.0.0.1:7878/something-else*과 같은
-다룬 요청을 한다면, Listing 20-1과 Listing 20-2에서 실행했을 때
+다룬 요청을 한다면, 예제 20-1과 예제 20-2에서 실행했을 때
 보았던 연결 에러가 나타날 것입니다.
 
 이제 요청에 대한 내용을 찾을 수 없다는 것을 나타내는 신호인 상태
-코드 404를 반환하기 위해서, Listing 20-7의 코드를 `else` 블록에
+코드 404를 반환하기 위해서, 예제 20-7의 코드를 `else` 블록에
 추가해 봅시다. 브라우저에서 렌더링하여 최종 사용자에 대한 응답을
 나타내는 HTML 페이지도 반환하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-7: */* 이외의 요청이 들어올 때
+<span class="caption">예제 20-7: */* 이외의 요청이 들어올 때
 상태 코드 404와 에러 페이지로 응답하기</span>
 
 여기서 응답에는 상태 코드 404와 `NOT FOUND`이라는 이유 문구가 있는 상태
 라인이 있습니다. 응답 본문은 *404.html* 파일에 있는 HTML이 될 것입니다.
 에러 페이지의 *hello.html*과 같은 위치에 *404.html* 파일을 만들어야 합니다;
-다시 한번 말하건데, 원하는 HTML을 사용해도 되고 Listing 20-8의 예제 HTML을
+다시 한번 말하건데, 원하는 HTML을 사용해도 되고 예제 20-8의 예제 HTML을
 사용해도 됩니다.
 
-<span class="filename">Filename: 404.html</span>
+<span class="filename">파일명: 404.html</span>
 
 ```html
 {{#include ../listings/ch20-web-server/listing-20-07/404.html}}
 ```
 
-<span class="caption">Listing 20-8: 모든 404 응답과 함께 보내지는
+<span class="caption">예제 20-8: 모든 404 응답과 함께 보내지는
 페이지를 위한 샘플 내용</span>
 
 이 변경을 적용하여 서버를 다시 실행하세요. *127.0.0.1:7878*을 요청하면
@@ -426,16 +426,16 @@ HTML이 나올 것입니다. 만일 *127.0.0.1:7878/something-else*과 같은
 상태 라인과 파일 이름의 값을 변수에 할당하는 별도의 `if`와
 `else` 라인으로 분리하여 코드를 더 간결하게 만들어봅시다;
 그렇게 하면 파일을 읽고 응답을 작성하는 코드에서 해당 변수를
-조건에 상관없이 사용할 수 있습니다. Listing 20-9는 거대한
+조건에 상관없이 사용할 수 있습니다. 예제 20-9는 거대한
 `if`와 `else` 블록을 교체한 후의 코드를 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,no_run
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-9: 두 경우의 차이에 대한 코드만 담은
+<span class="caption">예제 20-9: 두 경우의 차이에 대한 코드만 담은
 `if`와 `else` 블록으로 리팩토링하기</span>
 
 이제 `if`와 `else` 블록은 상태 라인과 파일 이름에 대한
@@ -447,8 +447,8 @@ HTML이 나올 것입니다. 만일 *127.0.0.1:7878/something-else*과 같은
 `status_line`과 `filename` 변수를 사용합니다. 이렇게 하면
 두 경우의 차이를 더 쉽게 확인할 수 있으며, 이는 파일 읽기와
 응답 작성하기의 작동 방식을 변경하려는 경우 코드를 업데이트할
-위치가 한 곳뿐이라는 의미입니다. Listing 20-9의 코드 동작은
-Listing 20-8의 코드 동작과 동일합니다.
+위치가 한 곳뿐이라는 의미입니다. 예제 20-9의 코드 동작은
+예제 20-8의 코드 동작과 동일합니다.
 
 멋지군요! 이제 하나의 요청에 대해서는 콘텐츠 페이지로 응답하고, 다른
 모든 요청에는 404 응답으로 응답하는 약 40 라인의 러스트 코드로 구성된

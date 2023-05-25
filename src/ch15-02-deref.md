@@ -25,17 +25,17 @@ Deref 트레잇을 구현하는 것은 *역참조 연산자 (dereference operato
 ### 포인터를 따라가서 값을 얻기
 
 보통의 참조자는 포인터의 한 종류이고, 포인터에 대해 생각하는 방법 하나는
-어딘가에 저장된 값을 가리키는 화살표처럼 생각하는 것입니다. Listing 15-6에서는
+어딘가에 저장된 값을 가리키는 화살표처럼 생각하는 것입니다. 예제 15-6에서는
 `i32` 값의 참조자를 생성하고는 역참조 연산자를 사용하여 참조자를 따라가서 값을
 얻어냅니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-6: 역참조 연산자를 사용하여 `i32` 값에 대한 참조자
+<span class="caption">예제 15-6: 역참조 연산자를 사용하여 `i32` 값에 대한 참조자
 따라가기</span>
 
 변수 `x`는 `i32` 값 `5`를 가지고 있습니다. `y`에는 `x`의 참조자를 설정했습니다.
@@ -58,21 +58,21 @@ Deref 트레잇을 구현하는 것은 *역참조 연산자 (dereference operato
 
 ### `Box<T>`를 참조자처럼 사용하기
 
-Listing 15-6의 코드는 참조자 대신 `Box<T>`를 사용하여 다시 작성할
-수 있습니다; Listing 15-7의 `Box<T>`에 사용된 역참조 연산자는
-Listing 15-6의 참조자에 사용된 역참조 연산자와 동일한 방식으로
+예제 15-6의 코드는 참조자 대신 `Box<T>`를 사용하여 다시 작성할
+수 있습니다; 예제 15-7의 `Box<T>`에 사용된 역참조 연산자는
+예제 15-6의 참조자에 사용된 역참조 연산자와 동일한 방식으로
 기능합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-7: `Box<i32>`에 역참조 연산자
+<span class="caption">예제 15-7: `Box<i32>`에 역참조 연산자
 사용하기</span>
 
-여기서 Listing 15-7와 Listing 15-6 간의 주요 차이점은 `y`에 `x`의
+여기서 예제 15-7와 예제 15-6 간의 주요 차이점은 `y`에 `x`의
 값을 가리키는 참조자가 아닌 `x`의 복제된 값을 가리키는 `Box<T>`의
 인스턴스를 설정했다는 것입니다. 마지막 단언문에서 `y`가 참조자일 때
 했던 것과 동일한 방식으로 박스 포인터 앞에 역참조 연산자를 사용할 수
@@ -88,34 +88,34 @@ Listing 15-6의 참조자에 사용된 역참조 연산자와 동일한 방식�
 살펴보겠습니다.
 
 `Box<T>` 타입은 궁극적으로 하나의 요소를 가진 튜플 구조체로 정의되므로,
-Listing 15-8에서 `MyBox<T>` 타입을 동일한 방식으로 정의했습니다. 또한
+예제 15-8에서 `MyBox<T>` 타입을 동일한 방식으로 정의했습니다. 또한
 `Box<T>`에 정의된 `new` 함수와 짝을 이루는 `new` 함수도 정의하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-8: `MyBox<T>` 타입 정의하기</span>
+<span class="caption">예제 15-8: `MyBox<T>` 타입 정의하기</span>
 
 `MyBox`라는 이름의 구조체를 정의하고 제네릭 매개변수 `T`를 선언했는데, 이는
 어떤 타입의 값이든 가질 수 있도록 하고 싶기 때문입니다. `MyBox` 타입은 `T`
 타입의 요소 하나를 가진 튜플 구조체입니다. `MyBox::new` 함수는 `T` 타입의
 매개변수 하나를 받아서 그 값을 들고 있는 `MyBox` 인스턴스를 반환합니다.
 
-Listing 15-7의 `main` 함수를 Listing 15-8에 추가하고 `Box<T>` 대신
+예제 15-7의 `main` 함수를 예제 15-8에 추가하고 `Box<T>` 대신
 우리가 정의한 `MyBox<T>` 타입을 사용하도록 고쳐봅시다. 러스트는 `MyBox`를
-역참조하는 방법을 모르기 때문에 Listing 15-9의 코드는 컴파일되지
+역참조하는 방법을 모르기 때문에 예제 15-9의 코드는 컴파일되지
 않을 것입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-9: 참조자와 `Box<T>`에 사용되었던 방식
+<span class="caption">예제 15-9: 참조자와 `Box<T>`에 사용되었던 방식
 그대로 `MyBox<T>` 사용 시도하기</span>
 
 아래는 그 결과 발생된 컴파일 에러입니다:
@@ -134,16 +134,16 @@ Listing 15-7의 `main` 함수를 Listing 15-8에 추가하고 `Box<T>` 대신
 논의한 바와 같이, 어떤 트레잇을 구현하기 위해서는 그 트레잇이 요구하는 메서드에
 대한 구현체를 제공할 필요가 있습니다. 표준 라이브러리가 제공하는 `Deref` 트레잇은
 `deref`라는 이름의 메서드 하나를 구현하도록 요구하는데, 이 함수는 `self`를
-빌려와서 내부 데이터의 참조자를 반환합니다. Listing 15-10은 `MyBox`의 정의에
+빌려와서 내부 데이터의 참조자를 반환합니다. 예제 15-10은 `MyBox`의 정의에
 덧붙여 `Deref`의 구현체를 담고 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-10: `MyBox<T>`에 대한 `Deref` 구현하기</span>
+<span class="caption">예제 15-10: `MyBox<T>`에 대한 `Deref` 구현하기</span>
 
 `type Target = T;` 문법은 `Deref` 트레잇이 사용할 연관 타입 (associated type)
 을 정의합니다. 연관 타입은 제네릭 매개변수를 선언하는 약간 다른 방식이지만,
@@ -154,7 +154,7 @@ Listing 15-7의 `main` 함수를 Listing 15-8에 추가하고 `Box<T>` 대신
 `*` 연산자를 이용하여 접근하려는 값의 참조자를 반환합니다; 5장의
 [“명명된 필드 없는 튜플 구조체를 사용하여 다른 타입 만들기”][tuple-structs]<!-- ignore -->절에서
 다룬 것처럼 `.0`이 튜플 구조체의 첫번째 값에 접근한다는 것을
-상기하세요. Listing 15-9에서 `MyBox<T>` 값에 대해 `*`을 호출하는
+상기하세요. 예제 15-9에서 `MyBox<T>` 값에 대해 `*`을 호출하는
 `main` 함수는 이제 컴파일되고 단언문은 통과됩니다!
 
 `Deref` 트레잇이 없으면 컴파일러는 오직 `&` 참조자들만 역참조 할 수 있습니다.
@@ -162,7 +162,7 @@ Listing 15-7의 `main` 함수를 Listing 15-8에 추가하고 `Box<T>` 대신
 `deref` 메서드를 호출하여, 자신이 역참조하는 방법을 알고 있는 `&` 참조자를
 가져올 수 있는 기능을 제공합니다.
 
-Listing 15-9의 `*y`에 들어서면 러스트 뒷편에서는 실제로 아래와 같은 코드가
+예제 15-9의 `*y`에 들어서면 러스트 뒷편에서는 실제로 아래와 같은 코드가
 동작합니다:
 
 ```rust,ignore
@@ -185,7 +185,7 @@ Listing 15-9의 `*y`에 들어서면 러스트 뒷편에서는 실제로 아래�
 코드에 `*`를 쓸 때마다 이 `*` 연산자가 `deref` 함수의 호출 후
 `*`를 한번만 호출하는 것으로 대치된다는 점을 주의하세요.
 `*` 연산자의 대입이 무한히 재귀적으로 실행되지 않기 때문에,
-결국 `i32` 타입의 데이터를 얻게 되는데, 이는 Listing 15-9의
+결국 `i32` 타입의 데이터를 얻게 되는데, 이는 예제 15-9의
 `assert_eq!` 내의 `5`와 일치합니다.
 
 ### 함수와 메서드를 이용한 암묵적 역참조 강제
@@ -205,35 +205,35 @@ Listing 15-9의 `*y`에 들어서면 러스트 뒷편에서는 실제로 아래�
 도입되었습니다. 또한 역참조 강제 기능은 참조자나 스마트 포인터 둘 중 어느
 경우라도 작동되는 코드를 더 많이 작성할 수 있도록 해 줍니다.
 
-역참조 강제가 실제 작동하는 것을 보기 위해서, Listing 15-8에서
-정의했던 `MyBox<T>`과 Listing 15-10에서 추가했던 `Deref`의 구현체를
-이용해 봅시다. Listing 15-11은 문자열 슬라이스 매개변수를 갖는 함수의
+역참조 강제가 실제 작동하는 것을 보기 위해서, 예제 15-8에서
+정의했던 `MyBox<T>`과 예제 15-10에서 추가했던 `Deref`의 구현체를
+이용해 봅시다. 예제 15-11은 문자열 슬라이스 매개변수를 갖는 함수의
 정의를 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-11: `&str` 타입의 `name` 매개변수를 갖는
+<span class="caption">예제 15-11: `&str` 타입의 `name` 매개변수를 갖는
 `hello` 함수</span>
 
 `hello` 함수는 이를 테면 `hello("Rust");`와 같이 문자열 슬라이스를 인자로
-호출될 수 있습니다. Listing 15-12에서 보는 바와 같이, 역참조 강제는 `MyBox<String>`
+호출될 수 있습니다. 예제 15-12에서 보는 바와 같이, 역참조 강제는 `MyBox<String>`
 타입 값에 대한 참조자로 `hello`의 호출을 가능하게 만들어 줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-12/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-12: 역참조 강제에 의해 작동되는,
+<span class="caption">예제 15-12: 역참조 강제에 의해 작동되는,
 `MyBox<String>` 값에 대한 참조자로 `hello` 호출하기</span>
 
 여기서는 `hello` 함수에 `&m` 인자를 넣어 호출하고 있는데, 이것이 `MyBox<String>`
-값에 대한 참조자입니다. Listing 15-10에서 `MyBox<T>`에 대한 `Deref` 트레잇을
+값에 대한 참조자입니다. 예제 15-10에서 `MyBox<T>`에 대한 `Deref` 트레잇을
 구현했으므로, 러스트는 `deref`를 호출하여 `&MyBox<String>`을  `&String`로
 바꿀 수 있습니다. 표준 라이브러리에 구현되어 있는 `String`의 `Deref`가
 문자열 슬라이스를 반환하고, 이는 `Deref`에 대한 API 문서에도 있습니다.
@@ -241,16 +241,16 @@ Listing 15-9의 `*y`에 들어서면 러스트 뒷편에서는 실제로 아래�
 이것이 `hello` 함수의 정의와 일치하게 됩니다.
 
 만일 러스트에 역참조 강제가 구현되어 있지 않았다면, `&MyBox<String>`
-타입의 값으로 `hello`를 호출하기 위해서는 Listing 15-12의 코드 대신
-Listing 15-13의 코드를 작성했어야 할 것입니다:
+타입의 값으로 `hello`를 호출하기 위해서는 예제 15-12의 코드 대신
+예제 15-13의 코드를 작성했어야 할 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-13/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-13: 러스트에 역참조 강제가 없었을 경우
+<span class="caption">예제 15-13: 러스트에 역참조 강제가 없었을 경우
 작성했어야 할 코드</span>
 
 `(*m)`은 `MyBox<String>`을 `String`로 역참조해 줍니다. 그런 다음 `&`과

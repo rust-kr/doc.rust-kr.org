@@ -41,32 +41,32 @@ Elements of Reusable Object-Oriented Software*은 객체 지향 디자인 패턴
 정의할 수 있습니다. 또한 이 구조체는 벡터의 값에 대한 평균값을 담는
 필드도 가질 수 있으므로, 평균값이 필요한 순간마다 매번 이를 계산할
 필요는 없습니다. 바꿔 말하면, `AveragedCollection`은 계산된 평균값을
-캐시할 것입니다. Listing 17-1은 이 `AveragedCollection` 구조체에 대한
+캐시할 것입니다. 예제 17-1은 이 `AveragedCollection` 구조체에 대한
 정의를 나타냅니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-01/src/lib.rs}}
 ```
 
-<span class="caption">Listing 17-1: 컬렉션 내의 정수
+<span class="caption">예제 17-1: 컬렉션 내의 정수
 아이템들과 그의 평균값을 관리하는 `AveragedCollection`
 구조체</span>
 
 구조체는 `pub`으로 표시되어 다른 코드가 이를 사용할 수 있지만, 구조체 안에 존재하는
 필드들은 여전히 비공개입니다. 이는 이번 사례에 매우 중요한데, 그 이유는 하나의 값이
 리스트에 추가되거나 제거될 때마다 평균 또한 확실히 갱신되도록 하고 싶기 때문입니다.
-Listing 17-2와 같이 구조체에 `add`, `remove`, 그리고 `average` 메서드를 구현하여
+예제 17-2와 같이 구조체에 `add`, `remove`, 그리고 `average` 메서드를 구현하여
 이를 수행합니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-02/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-2: `AveragedCollection`의 공개 메서드 `add`,
+<span class="caption">예제 17-2: `AveragedCollection`의 공개 메서드 `add`,
 `remove`, 그리고 `average`의 구현</span>
 
 공개 메서드들 `add`, `remove`, 그리고 `average`는 `AveragedCollection`
@@ -113,7 +113,7 @@ Listing 17-2와 같이 구조체에 `add`, `remove`, 그리고 `average` 메서�
 것입니다: 어떤 타입의 특정한 동작을 구현할 수 있고, 상속을 통하여
 다른 타입에 대해 그 구현을 재사용할 수 있습니다. 러스트 코드에서는
 대신 기본 트레잇 메서드의 구현을 이용하여 제한적으로 공유할 수 있는데,
-이는 Listing 10-14에서 `Summary` 트레잇에 `summarize` 메서드의 기본
+이는 예제 10-14에서 `Summary` 트레잇에 `summarize` 메서드의 기본
 구현을 추가할 때 봤던 것입니다. `Summary` 트레잇을 구현하는 모든 타입은
 추가 코드 없이 `summarize` 메서드를 사용할 수 있습니다. 이는 어떤
 메서드의 구현체를 갖는 부모 클래스와 그를 상속받는 자식 클래스 또한

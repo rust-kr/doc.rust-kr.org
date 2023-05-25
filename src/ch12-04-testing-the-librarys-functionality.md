@@ -32,16 +32,16 @@
 그런 다음 [11장][ch11-anatomy]<!-- ignore -->에서 그랬던 것처럼 *src/lib.rs*에
 `test` 모듈과 함께 테스트 함수를 추가하세요. 테스트 함수는 `search` 함수가
 가져야할 동작을 특정합니다: 즉 질의값와 검색할 텍스트를 입력받아서
-텍스트로부터 질의값을 담고 있는 라인들만 반환하는 것이죠. Listing 12-15는
+텍스트로부터 질의값을 담고 있는 라인들만 반환하는 것이죠. 예제 12-15는
 이러한 테스트를 보여주는데, 아직 컴파일되진 않을 것입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-15/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-15: 구현하고자 하는 `search` 함수를 위한
+<span class="caption">예제 12-15: 구현하고자 하는 `search` 함수를 위한
 실패하는 테스트 만들기</span>
 
 이 테스트는 문자열 `"duct"`를 검색합니다. 검색하는 텍스트는 세 줄인데,
@@ -52,19 +52,19 @@
 
 이 테스트는 아직 컴파일도 되지 않을 것이므로 테스트를 실행시켜서 실패하는
 걸 지켜볼 수는 없습니다: 아직 `search` 함수가 없으니까요! TDD 원칙에 따라서,
-Listing 12-16과 같이 항상 빈 벡터를 반환하는 `search` 함수 정의부를
+예제 12-16과 같이 항상 빈 벡터를 반환하는 `search` 함수 정의부를
 추가하는 것으로 컴파일과 테스트가 동작하기에 딱 충분한 코드만 집어넣어
 보겠습니다. 그러면 테스트는 컴파일되고, 반환된 빈 벡터가 `"safe, fast,
 productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실패해야
 합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-16/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-16: 테스트가 딱 컴파일만 될 정도의
+<span class="caption">예제 12-16: 테스트가 딱 컴파일만 될 정도의
 `search` 함수 정의하기</span>
 
 `search`의 시그니처에는 명시적 라이프타임 `'a`가 정의될 필요가 있고
@@ -125,20 +125,20 @@ productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실
 #### `lines` 메서드로 라인들에 대해 반복하기
 
 러스트는 문자열의 라인별 반복을 처리하기 위한 유용한 메서드를 제공하는데,
-편리하게도 `lines`라는 이름이고 Listing 12-17에서 보는 바와 같이 동작합니다.
+편리하게도 `lines`라는 이름이고 예제 12-17에서 보는 바와 같이 동작합니다.
 아직 컴파일되지 않음을 주의하세요.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-17/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-17: `contents`의 각 줄에 대한 반복
+<span class="caption">예제 12-17: `contents`의 각 줄에 대한 반복
 </span>
 
 `lines` 메서드는 반복자를 반환합니다. 반복자에 대해서는 [13장][ch13-iterators]<!-- ignore -->에서
-더 깊이 다루겠습니다만, 여러분은 [Listing 3-5][ch3-iter]<!-- ignore -->에서
+더 깊이 다루겠습니다만, 여러분은 [예제 3-5][ch3-iter]<!-- ignore -->에서
 이런 방식의 반복자 사용을 봤었음을 상기해봅시다. 그때는 어떤 컬렉션 안의 각
 아이템에 대해 어떤 코드를 실행시키기 위해 `for`과 함께 반복자를 사용했었지요.
 
@@ -146,16 +146,16 @@ productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실
 
 다음으로는 현재의 라인에 질의 문자열이 들어있는지 검사해 보겠습니다.
 다행히도 이걸 해주는 `contains`라는 이름의 유용한 메서드가 문자열에
-있습니다! Listing 12-18처럼 `search` 함수에 `contains` 메서드 호출을
+있습니다! 예제 12-18처럼 `search` 함수에 `contains` 메서드 호출을
 추가하세요. 아직 컴파일되지는 않음을 주의하세요.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-18/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-18: 라인이 `query`의 문자열을 포함하는지
+<span class="caption">예제 12-18: 라인이 `query`의 문자열을 포함하는지
 알아보기 위한 기능 추가하기</span>
 
 이 시점에서는 아직 기능을 쌓아가는 중입니다. 컴파일되기 위해서는
@@ -167,15 +167,15 @@ productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실
 이 함수를 완성하기 위해서는 반환하고자 하는 매치된 라인들을 저장할 방법이
 필요합니다. 이를 위해서 `for` 루프 전에 가변 백터를 만들고 `line`을 이
 벡터에 저장하기 위해 `push` 메서드를 호출할 수 있겠습니다. `for` 루프 뒤에는
-Listing 12-19와 같이 이 벡터를 반환합니다.
+예제 12-19와 같이 이 벡터를 반환합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-19: 매치된 라인들을 저장하여 반환될 수
+<span class="caption">예제 12-19: 매치된 라인들을 저장하여 반환될 수
 있게 하기</span>
 
 이제 `search` 함수는 `query`를 담고 있는 라인들만 반환해야 하고
@@ -201,7 +201,7 @@ Listing 12-19와 같이 이 벡터를 반환합니다.
 `run`이 읽어들인 `contents`를 넘겨줘야 합니다. 그러면 `run`은
 `search`가 반환한 각 라인을 출력할 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/src/lib.rs:here}}

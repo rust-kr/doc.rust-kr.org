@@ -29,7 +29,7 @@ $ cd add
 명시하는 방식으로 이 작업공간에 멤버를 추가할 것입니다; 지금의 경우
 해당 경로는 *adder*입니다:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch14-more-about-cargo/no-listing-01-workspace-with-adder-crate/add/Cargo.toml}}
@@ -80,7 +80,7 @@ $ cargo new adder
 붙입시다. 최상위 *Cargo.toml*을 수정하여 `members` 리스트에
 *add_one* 경로를 지정하세요:
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch14-more-about-cargo/no-listing-02-workspace-with-two-crates/add/Cargo.toml}}
@@ -118,7 +118,7 @@ $ cargo new add_one --lib
 
 *add_one/src/lib.rs* 파일에 `add_one` 함수를 추가합시다:
 
-<span class="filename">Filename: add_one/src/lib.rs</span>
+<span class="filename">파일명: add_one/src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch14-more-about-cargo/no-listing-02-workspace-with-two-crates/add/add_one/src/lib.rs}}
@@ -128,7 +128,7 @@ $ cargo new add_one --lib
 `add_one` 패키지를 갖추었습니다. 먼저 *adder/Cargo.toml*에 `add_one`의 경로
 의존성을 추가할 필요가 있겠습니다.
 
-<span class="filename">Filename: adder/Cargo.toml</span>
+<span class="filename">파일명: adder/Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch14-more-about-cargo/no-listing-02-workspace-with-two-crates/add/adder/Cargo.toml:6:7}}
@@ -139,16 +139,16 @@ $ cargo new add_one --lib
 
 다음으로 `adder` 크레이트에서 (`add_one` 크레이트에 있는) `add_one` 함수를
 사용해봅시다. *adder/src/main.rs* 파일을 열어서 제일 윗 줄에 `use`을 추가하여
-스코프로 새로운 `add_one` 라이브러리를 가져옵시다. 그런 다음 Listing 14-7과
+스코프로 새로운 `add_one` 라이브러리를 가져옵시다. 그런 다음 예제 14-7과
 같이 `main` 함수를 수정하여 `add_one` 함수를 호출하세요.
 
-<span class="filename">Filename: adder/src/main.rs</span>
+<span class="filename">파일명: adder/src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-07/add/adder/src/main.rs}}
 ```
 
-<span class="caption">Listing 14-7: `adder` 크레이트에서 `add_one` 라이브러리
+<span class="caption">예제 14-7: `adder` 크레이트에서 `add_one` 라이브러리
 크레이트 사용하기</span>
 
 최상위 *add* 디렉토리에서 `cargo build`를 실행하여 작업공간을
@@ -204,7 +204,7 @@ Hello, world! 10 plus one is 11!
 * ch07-04-bringing-paths-into-scope-with-the-use-keyword.md
 -->
 
-<span class="filename">Filename: add_one/Cargo.toml</span>
+<span class="filename">파일명: add_one/Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch14-more-about-cargo/no-listing-03-workspace-with-external-dependency/add/add_one/Cargo.toml:6:7}}
@@ -277,7 +277,7 @@ error[E0432]: unresolved import `rand`
 또다른 발전을 위해 `add_one::add_one` 함수의 테스트를 `add_one`
 크레이트 내에 추가해봅시다:
 
-<span class="filename">Filename: add_one/src/lib.rs</span>
+<span class="filename">파일명: add_one/src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch14-more-about-cargo/no-listing-04-workspace-with-tests/add/add_one/src/lib.rs}}

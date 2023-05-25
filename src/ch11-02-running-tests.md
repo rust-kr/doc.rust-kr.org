@@ -55,16 +55,16 @@ $ cargo test -- --test-threads=1
 해당 테스트가 성공했다고 표시된 줄만 볼 수 있죠.
 테스트가 실패하면 표준 출력으로 출력됐던 모든 내용이 실패 메세지 아래에 표시됩니다.
 
-Listing 11-10은 매개변수를 출력하고 10을 반환하는 단순한 함수와,
+예제 11-10은 매개변수를 출력하고 10을 반환하는 단순한 함수와,
 성공하는 테스트와 실패하는 테스트를 작성한 예시입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,panics,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-10: `println!`을 호출하는
+<span class="caption">예제 11-10: `println!`을 호출하는
 함수 테스트</span>
 
 `cargo test` 명령어를 실행하면 다음 결과가 나타납니다.
@@ -85,7 +85,7 @@ Listing 11-10은 매개변수를 출력하고 10을 반환하는 단순한 함�
 $ cargo test -- --show-output
 ```
 
-Listing 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
+예제 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
 다음과 같습니다.
 
 ```console
@@ -99,16 +99,16 @@ Listing 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
 `cargo test` 명령어에 테스트의 이름을 인자로 넘겨
 어떤 테스트를 실행할지 선택할 수 있습니다.
 
-일부 테스트만 실행하는 법을 알아보기 위해, 먼저 Listing 11-11처럼
+일부 테스트만 실행하는 법을 알아보기 위해, 먼저 예제 11-11처럼
 `add_two` 함수에 대한 세 가지 테스트를 작성하고 하나만 골라 실행해보겠습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-11/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-11: 세 가지 서로 다른 이름의
+<span class="caption">예제 11-11: 세 가지 서로 다른 이름의
 테스트</span>
 
 앞서 살펴본 것처럼, 테스트를 아무 인자도 없이 실행하면
@@ -156,7 +156,7 @@ Listing 11-10의 테스트를 `--show-output` 플래그로 실행한 결과는
 시간이 오래 걸리는 테스트에 `ignore` 속성을 어노테이션하면
 됩니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-11-ignore-a-test/src/lib.rs}}

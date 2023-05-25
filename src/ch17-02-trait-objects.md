@@ -1,7 +1,7 @@
 ## 트레잇 객체를 사용하여 다른 타입의 값 허용하기
 
 8장에서 벡터의 제약사항 중 하나는 딱 하나의 타입에 대한 요소만 보관할 수
-있다는 것임을 언급했습니다. Listing 8-10에서 정수, 부동소수점, 그리고 문자를
+있다는 것임을 언급했습니다. 예제 8-10에서 정수, 부동소수점, 그리고 문자를
 보관하기 위한 배리언트들을 가지고 있는 `SpreadsheetCell` 열거형을 정의하는
 해결 방안을 만들었습니다. 즉 각 칸마다 다른 타입의 데이터를 저장할 수 있으면서도
 여전히 그 칸들의 한 묶음을 대표하는 벡터를 가질 수 있었습니다. 이는 교환 가능한
@@ -63,59 +63,59 @@
 않습니다: 그들의 명확한 목적은 공통된 동작에 대한 추상화를 가능하도록
 하는 것이죠.
 
-Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레잇을 정의하는
+예제 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레잇을 정의하는
 방법을 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-03/src/lib.rs}}
 ```
 
-<span class="caption">Listing 17-3: `Draw` 트레잇의 정의</span>
+<span class="caption">예제 17-3: `Draw` 트레잇의 정의</span>
 
 이 문법은 10장에 있는 트레잇을 정의하는 방법에서 다뤘으니 익숙하실 겁니다.
-다음에 새로운 문법이 등장합니다: Listing 17-4는 `components` 라는
+다음에 새로운 문법이 등장합니다: 예제 17-4는 `components` 라는
 벡터를 보유하고 있는 `Screen`이라는 구조체를 정의합니다. `Box<dyn Draw>`
 타입의 벡터인데, 이것이 트레잇 객체입니다; 이것은 `Draw` 트레잇을 구현한
 `Box` 안의 모든 타입에 대한 대역입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-04/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-4: `Draw` 트레잇을 구현하는
+<span class="caption">예제 17-4: `Draw` 트레잇을 구현하는
 트레잇 객체들의 벡터 `components`를 필드로 가지고 있는 `Screen`
 구조체의 정의</span>
 
-`Screen` 구조체에서는 Listing 17-5와 같이 `components`의 각 요소마다
+`Screen` 구조체에서는 예제 17-5와 같이 `components`의 각 요소마다
 `draw` 메서드를 호출하는 `run` 메서드를 정의합니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-05/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-5: 각 컴포넌트에 대해 `draw` 메서드를
+<span class="caption">예제 17-5: 각 컴포넌트에 대해 `draw` 메서드를
 호출하는 `Screen`의 `run` 메서드</span>
 
 이는 트레잇 바운드가 있는 제네릭 타입 매개변수를 사용하는 구조체를
 정의하는 것과는 다르게 작동합니다. 제네릭 타입 매개변수는 한 번에
 하나의 구체 타입으로만 대입될 수 있는 반면, 트레잇 객체를 사용하면
 런타임에 트레잇 객체에 대해 여러 구체 타입을 채워넣을 수 있습니다.
-예를 들면, Listing 17-6처럼 제네릭 타입과 트레잇 바운드를 사용하여
+예를 들면, 예제 17-6처럼 제네릭 타입과 트레잇 바운드를 사용하여
 `Screen` 구조체를 정의할 수도 있을 겁니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-06/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-6: 제네릭과 트레잇 바운드를 사용한
+<span class="caption">예제 17-6: 제네릭과 트레잇 바운드를 사용한
 `Screen` 구조체와 `run` 메서드의 대체 구현</span>
 
 이렇게하면 전부 `Button` 타입이거나 전부 `TextField` 타입인 컴포넌트의
@@ -133,16 +133,16 @@ Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레�
 이제 `Draw` 트레잇을 구현하는 몇가지 타입을 추가하겠습니다. `Button` 타입을
 제공해 보겠습니다. 다시금 말하지만, 실제 GUI 라이브러리를 구현하는 것은
 이 책의 범위를 벗어나므로, `draw`에는 별다른 구현을 하지 않을 겁니다.
-구현이 어떻게 생겼을지 상상해보자면, `Button` 구조체에는 Listing 17-7에서
+구현이 어떻게 생겼을지 상상해보자면, `Button` 구조체에는 예제 17-7에서
 보는 바와 같이 `width`, `height` 그리고 `label` 필드들이 있을 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-07/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-7: `Draw` 트레잇을 구현하는
+<span class="caption">예제 17-7: `Draw` 트레잇을 구현하는
 `Button` 구조체</span>
 
 `Button`의 `width`, `height` 및 `label` 필드는 다른 컴포넌트의
@@ -156,31 +156,31 @@ Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레�
 메서드는 `TextField`와 같은 타입에는 적용할 수 없죠.
 
 우리의 라이브러리를 사용하는 누군가가 `width`, `height` 및 `options`
-필드가 있는 `SelectBox` 구조체를 구현하기로 결정했다면, Listing 17-8과 같이
+필드가 있는 `SelectBox` 구조체를 구현하기로 결정했다면, 예제 17-8과 같이
 `SelectBox` 타입에도 `Draw` 트레잇을 구현합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch17-oop/listing-17-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 17-8: `gui`를 사용하고 `Draw` 트레잇을
+<span class="caption">예제 17-8: `gui`를 사용하고 `Draw` 트레잇을
 `SelectBox` 구조체에 구현한 또 다른 크레이트</span>
 
 이제 라이브러리 사용자는 `main` 함수를 작성하여 `Screen` 인스턴스를
 만들 수 있습니다. `Screen` 인스턴스에는 `SelectBox`와 `Button`를
 `Box<T>` 안에 넣어 트레잇 객체가 되도록 함으로써 이들을 추가할 수 있습니다.
 그러면 `Screen` 인스턴스 상의 `run` 메서드를 호출할 수 있는데, 이는 각 컴포넌트들에
-대해 `draw`를 호출할 것입니다. Listing 17-9는 이러한 구현을 보여줍니다:
+대해 `draw`를 호출할 것입니다. 예제 17-9는 이러한 구현을 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch17-oop/listing-17-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 17-9: 트레잇 객체를 사용하여 동일한 트레잇을
+<span class="caption">예제 17-9: 트레잇 객체를 사용하여 동일한 트레잇을
 구현하는 서로 다른 타입들의 값 저장하기</span>
 
 이 라이브러리를 작성할 때는 누군가 `SelectBox` 타입을 추가할 수도
@@ -191,7 +191,7 @@ Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레�
 이러한 개념, 즉 값의 구체적인 타입이 아닌 값이 응답하는 메시지만
 고려하는 개념은 동적 타입 언어의 *오리 타이핑 (duck typing)* 이란
 개념과 유사합니다: 만약 오리처럼 걷고 오리처럼 꽥꽥거리면, 그것은
-오리임에 틀림없습니다! Listing 17-5에 있는 `Screen`에 구현된 `run`을 보면,
+오리임에 틀림없습니다! 예제 17-5에 있는 `Screen`에 구현된 `run`을 보면,
 `run`은 각 컴포넌트가 어떤 구체적 타입인지 알 필요가 없습니다.
 이 함수는 컴포넌트가 `Button`의 인스턴스인지 혹은 `SelectBox`의
 인스턴스인지 검사하지 않고 그저 각 컴포넌트의 `draw` 메서드를 호출할
@@ -205,16 +205,16 @@ Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레�
 발생할 것을 걱정할 필요가 없다는 겁니다. 트레잇 객체가 요구하는 트레잇을
 해당 값이 구현하지 않았다면 러스트는 컴파일하지 않을 겁니다.
 
-예를 들어, Listing 17-10은 `String`을 컴포넌트로 사용하여 `Screen`을
+예를 들어, 예제 17-10은 `String`을 컴포넌트로 사용하여 `Screen`을
 생성하는 시도를 하면 어떤 일이 벌어지는지 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch17-oop/listing-17-10/src/main.rs}}
 ```
 
-<span class="caption">Listing 17-10: 트레잇 객체의 트레잇을 구현하지 않은
+<span class="caption">예제 17-10: 트레잇 객체의 트레잇을 구현하지 않은
 타입의 사용 시도</span>
 
 `String`이 `Draw` 트레잇을 구현하지 않기 때문에 아래와 같은 에러를 얻게 됩니다:
@@ -248,7 +248,7 @@ Listing 17-3은 `draw`라는 이름의 메서드를 갖는 `Draw `라는 트레�
 이러한 조회는 정적 디스패치 시에는 발생하지 않을 런타임 비용을 만들어냅니다.
 동적 디스패치는 또한 컴파일러가 메서드의 코드를 인라인 (inline) 화하는 선택을
 막아버리는데, 이것이 결과적으로 몇가지 최적화를 수행하지 못하게 합니다. 하지만,
-Listing 17-5와 같은 코드를 작성하고 Listing 17-9과 같은 지원을 가능하게 하는
+예제 17-5와 같은 코드를 작성하고 예제 17-9과 같은 지원을 가능하게 하는
 추가적인 유연성을 얻었으므로, 여기에는 고려할 기회비용이 있다고 하겠습니다.
 
 [performance-of-code-using-generics]:

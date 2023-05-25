@@ -73,15 +73,15 @@ let v: Vec<u32> = vec![1, 2, 3];
 슬라이스로 이루어진 벡터를 만들 수도 있습니다. 값의 개수나 타입을 미리 알 수
 없으므로 함수를 사용하는 것으로는 동일한 작업을 수행할 수 없습니다.
 
-Listing 19-28은 `vec!` 매크로의 약간 간소화된 정의를 보여줍니다.
+예제 19-28은 `vec!` 매크로의 약간 간소화된 정의를 보여줍니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
 ```
 
-<span class="caption">Listing 19-28: 간소화된 버전의 `vec!` 매크로
+<span class="caption">예제 19-28: 간소화된 버전의 `vec!` 매크로
 정의</span>
 
 > Note: 표준 라이브러리의 `vec!` 매크로의 실제 정의에는 정확한 양의
@@ -106,7 +106,7 @@ Listing 19-28은 `vec!` 매크로의 약간 간소화된 정의를 보여줍니�
 
 매크로 패턴은 값이 아닌 러스트 코드 구조에 대한 매칭을 하기
 때문에 매크로 정의에서 유효한 패턴 문법은 18장에서 다루었던
-패턴 구문과 다릅니다. Listing 19-28의 패턴 조각이 무엇을
+패턴 구문과 다릅니다. 예제 19-28의 패턴 조각이 무엇을
 의미하는지 살펴봅시다; 전체 매크로 패턴 문법은
 [러스트 레퍼런스 문서][ref]를 참조하세요.
 
@@ -160,11 +160,11 @@ Listing 19-28은 `vec!` 매크로의 약간 간소화된 정의를 보여줍니�
 
 절차적 매크로를 만들 때, 그 정의는 특별한 크레이트 타입을 가진 자신만의
 크레이트에 있어야 합니다. 이는 복잡한 기술적인 이유 때문이고 앞으로는 이러한
-문제를 없애고자 합니다. Listing 19-29에서는 절차적 매크로를 정의하는 방법을
+문제를 없애고자 합니다. 예제 19-29에서는 절차적 매크로를 정의하는 방법을
 보여주는데, 여기서 `some_attribute`는 특정 매크로 종류를 사용하기 위한
 자리표시자입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 use proc_macro;
@@ -174,7 +174,7 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 }
 ```
 
-<span class="caption">Listing 19-29: 절차적 매크로 정의
+<span class="caption">예제 19-29: 절차적 매크로 정의
 예제</span>
 
 절차적 매크로를 정의하는 함수는 `TokenStream`을 입력으로 받아서
@@ -199,16 +199,16 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 타입에 명시하여 `hello_macro` 함수의 기본 구현을 가져올 수 있도록
 하겠습니다. 기본 구현은 `Hello, Macro! My name is TypeName!`라고
 출력하는데, 여기서 `TypeName`은 이 트레잇이 정의된 타입의 이름입니다.
-바꿔 말하면, 다른 프로그래머가 우리의 크레이트를 사용하여 Listing
-19-30과 같은 코드를 작성할 수 있도록 하는 크레이트를 작성할 것입니다.
+바꿔 말하면, 다른 프로그래머가 우리의 크레이트를 사용하여 예제 19-30과
+같은 코드를 작성할 수 있도록 하는 크레이트를 작성할 것입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-30/src/main.rs}}
 ```
 
-<span class="caption">Listing 19-30: 우리의 절차적 매크로를 사용할 때
+<span class="caption">예제 19-30: 우리의 절차적 매크로를 사용할 때
 크레이트 사용자가 작성할 수 있게될 코드</span>
 
 작업을 마치면 이 코드는 `Hello, Macro! My name is Pancakes!`를 출력할 것입니다.
@@ -220,7 +220,7 @@ $ cargo new hello_macro --lib
 
 다음은 `HelloMacro` 트레잇과 그 연관 함수를 정의하는 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
@@ -269,23 +269,23 @@ $ cargo new hello_macro_derive --lib
 필요하므로, 이들을 종속성으로 추가해야 합니다. `hello_macro_derive`의
 *Cargo.toml* 파일에 다음을 추가하세요:
 
-<span class="filename">Filename: hello_macro_derive/Cargo.toml</span>
+<span class="filename">파일명: hello_macro_derive/Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:6:12}}
 ```
 
-절차적 매크로 정의를 시작하려면 Listing 19-31의 코드를 `hello_macro_derive`
+절차적 매크로 정의를 시작하려면 예제 19-31의 코드를 `hello_macro_derive`
 크레이트의 *src/lib.rs* 파일에 넣으세요. 이 코드는 `impl_hello_macro` 함수에
 대한 정의를 추가할 때까지 컴파일되지 않는다는 점에 유의하세요.
 
-<span class="filename">Filename: hello_macro_derive/src/lib.rs</span>
+<span class="filename">파일명: hello_macro_derive/src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/src/lib.rs}}
 ```
 
-<span class="caption">Listing 19-31: 대부분의 절차적 매크로 크레이트가
+<span class="caption">예제 19-31: 대부분의 절차적 매크로 크레이트가
 러스트 코드를 처리하기 위해 필요로 하는 코드</span>
 
 `TokenStream`의 파싱을 담당하는 `hello_macro_derive` 함수와
@@ -318,7 +318,7 @@ $ cargo new hello_macro_derive --lib
 해석 및 연산 수행이 가능한 데이터 구조로 변환합니다. 여기서
 `syn`이 등장합니다. `syn`의 `parse` 함수는 `TokenStream`을
 받아 파싱된 러스트 코드를 나타내는 `DeriveInput` 구조체를
-반환합니다. Listing 19-32는 `struct Pancakes;` 문자열을 파싱하여
+반환합니다. 예제 19-32는 `struct Pancakes;` 문자열을 파싱하여
 얻은 `DeriveInput` 구조체의 관련 부분을 보여줍니다:
 
 ```rust,ignore
@@ -341,7 +341,7 @@ DeriveInput {
 }
 ```
 
-<span class="caption">Listing 19-32: Listing 19-30의 매크로 속성이
+<span class="caption">예제 19-32: 예제 19-30의 매크로 속성이
 있는 코드를 파싱했을 때 얻게 되는 `DeriveInput` 인스턴스</span>
 
 이 구조체의 필드는 파싱한 러스트 코드가 `Pancakes`의 `ident` (식별자
@@ -365,24 +365,24 @@ DeriveInput {
 잘못되었는지에 대한 보다 구체적인 에러 메시지를 제공해야 합니다.
 
 이제 `TokenStream`으로부터 어노테이션된 러스트 코드를 `DeriveInput`
-인스턴스로 변환하는 코드가 있으니, Listing 19-33에 나온 것처럼 어노테이션된
+인스턴스로 변환하는 코드가 있으니, 예제 19-33에 나온 것처럼 어노테이션된
 타입에 `HelloMacro` 트레잇을 구현하는 코드를 생성해 봅시다.
 
-<span class="filename">Filename: hello_macro_derive/src/lib.rs</span>
+<span class="filename">파일명: hello_macro_derive/src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-33/hello_macro/hello_macro_derive/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 19-33: 파싱된 러스트 코드를 사용하여
+<span class="caption">예제 19-33: 파싱된 러스트 코드를 사용하여
 `HelloMacro` 트레잇 구현하기</span>
 
 `ast.ident`을 사용하여 어노테이션된 타입의 이름(식별자)을 담고 있는
-`Ident` 구조체 인스턴스를 얻습니다. Listing 19-32의 구조체는 Listing
-19-30의 코드에서 `impl_hello_macro` 함수를 실행할 때, 얻게 되는
+`Ident` 구조체 인스턴스를 얻습니다. 예제 19-32의 구조체는 예제 19-30의
+코드에서 `impl_hello_macro` 함수를 실행할 때, 얻게 되는
 `ident`에 `"Pancakes"` 값을 가진 `ident` 필드가 있음을 보여줍니다.
-따라서, Listing 19-33의 `name` 변수에는 `Ident` 구조체 인스턴스가
-포함되며, 이 인스턴스를 출력하면 Listing 19-30의 구조체 이름인
+따라서, 예제 19-33의 `name` 변수에는 `Ident` 구조체 인스턴스가
+포함되며, 이 인스턴스를 출력하면 예제 19-30의 구조체 이름인
 `"Pancakes"` 문자열이 됩니다.
 
 `quote!` 매크로는 반환하고자 하는 러스트 코드를 정의하도록 해줍니다.
@@ -411,7 +411,7 @@ DeriveInput {
 `#name`을 문자열 리터럴로 변환하여 할당량을 절약할 수도 있습니다.
 
 이 시점에서는 `cargo build`가 `hello_macro`와 `hello_macro_derive` 둘
-모두에서 성공적으로 완료되어야 합니다. 이 크레이트를 Listing 19-30의 코드에
+모두에서 성공적으로 완료되어야 합니다. 이 크레이트를 예제 19-30의 코드에
 연결하여 절차적 매크로가 작동하는 것을 확인해 봅시다! `cargo new pancakes`를
 사용하여 *projects* 디렉토리에 새 바이너리 프로젝트를 생성하세요. `pancake`
 크레이트의 *Cargo.toml*에 종속성으로 `hello_macro`와 `hello_macro_derive`를
@@ -423,7 +423,7 @@ DeriveInput {
 {{#include ../listings/ch19-advanced-features/no-listing-21-pancakes/pancakes/Cargo.toml:7:9}}
 ```
 
-Listing 19-30의 코드를 *src/main.rs*에 넣고 `cargo run`을 실행하세요:
+예제 19-30의 코드를 *src/main.rs*에 넣고 `cargo run`을 실행하세요:
 `Hello, Macro! My name is Pancakes!"라고 출력되어야 합니다. 절차적
 매크로의 `HelloMacro` 트레잇 구현은 `pancakes` 크레이트가 구현할 필요
 없이 포함되었습니다; `#[derive(HelloMacro)]`이 트레잇 구현을

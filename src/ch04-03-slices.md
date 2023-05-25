@@ -18,16 +18,16 @@ fn first_word(s: &String) -> ?
 
 `first_word` 함수는 소유권을 가질 필요가 없으니 `&String`을 매개변수로 갖게 했습니다.
 그런데, 뭘 반환해야 할까요? 문자열 *일부분*을 나타내는 법을 모르겠네요.
-일단 Listing 4-7 처럼 공백문자를 가리키는 단어 끝부분의 인덱스를
+일단 예제 4-7 처럼 공백문자를 가리키는 단어 끝부분의 인덱스를
 반환하도록 만들어 보겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-7: `String` 매개변수의 바이트 인덱스 값을 반환하는
+<span class="caption">예제 4-7: `String` 매개변수의 바이트 인덱스 값을 반환하는
 `first_word` 함수</span>
 
 `String`을 하나하나 쪼개서
@@ -70,16 +70,16 @@ fn first_word(s: &String) -> ?
 생겼지만, 문제가 있습니다. `usize`를 반환하고 있는데, 이는
 `&String`의 컨텍스트에서만 의미 있는 숫자일 뿐입니다. 바꿔
 말하면, `String`과는 별개의 값이기 때문에 향후에도 유효하다는
-보장이 없습니다. Listing 4-7의 `first_word` 함수를 사용하는
-Listing 4-8의 프로그램을 살펴봅시다.
+보장이 없습니다. 예제 4-7의 `first_word` 함수를 사용하는
+예제 4-8의 프로그램을 살펴봅시다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-8: `first_word` 함수의 결과를 저장했으나,
+<span class="caption">예제 4-8: `first_word` 함수의 결과를 저장했으나,
 이후에 `String`의 내용물이 변경된 상황</span>
 
 이 코드는 문법적으로 전혀 문제없고, 정상적으로 컴파일됩니다.
@@ -97,7 +97,7 @@ fn second_word(s: &String) -> (usize, usize) {
 ```
 
 두 번째 단어이니 시작, 끝 두 개의 인덱스가 필요할 것이고,
-이는 앞선 Listing 4-8 의 `word` 처럼 어떠한 데이터의 특정 상태에만
+이는 앞선 예제 4-8 의 `word` 처럼 어떠한 데이터의 특정 상태에만
 의존하는 값들이 늘어남을 의미합니다. 그럼 여러분은 3개의 관련 없는
 변수들을 계속 동기화 해야겠죠.
 
@@ -121,7 +121,7 @@ fn second_word(s: &String) -> (usize, usize) {
 시작 위치로 `s`의 (1부터 시작하여) 7번째 바이트를 가리키는 포인터와,
 길이 값 5를 갖는 슬라이스가 되겠죠.
 
-Figure 4-6는 위 내용을 다이어그램으로 그린 것입니다:
+그림 4-6는 위 내용을 다이어그램으로 그린 것입니다:
 
 <img alt="세 개의 테이블: 힙 상의 문자열 데이터 &quot;hello world&quot;이
 들어있는 테이블의 0번째 바이트를 가리키고 있는 s의 스택 데이터를 나타내는 테이블.
@@ -129,7 +129,7 @@ Figure 4-6는 위 내용을 다이어그램으로 그린 것입니다:
 테이블의 6번째 바이트를 가리키고 있습니다."
 src="img/trpl04-06.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 4-6: `String` 일부를 참조하는
+<span class="caption">그림 4-6: `String` 일부를 참조하는
 문자열 슬라이스</span>
 
 `..` 범위 표현법은 인덱스 0부터 시작하는 경우, 앞의 값을 생략할 수 있습니다.
@@ -176,13 +176,13 @@ let slice = &s[..];
 여태 다룬 내용을 잘 기억해두고, `first_word` 함수가 슬라이스를 반환하도록 재작성해보죠.
 문자열 슬라이스를 나타내는 타입은 `&str` 로 작성합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-18-first-word-slice/src/main.rs:here}}
 ```
 
-Listing 4-7 과 같은 방법으로
+예제 4-7 과 같은 방법으로
 단어의 끝부분 인덱스를 알아내되,
 공백문자 발견 시 해당 인덱스를 그대로 반환하는 것이 아니라
 문자열 맨 앞부터 알아낸 위치까지 문자열 슬라이스를 생성하여 반환합니다.
@@ -197,7 +197,7 @@ Listing 4-7 과 같은 방법으로
 fn second_word(s: &String) -> &str {
 ```
 
-사용법이 훨씬 직관적이지 않나요? 또한 Listing 4-8 에서 말한
+사용법이 훨씬 직관적이지 않나요? 또한 예제 4-8 에서 말한
 첫 단어의 끝부분 인덱스를 찾은 이후 문자열이 비워지면 찾아낸
 인덱스가 쓸모없어지는 문제도 해결했습니다. 이제는 컴파일러가
 `String`을 가리키는 참조자의 유효함을 보증하니까요.
@@ -207,7 +207,7 @@ fn second_word(s: &String) -> &str {
 발생할지도 모를 문제마저 사전에 알 수 있습니다. 이제 슬라이스로 만든
 `first_word`를 잘못된 방법으로 사용했을 때 컴파일 에러가 제대로 나타나는지 확인해보죠:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/src/main.rs:here}}
@@ -254,14 +254,14 @@ fn first_word(s: &String) -> &str {
 ```
 
 경험 많은 러스트 프로그래머는
-다음 Listing 4-9 처럼 `&String` 값, `&str` 값
+다음 예제 4-9 처럼 `&String` 값, `&str` 값
 모두 사용 가능한 함수를 작성하는 방법도 알죠.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-9: `first_word` 함수 개선
+<span class="caption">예제 4-9: `first_word` 함수 개선
 (매개변수 `s`를 문자열 슬라이스 타입으로 변경)</span>
 
 문자열 슬라이스를 가지고 있다면 이걸 바로 넘길 수 있습니다. `String`을
@@ -273,7 +273,7 @@ fn first_word(s: &String) -> &str {
 `String`에 대한 참조자 대신에 문자열 슬라이스를 매개변수로 하는 함수를 정의하면
 기능 면에서 손해보지 않고 API를 더 일반적이고 유용하게 만들어 줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:usage}}

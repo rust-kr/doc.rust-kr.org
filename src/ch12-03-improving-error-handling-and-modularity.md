@@ -67,16 +67,16 @@ file`이나 출력한다는 것입니다. 파일을 읽는 작업은 여러가�
 
 커맨드 라인 파싱 로직을 *src/lib.rs*로 옮기기 위한 준비 단계로
 인자를 파싱하기 위한 기능을 `main`이 호출할 함수로 추출하겠습니다.
-Listing 12-5는 새로 시작하는 `main`과 호출되는 새로운 함수 `parse_config`를
+예제 12-5는 새로 시작하는 `main`과 호출되는 새로운 함수 `parse_config`를
 보여주는데, 여기서 잠깐 동안은 *src/main.rs*에 정의하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-5: `main`으로부터 `parse_config` 함수
+<span class="caption">예제 12-5: `main`으로부터 `parse_config` 함수
 추출</span>
 
 여전히 커맨드 라인 인자는 벡터로 모으지만, `main` 함수 내에서
@@ -110,15 +110,15 @@ Listing 12-5는 새로 시작하는 `main`과 호출되는 새로운 함수 `par
 사람에게 이 다른 값들이 어떻게 서로 연관되어 있고 이 값들의 목적은 무엇인지를
 더 쉽게 이해하도록 만들어 줄 것입니다.
 
-Listing 12-6은 `parse_config` 함수에 대한 개선을 보여줍니다.
+예제 12-6은 `parse_config` 함수에 대한 개선을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-6: `Config` 구조체의 인스턴스를 반환하도록
+<span class="caption">예제 12-6: `Config` 구조체의 인스턴스를 반환하도록
 하는 `parse_config` 리팩토링</span>
 
 `query`와 `file_path`라는 이름의 필드를 갖도록 정의된 `Config`라는 이름의
@@ -176,16 +176,16 @@ Listing 12-6은 `parse_config` 함수에 대한 개선을 보여줍니다.
 만들어줄 것입니다. `String` 같은 표준 라이브러리 타입의 인스턴스 생성은
 `String::new`를 호출하는 것으로 할 수 있습니다. 비슷하게 `parse_config`를
 `Config`와 연관된 함수 `new`로 변경함으로써 `Config` 인스턴스의 생성을
-`Config::new`의 호출로 할 수 있을 것입니다. Listing 12-7은 이를 위한
+`Config::new`의 호출로 할 수 있을 것입니다. 예제 12-7은 이를 위한
 변경점을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-7: `parse_config`를 `Config::new`로
+<span class="caption">예제 12-7: `parse_config`를 `Config::new`로
 변경하기</span>
 
 원래 `parse_config`를 호출하고 있던 `main` 부분을 `Config::new` 호출로
@@ -210,20 +210,20 @@ Listing 12-6은 `parse_config` 함수에 대한 개선을 보여줍니다.
 
 #### 에러 메세지 개선
 
-Listing 12-8에서는 인덱스 1과 2에 접근하기 전에 슬라이스가 충분히 긴지를
+예제 12-8에서는 인덱스 1과 2에 접근하기 전에 슬라이스가 충분히 긴지를
 검증하는 기능을 `new` 함수에 추가했습니다. 만일 슬라이스가 충분히 길지
 않다면, 프로그램은 패닉을 일으키고 더 나은 에러 메세지를 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-8: 인자의 개수 검사
+<span class="caption">예제 12-8: 인자의 개수 검사
 추가</span>
 
-이 코드는 [Listing 9-13에서 작성했었던 `Guess::new` 함수][ch9-custom-types]<!-- ignore -->와
+이 코드는 [예제 9-13에서 작성했었던 `Guess::new` 함수][ch9-custom-types]<!-- ignore -->와
 비슷한데, 거기서는 `value` 인자가 유효한 값의 범위 밖인 경우
 `panic!`을 호출했었지요. 여기서는 값의 범위를 검사하는 대신,
 `args`의 길이가 최소 3이고 이 조건을 만족하는 가정 아래에서
@@ -239,7 +239,7 @@ Listing 12-8에서는 인덱스 1과 2에 접근하기 전에 슬라이스가 �
 ```
 
 이번 출력이 더 좋습니다: 이제는 적절한 에러 메세지가 되었습니다. 하지만 사용자들에게
-주고 싶지 않은 추가 정보 또한 제공하고 있습니다. 어쩌면 Listing 9-13에서
+주고 싶지 않은 추가 정보 또한 제공하고 있습니다. 어쩌면 예제 9-13에서
 사용했던 기술을 이용하는 것이 여기에 쓰기 최선은 아닌가 봅니다:
 [9장에서 얘기한 것처럼][ch9-error-guidelines]<!-- ignore --> `panic!`을
 호출하는 것은 사용의 문제보다는 프로그램의 문제에 더 적합합니다. 대신에
@@ -260,18 +260,18 @@ Listing 12-8에서는 인덱스 1과 2에 접근하기 전에 슬라이스가 �
 더 실용적인 에러 메세지로 변경할 수 있고, 이는 `panic!`의 호출로 인한
 `thread 'main'`과 `RUST_BACKTRACE`에 대해 감싸져 있는 텍스트를 없앨 수 있겠습니다.
 
-Listing 12-9는 이제 `Config::build`라고 부르고 있는 함수의 반환 값과
+예제 12-9는 이제 `Config::build`라고 부르고 있는 함수의 반환 값과
 `Result`를 반환할 필요가 있게된 함수 본문을 위해 필요한 변경점을
 보여줍니다. `main`도 마찬가지로 수정하지 않으면 컴파일 되지 않는다는
 점을 유의하세요. 이건 다음에 하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-9: `Config::build`로부터
+<span class="caption">예제 12-9: `Config::build`로부터
 `Result` 반환하기</span>
 
 우리의 `build` 함수는 성공한 경우 `Config`를, 에러가 난 경우 `&'static str`을
@@ -293,19 +293,19 @@ Listing 12-9는 이제 `Config::build`라고 부르고 있는 함수의 반환 �
 #### `Config::build` 호출과 에러 처리
 
 에러가 난 경우를 처리하여 사용자 친화적인 메세지를 출력하기 위해서는,
-Listing 12-10처럼 `main`을 수정하여 `Config::build`에 의해 반환되는
+예제 12-10처럼 `main`을 수정하여 `Config::build`에 의해 반환되는
 `Result`를 처리할 피요가 있습니다. 또한 `panic!`으로부터 벗어나서
 직접 0이 아닌 에러 코드로 커맨드 라인 도구를 종료하도록 구현할 것입니다.
 0이 아닌 종료 상태값은 우리의 프로그램을 호출한 프로세스에게 에러 상태값과
 함께 종료되었음을 알려주는 관례입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-10: `Config` 생성이 실패했을 경우 에러
+<span class="caption">예제 12-10: `Config` 생성이 실패했을 경우 에러
 코드와 함께 종료하기</span>
 
 위의 코드에서는 우리가 아직 상세히 다루지 않은 메서드를 사용했습니다:
@@ -317,7 +317,7 @@ Listing 12-10처럼 `main`을 수정하여 `Config::build`에 의해 반환되�
 우리가 정의하여 `unwrap_or_else`의 인자로 넘겨준 익명 함수입니다.
 클로저에 대해서는 [13장][ch13]<!-- ignore -->에서 더 자세히 다루겠습니다.
 지금은 그저 `unwrap_or_else`가 `Err`의 내부 값을 클로저의 세로 파이프 (|)
-사이에 있는 `err`인제로 넘겨주는데, 이번 경우 그 값은 Listing 12-9에
+사이에 있는 `err`인제로 넘겨주는데, 이번 경우 그 값은 예제 12-9에
 추가한 정적 문자열 `"not enough arguments"`이라는 정도만 알면
 됩니다. 그러면 실행했을 때 클로저 내의 코드가 `err` 값을 사용할 수
 있게 됩니다.
@@ -326,7 +326,7 @@ Listing 12-10처럼 `main`을 수정하여 `Config::build`에 의해 반환되�
 가져옵니다. 에러가 난 경우 실행될 클로저 내의 코드는 딱 두 줄입니다:
 `err` 값을 출력한 다음 `process::exit`를 호출하는 것이지요.
 `process::exit` 함수는 프로그램을 즉시 멈추고 넘겨진 숫자를
-종료 상태 코드로서 반환하게 될 것입니다. 이는 Listing 12-8에서
+종료 상태 코드로서 반환하게 될 것입니다. 이는 예제 12-8에서
 사용했던 `panic!` 기반의 처리와 비슷하지만, 이제는 추가 출력문들이
 사라지게 됩니다. 한번 시도해 봅시다:
 
@@ -346,17 +346,17 @@ Listing 12-10처럼 `main`을 수정하여 `Config::build`에 의해 반환되�
 간결하고 검사하기 쉬워질 것이며, 나머지 모든 로직에 대한
 테스트를 작성할 수 있게 될 것입니다.
 
-Listing 12-11은 추출된 `run` 함수를 보여줍니다. 지금은 함수 추출에
+예제 12-11은 추출된 `run` 함수를 보여줍니다. 지금은 함수 추출에
 대한 작고 점진적인 개선만 하고 있습니다. 여전히 함수는 *src/main.rs*에
 정의되어 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-11: 프로그램 로직의 나머지를 담고 있는
+<span class="caption">예제 12-11: 프로그램 로직의 나머지를 담고 있는
 `run` 함수 추출</span>
 
 `run` 함수는 이제 이는 파일을 읽는 부분부터 시작되는, `main`으로부터
@@ -370,16 +370,16 @@ Listing 12-11은 추출된 `run` 함수를 보여줍니다. 지금은 함수 추
 `expect`를 호출하여 프로그램이 패닉이 되도록하는 대신, `run` 함수는
 뭔가 잘못되면 `Result<T, E>`를 반환할 것입니다. 이것이 사용차 친화적인
 방식으로 에러를 처리하는 `main` 안의 로직을 더 굳건히 만들게 해줄
-것입니다. Listing 12-12는 `run`의 시그니처와 본문에 필요한 변경점을
+것입니다. 예제 12-12는 `run`의 시그니처와 본문에 필요한 변경점을
 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-12/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-12: `run` 함수가 `Result`를 반환하도록
+<span class="caption">예제 12-12: `run` 함수가 `Result`를 반환하도록
 변경하기</span>
 
 여기서는 세 가지 중요한 변경점이 있습니다. 첫번째로, `run` 함수의 반환
@@ -421,10 +421,10 @@ Listing 12-11은 추출된 `run` 함수를 보여줍니다. 지금은 함수 추
 
 #### `main`에서 `run`으로부터 반환된 에러 처리하기
 
-이제 Listing 12-10의 `Config::build`에 사용했던 것과 비슷한 기술을 사용하여
+이제 예제 12-10의 `Config::build`에 사용했던 것과 비슷한 기술을 사용하여
 에러를 검사하고 이를 처리해볼 것인데, 약간 다른 점이 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
@@ -454,33 +454,33 @@ Listing 12-11은 추출된 `run` 함수를 보여줍니다. 지금은 함수 추
 * `Config` 정의 부분
 * `Config::build` 함수 정의 부분
 
-*src/lib.rs*의 내용은 Listing 12-13과 같은 시그니처를 가지고 있어야 합니다
-(간결성을 위해 함수의 본문은 생략하였습니다). *src/main.rs*를 Listing 12-14처럼
+*src/lib.rs*의 내용은 예제 12-13과 같은 시그니처를 가지고 있어야 합니다
+(간결성을 위해 함수의 본문은 생략하였습니다). *src/main.rs*를 예제 12-14처럼
 수정하기 전까지는 컴파일이 되지 않음을 유의하세요.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-13: `Config`와 `run`을 *src/lib.rs*
+<span class="caption">예제 12-13: `Config`와 `run`을 *src/lib.rs*
 안으로 옮기기</span>
 
 `pub` 키워드를 자유롭게 사용했습니다: `Config`와 이 구조체의 각 필드및 `build`
 메서드, 그리고 `run` 함수에 대해 사용했지요. 이제 우리는 테스트 해볼 수 있는
 공개 API를 갖춘 라이브러리 크레이트를 가지게 되었습니다!
 
-이제는 Listing 12-14처럼 *src/lib.rs*로 옮겨진 코드를 *src/main.rs* 내의
+이제는 예제 12-14처럼 *src/lib.rs*로 옮겨진 코드를 *src/main.rs* 내의
 바이너리 크레이트 스코프쪽으로 가져올 필요가 생겼습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 12-14: *src/main.rs*에서 `minigrep` 라이브러리
+<span class="caption">예제 12-14: *src/main.rs*에서 `minigrep` 라이브러리
 크레이트 사용하기</span>
 
 `use minigrep::Config` 줄을 추가하여 라이브러리 크레이트로부터

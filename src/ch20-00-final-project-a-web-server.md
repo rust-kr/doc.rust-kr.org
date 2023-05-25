@@ -6,11 +6,11 @@
 합니다.
 
 최종 프로젝트로는 “hello”라고 말하는 웹 서버를 만들 것이며 웹 브라우저에서는
-Figure 20-1과 같이 보일 것입니다.
+그림 20-1과 같이 보일 것입니다.
 
 ![hello from rust](img/trpl20-01.png)
 
-<span class="caption">Figure 20-1: 최종 프로젝트</span>
+<span class="caption">그림 20-1: 최종 프로젝트</span>
 
 이 웹 서버를 만들기 위한 계획은 다음과 같습니다:
 

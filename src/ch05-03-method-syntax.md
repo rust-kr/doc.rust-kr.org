@@ -12,16 +12,16 @@
 ### 메서드 정의
 
 기존의 `Rectangle` 매개변수를 갖던 `area` 함수를 수정하여
-Listing 5-13 처럼 `Rectangle` 구조체에 정의된
+예제 5-13 처럼 `Rectangle` 구조체에 정의된
 `area` 메서드로 바꿔봅시다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-13/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-13: `Rectangle` 구조체에
+<span class="caption">예제 5-13: `Rectangle` 구조체에
 `area` 메서드 정의</span>
 
 `Rectangle`의 컨텍스트 내에 함수를 정의하기 위해서, `Rectangle`에 대한 `impl`
@@ -65,7 +65,7 @@ Listing 5-13 처럼 `Rectangle` 구조체에 정의된
 예를 들면, `width`라는 중복된 이름의 메서드를 `Rectangle`상에 정의할 수
 있지요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-06-method-field-interaction/src/main.rs:here}}
@@ -138,16 +138,16 @@ Listing 5-13 처럼 `Rectangle` 구조체에 정의된
 이번에 만들 새로운 메서드는 다른 `Rectangle` 인스턴스를 받아서,
 `self` 사각형 (첫번째 `Rectangle`) 면적 내에 두 번째 사각형 `Rectangle`
 인스턴스가 완전히 들어갈 수 있다면 `true`를 반환하고, 못 들어가면 `false`를
-반환할 겁니다. 즉, `can_hold` 메서드를 정의하여 다음 Listing 5-14에 나오는
+반환할 겁니다. 즉, `can_hold` 메서드를 정의하여 다음 예제 5-14에 나오는
 프로그램이 작동하도록 만들겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 5-14: `can_hold` 메서드를 작성하고 나면
+<span class="caption">예제 5-14: `can_hold` 메서드를 작성하고 나면
 작동할 코드</span>
 
 `rect2`는 너비와 높이 둘 다 `rect1`보다 작지만,
@@ -170,19 +170,19 @@ Can rect1 hold rect3? false
 논리적으로도 불변 참조자가 가장 적합합니다.
 반환값은 Boolean 타입이 될 거고, `self`의 너비, 높이가
 다른 `Rectangle`의 너비, 높이보다 큰지 검사하는 식으로 구현될 겁니다.
-그럼 이제 Listing 5-13의 `impl` 블록에 `can_hold` 메서드를 새로 추가해보죠!
-추가하고 난 모습은 다음 Listing 5-15와 같습니다:
+그럼 이제 예제 5-13의 `impl` 블록에 `can_hold` 메서드를 새로 추가해보죠!
+추가하고 난 모습은 다음 예제 5-15와 같습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-15: 다른 `Rectangle` 인스턴스를
+<span class="caption">예제 5-15: 다른 `Rectangle` 인스턴스를
 매개변수로 갖는 `can_hold` 메서드를 `Rectangle` 에 구현</span>
 
-이제 Listing 5-14 에서 본
+이제 예제 5-14 에서 본
 `main` 함수를 실행하면 원했던 결과가 나올 겁니다.
 이처럼 메서드는 `self` 매개변수 뒤에 여러 매개변수를 가질 수 있으며,
 이 매개변수는 함수에서의 매개변수와 동일하게 기능합니다.
@@ -204,7 +204,7 @@ Can rect1 hold rect3? false
 더 간단하게 정사각형을 만드는 연관 함수 `square`를
 제공해보겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
@@ -223,14 +223,14 @@ Can rect1 hold rect3? false
 ### `impl` 블록은 여러 개일 수 있습니다
 
 각 구조체는 여러 개의 `impl` 블록을 가질 수 있습니다.
-다음 Listing 5-16은 Listing 5-15에 나온 코드를 변경해
+다음 예제 5-16은 예제 5-15에 나온 코드를 변경해
 `impl` 블록을 여러 개로 만든 모습입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-16: Listing 5-15 를 여러 `impl`
+<span class="caption">예제 5-16: 예제 5-15 를 여러 `impl`
 블록을 사용하도록 재작성</span>
 
 위 코드에서는 `impl` 블록을 여러 개로 나눠야 할 이유가 전혀 없지만,

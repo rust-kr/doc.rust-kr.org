@@ -33,15 +33,15 @@
 `Box<T>`에 대한 사용례를 논의하기 전에, 먼저 문법 및 `Box<T>` 내에
 저장된 값의 사용법을 다루겠습니다.
 
-Listing 15-1은 박스를 사용하여 힙에 `i32` 값을 저장하는 방법을 보여줍니다:
+예제 15-1은 박스를 사용하여 힙에 `i32` 값을 저장하는 방법을 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-1: 박스를 사용하여 `i32` 값을 힙에
+<span class="caption">예제 15-1: 박스를 사용하여 `i32` 값을 힙에
 저장하기</span>
 
 변수 `b`를 정의하여 `5`라는 값을 가리키는 `Box` 값을 갖도록 했는데, 여기서
@@ -102,17 +102,17 @@ cons list는 러스트에서 흔히 사용되는 데이터 구조는 아닙니�
 하지만, 이 장에서는 cons list로 시작하여 박스가 어떤 식으로 별로 주의를
 기울이지 않고도 재귀적 데이터 타입을 정의하도록 하는지 탐구하겠습니다.
 
-Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `List` 타입이
+예제 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `List` 타입이
 알려진 크기를 가지고 있지 않고 있기 때문에 이 코드는 아직 컴파일이 안된다는
 점을 유의하세요. 이것이 여기서 보여주려는 것입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-2: `i32` 값의 cons list 데이터 구조를
+<span class="caption">예제 15-2: `i32` 값의 cons list 데이터 구조를
 표현하는 열거형 정의에 대한 첫 번째 시도</span>
 
 > Note: 이 예제의 목적을 위해 오직 `i32` 값만 담는 cons list를
@@ -120,16 +120,16 @@ Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `Li
 > 임의의 타입 값을 저장할 수 있는 cons list 타입을 정의할 수도
 > 있습니다.
 
-`List` 타입을 이용하여 리스트 `1, 2, 3`을 저장하는 것은 Listing 15-3의
+`List` 타입을 이용하여 리스트 `1, 2, 3`을 저장하는 것은 예제 15-3의
 코드처럼 보일 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-3: `List` 열거형을 이용하여 리스트 `1, 2, 3`
+<span class="caption">예제 15-3: `List` 열거형을 이용하여 리스트 `1, 2, 3`
 저장하기</span>
 
 첫 번째 `Cons` 값은 `1`과 또다른 `List` 값을 갖습니다. 이 `List` 값은
@@ -137,14 +137,14 @@ Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `Li
 `List` 값을 갖는 `Cons`가 하나 더 있는데, 여기서 마지막의 `List`은 `Nil`로서,
 리스트의 끝을 알리는 비재귀적인 배리언트입니다.
 
-만일 Listing 15-3 코드의 컴파일을 시도하면, Listing 15-4과 같은
+만일 예제 15-3 코드의 컴파일을 시도하면, 예제 15-4과 같은
 에러를 얻습니다:
 
 ```console
 {{#include ../listings/ch15-smart-pointers/listing-15-03/output.txt}}
 ```
 
-<span class="caption">Listing 15-4: 재귀적 열거형을 정의하는 시도를 했을 때 얻게
+<span class="caption">예제 15-4: 재귀적 열거형을 정의하는 시도를 했을 때 얻게
 되는 에러</span>
 
 이 에러는 이 타입이 “무한한 크기다”라고 말해줍니다. 그 원인은 재귀적인 배리언트를
@@ -155,7 +155,7 @@ Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `Li
 
 #### 비재귀적 타입의 크기 계산하기
 
-6장에서 열거형 정의에 대해 논의할 때 Listing 6-2에서 정의했던 `Message`
+6장에서 열거형 정의에 대해 논의할 때 예제 6-2에서 정의했던 `Message`
 열거형을 상기해봅시다:
 
 ```rust
@@ -169,7 +169,7 @@ Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `Li
 진행됩니다. 하나의 배리언트만 사용될 것이기 때문에, `Message` 값이 필요로 하는
 가장 큰 공간은 varient 중에서 가장 큰 것을 저장하는데 필요한 공간입니다.
 
-러스트가 Listing 15-2의 `List` 열거형과 같은 재귀적 타입이 필요로 하는 공간을
+러스트가 예제 15-2의 `List` 열거형과 같은 재귀적 타입이 필요로 하는 공간을
 결정하는 시도를 할 때는 어떤 일이 일어날지 위의 경우와 대조해보세요. 컴파일러는
 `Cons` 배리언트를 살펴보기 시작하는데, 이는 `i32` 타입의 값과 `List` 타입의 값을
 갖습니다. 그러므로 `Cons`는 `i32`의 크기에 `List` 크기를 더한 만큼의 공간을
@@ -180,7 +180,7 @@ Listing 15-2는 cons list를 위한 열거형 정의를 담고 있습니다. `Li
 
 <img alt="An infinite Cons list" src="img/trpl15-01.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 15-1: 무한한 `Cons` 배리언트를 가지고 있는
+<span class="caption">그림 15-1: 무한한 `Cons` 배리언트를 가지고 있는
 무한한 `List`</span>
 
 #### `Box<T>`를 이용하여 알려진 크기를 가진 재귀적 타입 만들기
@@ -212,16 +212,16 @@ help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `List` repre
 이 구현은 이제 아이템을 다른 것 안쪽에 넣는 것이 아니라 그 다음 위치에 놓는
 형태에 더 가깝습니다.
 
-Listing 15-2의 `List` 열거형의 정의와 Listing 15-3의 `List` 사용법을
-Listing 15-5의 코드로 바꿀 수 있고, 이것은 컴파일될 것입니다:
+예제 15-2의 `List` 열거형의 정의와 예제 15-3의 `List` 사용법을
+예제 15-5의 코드로 바꿀 수 있고, 이것은 컴파일될 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-5: 알려진 크기를 갖도록 하기 위해
+<span class="caption">예제 15-5: 알려진 크기를 갖도록 하기 위해
 `Box<T>`를 이용한 `List` 정의</span>
 
 `Cons` 배리언트에는 `i32`와 박스의 포인터 데이터를 저장할 공간을 더한 크기만큼이
@@ -229,12 +229,12 @@ Listing 15-5의 코드로 바꿀 수 있고, 이것은 컴파일될 것입니다
 공간을 덜 필요로 합니다. 이제는 어떠한 `List` 값이라도 `i32`의 크기와 박스의 포인터
 데이터 크기를 더한 값만큼만 차지한다는 것을 알게 되었습니다. 박스를 이용하는 것으로
 무한한 재귀적 연결을 깨뜨렸고, 따라서 컴파일러는 `List` 값을 저장하는데 필요한
-크기를 알아낼 수 있습니다. Figure 15-2는 `Cons` 배리언트가 이제 어떻게 생겼는지를
+크기를 알아낼 수 있습니다. 그림 15-2는 `Cons` 배리언트가 이제 어떻게 생겼는지를
 보여주고 있습니다:
 
 <img alt="A finite Cons list" src="img/trpl15-02.svg" class="center" />
 
-<span class="caption">Figure 15-2: `Cons`가 `Box`를 들고 있기 때문에
+<span class="caption">그림 15-2: `Cons`가 `Box`를 들고 있기 때문에
 무한한 크기가 아니게 된 `List`</span>
 
 박스는 그저 간접 및 힙 할당만을 제공할 뿐입니다; 이들은 다른 어떤 특별한

@@ -23,7 +23,7 @@
 
 또한 주석은 코드의 뒷 부분에 위치할 수도 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-24-comments-end-of-line/src/main.rs}}
@@ -32,7 +32,7 @@
 하지만 아래와 같이 코드 앞줄에 따로 주석을 작성한 형태를
 더 자주 보게 될 겁니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}

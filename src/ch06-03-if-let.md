@@ -2,7 +2,7 @@
 
 `if let` 문법은 `if`와 `let`을 조합하여 하나의 패턴만 매칭시키고
 나머지 경우는 무시하는 값을 다루는 간결한 방법을 제공합니다.
-Listing 6-6의 프로그램은 `config_max` 변수의 어떤 `Option<u8>`
+예제 6-6의 프로그램은 `config_max` 변수의 어떤 `Option<u8>`
 값을 매칭하지만 그 값이 `Some` 배리언트일 경우에만 코드를 실행시키고
 싶어 하는 예제를 보여줍니다:
 
@@ -10,7 +10,7 @@ Listing 6-6의 프로그램은 `config_max` 변수의 어떤 `Option<u8>`
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-6: 어떤 값이 `Some` 일 때에만 코드를 실행하도록
+<span class="caption">예제 6-6: 어떤 값이 `Some` 일 때에만 코드를 실행하도록
 하는 `match`</span>
 
 이 값이 `Some`이면 패턴 내에 있는 `max`에 `Some` 배리언트의 값을
@@ -20,7 +20,7 @@ Listing 6-6의 프로그램은 `config_max` 변수의 어떤 `Option<u8>`
 코드입니다.
 
 그 대신, `if let`을 이용하여 이 코드를 더 짧게 쓸 수 있습니다. 아래의 코드는
-Listing 6-6에서의 `match`와 동일하게 동작합니다:
+예제 6-6에서의 `match`와 동일하게 동작합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
@@ -45,7 +45,7 @@ Listing 6-6에서의 `match`와 동일하게 동작합니다:
 
 `if let`과 함께 `else`를 포함시킬 수 있습니다. `else` 뒤에 나오는
 코드 블록은 `match` 표현식에서 `_` 케이스 뒤에 나오는 코드 블록과
-동일합니다. Listing 6-4에서 `Quarter` 배리언트가 `UsState` 값도 들고
+동일합니다. 예제 6-4에서 `Quarter` 배리언트가 `UsState` 값도 들고
 있었던 `Coin` 열거형 정의부를 상기해 보세요.
 만일 우리가 쿼터가 아닌 모든 동전을 세고 싶은 동시에 쿼터 동전일
 경우 또한 알려주고 싶었다면, 아래와 같이 `match`문을 쓸 수 있었을

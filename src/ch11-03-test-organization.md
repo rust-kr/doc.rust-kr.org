@@ -35,7 +35,7 @@
 이번 장 첫 번째 절에서 `adder` 프로젝트를 생성했을 때
 카고가 생성했던 코드를 다시 살펴봅시다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs}}
@@ -56,15 +56,15 @@
 다른 언어에서는 비공개 함수를 테스트하기 어렵거나, 불가능하게 만들어두었습니다.
 여러분의 테스트 철학이 어떤지는 모르겠지만, 러스트의 프라이버시 규칙은
 비공개 함수를 테스트하도록 허용합니다.
-Listing 11-12는 비공개 함수 `internal_adder`를 보여줍니다.
+예제 11-12는 비공개 함수 `internal_adder`를 보여줍니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 11-12: 비공개 함수 테스트하기</span>
+<span class="caption">예제 11-12: 비공개 함수 테스트하기</span>
 
 `internal_adder` 함수는 `pub` 으로 표시되지 않았습니다. 테스트는
 그냥 러스트 코드이며 `tests` 모듈도 그저 또 다른 모듈일 뿐입니다.
@@ -92,7 +92,7 @@ Listing 11-12는 비공개 함수 `internal_adder`를 보여줍니다.
 원하는 만큼 통합 테스트 파일을 만들 수 있고, 카고는 각 파일을
 각각의 크레이트로 컴파일합니다.
 
-통합 테스트를 직접 만들어보죠. Listing 11-12 코드를 *src/lib.rs* 에 작성한 채로
+통합 테스트를 직접 만들어보죠. 예제 11-12 코드를 *src/lib.rs* 에 작성한 채로
 *tests* 디렉토리를 만들고, *tests/integration_test.rs* 파일을 생성합니다.
 여러분의 디렉토리 구조는 다음과 같이 생겨야 합니다:
 
@@ -106,15 +106,15 @@ adder
     └── integration_test.rs
 ```
 
-*tests/integration_test.rs* 파일에 Listing 11-13의 코드를 입력합시다:
+*tests/integration_test.rs* 파일에 예제 11-13의 코드를 입력합시다:
 
-<span class="filename">Filename: tests/integration_test.rs</span>
+<span class="filename">파일명: tests/integration_test.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-13/tests/integration_test.rs}}
 ```
 
-<span class="caption">Listing 11-13: `adder` 크레이트 내 함수를 테스트하는
+<span class="caption">예제 11-13: `adder` 크레이트 내 함수를 테스트하는
 통합 테스트</span>
 
 `tests` 디렉토리의 각 파일은 별개의 크레이트이므로, 각각의 테스트 크레이트의
@@ -136,7 +136,7 @@ adder
 없을 것입니다.
 
 첫 번째 절인 유닛 테스트는 앞서 본 것과 같습니다: 유닛 테스트가
-한 줄씩 (`internal`은 Listing 11-12 에서 추가했었습니다)
+한 줄씩 (`internal`은 예제 11-12 에서 추가했었습니다)
 출력되고, 유닛 테스트 결과 요약 줄이 출력됩니다.
 
 통합 테스트 절은 `Running tests/integration_test.rs`줄로
@@ -177,7 +177,7 @@ adder
 *tests/common.rs* 파일을 생성하고, 여러 테스트 파일 내
 함수에서 호출할 `setup` 함수를 작성한다고 가정해봅시다:
 
-<span class="filename">Filename: tests/common.rs</span>
+<span class="filename">파일명: tests/common.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/tests/common.rs}}
@@ -223,13 +223,13 @@ adder
 다음은 *tests/integration_test.rs* 파일 내 `it_adds_two` 테스트에서 `setup` 함수를
 호출하는 예시입니다.
 
-<span class="filename">Filename: tests/integration_test.rs</span>
+<span class="filename">파일명: tests/integration_test.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-13-fix-shared-test-code-problem/tests/integration_test.rs}}
 ```
 
-Listing 7-21에서 배운 모듈 선언대로 `mod common;`를 선언했습니다.
+예제 7-21에서 배운 모듈 선언대로 `mod common;`를 선언했습니다.
 선언하고 나면 `common::setup()` 함수를 호출할 수
 있습니다.
 

@@ -29,17 +29,17 @@
 이를 보내는 시스템과 같이 서로 통신이 필요한 스레드에 채널을
 이용할 수 있습니다.
 
-먼저 Listing 16-6에서는 채널을 만들지만 이걸로 아무것도 하지 않을 것입니다.
+먼저 예제 16-6에서는 채널을 만들지만 이걸로 아무것도 하지 않을 것입니다.
 채널을 통해 보내려는 값의 타입이 무엇인지 러스트가 알지 못하므로 이 코드가
 아직 컴파일되지 않는다는 점을 주의하세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-6: 채널을 생성하여 각 절반을
+<span class="caption">예제 16-6: 채널을 생성하여 각 절반을
 `tx`와 `rx`에 할당하기</span>
 
 `mpsc::channel` 함수를 사용하여 새로운 채널을 생성합니다; `mpsc`는
@@ -61,18 +61,18 @@
 `mpsc::channel`에 의해 반환된 튜플의 조각들을 추출하는데 편리한
 접근법이라고만 알아둡시다.
 
-Listing 16-7과 같이 송신 단말을 생성된 스레드로 이동시키고 하나의
+예제 16-7과 같이 송신 단말을 생성된 스레드로 이동시키고 하나의
 문자열을 전송하게 하여 생성된 스레드가 메인 스레드와 통신하도록
 해봅시다. 이는 강 상류에 고무 오리를 띄우는 것 혹은 한 스레드에서 다른
 스레드로 채팅 메세지를 보내는 것과 비슷합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-7: `tx`를 생성된 스레드로 이동시키고
+<span class="caption">예제 16-7: `tx`를 생성된 스레드로 이동시키고
 “hi”를 보내기</span>
 
 다시 한번 `thread::spawn`을 이용하여 새로운 스레드를 생성한 뒤 `move`를
@@ -85,17 +85,17 @@ Listing 16-7과 같이 송신 단말을 생성된 스레드로 이동시키고 �
 중입니다. 그러나 실제 애플리케이션에서는 이를 적절히 다뤄야 할 것입니다:
 적절한 에러 처리를 위한 전략을 다시 보려면 9장으로 돌아가세요.
 
-Listing 16-8에서는 메인 스레드에 있는 채널의 수신 단말로부터 값을
+예제 16-8에서는 메인 스레드에 있는 채널의 수신 단말로부터 값을
 받을 것입니다. 이는 강의 끝물에서 고무 오리를 건져올리는 것 혹은 채팅
 메세지를 받는 것과 비슷합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-08/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-8: 메인 스레드에서 “hi” 값을
+<span class="caption">예제 16-8: 메인 스레드에서 “hi” 값을
 받아 출력하기</span>
 
 수신자는 두 개의 유용한 메서드를 가지고 있습니다: `recv`와 `try_recv`입니다. 여기서는
@@ -116,7 +116,7 @@ Listing 16-8에서는 메인 스레드에 있는 채널의 수신 단말로부�
 메세지를 기다리는 동안 해야 할 다른 일이 없으므로, 메인 스레드를 블록시키는
 것이 적절합니다.
 
-Listing 16-8의 코드를 실행하면, 메인 스레드로부터 출력된 값을 보게
+예제 16-8의 코드를 실행하면, 메인 스레드로부터 출력된 값을 보게
 될 것입니다:
 
 <!-- Not extracting output because changes to this output aren't significant;
@@ -136,16 +136,16 @@ Got: hi
 프로그램 전체에서 소유권을 고려할 경우 얻을 수 있는 이점입니다. 실험을
 통해 채널과 소유권이 함께 동작하는 것이 어떤 식으로 문제를 방지하는지
 알아봅시다: 채널로 `val` 값을 보낸 *이후에* 생성된 스레드에서 이 값을
-사용하는 시도를 해보겠습니다. Listing 16-9의 코드를 컴파일하여 이 코드가
+사용하는 시도를 해보겠습니다. 예제 16-9의 코드를 컴파일하여 이 코드가
 왜 허용되지 않는지를 보세요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-09/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-9: `val`을 채널로 보낸뒤
+<span class="caption">예제 16-9: `val`을 채널로 보낸뒤
 이에 대한 사용 시도</span>
 
 여기서는 `tx.send`를 통하여 채널에 `val`을 보낸뒤 이를 출력하는 시도를
@@ -153,7 +153,7 @@ Got: hi
 나면, 그 값을 다시 사용하려고 하기 전에 값을 받은 스레드에서 수정되거나
 버려질 수 있습니다. 잠재적으로, 다른 스레드에서의 수정은 불일치하거나 존재하지 않는
 데이터로 인하여 에러 혹은 예상치 못한 결과를 야기할 수 있습니다. 하지만 러스트에서는
-Listing 16-9 코드의 컴파일 시도를 하면 에러가 납니다:
+예제 16-9 코드의 컴파일 시도를 하면 에러가 납니다:
 
 ```console
 {{#include ../listings/ch16-fearless-concurrency/listing-16-09/output.txt}}
@@ -166,19 +166,19 @@ Listing 16-9 코드의 컴파일 시도를 하면 에러가 납니다:
 
 ### 여러 값 보내기와 수신자가 기다리는지 알아보기
 
-Listing 16-8의 코드는 컴파일되고 실행도 되지만, 두개의 분리된 스레드가
+예제 16-8의 코드는 컴파일되고 실행도 되지만, 두개의 분리된 스레드가
 채널을 통해 서로 대화를 했는지를 우리에게 명확히 보여주진 못했습니다.
-Listing 16-10에서는 Listing 16-8의 코드가 동시에 실행됨을 입증해 줄
+예제 16-10에서는 예제 16-8의 코드가 동시에 실행됨을 입증해 줄
 수정본을 만들었습니다: 이제 생성된 스레드가 여러 메세지를 보내면서
 각 메세지 사이에 1초씩 잠깐 멈출 것입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-10/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-10: 여러 메세지를 보내고
+<span class="caption">예제 16-10: 여러 메세지를 보내고
 각각마다 멈추기</span>
 
 이번에는 생성된 스레드가 메인 스레드로 보내고 싶은 문자열의 벡터를 
@@ -190,7 +190,7 @@ Listing 16-10에서는 Listing 16-8의 코드가 동시에 실행됨을 입증�
 대신 `rx`를 반복자처럼 다루고 있습니다. 각각의 수신된 값에 대해서 이를
 출력합니다. 채널이 닫힐 때는 반복이 종료될 것입니다.
 
-Listing 16-10의 코드를 실행시키면 다음과 같은 출력이 각 줄마다 1초씩
+예제 16-10의 코드를 실행시키면 다음과 같은 출력이 각 줄마다 1초씩
 멈추면서 보일 것입니다:
 
 <!-- Not extracting output because changes to this output aren't significant;
@@ -211,17 +211,17 @@ Got: thread
 ### 송신자를 복제하여 여러 생산자 만들기
 
 이전에 `mpsc`가 *복수 생산자, 단일 소비자 (multiple producer, single consumer)*
-의 약어라는 것을 언급했었지요. `mpsc`를 Listing 16-10의 코드에 적용하여 모두 동일한
-수신자로 값들을 보내는 여러 스레드들을 만들도록 코드를 확장해봅시다. Listing 16-11처럼
+의 약어라는 것을 언급했었지요. `mpsc`를 예제 16-10의 코드에 적용하여 모두 동일한
+수신자로 값들을 보내는 여러 스레드들을 만들도록 코드를 확장해봅시다. 예제 16-11처럼
 채널의 송신자를 복제하면 그렇게 할 수 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 16-11: 여러 개의 생산자로부터 여러 메세지
+<span class="caption">예제 16-11: 여러 개의 생산자로부터 여러 메세지
 보내기</span>
 
 이번에는 첫번째로 생성된 스레드를 생성하기 전에, 채널의 송신 단말에 대해 `clone`을

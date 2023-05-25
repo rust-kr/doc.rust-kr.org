@@ -11,15 +11,15 @@
 이때 구조체 이름은 함께 묶을 데이터의 의미에 맞도록 지어주세요.
 이후 중괄호 안에서는 필드(*field*)라 하는
 각 구성 요소의 이름 및 타입을 정의합니다.
-다음 Listing 5-1은 사용자 계정 정보를 저장하는 구조체입니다.
+다음 예제 5-1은 사용자 계정 정보를 저장하는 구조체입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-1: 사용자 계정 정보를 저장하는 `User` 구조체 정의</span>
+<span class="caption">예제 5-1: 사용자 계정 정보를 저장하는 `User` 구조체 정의</span>
 
 정의한 구조체를 사용하려면 해당 구조체 내
 각 필드의 값을 정해 인스턴스(*instance*)를 생성해야 합니다.
@@ -28,31 +28,31 @@
 이때 필드의 순서는 구조체를 정의했을 때와 동일하지 않아도 됩니다.
 요약하자면, 구조체 정의는 대충 해당 구조체에 무엇이 들어갈지를 정해둔 양식이며,
 인스턴스는 거기에 실제 값을 넣은 것이라고 생각하시면 됩니다.
-예시로 확인해 보죠. Listing 5-2 에서 앞서 정의한 `User` 구조체로
+예시로 확인해 보죠. 예제 5-2 에서 앞서 정의한 `User` 구조체로
 사용자를 선언해보겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-2: `User` 구조체의
+<span class="caption">예제 5-2: `User` 구조체의
 인스턴스 생성</span>
 
 구조체 내 특정 값은 점(.) 표기법으로 얻어올 수 있습니다. 예를 들어
 사용자의 이메일 주소를 얻어야 한다치면 `user1.email` 처럼 사용할 수 있죠.
 변경 가능한 인스턴스라면, 같은 방식으로 특정 필드의 값을 변경할 수도 있습니다.
-다음 Listing 5-3 이 변경 가능한 인스턴스의
+다음 예제 5-3 이 변경 가능한 인스턴스의
 `email` 필드 값을 변경하는 예시입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-3: `User` 인스턴스의
+<span class="caption">예제 5-3: `User` 인스턴스의
 `email` 필드 값 변경</span>
 
 가변성은 해당 인스턴스 전체가 지니게 됩니다.
@@ -60,17 +60,17 @@
 또한, 구조체도 다른 표현식과 마찬가지로 함수 마지막 표현식에서
 암묵적으로 새 인스턴스를 생성하고 반환할 수 있습니다.
 
-Listing 5-4 에선 `build_user` 함수가 사용자 이메일과 이름을 전달 받고,
+예제 5-4 에선 `build_user` 함수가 사용자 이메일과 이름을 전달 받고,
 `acitve`, `sign_in_count`를 각각 `true`, `1` 로 설정한
 `User` 인스턴스를 반환하는 모습을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-4: 사용자의 이메일과 이름을 전달 받고
+<span class="caption">예제 5-4: 사용자의 이메일과 이름을 전달 받고
 `User` 인스턴스를 반환하는 `build_user` 함수</span>
 
 특별히 나쁜 부분은 없지만, 매개변수명과 구조체 필드명이
@@ -83,18 +83,18 @@ Listing 5-4 에선 `build_user` 함수가 사용자 이메일과 이름을 전�
 
 ### 필드 초기화 축약법 사용하기
 
-Listing 5-4 처럼 변수명과 구조체 필드명이 같을 땐,
+예제 5-4 처럼 변수명과 구조체 필드명이 같을 땐,
 필드 초기화 축약법(*field init shorthand*)을 사용해서 더 적은 타이핑으로
-같은 기능을 구현할 수 있습니다. 다음 Listing 5-5 는 `email`, `username` 을
+같은 기능을 구현할 수 있습니다. 다음 예제 5-5 는 `email`, `username` 을
 반복 작성하는 대신 필드 초기화 축약법을 사용한 예제입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-5: 변수명과 필드명이 같던
+<span class="caption">예제 5-5: 변수명과 필드명이 같던
 `username`, `email` 에 필드 초기화 축약법을 적용한
 `build_user` 함수</span>
 
@@ -110,34 +110,34 @@ Listing 5-4 처럼 변수명과 구조체 필드명이 같을 땐,
 새로운 인스턴스를 생성하게 되는 경우가 간혹 있습니다.
 그럴 때 유용한 게 바로 구조체 갱신 문법(*struct update syntax*)입니다.
 
-먼저 Listing 5-6에서는 구조체 갱신 문법을 사용하지 않고 새로운 `User`
+먼저 예제 5-6에서는 구조체 갱신 문법을 사용하지 않고 새로운 `User`
 인스턴스 `user2`를 만드는 방법을 보여줍니다. `email`에는 새로운 값을
-설정했지만 나머지 값들에는 Listing 5-2에서 만들었던 `user1`의 값과 동일합니다.
+설정했지만 나머지 값들에는 예제 5-2에서 만들었던 `user1`의 값과 동일합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-6: `user1`의 값 중 하나를 달리한
+<span class="caption">예제 5-6: `user1`의 값 중 하나를 달리한
 새로운 `User` 인스턴스를 생성</span>
 
-구조체 갱신 문법을 사용하면 다음 Listing 5-7처럼 더 적은 코드로
+구조체 갱신 문법을 사용하면 다음 예제 5-7처럼 더 적은 코드로
 같은 효과를 낼 수 있습니다. `..`은  따로 명시된 필드를 제외한
 나머지 필드를, 주어진 인스턴스의 필드 값으로 설정하는 구문입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 5-7: 새로운 `email` 값으로 `User` 구조체의
+<span class="caption">예제 5-7: 새로운 `email` 값으로 `User` 구조체의
 인스턴스를 생성하되, 나머지 필드는 구조체 갱신 문법을 이용해 `user1`의 필드
 값을 사용하기</span>
 
-Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
+예제 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 생성하지만 `username`, `active`, `sign_in_count`는 `user1`의
 필드와 같은 값을 갖게 합니다. `user1`의 값들과 동일한 값들로
 나머지를 채우려면 `..user1`를 제일 끝에 적어야 하지만,
@@ -169,7 +169,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 그 뒤에는 타입들로 이루어진 튜플이 따라옵니다. 예시로 살펴볼까요?
 다음은 각각 `Color`, `Point` 라는 두 개의 튜플 구조체 정의 및 사용 예시입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs}}
@@ -194,7 +194,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 자세히 다루겠습니다. 아래는 `AlwaysEqual`이라는 이름의 유닛 구조체를
 선언하고 생성하는 예제입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-04-unit-like-structs/src/main.rs}}
@@ -212,7 +212,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 
 > ### 구조체 데이터의 소유권
 >
-> Listing 5-1 의 `User` 구조체 정의에서는 의도적으로
+> 예제 5-1 의 `User` 구조체 정의에서는 의도적으로
 > `&str` 문자열 슬라이스 대신 구조체가 소유권을 갖는 `String` 타입을 사용했습니다.
 > 구조체 인스턴스가 유효한 동안 각 인스턴스 내의
 > 모든 데이터가 유효하도록 만들기 위해서죠.
@@ -223,7 +223,7 @@ Listing 5-7의 코드 또한 `email` 값이 다른 `user2` 인스턴스를
 > 구조체 내 참조자가 가리키는 데이터의 유효함을 보장받을 수 있기 때문이죠.
 > 만약 라이프타임을 명시하지 않고 참조자를 저장하고자 하면 다음처럼 문제가 발생합니다.
 >
-> <span class="filename">Filename: src/main.rs</span>
+> <span class="filename">파일명: src/main.rs</span>
 >
 > <!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
 >

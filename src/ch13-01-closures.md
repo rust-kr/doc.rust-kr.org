@@ -33,15 +33,15 @@
 현재 재고에 있는 셔츠 색상을 나타내는 `Vec<ShirtColor>` 타입입니다.
 `Inventory` 상에 정의된 `giveaway` 메서드는 무료 티셔츠를 타게 된
 사람의 추가 색상 설정값을 얻어와서 그 사람이 받게 될 셔츠 색상을
-반환합니다. 이러한 설정이 Listing 13-1에 있습니다:
+반환합니다. 이러한 설정이 예제 13-1에 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-1: 셔츠 회사 증정 상황</span>
+<span class="caption">예제 13-1: 셔츠 회사 증정 상황</span>
 
 `main`에 정의된 `store`에는 이 한정판 프로모션 배포를 위해 남은 두 개의
 파란색 셔츠와 하나의 빨간색 셔츠를 가지고 있습니다. 여기서 빨간색 셔츠로
@@ -100,18 +100,18 @@
 
 변수와 마찬가지로, 딱 필요한 것만 적지 않고 더 장황하게 되는 비용을
 지불하고서라도 명시성과 명확성을 올리고 싶다면 타입 명시를 추가할 수
-있습니다. 클로저에 대한 타입 명시는 Listing 13-2과 같이 생긴 정의처럼
-보일 것입니다. 이 예제에서는 Listing 13-1에서처럼 인자로 넘기고 싶은
+있습니다. 클로저에 대한 타입 명시는 예제 13-2과 같이 생긴 정의처럼
+보일 것입니다. 이 예제에서는 예제 13-1에서처럼 인자로 넘기고 싶은
 위치에서 클로저를 정의하기 보다는, 클로저를 정의하여 변수에 저장하고
 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-2: 클로저에 매개변수와 반환값의
+<span class="caption">예제 13-2: 클로저에 매개변수와 반환값의
 타입을 추가적으로 명시하기</span>
 
 타입 명시가 추가되면 클로저의 문법은 함수의 문법과 더욱 유사해
@@ -139,7 +139,7 @@ let add_one_v4 = |x|               x + 1  ;
 혹은 `Vec` 안에 집어넣을 어떤 타입의 값이 필요한 것과 유사합니다.
 
 클로저 정의에 대하여, 컴파일러는 각각의 매개변수와 변환값 마다 하나의
-고정 타입을 추론할 것입니다. 예를 들면 Listing 13-3은 자신이
+고정 타입을 추론할 것입니다. 예를 들면 예제 13-3은 자신이
 매개변수로 받은 값을 그냥 반환하는 짧은 클로저의 정의를 보여주고
 있습니다. 이 클로저는 이 예제 용도 말고는 그다지 유요하진 않습니다.
 정의에 아무런 타입 명시를 하지 않았음을 주의하세요. 아무런 타입
@@ -147,13 +147,13 @@ let add_one_v4 = |x|               x + 1  ;
 여기서는 처음에 `String`에 대해 호출했습니다. 그런 다음 정수에
 대해 `example_closure`의 호출을 시도한다면, 에러를 얻게 됩니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-3: 두 개의 다른 타입에 대해 타입이
+<span class="caption">예제 13-3: 두 개의 다른 타입에 대해 타입이
 추론되는 클로저 호출 시도하기</span>
 
 컴파일러는 아래와 같은 에러를 냅니다:
@@ -175,17 +175,17 @@ let add_one_v4 = |x|               x + 1  ;
 클로저는 캡처된 값이 어떻게 쓰이는지에 기초하여 어떤 방법을 쓸 지
 결정할 것입니다.
 
-Listing 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대한 불변
+예제 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대한 불변
 참조자를 캡처하는데, 이는 그저 값을 출력하기 위한 불변 참조자가 필요한
 상태이기 때문입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-4: 불변 참조자를 캡처하는 클로저의
+<span class="caption">예제 13-4: 불변 참조자를 캡처하는 클로저의
 정의와 호출</span>
 
 또한 이 예제는 어떤 변수가 클로저의 정의에 묶일 수 있고, 이 클로저는
@@ -201,16 +201,16 @@ Listing 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대�
 {{#include ../listings/ch13-functional-features/listing-13-04/output.txt}}
 ```
 
-다음으로 Listing 13-5에서는 클로저의 본문을 바꾸어 `list` 벡터에 요소를
+다음으로 예제 13-5에서는 클로저의 본문을 바꾸어 `list` 벡터에 요소를
 추가하도록 했습니다. 클로저는 이제 가변 참조자를 캡처합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-5: 가변 참조자를 캡처하는 클로저의
+<span class="caption">예제 13-5: 가변 참조자를 캡처하는 클로저의
 정의와 호출</span>
 
 이 코드는 컴파일되고, 실행되고, 다음을 출력합니다:
@@ -235,20 +235,20 @@ Listing 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대�
 이 데이터를 소유하도록 하는데 대체로 유용합니다. 스레드가 무엇이고 왜 이를
 사용하게 되는지에 대한 자세한 내용은 16장에서 동시성에 대한 이야기를 할 때
 다루기로 하고, 지금은 `move` 키워드가 필요한 클로저를 사용하는 새 스레드의
-생성을 간략하게만 둘러봅시다. Listing 13-6은 Listing 13-4를 수정하여
+생성을 간략하게만 둘러봅시다. 예제 13-6은 예제 13-4를 수정하여
 메인 스레드가 아닌 새 스레드에서 벡터를 출력하는 코드를 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-6: 스레드에 대한 클로저가 `list`의
+<span class="caption">예제 13-6: 스레드에 대한 클로저가 `list`의
 소유권을 갖도록 `move` 사용하기</span>
 
 여기서는 새 스레드를 생성하여 여기에 인자로 실행될 클로저를 제공합니다.
-클로저의 본문에서는 리스트를 출력합니다. Listing 13-4에서는 클로저가
+클로저의 본문에서는 리스트를 출력합니다. 예제 13-4에서는 클로저가
 불변 참조자만 사용하여 `list`를 캡처했는데, 이것이 `list`를 출력하기
 위해 필요한 최소한의 접근 수준이기 때문입니다. 이 예제에서는 클로저 본문이
 여전히 불변 참조자만 필요할지라도, 클로저 정의의 앞부분에 `move` 키워드를
@@ -297,7 +297,7 @@ Listing 13-4에서 정의한 클로저는 `list`라는 이름의 벡터에 대�
    호출될 수 있는데, 이는 클로저가 동시에 여러번 호출되는 등의 경우에서
    중요합니다.
 
-Listing 13-1에서 사용했던 `Option<T>`의 `unwrap_or_else` 메서드 정의를
+예제 13-1에서 사용했던 `Option<T>`의 `unwrap_or_else` 메서드 정의를
 살펴봅시다:
 
 ```rust,ignore
@@ -344,17 +344,17 @@ impl<T> Option<T> {
 바운드는 왜 `FnOnce` 대신 `FnMut`인지를 알아봅시다. 이 클로저는 처리하려고
 하는 슬라이스 내에서 현재 아이템에 대한 참조자를 하나의 인자로 받아서,
 순서를 메길 수 있는 `K` 타입의 값을 반환합니다. 이 함수는 각 아이템의
-특정 속성을 이용하여 슬라이스를 정렬하고 싶을 때 유용합니다. Listing
-13-7에는 `Rectangle` 인스턴스의 리스트가 있고 `sort_by_key`를 사용하여
+특정 속성을 이용하여 슬라이스를 정렬하고 싶을 때 유용합니다. 예제 13-7에는
+`Rectangle` 인스턴스의 리스트가 있고 `sort_by_key`를 사용하여
 `width` 속성을 낮은 것부터 높은 순으로 정렬합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-7: `sort_by_key`를 사용하여 너비로
+<span class="caption">예제 13-7: `sort_by_key`를 사용하여 너비로
 사각형 정렬하기</span>
 
 이 코드는 다음을 출력합니다:
@@ -368,17 +368,17 @@ impl<T> Option<T> {
 r.width`는 자신의 환경으로부터 어떤 것도 캡처나 변형하기, 혹은 이전시키지
 않으므로, 트레잇 바운드 요건을 충족합니다.
 
-반면 Listing 13-8은 `FnOnce` 트레잇만 구현한 클로저의 예를
+반면 예제 13-8은 `FnOnce` 트레잇만 구현한 클로저의 예를
 보여주는데, 이 클로저는 환경으로부터 값을 이전시키고 있습니다.
 컴파일러는 이 클로저를 `sort_by_key`에 사용할 수 없게 할 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-8: `FnOnce` 클로저를 `sort_by_key`에 사용
+<span class="caption">예제 13-8: `FnOnce` 클로저를 `sort_by_key`에 사용
 시도하기</span>
 
 이는 `list`를 정렬할 때 `sort_by_key`가 클로저를 호출하는 횟수를 세려고
@@ -401,18 +401,18 @@ r.width`는 자신의 환경으로부터 어떤 것도 캡처나 변형하기, �
 이를 고치기 위해서는 클로저 본문을 수정하여 환경에서 값을 이전시키지
 않도록 할 필요가 있습니다. `sort_by_key`가 호출되는 횟수를 세기
 위해서는 환경쪽에 카운터를 유지하면서 클로저 본문에서 이 값을 증가시키는
-것이 더 직관적으로 계산하는 방법이겠습니다. Listing 13-9의 클로저는
+것이 더 직관적으로 계산하는 방법이겠습니다. 예제 13-9의 클로저는
 `sort_by_key`에서 동작하는데, 이는 `num_sort_operation` 카운터에
 대한 가변 참조자를 캡처할 뿐이므로 한번 이상 호출이 가능하기
 때문입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs}}
 ```
 
-<span class="caption">Listing 13-9: `FnMut` 클로저를 `sort_by_key`에 사용하는
+<span class="caption">예제 13-9: `FnMut` 클로저를 `sort_by_key`에 사용하는
 것은 허용됩니다</span>
 
 `Fn` 트레잇은 클로저를 사용하는 함수 혹은 타입을 정의하고 사용할 때

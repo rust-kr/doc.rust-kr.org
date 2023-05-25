@@ -38,7 +38,7 @@ cargo run > output.txt 2>&1
 cd ../../..
 -->
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
@@ -47,7 +47,7 @@ cd ../../..
 1장에서 보았듯이 `cargo new`는 여러분을 위해 “Hello, world!” 프로그램을 생성합니다.
 *src/main.rs* 파일을 살펴보면 다음과 같습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
@@ -71,15 +71,15 @@ cd ../../..
 프로그램의 첫 부분에서는 사용자 입력 요청, 입력값의 처리 후
 입력값이 기대하던 형식인지 검증합니다. 첫 시작으로 플레이어가
 추리한 값을 입력받을 수 있게 할 것입니다.
-Listing 2-1의 코드를 *src/main.rs* 에 작성하세요.
+예제 2-1의 코드를 *src/main.rs* 에 작성하세요.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:all}}
 ```
 
-<span class="caption">Listing 2-1: 사용자가 추리한 값을 입력 받아 그대로
+<span class="caption">예제 2-1: 사용자가 추리한 값을 입력 받아 그대로
 출력하는 코드</span>
 
 이 코드에 담긴 다양한 정보를 한 줄씩 살펴보겠습니다.
@@ -346,7 +346,7 @@ You guessed: 6
 * ch14-03-cargo-workspaces.md
 -->
 
-<span class="filename">Filename: Cargo.toml</span>
+<span class="filename">파일명: Cargo.toml</span>
 
 ```toml
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:8:}}
@@ -367,7 +367,7 @@ You guessed: 6
 최신 패치판을 받게 될 것임을 보장합니다. 0.9.0 버전 혹은 그 이상의 버전은
 이후의 예제에서 사용할 때 동일한 API가 있음을 보장하지 못합니다.
 
-이제 Listing 2-2처럼 코드 수정 없이 프로젝트를
+이제 예제 2-2처럼 코드 수정 없이 프로젝트를
 빌드 해 봅시다.
 
 <!-- manual-regeneration
@@ -397,7 +397,7 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 2.53s
 ```
 
-<span class="caption">Listing 2-2: rand 크레이트를 의존성으로 추가한 후
+<span class="caption">예제 2-2: rand 크레이트를 의존성으로 추가한 후
 `cargo build`를 실행한 출력 결과</span>
 
 여러분에게는 다른 버전명이 보이거나 (하지만 SemVer 덕분에 현재 코드와 호환될 것입니다)
@@ -506,15 +506,15 @@ rand = "0.9.0"
 ### 임의의 숫자 생성하기
 
 `rand`를 사용하여 추리할 임의의 숫자를 생성해봅시다. 다음 단계는
-*src/main.rs*를 Listing 2-3처럼 업데이트하면 됩니다.
+*src/main.rs*를 예제 2-3처럼 업데이트하면 됩니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:all}}
 ```
 
-<span class="caption">Listing 2-3: 임의의 숫자를 생성하기 위한 코드
+<span class="caption">예제 2-3: 임의의 숫자를 생성하기 위한 코드
 추가하기</span>
 
 먼저 `use rand::Rng;` 라인을 추가합니다. `Rng`는 난수 생성기를 구현한
@@ -582,16 +582,16 @@ You guessed: 5
 ## 비밀번호와 추리값을 비교하기
 
 이제는 입력값과 임의의 정수를 가지고 있으므로 이 둘을 비교할 수 있습니다.
-Listing 2-4는 그 단계를 보여주고 있습니다. 이 코드는 아직 컴파일 되지
+예제 2-4는 그 단계를 보여주고 있습니다. 이 코드는 아직 컴파일 되지
 않는데, 그 이유는 곧 설명하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 2-4: 두 숫자의 비교에 대한 가능한 반환값
+<span class="caption">예제 2-4: 두 숫자의 비교에 대한 가능한 반환값
 처리하기</span>
 
 먼저 `use`를 구문을 하나 더 사용하여 표준 라이브러리로부터
@@ -631,7 +631,7 @@ Listing 2-4는 그 단계를 보여주고 있습니다. 이 코드는 아직 컴
 이후 `match` 표현식은 끝나므로, 지금의 시나리오에서는 마지막
 갈래를 확인하지 않습니다.
 
-하지만 Listing 2-4의 코드는 컴파일되지 않습니다. 한번 시도해 봅시다:
+하지만 예제 2-4의 코드는 컴파일되지 않습니다. 한번 시도해 봅시다:
 
 <!--
 The error numbers in this output should be that of the code **WITHOUT** the
@@ -657,7 +657,7 @@ anchor or snip comments
 비밀번호와 숫자로 비교할 수 있도록 하고 싶습니다. 이를 위해 `main` 함수의
 본문에 아래와 같이 한 줄을 추가합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/src/main.rs:here}}
@@ -750,7 +750,7 @@ Too big!
 `loop` 키워드는 무한루프를 제공합니다. 루프를 추가하여 사용자들에게 숫자를
 추리할 기회를 더 주겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-04-looping/src/main.rs:here}}
@@ -810,7 +810,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 사용자가 정답을 맞췄을 때 게임이 종료되도록 `break`문을 추가합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-05-quitting/src/main.rs:here}}
@@ -824,16 +824,16 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 게임의 동작을 더욱 다듬기 위해 사용자가 숫자가 아닌 값을 입력할 때
 프로그램을 종료시키는 대신 이를 무시하여 사용자가 계속 추측값을 입력할
-수 있도록 만들어 봅시다. Listing 2-5에 나온 것처럼 `guess`가 `String`에서
+수 있도록 만들어 봅시다. 예제 2-5에 나온 것처럼 `guess`가 `String`에서
 'u32'로 변환되는 줄을 변경하면 그렇게 할 수 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 2-5: 숫자가 아닌 추측값에 대해 프로그램을
+<span class="caption">예제 2-5: 숫자가 아닌 추측값에 대해 프로그램을
 종료하는 대신 이를 무시하고 다른 추측값을 요청하기</span>
 
 `expect` 메서드 호출을 `match` 표현식으로 바꾸어 에러 발생 시 즉시
@@ -895,15 +895,15 @@ You win!
 멋집니다! 마지막 미세 조정만 더하여 추리 게임을 마무리하겠습니다. 프로그램이
 여전히 비밀번호를 출력하고 있다는 것을 떠올리세요. 테스트 때는 괜찮지만 게임을
 망치게 됩니다. 비밀번호를 출력하는 `println!`을 삭제합시다.
-Listing 2-6은 최종 코드를 보여줍니다.
+예제 2-6은 최종 코드를 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 2-6: 완성된 추리 게임 코드</span>
+<span class="caption">예제 2-6: 완성된 추리 게임 코드</span>
 
 이 시점에서 여러분은 성공적으로 추리 게임을 만들었습니다! 축하합니다!
 

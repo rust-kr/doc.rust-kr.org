@@ -39,16 +39,16 @@
 알아내는 방법을 보는 것으로 제네릭을 사용할 수 있는 중복된 코드들이
 인식되기 시작할 것입니다.
 
-Listing 10-1과 같이 리스트에서 가장 큰 숫자를 찾아내는
+예제 10-1과 같이 리스트에서 가장 큰 숫자를 찾아내는
 간단한 프로그램부터 시작하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-1: 숫자 리스트에서
+<span class="caption">예제 10-1: 숫자 리스트에서
 가장 큰 수 찾기</span>
 
 `number_list` 변수에는 정수 리스트를 저장하고, `largest`
@@ -61,16 +61,16 @@ Listing 10-1과 같이 리스트에서 가장 큰 숫자를 찾아내는
 위의 경우에는 100이 됩니다.
 
 이번에는 두 개의 다른 숫자 리스트에서 가장 큰 숫자를 찾으라는 일감을
-받았습니다. 그렇게 하기 위해서는 Listing 10-2처럼 Listing 10-1의 코드를
+받았습니다. 그렇게 하기 위해서는 예제 10-2처럼 예제 10-1의 코드를
 프로그램 내 다른 곳에 복사하여 동일한 로직을 이용할 수도 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-02/src/main.rs}}
 ```
 
-<span class="caption">Listing 10-2: *두* 개의 숫자 리스트에서 가장 큰 숫자를
+<span class="caption">예제 10-2: *두* 개의 숫자 리스트에서 가장 큰 숫자를
 찾는 코드</span>
 
 이 코드는 잘 동작하지만, 중복된 코드를 생성하는 일은 지루하고 에러가 발생할
@@ -82,18 +82,18 @@ Listing 10-1과 같이 리스트에서 가장 큰 숫자를 찾아내는
 이렇게 하면 코드가 더 명확해지고 목록에서 가장 큰 숫자를 찾는다는
 개념을 추상적으로 표현할 수 있습니다.
 
-Listing 10-3에서는 가장 큰 수를 찾는 코드를 `largest`라는 이름의
-함수로 추출합니다. 그 다음 Listing 10-2에 있는 두 리스트에서 가장 큰
+예제 10-3에서는 가장 큰 수를 찾는 코드를 `largest`라는 이름의
+함수로 추출합니다. 그 다음 예제 10-2에 있는 두 리스트에서 가장 큰
 수를 찾기 위해 이 함수를 호출합니다. 나중에 있을지 모를 다른 어떤 `i32`
 값의 리스트에 대해서라도 이 함수를 사용할 수 있겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 10-3: 두 리스트에서 가장 큰 수를 찾는
+<span class="caption">예제 10-3: 두 리스트에서 가장 큰 수를 찾는
 추상화된 코드</span>
 
 `largest` 함수는 `list` 매개변수를 갖는데,
@@ -101,7 +101,7 @@ Listing 10-3에서는 가장 큰 수를 찾는 코드를 `largest`라는 이름�
 실제로 `largest` 함수가 호출될 때는 우리가 넘겨준 구체적인 값으로
 실행됩니다.
 
-Listing 10-2에서부터 Listing 10-3까지 우리가 거친 과정을 요약하면
+예제 10-2에서부터 예제 10-3까지 우리가 거친 과정을 요약하면
 다음과 같습니다:
 
 1. 중복된 코드를 식별합니다.

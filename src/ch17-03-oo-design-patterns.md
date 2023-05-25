@@ -36,17 +36,17 @@
 만약 검토를 요청하기도 전에 블로그 게시물 초안을 승인하려는 시도를 했다면,
 그 게시물은 게시되지 않은 초안으로 남아있어야 합니다.
 
-Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이는 `blog`라는 이름의
+예제 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이는 `blog`라는 이름의
 라이브러리 크레이트에 구현하게 될 API를 사용하는 예제입니다. 아직 `blog` 크레이트를
 구현하지 않았으므로 컴파일되지 않습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch17-oop/listing-17-11/src/main.rs:all}}
 ```
 
-<span class="caption">Listing 17-11: `blog` 크레이트에 원하는 요구
+<span class="caption">예제 17-11: `blog` 크레이트에 원하는 요구
 동작들을 보여주는 코드</span>
 
 사용자가 `Post::new`를 통해 새로운 블로그 게시물의 초안을 작성할 수 있도록
@@ -74,7 +74,7 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 ### `Post`를 정의하고 초안 상태의 새 인스턴스 생성하기
 
 라이브러리 구현을 시작해 봅시다! 어떤 내용물을 담고 있는 공개된
-`Post` 구조체가 필요하다는 것을 알고 있으므로, Listing 17-12와
+`Post` 구조체가 필요하다는 것을 알고 있으므로, 예제 17-12와
 같이 구조체의 정의와 `Post`의 인스턴스를 만들기 위한 연관 공개
 함수 `new`를 정의로 시작하겠습니다. `Post`에 대한 모든 상태
 객체가 가져야하는 동작이 정의된 비공개 `State` 트레잇도
@@ -84,13 +84,13 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 트레잇 객체를 `state`라는 비공개 필드로 가지게 될 것입니다. `Option<T>`가 왜
 필요한지는 곧 보게 될겁니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 17-12: `Post` 구조체, 새로운 `Post`
+<span class="caption">예제 17-12: `Post` 구조체, 새로운 `Post`
 인스턴스를 만드는 `new` 함수, `State` 트레잇, 그리고 `Draft` 구조체의
 정의</span>
 
@@ -109,21 +109,21 @@ Listing 17-11은 이 작업 흐름을 코드의 형태로 보여줍니다: 이�
 
 ### 게시물 콘텐츠의 텍스트 저장하기
 
-Listing 17-11에서 `add_text`라는 메서드를 호출하고 여기에 `&str`을
+예제 17-11에서 `add_text`라는 메서드를 호출하고 여기에 `&str`을
 전달하여 블로그 게시물의 콘텐츠 텍스트로 추가할 수 있길 원한다는
 것을 보았습니다. 나중에 `content` 필드의 데이터를 읽는 방식을
 제어할 수 있는 메서드를 구현할 수 있도록 `content` 필드를 `pub`으로
 노출시키는 대신 메서드로 구현합니다. `add_text` 메서드는 매우
-직관적이므로, Listing 17-13의 구현을 `impl Post` 블록에
+직관적이므로, 예제 17-13의 구현을 `impl Post` 블록에
 추가해봅시다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-13: `content`에 텍스트를 추가하기
+<span class="caption">예제 17-13: `content`에 텍스트를 추가하기
 위한 `add_text` 메서드 구현하기</span>
 
 `add_text` 메서드는 가변 참조자 `self`를 취하는데, 이는 `add_text`를
@@ -138,37 +138,37 @@ Listing 17-11에서 `add_text`라는 메서드를 호출하고 여기에 `&str`�
 
 `add_text`를 호출하고 게시물에 어떤 콘텐츠를 추가한 이후일지라도, 여전히
 `content` 메서드가 빈 문자열 슬라이스을 반환하길 원하는데, 그 이유는 
-Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 때문입니다. 당장은
+예제 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 때문입니다. 당장은
 이 요건을 만족할 가장 단순한 것으로 `content` 메서드를 구현해놓으려고 합니다:
 언제나 빈 문자열 슬라이스를 반환하는 것으로요. 나중에 게시물이 게시될 수 있도록
 게시물의 상태를 변경하는 기능을 구현하게 되면 이 메서드를 변경하겠습니다.
 지금까지는 게시물이 오직 초안 상태만 가능하므로, 게시물 콘텐츠는 항상 비어 있어야
-합니다. Listing 17-14는 이 껍데기 구현을 보여줍니다:
+합니다. 예제 17-14는 이 껍데기 구현을 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-14/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-14: 항상 비어있는 문자열 슬라이스를
+<span class="caption">예제 17-14: 항상 비어있는 문자열 슬라이스를
 반환하는 `Post`의 `content` 메서드에 대한 껍데기 구현</span>
 
-`content` 메서드를 추가함으로써, Listing 17-11의 7번째 줄까지는
+`content` 메서드를 추가함으로써, 예제 17-11의 7번째 줄까지는
 의도한대로 작동됩니다.
 
 ### 게시물에 대한 검토 요청이 게시물의 상태를 변경합니다
 
 다음에는 게시물의 검토를 요청하는 기능을 추가하고자 하는데, 이는 게시물의 상태를
-`Draft`에서 `PendingReview`로 변경해야 합니다. Listing 17-15가 이 코드를 보여줍니다:
+`Draft`에서 `PendingReview`로 변경해야 합니다. 예제 17-15가 이 코드를 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-15/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-15: `Post`와 `State` 트레잇에
+<span class="caption">예제 17-15: `Post`와 `State` 트레잇에
 `request_review` 메서드를 구현하기</span>
 
 `Post`에게 `self`에 대한 가변 참조자를 받는 `request_review`라는 이름의
@@ -211,7 +211,7 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 `Post`의 `content` 메서드는 빈 문자열 슬라이스를 반환하도록 그대로
 놔두겠습니다. 이제는 `Draft` 상태에 있는 `Post` 뿐만 아니라 `PendingReview`
 상태에 있는 `Post`도 있습니다만, `PendingReview` 상태에서도 동일한 동작이
-필요합니다. Listing 17-11은 이제 10번째 줄까지 동작합니다!
+필요합니다. 예제 17-11은 이제 10번째 줄까지 동작합니다!
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="adding-the-approve-method-that-changes-the-behavior-of-content"></a>
@@ -219,16 +219,16 @@ Listing 17-11의 7번째 줄처럼 게시물이 여전히 초안 상태이기 �
 ### `content`의 동작을 변경하는 `approve` 메서드 추가하기
 
 `approve` 메서드는 `request_review` 메서드와 유사할 것입니다: 이것은
-Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값으로 `state`를
+예제 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값으로 `state`를
 설정하게 됩니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-16/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-16: `Post`와 `State` 트레잇에
+<span class="caption">예제 17-16: `Post`와 `State` 트레잇에
 `approve` 메서드 구현하기</span>
 
 `State` 트레잇에 `approve` 메서드를 추가하고 `State`를 구현하는
@@ -243,17 +243,17 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 반환합니다.
 
 이제 `Post`의 `content` 메서드를 갱신해야 합니다. `content`로부터 반환된
-값이 `Post`의 현재 상태에 의존적이길 원하므로, Listing 17-17과 같이
+값이 `Post`의 현재 상태에 의존적이길 원하므로, 예제 17-17과 같이
 `Post`가 자신의 `state`에 정의된 `content` 메서드에게 위임 (delegate)
 하도록 할 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch17-oop/listing-17-17/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-17: `Post`의 `content` 메서드가
+<span class="caption">예제 17-17: `Post`의 `content` 메서드가
 `State`의 `content` 메서드에게 위임하도록 갱신하기</span>
 
 목표는 `State`를 구현하는 구조체들 안에서 이 모든 규칙을 유지하는 것이기
@@ -278,17 +278,17 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 이 시점에서 `&Box<dyn State>`의 `content`가 호출되면, `&`와 `Box`에
 역참조 강제가 적용되어, `content` 메서드는 궁극적으로 `State`
 트레잇을 구현하는 타입에서 호출될 것입니다. 이는 즉 `State` 트레잇
-정의에 `content`를 추가해야 함을 뜻하고, Listing 17-18처럼
+정의에 `content`를 추가해야 함을 뜻하고, 예제 17-18처럼
 가지고 있는 상태에 따라 어떤 내용물을 반환할지에 대한 로직을
 여기에 넣을 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-18/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-18: `State` 트레잇에 `content` 메서드
+<span class="caption">예제 17-18: `State` 트레잇에 `content` 메서드
 추가하기</span>
 
 `content` 메서드에 대하여 빈 문자열 슬라이스를 반환하는 기본 구현이
@@ -301,7 +301,7 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 일부분에 대한 참조자를 반환하는 중이므로, 반환되는 참조자의 라이프타임은
 `post` 인자의 라이프타임과 관련이 있습니다.
 
-그리고 이제 끝났습니다—이제 Listing 17-11의 모든 코드가 작동합니다!
+그리고 이제 끝났습니다—이제 예제 17-11의 모든 코드가 작동합니다!
 블로그 게시물의 작업 흐름을 상태 패턴을 통해 구현해냈습니다. 규칙과 관련된
 로직들은 `Post` 전체에 흩어져 있는 것이 아닌 상태 객체 안에서만 존재합니다.
 
@@ -381,9 +381,9 @@ Listing 17-16과 같이 현재 상태가 승인되었을 때 갖게 되는 값�
 검사 시스템은 컴파일 에러를 발생시켜 게시된 게시물만 허용되는 곳에서
 게시물 초안을 사용하려는 시도를 방지할 것입니다.
 
-Listing 17-11의 `main` 첫 부분을 고려해 봅시다:
+예제 17-11의 `main` 첫 부분을 고려해 봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch17-oop/listing-17-11/src/main.rs:here}}
@@ -396,16 +396,16 @@ Listing 17-11의 `main` 첫 부분을 고려해 봅시다:
 내용을 얻는 시도를 할 경우, 해당 메서드가 존재하지 않는다는 컴파일 에러가
 발생할 것입니다. 결과적으로, 프로덕션 환경에서 실수로 초안 게시물의 내용을
 얻게 되는 일은 아예 컴파일조차 되지 않으므로 불가능해집니다.
-Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각의
+예제 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각의
 메서드를 보여줍니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-19/src/lib.rs}}
 ```
 
-<span class="caption">Listing 17-19: `content` 메서드가 있는
+<span class="caption">예제 17-19: `content` 메서드가 있는
 `Post`와 `content` 메서드가 없는 `DraftPost`</span>
 
 `Post`와 `DraftPost` 구조체 모두 블로그 게시물의 텍스트를 저장하는 비공개
@@ -429,19 +429,19 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 
 그러면 게시물을 게시하려면 어떻게 해야 할까요? 초안 게시물이 게시되기
 전에 검토와 승인을 받아야 하는 규칙은 적용되기를 원합니다. 검토를 기다리는
-상태인 게시물은 여전히 어떤 내용도 보여줘서는 안되구요. Listing 17-20처럼
+상태인 게시물은 여전히 어떤 내용도 보여줘서는 안되구요. 예제 17-20처럼
 또다른 구조체 `PendingReviewPost`를 추가하고, `DraftPost`에
 `PendingReviewPost`를 반환하는 `request_review` 메서드를 정의하고,
 `PendingReviewPost`에 `Post`를 반환하는 `approve` 메서드를 정의하여
 위의 제약사항들을 구현해봅시다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-20/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 17-20: `DraftPost`의 `request_review`를
+<span class="caption">예제 17-20: `DraftPost`의 `request_review`를
 호출하여 생성되는 `PendingReviewPost` 및 `PendingReviewPost`를 게시된
 `Post`로 전환하는 `approve` 메서드</span>
 
@@ -463,15 +463,15 @@ Listing 17-19는 `Post` 구조체와 `DraftPost` 구조체의 정의와 각각�
 반환되는 인스턴스를 보관해야 합니다. 또한 초안과 검토 중인 게시물의
 내용이 빈 문자열이라고 단언할 수도 없고, 단언할 필요도 없습니다: 이 상태에서
 게시물이 콘텐츠를 사용 시도하는 코드는 더 이상 컴파일되지 않습니다.
-Listing 17-12에 갱신된 `main` 코드가 있습니다:
+예제 17-12에 갱신된 `main` 코드가 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch17-oop/listing-17-21/src/main.rs}}
 ```
 
-<span class="caption">Listing 17-21: 새로운 블로그 게시물 작업 흐름
+<span class="caption">예제 17-21: 새로운 블로그 게시물 작업 흐름
 구현을 사용하기 위한 `main` 수정</span>
 
 `main`에서 `post`의 다시 대입하기 위해 필요한 이 변경사항은 즉 이
@@ -482,7 +482,7 @@ Listing 17-12에 갱신된 `main` 코드가 있습니다:
 이는 게시되지 않은 게시물의 내용이 보여진다거나 하는 특정
 버그들이 프로덕션에 적용되기 전에 발견될 것임을 보장합니다.
 
-이번 절의 시작점에서 제안되었던 작업들을 Listing 17-21의 `blog`
+이번 절의 시작점에서 제안되었던 작업들을 예제 17-21의 `blog`
 크레이트에서 그대로 시도해보면서 이 버전의 코드 디자인에 대해
 어떻게 생각하는지 살펴보세요. 일부 작업은 이번 디자인에서 이미
 완료되었을 수도 있음을 알려드립니다. 

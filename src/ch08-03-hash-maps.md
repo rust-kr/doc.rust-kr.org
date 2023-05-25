@@ -20,7 +20,7 @@
 ### 새로운 해쉬맵 생성하기
 
 빈 해쉬맵 생성하는 한가지 방법으로 `new`를 사용한 뒤 `insert`를 이용하여 요소를
-추가하는 것이 있습니다. Listing 8-20에서는 팀 이름이 각각 *블루*와 *옐로우*인
+추가하는 것이 있습니다. 예제 8-20에서는 팀 이름이 각각 *블루*와 *옐로우*인
 두 팀의 점수를 관리하고 있습니다. 블루 팀은 10점, 옐로우 팀은 50점으로 시작할
 것입니다:
 
@@ -28,7 +28,7 @@
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-20/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-20: 새로운 해쉬맵을 생성하여 몇 개의 키와 값을
+<span class="caption">예제 8-20: 새로운 해쉬맵을 생성하여 몇 개의 키와 값을
 집어넣기</span>
 
 먼저 표준 라이브러리의 컬렉션 부분으로부터 `HashMap`을 `use`로 가져와야 할
@@ -44,14 +44,14 @@
 
 ### 해쉬맵 내의 값 접근하기
 
-Listing 8-21과 같이 `get` 메서드에 키를 제공하여 해쉬맵으로부터 값을
+예제 8-21과 같이 `get` 메서드에 키를 제공하여 해쉬맵으로부터 값을
 얻어올 수 있습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-23: 해쉬맵 내에 저장된 블루 팀의 점수
+<span class="caption">예제 8-23: 해쉬맵 내에 저장된 블루 팀의 점수
 접근하기</span>
 
 여기서 `score`는 블루 팀과 연관된 값을 가지고 있을 것이고, 결과값은
@@ -78,14 +78,14 @@ Blue: 10
 ### 해쉬맵과 소유권
 
 `i32`와 같이 `Copy` 트레잇을 구현한 타입에 대하여, 그 값들은 해쉬맵 안으로
-복사됩니다. `String`과 같이 소유된 값들에 대해서는, 아래의 Listing 8-22와 같이
+복사됩니다. `String`과 같이 소유된 값들에 대해서는, 아래의 예제 8-22와 같이
 값들이 이동되어 해쉬맵이 그 값들에 대한 소유자가 될 것입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-22: 키와 값이 삽입되는 순간 이들이 해쉬맵의
+<span class="caption">예제 8-22: 키와 값이 삽입되는 순간 이들이 해쉬맵의
 소유가 되는 것을 보여주는 예</span>
 
 `insert`를 호출하여 `field_name`과 `field_value`를 해쉬맵으로 이동시킨 후에는
@@ -115,7 +115,7 @@ Blue: 10
 #### 값을 덮어쓰기
 
 만일 해쉬맵에 키와 값을 삽입하고, 그 후 똑같은 키에 다른 값을 삽입하면,
-키에 연관지어진 값은 새 값으로 대신될 것입니다. 아래 Listing 8-23의 코드가
+키에 연관지어진 값은 새 값으로 대신될 것입니다. 아래 예제 8-23의 코드가
 `insert`를 두 번 호출함에도, 해쉬맵은 딱 하나의 키/값 쌍을 담게 될 것인데
 그 이유는 두 번 모두 블루 팀의 키에 대한 값을 삽입하고 있기
 때문입니다:
@@ -124,7 +124,7 @@ Blue: 10
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-23/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-23: 특정한 키로 저장된 값을
+<span class="caption">예제 8-23: 특정한 키로 저장된 값을
 덮어쓰기</span>
 
 이 코드는 `{"Blue": 25}`를 출력할 것입니다. 원래의 값 `10`은
@@ -145,13 +145,13 @@ Blue: 10
 리턴값은 열거형 `Entry`인데, 해당 키가 있는지 혹은 없는지를 나타냅니다.
 우리가 옐로우 팀에 대한 키가 연관된 값을 가지고 있는지 검사하고 싶어한다고
 해봅시다. 만일 없다면, 값 50을 삽입하고, 블루팀에 대해서도 똑같이 하고
-싶습니다. 엔트리 API를 사용한 코드는 아래의 Listing 8-24와 같습니다.
+싶습니다. 엔트리 API를 사용한 코드는 아래의 예제 8-24와 같습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-24/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-24: `entry` 메서드를 이용하여 어떤 키가 값을
+<span class="caption">예제 8-24: `entry` 메서드를 이용하여 어떤 키가 값을
 이미 갖고 있지 않을 경우에만 추가하기</span>
 
 `Entry`에 대한 `or_insert` 메서드는 해당 키가 존재할 경우 관련된 `Entry` 키에
@@ -160,7 +160,7 @@ Blue: 10
 우리가 직접 로직을 작성하는 것보다 훨씬 깔끔하고, 게다가 빌림 검사기와 잘
 어울려 동작합니다.
 
-Listing 8-24의 코드를 실행하면 `{"Yellow": 50, "Blue": 10}`를 출력할 것입니다.
+예제 8-24의 코드를 실행하면 `{"Yellow": 50, "Blue": 10}`를 출력할 것입니다.
 첫 번째 `entry` 호출은 옐로우 팀에 대한 키에 대하여 값 50을 삽입하는데, 이는
 옐로우 팀이 값을 가지고 있지 않기 때문입니다. 두 번째 `entry` 호출은 해쉬맵을
 변경하지 않는데, 왜냐하면 블루 팀은 이미 값 10을 가지고 있기
@@ -169,7 +169,7 @@ Listing 8-24의 코드를 실행하면 `{"Yellow": 50, "Blue": 10}`를 출력할
 #### 이전 값을 기초로 값을 갱신하기
 
 해쉬맵에 대한 또 다른 흔한 사용 방식은 키에 대한 값을 찾아서 예전 값에 기초하여
-값을 갱신하는 것입니다. 예를 들어, Listing 8-25은 어떤 텍스트 내에 각 단어가
+값을 갱신하는 것입니다. 예를 들어, 예제 8-25은 어떤 텍스트 내에 각 단어가
 몇 번이나 나왔는지를 세는 코드를 보여줍니다. 단어를 키로 사용하는 해쉬맵을
 이용하여 해당 단어가 몇 번이나 나왔는지를 유지하기 위해 값을 증가시켜 줍니다.
 만일 어떤 단어를 처음 본 것이라면, 값 `0`을 삽입할
@@ -179,7 +179,7 @@ Listing 8-24의 코드를 실행하면 `{"Yellow": 50, "Blue": 10}`를 출력할
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-25/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-25: 단어와 횟수를 저장하는 해쉬맵을 사용하여
+<span class="caption">예제 8-25: 단어와 횟수를 저장하는 해쉬맵을 사용하여
 단어의 등장 횟수 세기</span>
 
 이 코드는 `{"world": 2, "hello": 1, "wonderful": 1}`를 출력할 것입니다.

@@ -13,16 +13,16 @@
 추가하겠습니다. 계속하여 TDD 프로세스를 따를 것이므로, 첫번째 단계는
 다시 한번 실패하는 테스트를 작성하는 것입니다. 새로운 함수
 `search_case_insensitive`를 위한 추가하고 이전 테스트 이름은
-Listing 12-20처럼 두 테스트 간의 차이를 명화학하게 하기 위해 `one_result`에서
+예제 12-20처럼 두 테스트 간의 차이를 명화학하게 하기 위해 `one_result`에서
 `case_sensitive`로 바꾸겠습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-20/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-20: 추가하려는 대소문자 구분없는 함수를 위한
+<span class="caption">예제 12-20: 추가하려는 대소문자 구분없는 함수를 위한
 새로운 실패 테스트 추가하기</span>
 
 예전 테스트의 `contents`도 수정되었음을 유의하세요. 대문자 D를 사용한
@@ -37,24 +37,24 @@ Listing 12-20처럼 두 테스트 간의 차이를 명화학하게 하기 위해
 질의어 `"rUsT"`는 대소문자 구분이 질의어와 다르더라도 대문자 R로 시작하는
 `"Rust:"를 포함하는 라인 및 `"Trust me."` 라인과 매칭되어야 합니다.
 이것이 우리의 실패하는 테스트고, 아직 `search_case_insensitive` 함수를
-정의하지 않았으므로 컴파일에 실패할 것입니다. Listing 12-16에서 테스트가
+정의하지 않았으므로 컴파일에 실패할 것입니다. 예제 12-16에서 테스트가
 컴파일되고 실패하는 것을 지켜보기 위해 했었던 것과 마찬가지로, 편하게
 언제나 빈 벡터를 반환하는 뼈대 구현을 추가해 봅시다.
 
 ### `search_case_insensitive` 함수 구현하기
 
-Listing 12-21에서 보시는 `search_case_insensitive` 함수는 `search`
+예제 12-21에서 보시는 `search_case_insensitive` 함수는 `search`
 함수와 거의 똑같이 생겼을 것입니다. 유일한 차이점은 `query`와 각 `line`을
 소문자로 만들어서 입력된 인자의 대소문자가 어떻든 간에 질의어가 라인에
 포함되어 있는지 확인할 때는 언제나 같은 소문일 것이란 점입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-21/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-21: 질의어와 라인을 비교하기 전에 소문자로
+<span class="caption">예제 12-21: 질의어와 라인을 비교하기 전에 소문자로
 만드는 `search_case_insensitive` 함수 정의하기</span>
 
 먼저 `query` 문자열을 소문자로 만들어서 같은 이름의 변수를 가리는
@@ -90,40 +90,40 @@ Listing 12-21에서 보시는 `search_case_insensitive` 함수는 `search`
 초기화하고 있지 않기 때문에 필드를 추가하는 것만으로는 컴파일 에러가
 날 것입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:here}}
 ```
 
-부울린 값을 갖는 `ignore_case` 필드를 추가했습니다. 다음으로, Listing
-12-22에서 보는 것처럼 `run` 함수가 `ignore_case` 필드의 값을 검사하여
+부울린 값을 갖는 `ignore_case` 필드를 추가했습니다. 다음으로, 예제 12-22에서
+보시는 것처럼 `run` 함수가 `ignore_case` 필드의 값을 검사하여
 `search` 함수 혹은 `search_case_insensitive` 함수 중 어느 쪽을 호출할
 지 결정하는 것이 필요합니다. 아직은 컴파일되지 않을 것입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:there}}
 ```
 
-<span class="caption">Listing 12-22: `config.ignore_case`의 값에
+<span class="caption">예제 12-22: `config.ignore_case`의 값에
 기초하여 `search`나 `search_case_insensitive`를 호출하기</span>
 
 마지막으로 환경 변수의 검사가 필요합니다. 환경 변수 사용을
 위한 함수는 표준 라이브러리의 `env` 모듈에 있으므로,
 *src/lib.rs* 상단에서 이 모듈을 스코프로 가져옵니다.
-그런 다음 Listing 12-23처럼 `env` 모듈의 `var` 함수를
+그런 다음 예제 12-23처럼 `env` 모듈의 `var` 함수를
 사용하여 `IGNORE_CASE`라는 이름의 환경 변수에 어떤 값이
 설정되었는지 확인해 보겠습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-23/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 12-23: `IGNORE_CASE`라는 이름의 환경 변수의
+<span class="caption">예제 12-23: `IGNORE_CASE`라는 이름의 환경 변수의
 값을 검사하기</span>
 
 여기서 `ignore_case`라는 새 변수를 만들었습니다. 이 값을 설정하기 위해서
@@ -142,7 +142,7 @@ Listing 12-21에서 보시는 `search_case_insensitive` 함수는 `search`
 사용했던 다른 메서드들 대신 `ik_ok`을 사용하고 있습니다.
 
 이 `ignore_case` 변수의 값을 `Config` 인스턴스에게 넘겼으므로, `run` 함수는
-Listing 12-22에 구현된 것처럼 이 값을 읽어서 `search_case_insensitive` 혹은
+예제 12-22에 구현된 것처럼 이 값을 읽어서 `search_case_insensitive` 혹은
 `search`의 호출 여부를 결정할 수 있습니다.
 
 한번 시도해봅시다! 먼저 환경 변수 설정 없이 질의어 `to`를 넣어 프로그램을

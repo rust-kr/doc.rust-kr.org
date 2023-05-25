@@ -24,14 +24,14 @@
 
 러스트가 반박 불가능한 패턴을 요구하는 곳에서 반박 가능한 패턴의 사용을
 시도하는 경우와 그 반대의 경우 어떤 일이 발생하는지 예제를 살펴봅시다.
-Listing 18-8은 `let` 구문을 보여주는데, 이 패턴에는 반박 가능한 패턴인
+예제 18-8은 `let` 구문을 보여주는데, 이 패턴에는 반박 가능한 패턴인
 `Some(x)`를 특정했습니다. 예상할 수 있듯 이 코드는 컴파일되지 않습니다.
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-08/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-8: `let`에서 반박 가능한 패턴의
+<span class="caption">예제 18-8: `let`에서 반박 가능한 패턴의
 사용 시도하기</span>
 
 `some_option_value`이 `None` 값이면 `Some(x)` 패턴과 매칭되지
@@ -50,18 +50,18 @@ Listing 18-8은 `let` 구문을 보여주는데, 이 패턴에는 반박 가능�
 반박 불가능한 패턴이 필요한 곳에서 반박 가능한 패턴을 사용한 경우, 패턴을
 사용하는 코드를 변경하여 문제를 해결할 수 있습니다: `let`을 사용하는 대신
 `if let`을 사용하면 됩니다. 그러면 패턴이 매칭되지 않는 경우 코드가 중괄호
-안의 코드를 그냥 건너뛰어 유효하게 계속하는 방법을 제공합니다. Listing 18-9는
-Listing 18-8의 코드를 수정하는 방법을 보여줍니다.
+안의 코드를 그냥 건너뛰어 유효하게 계속하는 방법을 제공합니다. 예제 18-9는
+예제 18-8의 코드를 수정하는 방법을 보여줍니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-09/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-9: `let` 대신 반증 가능한 패턴과 함께
+<span class="caption">예제 18-9: `let` 대신 반증 가능한 패턴과 함께
 `if let`과 코드 블록 사용하기</span>
 
 코드에 탈출구를 만들어 주었습니다! 에러 없이 반박 가능한 패턴을 사용할
-수 없다는 뜻이지만, 이 코드는 완벽하게 유효합니다. Listing 18-10에
+수 없다는 뜻이지만, 이 코드는 완벽하게 유효합니다. 예제 18-10에
 나오는 `x`처럼 `if let`에 항상 매칭되는 패턴을 사용하면, 컴파일러는
 경고를 줄 것입니다.
 
@@ -69,7 +69,7 @@ Listing 18-8의 코드를 수정하는 방법을 보여줍니다.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 18-10: `if let`에 반박 불가능한 패턴 사용
+<span class="caption">예제 18-10: `if let`에 반박 불가능한 패턴 사용
 시도하기</span>
 
 러스트는 반박 불가능한 패턴에 `if let`을 사용하는 것은 이치에 맞지

@@ -1,6 +1,6 @@
 ## 참조자와 Borrow
 
-앞 절 마지막에 등장한 Listing 4-5 에선 `String`이 `calculate_length` 로
+앞 절 마지막에 등장한 예제 4-5 에선 `String`이 `calculate_length` 로
 이동해버린 것 때문에 `calclulate_length`를 호출한 함수로 `String`을 반환하여,
 함수 호출 이후에도 `String`을 사용할 수 있게
 하였습니다. 이렇게 하는 대신 `String` 값의 참조자를 만들 수 있습니다.
@@ -12,7 +12,7 @@
 이번에는 값의 소유권을 넘기는 대신 개체의 참조자를 넘겨주는 방법을 소개하도록 하겠습니다.
 다음은 참조자를 인자로 받도록 구현한 `calculate_length` 함수의 정의 및 용례입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:all}}
@@ -22,13 +22,13 @@
 것을 볼 수 있습니다. 또한 `calculate_length` 함수에 `s1` 대신 `&s1` 을
 넘기고, 함수 정의에 `String` 대신 `&String`을 사용했네요. 이 앰퍼센드
 (&) 기호가 *참조자*를 나타내고, 어떤 값의 소유권을 가져오지 않고 해당 값을
-참조할 수 있도록 해줍니다. Figure 4-5는 이 개념을 도식화한 것입니다.
+참조할 수 있도록 해줍니다. 그림 4-5는 이 개념을 도식화한 것입니다.
 
 <img alt="세 개의 테이블: s 테이블은 s1 테이블을 가리키는 포인터만
 가지고 있습니다. s1 테이블에는 s1에 대한 스택 데이터와 힙 상에 저장된
 문자열을 가리키고 있습니다." src="img/trpl04-05.svg" class="center" />
 
-<span class="caption">Figure 4-5: `&String s`는  `String s1` 을
+<span class="caption">그림 4-5: `&String s`는  `String s1` 을
 가리킴</span>
 
 > Note: `&`를 이용한 참조의 반대는
@@ -64,16 +64,16 @@
 현실에서도 여러분이 다른 사람이 소유하고 있는 뭔가를 빌리고,
 용무가 끝나면 돌려주는 것처럼요. 여러분의 소유가 아니니까요.
 
-그럼 borrow 한 값을 수정하면 어떻게 될까요? Listing 4-6 코드를
+그럼 borrow 한 값을 수정하면 어떻게 될까요? 예제 4-6 코드를
 실행해보면 알 수 있으나, 미리 말씀드리자면 이 코드는 작동하지 않습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-06/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-6: borrow 한 값을 수정해보는 코드</span>
+<span class="caption">예제 4-6: borrow 한 값을 수정해보는 코드</span>
 
 나타나는 에러는 다음과 같습니다:
 
@@ -86,10 +86,10 @@
 
 ### 가변 참조자 (Mutable Reference)
 
-*가변 참조자 (mutable reference)*를 사용하는 식으로 Listing 4-6을 살짝만
+*가변 참조자 (mutable reference)*를 사용하는 식으로 예제 4-6을 살짝만
 수정하면 에러를 없앨 수 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-09-fixes-listing-04-06/src/main.rs}}
@@ -104,7 +104,7 @@
 있다면, 그 값에 대한 참조자는 더 이상 만들 수 없습니다. 아래의 코드는
 `s`에 대한 두 개의 가변 참조자를 만드는 시도를 하는 코드로, 작동하지 않습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/src/main.rs:here}}
@@ -198,7 +198,7 @@
 댕글링 참조자를 만들어서 러스트가 어떤 식으로 컴파일 타임에 이걸
 방지하는지 살펴봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/src/main.rs}}
@@ -222,7 +222,7 @@ this function's return type contains a borrowed value, but there is no value for
 `dangle` 함수에서 어떤 일이 일어나는지
 단계별로 알아봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-15-dangling-reference-annotated/src/main.rs:here}}

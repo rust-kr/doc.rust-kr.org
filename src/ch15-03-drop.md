@@ -24,17 +24,17 @@
 메서드는 `self`에 대한 가변 참조자를 매개변수로 갖습니다. 러스트가 언제 `drop`을
 호출하는지 보기 위해서, 지금은 `println!` 구문과 함께 `drop`을 구현해봅시다.
 
-Listing 15-4는 러스트가 `drop` 함수를 호출하는 때를 보여주기 위해서,
+예제 15-4는 러스트가 `drop` 함수를 호출하는 때를 보여주기 위해서,
 인스턴스가 스코프 밖으로 벗어났을 때 `Dropping CustomSmartPointer!`를
 출력하는 커스텀 기능만을 갖춘 `CustomSmartPointer` 구조체를 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 15-14: 메모리 정리 코드를 집어넣게 될
+<span class="caption">예제 15-14: 메모리 정리 코드를 집어넣게 될
 `Drop` 트레잇을 구현한 `CustomSmartPointer` 구조체</span>
 
 `Drop` 트레잇은 프렐루드에 포함되어 있으므로, 이를 스코프로 가져올 필요는
@@ -75,17 +75,17 @@ Listing 15-4는 러스트가 `drop` 함수를 호출하는 때를 보여주기 �
 표준 라이브러리가 제공하는 `std::mem::drop` 함수를 호출하여 스코프가
 끝나기 전에 강제로 값을 버리도록 할 수 있습니다.
 
-Listing 15-14의 `main` 함수를 Listing 15-15 처럼 수정하여
+예제 15-14의 `main` 함수를 예제 15-15 처럼 수정하여
 `Drop` 트레잇의 `drop` 메서드를 수동으로 호출하려고 하면 컴파일
 에러가 납니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-15: 메모리를 일찍 정리하기 위한 `Drop`
+<span class="caption">예제 15-15: 메모리를 일찍 정리하기 위한 `Drop`
 트레잇의 `drop` 메서드의 수동 호출 시도하기</span>
 
 이 코드의 컴파일을 시도하면 다음과 같은 에러를 얻게 됩니다:
@@ -111,16 +111,16 @@ Listing 15-14의 `main` 함수를 Listing 15-15 처럼 수정하여
 
 `std::mem::drop` 함수는 `Drop` 트레잇에 있는 `drop` 메서드와는
 다릅니다. 이 함수에 일찍 버리려고 하는 값을 인자로 넘겨 호출합니다.
-이 함수는 프렐루드에 포함되어 있어서, Listing 15-14의 `main`을
-Listing 15-16처럼 수정할 수 있습니다:
+이 함수는 프렐루드에 포함되어 있어서, 예제 15-14의 `main`을
+예제 15-16처럼 수정할 수 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-16/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 15-16: `std::mem::drop`을 호출하여
+<span class="caption">예제 15-16: `std::mem::drop`을 호출하여
 값이 스코프를 벗어나기 전에 명시적으로 버리기</span>
 
 이 코드를 실행하면 아래와 같이 출력할 것입니다:

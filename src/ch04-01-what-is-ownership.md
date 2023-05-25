@@ -111,13 +111,13 @@ let s = "hello";
 변수 `s`는 문자열 리터럴 (string literal) 을 나타내며,
 문자열 리터럴의 값은 코드 내에 하드코딩되어 있습니다.
 이 변수는 선언된 시점부터 현재의 *스코프*를 벗어날 때까지 유효합니다.
-Listing 4-1에 변수 `s`가 유효한 지점을 주석으로 표시한 예제입니다:
+예제 4-1에 변수 `s`가 유효한 지점을 주석으로 표시한 예제입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-1: 변수와,
+<span class="caption">예제 4-1: 변수와,
 해당 변수가 유효한 스코프</span>
 
 중요한 점은 두 가지입니다.
@@ -208,7 +208,7 @@ GC가 없는 대부분의 언어에선 할당받은 메모리가 필요 없어�
 
 러스트에서는 이 문제를 변수가 자신이 소속된 스코프를 벗어나는 순간
 자동으로 메모리를 해제하는 방식으로 해결했습니다. 예시로 보여드리도록 하죠.
-Listing 4-1에서 문자열 리터럴을 `String` 으로 바꿔봤습니다:
+예제 4-1에서 문자열 리터럴을 `String` 으로 바꿔봤습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
@@ -243,7 +243,7 @@ Listing 4-1에서 문자열 리터럴을 `String` 으로 바꿔봤습니다:
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 4-2: 변수 `x`의 정수값을
+<span class="caption">예제 4-2: 변수 `x`의 정수값을
 `y`에 대입하기</span>
 
 대충 어떤 일이 일어날지 예상되네요.
@@ -262,7 +262,7 @@ Listing 4-1에서 문자열 리터럴을 `String` 으로 바꿔봤습니다:
 두 번째 줄에서 `s1`의 복사본을 생성해 `s2` 에 바인딩하는 식으로 말이죠.
 하지만 이번엔 전혀 다른 방식으로 동작합니다.
 
-Figure 4-1를 참고해주세요. `String`은 그림 좌측에 표시된 것처럼
+그림 4-1를 참고해주세요. `String`은 그림 좌측에 표시된 것처럼
 세 부분으로 이루어져 있습니다: 문자열 내용이 들어 있는
 메모리를 가리키는 포인터, 문자열 길이, 메모리 용량입니다.
 이 데이터는 스택에 저장됩니다.
@@ -274,7 +274,7 @@ Figure 4-1를 참고해주세요. `String`은 그림 좌측에 표시된 것처�
 나타내고 있습니다." src="img/trpl04-01.svg" class="center"
 style="width: 50%;" />
 
-<span class="caption">Figure 4-1: `s1` 에 바인딩된, `"hello"` 값을 저장하고 있는
+<span class="caption">그림 4-1: `s1` 에 바인딩된, `"hello"` 값을 저장하고 있는
 `String`의 메모리 속 모습</span>
 
 문자열 길이와 메모리 용량이 무슨 차이인가 궁금하실 분들을 위해 간단히 설명해드리자면,
@@ -292,10 +292,10 @@ style="width: 50%;" />
 나타내고 둘 모두 힙 상의 같은 문자열 데이터를 가리키고 있습니다."
 src="img/trpl04-02.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 4-2: 변수 `s2`가 `s1`의
+<span class="caption">그림 4-2: 변수 `s2`가 `s1`의
 포인터, 길이, 용량 값을 복사했을 때 나타나는 메모리 구조</span>
 
-아래의 Figure 4-3 은 힙 메모리 상 데이터까지
+아래의 그림 4-3 은 힙 메모리 상 데이터까지
 복사했을 경우 나타날 구조로, *실제로는 이와 다릅니다*.
 만약 러스트가 이런 식으로 동작한다면,
 힙 내 데이터가 커질수록 `s2 = s1` 연산은 굉장히 느려질겁니다.
@@ -304,13 +304,13 @@ src="img/trpl04-02.svg" class="center" style="width: 50%;" />
 있고, 그리고 각자 힙 상에 있는 자신의 문자열 데이터 복사본을 가리킵니다."
 src="img/trpl04-03.svg" class="center" style="width: 50%;" />
 
-<span class="caption">Figure 4-3: 러스트에서 힙 데이터까지 복사할 경우의
+<span class="caption">그림 4-3: 러스트에서 힙 데이터까지 복사할 경우의
 `s2 = s1` 연산 결과</span>
 
 앞서 언급한 내용 중 변수가 스코프 밖으로 벗어날 때
 러스트에서 자동으로 `drop` 함수를 호출하여 해당 변수가 사용하는
 힙 메모리를 제거한다는 내용이 있었습니다.
-하지만 Figure 4-2 처럼 두 포인터가 같은 곳을 가리킬 경우에는 어떻게 될까요?
+하지만 그림 4-2 처럼 두 포인터가 같은 곳을 가리킬 경우에는 어떻게 될까요?
 `s2`, `s1`이 스코프 밖으로 벗어날 때 각각 메모리를 해제하게 되면
 *중복 해제 (double free)* 에러가 발생할 겁니다.
 이는 메모리 안정성 버그 중 하나이며, 보안을 취약하게 만드는 메모리 손상의 원인입니다.
@@ -344,7 +344,7 @@ s1 테이블은 더 이상 유효하지 않기 때문에 회색 처리 되었습
 힙 데이터 조회에 사용될 수 있습니다." src="img/trpl04-04.svg" class="center"
 style="width: 50%;" />
 
-<span class="caption">Figure 4-4: `s1`이 무효화 된 후의
+<span class="caption">그림 4-4: `s1`이 무효화 된 후의
 메모리 구조</span>
 
 이로써 문제가 사라졌네요! `s2` 만이 유효하니, 스코프 밖으로
@@ -371,7 +371,7 @@ style="width: 50%;" />
 ```
 
 이 코드의 실행 결과는 힙 데이터까지 복사됐을 때의 메모리 구조를 나타낸
-Figure 4-3과 정확히 일치합니다.
+그림 4-3과 정확히 일치합니다.
 
 이 코드에서 `clone` 호출을 보고, 이 지점에서 성능에 영향이 갈 수도
 있는 코드가 실행될 것을 알 수 있습니다. 즉, `clone`은  해당 위치에서
@@ -380,7 +380,7 @@ Figure 4-3과 정확히 일치합니다.
 #### 스택에만 저장되는 데이터: 복사
 
 아직 다루지 않은 부분이 있습니다.
-다음 코드는 앞서 Listing 4-2 에서 본 정수형을 이용하는 코드입니다
+다음 코드는 앞서 예제 4-2 에서 본 정수형을 이용하는 코드입니다
 (정상적으로 작동합니다):
 
 ```rust
@@ -426,16 +426,16 @@ Figure 4-3과 정확히 일치합니다.
 
 함수로 값을 전달하는 메커니즘은 변수에 값을 대입할 때와 유사합니다.
 함수에 변수를 전달하면 대입 연산과 마찬가지로 이동이나 복사가 일어나기 때문이죠.
-Listing 4-3 에 변수가 스코프를 벗어나는 부분을
+예제 4-3 에 변수가 스코프를 벗어나는 부분을
 주석으로 표시해 보았습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-03/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-3: 소유권, 스코프가 주석으로
+<span class="caption">예제 4-3: 소유권, 스코프가 주석으로
 표시된 함수</span>
 
 러스트는 `takes_ownership` 함수를 호출한 이후에 `s`를 사용하려 할 경우,
@@ -445,17 +445,17 @@ Listing 4-3 에 변수가 스코프를 벗어나는 부분을
 
 ### 반환 값과 스코프
 
-소유권은 값을 반환하는 과정에서도 이동합니다. 앞서 본 Listing 4-3과
-비슷한 주석이 달린, 어떤 값을 반환하는 함수에 대한 예제 Listing 4-4를
+소유권은 값을 반환하는 과정에서도 이동합니다. 앞서 본 예제 4-3과
+비슷한 주석이 달린, 어떤 값을 반환하는 함수에 대한 예제 예제 4-4를
 살펴봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-4: 반환 값으로 일어나는
+<span class="caption">예제 4-4: 반환 값으로 일어나는
 소유권 이동</span>
 
 상황은 다양할지라도, 변수의 소유권 규칙은 언제나 동일합니다.
@@ -469,15 +469,15 @@ Listing 4-3 에 변수가 스코프를 벗어나는 부분을
 다시 쓰고 싶은 변수까지 같이 반환받아야 한다면 본말전도나 다름없죠.
 그럼, 함수가 값을 사용할 수 있도록 하되 소유권은 가져가지 않도록 하고 싶다면 어떻게 해야 할까요?
 
-러스트에서는 Listing 4-5에서처럼 튜플을 사용하여 여러 값을 반환하는 것이 가능합니다:
+러스트에서는 예제 4-5에서처럼 튜플을 사용하여 여러 값을 반환하는 것이 가능합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 4-5: 매개변수의 소유권을 되돌려주는 방법</span>
+<span class="caption">예제 4-5: 매개변수의 소유권을 되돌려주는 방법</span>
 
 하지만 이런 식은 일반적인 컨셉이 되기엔 너무 거추장스럽고 많은 작업량이
 수반됩니다. 다행히도, 러스트에는 소유권 이전 없이 값을 사용할 수 있는

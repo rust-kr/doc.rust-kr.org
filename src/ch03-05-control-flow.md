@@ -14,7 +14,7 @@
 `if` 표현식을 알아보기 위해서 여러분의 *projects* 디렉토리에 *branches*라는
 새 프로젝트를 생성합시다. *src/main.rs* 파일에 다음을 입력하세요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/src/main.rs}}
@@ -58,7 +58,7 @@
 가치가 있습니다. 조건식이 `bool`이 아니면 에러가 발생합니다. 예를 들자면
 아래 코드를 실행해보세요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/src/main.rs}}
@@ -78,7 +78,7 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 `if` 코드 블록을 실행시키고자 한다면, 다음과 같이 `if` 표현식을 바꾸면
 됩니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-29-if-not-equal-0/src/main.rs}}
@@ -91,7 +91,7 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 `if`와 `else` 사이에 `else if`를 조합하면 여러 조건식을 사용할 수
 수 있습니다. 예를 들면:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/src/main.rs}}
@@ -117,16 +117,16 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 
 #### `let` 구문에서 `if` 사용하기
 
-`if`는 표현식이기 때문에 Listing 3-2처럼 변수에 결과를 할당하기
+`if`는 표현식이기 때문에 예제 3-2처럼 변수에 결과를 할당하기
 위하여 `let` 구문의 우변에 사용할 수 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-02/src/main.rs}}
 ```
 
-<span class="caption">Listing 3-2: `if` 표현식의 결과를 변수에
+<span class="caption">예제 3-2: `if` 표현식의 결과를 변수에
 할당하기</span>
 
 변수 `number`에는 `if` 표현식을 계산한 결과값이 바인딩될 것입니다.
@@ -140,11 +140,11 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 그 자체로 표현식임을 기억하세요. 위의 경우 전체 `if`
 표현식의 값은 실행되는 코드 블록에 따라 결정됩니다.
 그렇기에 `if` 표현식의 각 갈래의 결과값은 같은 타입이어야
-합니다. Listing 3-2에서 `if` 갈래와 `else` 갈래는 모두
+합니다. 예제 3-2에서 `if` 갈래와 `else` 갈래는 모두
 `i32` 정수값입니다. 하지만 만약 다음 예제처럼 타입이
 다르면 어떻게 될까요?
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/src/main.rs}}
@@ -184,7 +184,7 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 일례로 *loops* 디렉토리의 *src/main.rs* 코드를 다음과 같이
 바꿔보세요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-32-loop/src/main.rs}}
@@ -278,17 +278,17 @@ again!
 `break`를 호출하여 반복을 종료합니다. 이러한 반복문 형태는 `loop`, `if`,
 `else`와 `break`의 조합으로 구현할 수 있습니다; 여러분이 원하신다면 그렇게
 시도해볼 수 있습니다. 하지만 이러한 패턴은 매우 흔하기 때문에 러스트에서는
-`while` 반복문이라 일컫는 구조가 내장되어 있습니다. Listing 3-3은 `while`을
+`while` 반복문이라 일컫는 구조가 내장되어 있습니다. 예제 3-3은 `while`을
 사용하여 코드를 3번 반복 실행하면서 매번 카운트를 깎고 난 다음, 반복문 후에
 다른 메세지를 출력하고 종료합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-03/src/main.rs}}
 ```
 
-<span class="caption">Listing 3-3: `while` 반복문을 사용하여 조건이 참인
+<span class="caption">예제 3-3: `while` 반복문을 사용하여 조건이 참인
 동안 코드를 반복 실행하기</span>
 
 이 구조는 `loop`, `if`, `else` 및 `break`를 사용할 때 필요하게 될
@@ -298,16 +298,16 @@ again!
 #### `for`를 이용한 컬렉션에 대한 반복문
 
 `while`를 사용하여 배열과 같은 컬렉션의 각 요소에 대한 반복문을
-작성할 수 있습니다. 한 가지 예로 Listing 3-4의 반복문은
+작성할 수 있습니다. 한 가지 예로 예제 3-4의 반복문은
 `a`라는 배열의 각 요소를 출력합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-04/src/main.rs}}
 ```
 
-<span class="caption">Listing 3-4: `while` 반복문을 사용하여 컬렉션의
+<span class="caption">예제 3-4: `while` 반복문을 사용하여 컬렉션의
 각 요소 순회하기</span>
 
 위의 코드는 배열의 요소들을 훑기 위해 숫자를 셉니다. 인덱스 `0`을 시작으로
@@ -331,18 +331,18 @@ again!
 조건문 검사를 수행하는 코드를 붙이기 때문에 느려집니다.
 
 좀 더 간편한 대안으로 `for` 반복문을 사용하여 컬렉션의 각 아이템에 대하여 임의의
-코드를 수행시킬 수 있습니다. `for` 반복문은 Listing 3-5의 코드처럼 생겼습니다.
+코드를 수행시킬 수 있습니다. `for` 반복문은 예제 3-5의 코드처럼 생겼습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-05/src/main.rs}}
 ```
 
-<span class="caption">Listing 3-5: `for` 반복문을 이용하여 콜랙션의
+<span class="caption">예제 3-5: `for` 반복문을 이용하여 콜랙션의
 각 요소 순회하기</span>
 
-이 코드를 실행하면 Listing 3-4의 결과와 동일한 결과를 보게 됩니다.
+이 코드를 실행하면 예제 3-4의 결과와 동일한 결과를 보게 됩니다.
 그보다 더 중요한 것은 이렇게 함으로써 코드의 안전성이 강화되고
 배열의 끝을 넘어서거나 끝까지 가지 못해서 몇 개의 아이템을 놓쳐서
 발생할 수도 있는 버그의 가능성을 제거했다는 것입니다.
@@ -353,7 +353,7 @@ again!
 
 이러한 안전성과 간편성 덕분에 `for` 반복문은 러스트에서 가장 흔하게
 사용되는 반복문 구성요소가 되었습니다. 심지어 `while` 반복문을 사용했던
-Listing 3-3의 카운트다운 예제처럼 어떤 코드를 몇 번 정도 반복하고
+예제 3-3의 카운트다운 예제처럼 어떤 코드를 몇 번 정도 반복하고
 싶은 경우라도, 대부분의 러스타시안들은 `for` 반복문을 이용할 겁니다.
 표준 라이브러리가 제공하는 `Range` 타입을 이용하면 특정 횟수만큼의
 반복문을 구현할 수 있는데, `Range`는 어떤 숫자에서 시작하여 다른 숫자 종료
@@ -362,7 +362,7 @@ Listing 3-3의 카운트다운 예제처럼 어떤 코드를 몇 번 정도 반�
 `for` 반복문을 이용한 카운트다운 구현은 아래처럼 생겼습니다. 여기서 아직 살펴보지
 않았던 `rev` 메서드는 범위값을 역순으로 만들어줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-34-for-range/src/main.rs}}

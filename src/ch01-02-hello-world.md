@@ -47,9 +47,9 @@ Windows CMD 사용자는 다음 명령어를 입력해주세요:
 *helloworld.rs* 와 같이 붙여서 쓰지 않고 *hello_world.rs* 처럼 단어 사이에
 밑줄 (`_`) 을 넣는 것이 관례입니다.
 
-*main.rs* 파일에 Listing 1-1 코드를 입력합시다.
+*main.rs* 파일에 예제 1-1 코드를 입력합시다.
 
-<span class="filename">Filename: main.rs</span>
+<span class="filename">파일명: main.rs</span>
 
 ```rust
 fn main() {
@@ -57,7 +57,7 @@ fn main() {
 }
 ```
 
-<span class="caption">Listing 1-1: `Hello, world!`를 출력하는 프로그램</span>
+<span class="caption">예제 1-1: `Hello, world!`를 출력하는 프로그램</span>
 
 파일을 저장하고 터미널 창으로 돌아가 *~/projects/hello_world*
 디렉토리로 갑니다. Linux, macOS 사용자는 다음 명령어를 입력하여

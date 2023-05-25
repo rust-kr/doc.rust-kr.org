@@ -38,39 +38,39 @@ UTF-8로 인코딩된 문자열 타입입니다. 러스타시안들이 “문자
 `Vec<T>`에서 쓸 수 있는 많은 연산들이 `String`에서도 마찬가지로 똑같이 쓰일
 수 있는데, 이는 `String`이 실제로 바이트 벡터에 더하여 몇 가지 보장,
 제한, 기능들을 추가한 래퍼(wrapper)로 구현되어 있기 때문입니다.
-`Vec<T>`과 `String`이 같은 방식으로 동작한다는 함수의 예로서 Listing 8-11과
+`Vec<T>`과 `String`이 같은 방식으로 동작한다는 함수의 예로서 예제 8-11과
 같이 새 인스턴스를 생성하는 `new` 함수가 있습니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-11: 비어있는 새로운 `String` 생성하기</span>
+<span class="caption">예제 8-11: 비어있는 새로운 `String` 생성하기</span>
 
 이 라인은 우리가 어떤 데이터를 담아둘 수 있는 `s` 라는 빈 문자열을 만들어
 줍니다. 종종 우리는 문자열에 담아두고 시작할 초기값을 가지고 있을 것입니다.
 그런 경우, `to_string` 메서드를 이용하는데, 이는 `Display` 트레잇이 구현된
 어떤 타입이든 사용 가능하며, 문자열 리터럴도 이 트레잇을 구현하고 있습니다.
-Listing 8-12에서 두 가지 예제를 보여주고 있습니다:
+예제 8-12에서 두 가지 예제를 보여주고 있습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-12/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-12: `to_string` 메서드를 사용하여 문자열
+<span class="caption">예제 8-12: `to_string` 메서드를 사용하여 문자열
 리터럴로부터 `String` 생성하기</span>
 
 이 코드는 `initial contents`를 담고 있는 문자열을 생성합니다.
 
 또한 문자열 리터럴로부터 `String`을 생성하기 위해서 `String::from` 함수를
-이용할 수도 있습니다. Listing 8-13의 코드는 `to_string`을 사용하는 Listing
-8-12의 코드와 동일합니다:
+이용할 수도 있습니다. 예제 8-13의 코드는 `to_string`을 사용하는 예제 8-12의
+코드와 동일합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-13/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-13: `String::from` 함수를 사용하여 문자열
+<span class="caption">예제 8-13: `String::from` 함수를 사용하여 문자열
 리터럴로부터 `String` 생성하기</span>
 
 문자열이 너무나 많은 것들에 사용되기 때문에, 문자열을 위해 다양한 제네릭
@@ -79,14 +79,14 @@ API들을 사용할 수 있으며, 다양한 옵션들을 제공합니다. 몇�
 `.to_string`은 정확히 똑같은 일을 하며, 따라서 어떤 것을 사용하는가는 여러분의
 스타일과 가독성에 따라 달린 문제입니다.
 
-문자열이 UTF-8로 인코딩되었음을 기억하세요. 즉, 아래의 Listing 8-14에서 보는
+문자열이 UTF-8로 인코딩되었음을 기억하세요. 즉, 아래의 예제 8-14에서 보는
 것처럼 우리는 인코딩된 어떤 데이터라도 포함시킬 수 있습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-14: 문자열에 다양한 언어로 인삿말
+<span class="caption">예제 8-14: 문자열에 다양한 언어로 인삿말
 저장하기</span>
 
 위의 모두가 유효한 `String` 값입니다.
@@ -99,40 +99,40 @@ API들을 사용할 수 있으며, 다양한 옵션들을 제공합니다. 몇�
 
 #### `push_str`과 `push`를 이용하여 문자열 추가하기
 
-Listing 8-15와 같이 문자열 슬라이스를 추가하기 위해 `push_str` 메서드를
+예제 8-15와 같이 문자열 슬라이스를 추가하기 위해 `push_str` 메서드를
 이용하여 `String`을 키울 수 있습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-15: `push_str` 메서드를 사용하여 `String`에
+<span class="caption">예제 8-15: `push_str` 메서드를 사용하여 `String`에
 문자열 슬라이스 추가하기</span>
 
 `s`는 위의 두 라인 뒤에 `foobar`를 담게 될 것입니다. `push_str` 메서드는
 문자열 슬라이스를 매개변수로 갖는데 이는 매개변수의 소유권을 가져올 필요가
-없기 때문입니다. 예를 들어, Listing 8-16의 코드에서는 `s2`의 내용물을
+없기 때문입니다. 예를 들어, 예제 8-16의 코드에서는 `s2`의 내용물을
 `s1`에 추가한 후 `s2`를 쓰려고 합니다.
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-16/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-16: 문자열 슬라이스를 `String`에 붙인 이후에
+<span class="caption">예제 8-16: 문자열 슬라이스를 `String`에 붙인 이후에
 문자열 슬라이스를 사용하기</span>
 
 만일 `push_str` 함수가 `s2`의 소유권을 가져갔다면, 마지막 줄에서 그 값을
 출력할 수 없었을 것입니다. 하지만, 이 코드는 우리가 기대했던 대로 작동합니다!
 
 `push` 메서드는 한 개의 글자를 매개변수로 받아서 `String`에 추가합니다.
-Listing 8-17은 `push` 메서드를 사용하여 `String`에 “l”을 추가하고
+예제 8-17은 `push` 메서드를 사용하여 `String`에 “l”을 추가하고
 있습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-17/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-17: `push`를 사용하여 `String` 값에 한 글자
+<span class="caption">예제 8-17: `push`를 사용하여 `String` 값에 한 글자
 추가하기</span>
 
 위의 코드를 실행한 결과로 `s`는 `lol`을 담고 있을 것입니다.
@@ -140,13 +140,13 @@ Listing 8-17은 `push` 메서드를 사용하여 `String`에 “l”을 추가�
 #### `+` 연산자나 `format!` 매크로를 이용한 접합
 
 종종 우리는 가지고 있는 두 개의 문자열을 조합하고 싶어 합니다. 그렇게 하는 방법
-중 하나는 아래 Listing 8-18과 같이 `+` 연산자를 사용하는 것입니다:
+중 하나는 아래 예제 8-18과 같이 `+` 연산자를 사용하는 것입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-18: `+` 연산자를 사용하여 두 `String` 값을
+<span class="caption">예제 8-18: `+` 연산자를 사용하여 두 `String` 값을
 하나의 새로운 `String` 값으로 조합하기</span>
 
 문자열 `s3`는 `Hello, world!`를 담게 될 것입니다. `s1`이 더하기 연산
@@ -169,7 +169,7 @@ fn add(self, s: &str) -> String {
 *참조자*를 더하고 있음을 뜻합니다. 이는 `add` 함수의 `s` 매개변수 때문입니다:
 `String`에는 `&str`만 더할 수 있고, 두 `String` 끼리는 더하지 못합니다.
 아니, 잠깐만요 - `&s2`의 타입은 `&String`이지, `add`의 두 번째 매개변수에
-명시한 것처럼 `&str`은 아니죠. 어째서 Listing 8-18의 예제가 컴파일되는 걸까요?
+명시한 것처럼 `&str`은 아니죠. 어째서 예제 8-18의 예제가 컴파일되는 걸까요?
 
 `&s2`를 `add` 호출에 사용할 수 있는 이유는 `&String` 인자가 `&str`로 *강제*될
 수 있기 때문입니다 -`add` 함수가 호출되면, 러스트는 *역참조 강제(deref coercion)*
@@ -179,7 +179,7 @@ fn add(self, s: &str) -> String {
 연산 이후에도 여전히 유효한 `String`일 것입니다.
 
 두 번째로, 시그니처에서 `add`가 `self`의 소유권을 가져가는 것을 볼 수 있는데,
-이는 `self`가 `&`를 *안 가지고* 있기 때문입니다. 즉 Listing 8-18의 예제에서
+이는 `self`가 `&`를 *안 가지고* 있기 때문입니다. 즉 예제 8-18의 예제에서
 `s1`이 `add` 호출로 이동되어 이후에는 더 이상 유효하지 않을 것이라는 의미입니다.
 따라서 `let s3 = s1 + &s2;`가 마치 두 문자열을 복사하여 새로운 문자열을 만들
 것처럼 보일지라도, 실제로 이 구문은 `s1`의 소유권을 가져다가 `s2`의 내용물의
@@ -213,13 +213,13 @@ fn add(self, s: &str) -> String {
 다른 많은 프로그래밍 언어들에서, 인덱스를 이용한 참조를 통해 문자열 내부의
 개별 문자들에 접근하는 것은 유효하고 범용적인 연산에 속합니다. 그러나 러스트에서
 인덱싱 문법을 이용하여 `String`의 부분에 접근하고자 하면 에러를 얻게 됩니다.
-아래 Listing 8-19와 같은 코드를 생각해봅시다:
+아래 예제 8-19와 같은 코드를 생각해봅시다:
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-19/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 8-19: 문자열에 인덱싱 문법을 사용하는
+<span class="caption">예제 8-19: 문자열에 인덱싱 문법을 사용하는
 시도</span>
 
 이 코드는 아래와 같은 에러를 출력합니다:
@@ -234,7 +234,7 @@ fn add(self, s: &str) -> String {
 
 #### 내부적 표현
 
-`String`은 `Vec<u8>`을 감싼 것입니다(wrapper). Listing 8-14에서 보았던 몇 가지
+`String`은 `Vec<u8>`을 감싼 것입니다(wrapper). 예제 8-14에서 보았던 몇 가지
 적절히 인코딩된 UTF-8 예제 문자열을 살펴봅시다. 첫 번째로, 이것입니다:
 
 ```rust

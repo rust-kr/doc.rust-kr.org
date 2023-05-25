@@ -37,11 +37,11 @@ let guess: u32 = "42".parse().expect("Not a number!");
 *정수형 (integer type)* 은 소수점이 없는 숫자입니다. 2장에서
 정수형 중 하나인 `u32` 타입을 사용했었죠. 해당 타입의 선언은
 부호 없는 32비트 변수임을 나타냅니다 (부호 있는 타입은 `u`대신
-`i`로 시작합니다.) Table 3-1은 러스트에서 사용되는 정수형들을
+`i`로 시작합니다.) 표 3-1은 러스트에서 사용되는 정수형들을
 보여줍니다. 이 변형 중 어떤 것이라도 정수 값의 타입 선언에
 사용할 수 있습니다.
 
-<span class="caption">Table 3-1: 러스트의 정수형 타입들</span>
+<span class="caption">표 3-1: 러스트의 정수형 타입들</span>
 
 | 길이    | 부호 있음 (Signed)  | 부호 없음 (Unsigned) |
 |---------|---------|----------|
@@ -73,13 +73,13 @@ let guess: u32 = "42".parse().expect("Not a number!");
 64-bit 아키텍처이면 64비트를, 32-bit 아키텍처이면 32비트를 갖게
 됩니다.
 
-정수형 리터럴은 Table 3-2에서 보시는 것과 같은 형태로 작성할 수 있습니다.
+정수형 리터럴은 표 3-2에서 보시는 것과 같은 형태로 작성할 수 있습니다.
 여러 숫자 타입이 될 수 있는 숫자 리터럴에는 `57u8`과 같은 타입 접미사를
 사용하여 타입을 지정할 수 있습니다. `1_000`과 같이 읽기 쉽도록 시각적인
 구분을 위해 `_`을 사용할 수 있는데, 이는 `1000`이라고 명시한 것과
 같은 값이 될 것입니다.
 
-<span class="caption">Table 3-2: 러스트의 정수형 리터럴</span>
+<span class="caption">표 3-2: 러스트의 정수형 리터럴</span>
 
 | 숫자 리터럴       | 예            |
 |------------------|---------------|
@@ -135,7 +135,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 
 다음은 부동소수점 숫자의 용례입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-06-floating-point/src/main.rs}}
@@ -151,7 +151,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 가까운 정수값으로 버림을 합니다. 아래 코드는 `let` 구문 내에서 각 연산을
 어떻게 사용하는지를 보여줍니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-07-numeric-operations/src/main.rs}}
@@ -168,7 +168,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 값을 가질 수 있습니다. 부울린 값은 1바이트 크기입니다. 러스트에서 부울린 타입은
 `bool`로 명시됩니다. 예를 들면:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-08-boolean/src/main.rs}}
@@ -183,7 +183,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 러스트의 `char`는 이 언어의 가장 기본적인 알파벳 타입입니다.
 다음 코드는 `char` 값을 선언하는 몇 가지 예시입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-09-char/src/main.rs}}
@@ -216,7 +216,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 이 튜플 내의 타입들은 서로 달라도 됩니다. 다음은 (안써도 괜찮지만)
 타입을 명시해 본 예제입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-10-tuples/src/main.rs}}
@@ -226,7 +226,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 튜플로부터 개별 값을 얻어오려면 아래와 같이 패턴 매칭을 하여 튜플 값을
 해체하면 사용하면 됩니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-11-destructuring-tuples/src/main.rs}}
@@ -241,7 +241,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 마침표(`.`) 뒤에 접근하고자 하는 값의 인덱스를 쓰는 방식으로도 튜플 요소에
 접근할 수 있습니다. 예를 들면:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-12-tuple-indexing/src/main.rs}}
@@ -265,7 +265,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 대괄호 안에 쉼표로 구분한 값들 나열해서 배열을
 만들 수 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-13-arrays/src/main.rs}}
@@ -318,7 +318,7 @@ let a = [3; 5];
 뭉치입니다. 아래와 같이 인덱스를 통해 배열 요소에 접근할 수
 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-14-array-indexing/src/main.rs}}
@@ -334,7 +334,7 @@ let a = [3; 5];
 알아봅시다. 사용자로부터 배열 인덱스를 입력받기 위해서 2장의 추리
 게임과 유사한 아래 코드를 실행한다 칩시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,panics
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}

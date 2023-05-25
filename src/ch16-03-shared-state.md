@@ -49,16 +49,16 @@
 
 #### `Mutex<T>`의 API
 
-뮤텍스 사용 방법에 대한 예제로서 Listing 16-12처럼 싱글스레드 컨텍스트에서
+뮤텍스 사용 방법에 대한 예제로서 예제 16-12처럼 싱글스레드 컨텍스트에서
 뮤텍스를 사용하는 것으로 시작해봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-12/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-12: 간소화를 위해 싱글스레드 컨텍스트에서
+<span class="caption">예제 16-12: 간소화를 위해 싱글스레드 컨텍스트에서
 `Mutex<T>`의 API 탐색하기</span>
 
 많은 타입들이 그렇듯 `Mutex<T>`는 연관함수 `new`를 사용하여 만들어집니다.
@@ -94,20 +94,20 @@
 
 이제 `Mutex<T>`를 사용하여 여러 스레드 사이에서 값을 공유하는 시도를 해봅시다.
 10개의 스레드를 생성하고 각자 카운터 값을 1씩 증가시켜서 카운터가 0에서 10으로
-가도록 할 것입니다. 다음 Listing 16-13의 예제는 컴파일 에러가 날 것이고,
+가도록 할 것입니다. 다음 예제 16-13의 예제는 컴파일 에러가 날 것이고,
 이 에러를 이용하여 `Mutex<T>`를 사용하는 방법과 러스트가 이를 고치는 것을
 돕는 방법에 대해 학습하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-13/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-13: `Mutex<T>`에 의해 보호되는 카운터를
+<span class="caption">예제 16-13: `Mutex<T>`에 의해 보호되는 카운터를
 각자 증가시키는 10개의 스레드</span>
 
-Listing 16-12에서 했던 것처럼 `Mutex<T>` 내부에 `i32`를 담고 있는 `counter`
+예제 16-12에서 했던 것처럼 `Mutex<T>` 내부에 `i32`를 담고 있는 `counter`
 변수를 만듭니다. 다음으로 숫자 범위만큼 반복하여 10개의 스레드를 만듭니다.
 `thread::spawn`을 사용하고 모든 스레드에게 동일한 클로저를 주었습니다: 이
 클로저는 카운터를 스레드로 이동시키고, `lock` 메서드를 호출하여 `Mutex<T>`의
@@ -115,8 +115,8 @@ Listing 16-12에서 했던 것처럼 `Mutex<T>` 내부에 `i32`를 담고 있는
 실행을 끝냈을 때, `num`은 스코프 밖으로 벗어내고 락이 해제되어 다른 스레드가
 이를 얻을 수 있습니다.
 
-메인 스레드에서는 조인 핸들을 전부 모읍니다. 그리고나서 Listing
-16-2에서처럼 각 핸들에 `join`을 호출하여 모든 스레드가 종료되는 것을
+메인 스레드에서는 조인 핸들을 전부 모읍니다. 그리고나서 예제 16-2에서처럼
+각 핸들에 `join`을 호출하여 모든 스레드가 종료되는 것을
 확실히 합니다. 그 시점에서 메인 스레드는 락을 얻고 이 프로그램의
 결과를 출력합니다.
 
@@ -135,16 +135,16 @@ Listing 16-12에서 했던 것처럼 `Mutex<T>` 내부에 `i32`를 담고 있는
 
 15장에서는 스마트 포인터 `Rc<T>`을 사용하여 참조 카운팅 값을 만들어
 값에 복수의 소유자를 부여했습니다. 여기서도 똑같이 해서 어떻게 되는지
-봅시다. Listing 16-14의 `Mutex<T>`를 `Rc<T>`로 감싸서 스레드로 소유권을
+봅시다. 예제 16-14의 `Mutex<T>`를 `Rc<T>`로 감싸서 스레드로 소유권을
 넘기기 전에 그 `Rc<T>`을 복제하겠습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-14: `Rc<T>`를 사용하여 여러 스레드가
+<span class="caption">예제 16-14: `Rc<T>`를 사용하여 여러 스레드가
 `Mutex<T>`를 소유할 수 있도록 하는 시도</span>
 
 다시 한번 컴파일을 하고 그 결과가... 다른 에러들이네요! 컴파일러는 우리에게
@@ -189,15 +189,15 @@ Listing 16-12에서 했던 것처럼 `Mutex<T>` 내부에 `i32`를 담고 있는
 
 예제로 다시 돌아갑시다: `Arc<T>`와 `Rc<T>`는 같은 API를 가지고 있으므로,
 `use` 라인과 `new` 호출, 그리고 `clone` 호출 부분을 바꾸는 것으로 프로그램을
-수정합니다. Listing 16-15의 코드는 마침내 컴파일 및 실행이 될 것입니다:
+수정합니다. 예제 16-15의 코드는 마침내 컴파일 및 실행이 될 것입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-15/src/main.rs}}
 ```
 
-<span class="caption">Listing 16-15: `Arc<T>`를 사용하여 `Mutex<T>`를 감싸서
+<span class="caption">예제 16-15: `Arc<T>`를 사용하여 `Mutex<T>`를 감싸서
 여러 스레드 사이에서 소유권을 공유할 수 있도록 하기</span>
 
 이 코드는 다음을 출력할 것입니다:

@@ -18,7 +18,7 @@
 그 값은 실행 중에 사용될 연관된 코드 블록 안으로 떨어질 것입니다.
 
 동전 이야기가 나왔으니, `match`를 이용한 예제로 동전들을 이용해봅시다!
-Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입력받아서,
+예제 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입력받아서,
 동전 계수기와 동일한 방식으로 그 동전이 어떤 것이고 센트로 해당 값을
 반환하는 함수를 작성할 수 있습니다.
 
@@ -26,7 +26,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-3: 열거형과 열거형의 배리언트를 패턴으로서 사용하는
+<span class="caption">예제 6-3: 열거형과 열거형의 배리언트를 패턴으로서 사용하는
 `match` 표현식</span>
 
 `value_in_cents` 함수 내의 `match`를 쪼개 봅시다.
@@ -51,7 +51,7 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 표현식의 결과로서 생기는 값은 전체 `match` 표현식에 대해
 반환되는 값입니다.
 
-각 갈래가 그냥 값을 리턴하는 Listing 6-3에서처럼 매치 갈래의 코드가 짧다면,
+각 갈래가 그냥 값을 리턴하는 예제 6-3에서처럼 매치 갈래의 코드가 짧다면,
 중괄호는 보통 사용하지 않습니다. 만일 매치 갈래 내에서 여러 줄의 코드를
 실행시키고 싶다면 중괄호를 사용하고, 그렇게 되면 갈래 뒤에 붙이는 쉼표는
 옵션이 됩니다. 예를 들어, 아래의 코드는 `Coin::Penny`와 함께 메서드가
@@ -73,13 +73,13 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 다른 동전들은 주의 디자인을 갖지 않고, 따라서 오직 쿼터 동전들만 이 특별 값을 갖습니다.
 우리는 이 정보를 `Quarter` 배리언트 내에 `UsState` 값을 포함하도록
 우리의 `enum`을 변경함으로써 추가할 수 있는데,
-이는 Listing 6-4에서 한 바와 같습니다:
+이는 예제 6-4에서 한 바와 같습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-4: `Quarter` 배리언트가 `UsSate` 값 또한 들고
+<span class="caption">예제 6-4: `Quarter` 배리언트가 `UsSate` 값 또한 들고
 있는 `Coin` 열거형</span>
 
 우리의 친구가 모든 50개 주 쿼터 동전을 모으기를 시도하는 중이라고 상상해봅시다.
@@ -117,13 +117,13 @@ Listing 6-3에서 보는 바와 같이, 우리는 익명의 미국 동전을 입
 다른 어떤 연산도 수행하는 시도를 하지 않아야 합니다.
 
 `match`에 감사하게도, 이 함수는 매우 작성하기 쉽고,
-Listing 6-5와 같이 보일 것입니다:
+예제 6-5와 같이 보일 것입니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 6-5: `Option<i32>` 상에서 `match`를 이용하는
+<span class="caption">예제 6-5: `Option<i32>` 상에서 `match`를 이용하는
 함수</span>
 
 `plus_one`의 첫 번째 실행을 좀 더 자세히 시험해봅시다. `plus_one(five)`가 호출될 때,
@@ -146,7 +146,7 @@ Listing 6-5와 같이 보일 것입니다:
 그런 다음 매치 갈래 내의 코드가 실행되므로, `i`의 값에 1을 더한 다음
 최종적으로 `6`을 담은 새로운 `Some` 값을 생성합니다.
 
-이제 `x`가 `None`인 Listing 6-5에서의 `plus_one`의 두 번째 호출을 살펴봅시다.
+이제 `x`가 `None`인 예제 6-5에서의 `plus_one`의 두 번째 호출을 살펴봅시다.
 `match` 안으로 들어와서 첫 번째 갈래와 비교합니다:
 
 ```rust,ignore

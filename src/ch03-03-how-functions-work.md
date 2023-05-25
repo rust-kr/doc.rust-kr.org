@@ -9,7 +9,7 @@
 이용하는데, 이는 모든 글자를 소문자로 쓰고 밑줄(underscore)로 단어를 구분하는
 방식을 말합니다. 다음은 예시로 함수를 정의한 프로그램입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-16-functions/src/main.rs}}
@@ -50,7 +50,7 @@
 
 아래의 `another_function`에는 매개변수가 추가되었습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/src/main.rs}}
@@ -76,7 +76,7 @@
 여러 매개변수를 정의하려면 아래처럼 쉼표 기호로 매개변수
 정의를 구분하세요:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/src/main.rs}}
@@ -114,15 +114,15 @@
 
 우리는 실제로는 이미 구문과 표현식을 사용해 봤습니다.
 `let` 키워드로 변수를 만들고 값을 할당하는 것은 구문입니다.
-Listing 3-1의 `let y = 6;`은 구문입니다:
+예제 3-1의 `let y = 6;`은 구문입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 3-1: 구문 하나로 되어있는 `main` 함수</span>
+<span class="caption">예제 3-1: 구문 하나로 되어있는 `main` 함수</span>
 
 또한 함수 정의도 구문입니다; 위 예제는 그 자체로 구문에
 해당됩니다.
@@ -130,7 +130,7 @@ Listing 3-1의 `let y = 6;`은 구문입니다:
 구문은 값을 반환하지 않습니다. 따라서 아래와 같이 `let` 구문을 다른 변수에
 할당하려고 하면 에러가 납니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/src/main.rs}}
@@ -151,12 +151,12 @@ Listing 3-1의 `let y = 6;`은 구문입니다:
 여러분이 작성하는 러스트 코드의 대부분은 표현식이며, 이는 어떤 값을 산출합니다.
 `5 + 6`과 같은 간단한 수학 연산을 살펴봅시다. 이 수식은 `11`이라는
 값을 산출하는 표현식입니다. 표현식은 구문의 일부일 수 있습니다:
-Listing 3-1의 `let y = 6;`이라는 구문에서 `6`은 `6`이라는 값을 
+예제 3-1의 `let y = 6;`이라는 구문에서 `6`은 `6`이라는 값을 
 산출하는 표현식입니다. 함수를 호출하는 것도, 매크로를 호출하는 것도
 표현식입니다. 아래 예제처럼 중괄호로 만들어진 새로운 스코프 블록도
 표현식입니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-20-blocks-are-expressions/src/main.rs}}
@@ -189,7 +189,7 @@ Listing 3-1의 `let y = 6;`이라는 구문에서 `6`은 `6`이라는 값을
 마지막 표현식 값을 반환합니다. 값을 반환하는 함수의 예를
 보겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/src/main.rs}}
@@ -220,7 +220,7 @@ let x = 5;
 
 다른 예제도 살펴봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-22-function-parameter-and-return/src/main.rs}}
@@ -230,7 +230,7 @@ let x = 5;
 만일 `x + 1` 끝에 세미콜론이 추가되어 표현식이 구문으로 변경되면
 에러가 발생합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/src/main.rs}}

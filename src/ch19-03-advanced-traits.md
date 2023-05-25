@@ -22,14 +22,14 @@
 연관 타입이 있는 트레잇의 한 예로 표준 라이브러리에서 제공하는
 `Iterator` 트레잇이 있습니다. 연관 타입의 이름은 `Item`이며
 `Iterator` 트레잇을 구현하는 타입이 반복하는 값의 타입을
-나타냅니다. `Iterator` 트레잇의 정의는 Listing 19-12에 나와
+나타냅니다. `Iterator` 트레잇의 정의는 예제 19-12에 나와
 있습니다.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 19-12: 연관 타입 `Item`이 있는
+<span class="caption">예제 19-12: 연관 타입 `Item`이 있는
 `Iterator` 트레잇의 정의</span>
 
 타입 `Item`은 자리표시자이고, `next` 메서드의 정의는 `Option<Self::Item>`
@@ -43,23 +43,23 @@
 `u32`로 지정된 `Counter`라는 타입에 대한 `Iterator` 트레잇 구현을
 살펴보겠습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-22-iterator-on-counter/src/lib.rs:ch19}}
 ```
 
-이 문법은 제네릭과 비슷해 보입니다. 그렇다면 Listing 19-13에 나온 것처럼
+이 문법은 제네릭과 비슷해 보입니다. 그렇다면 예제 19-13에 나온 것처럼
 제네릭으로 `Iterator` 트레잇을 정의하면 되지 않을까요?
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-13/src/lib.rs}}
 ```
 
-<span class="caption">Listing 19-13: 제네릭을 사용한 `Iterator` 트레잇의
+<span class="caption">예제 19-13: 제네릭을 사용한 `Iterator` 트레잇의
 가상 정의</span>
 
-차이점은 Listing 19-13에서와 같이 제네릭을 사용할 때는 각 구현에서
+차이점은 예제 19-13에서와 같이 제네릭을 사용할 때는 각 구현에서
 타입을 명시해야 한다는 점입니다; `Counter`에 대해 `Iterator<String>`
 혹은 다른 타입을 구현할 수도 있기 때문에, `Counter`에 대해 `Iterator`의
 구현이 여러 개 있을 수 있습니다. 다시 말해, 한 트레잇에 제네릭
@@ -70,7 +70,7 @@
 
 연관 타입을 사용하면 타입에 트레잇을 여러 번 구현할 수 없기
 때문에 타입 명시를 할 필요도 사라집니다. 연관 타입을 사용하는 정의가
-있는 Listing 19-12에서는 `Item`의 타입을 한 번만 선택할 수 있는데,
+있는 예제 19-12에서는 `Item`의 타입을 한 번만 선택할 수 있는데,
 이는 `impl Iterator for Counter`가 하나만 존재할 수 있기 때문입니다.
 `Counter`에서 `next`를 호출할 때마다 `u32` 값의 반복자를 원한다고
 지정할 필요가 없습니다.
@@ -93,18 +93,18 @@ API 문서에 연관 타입을 문서화하는 것이 좋습니다.
 
 러스트에서는 자체 연산자를 만들거나 임의의 연산자를 오버로드할 수
 없습니다. 그러나 `std::ops`에 나열된 연산자와 연관된 트레잇을 구현하여
-연산자 및 해당 트레잇을 오버로드할 수 있습니다. 예를 들면, Listing
-19-14에서는 `+` 연산자를 오버로드하여 두 `Point` 인스턴스를
+연산자 및 해당 트레잇을 오버로드할 수 있습니다. 예를 들면, 예제 19-14에서는
+`+` 연산자를 오버로드하여 두 `Point` 인스턴스를
 더합니다. 이 작업은 `Point` 구조체에 `Add` 트레잇을 구현하여
 수행합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-14/src/main.rs}}
 ```
 
-<span class="caption">Listing 19-14: `Add` 트레잇을 구현하여
+<span class="caption">예제 19-14: `Add` 트레잇을 구현하여
 `Point` 인스턴스에 대한 `+` 연산자 오버로딩하기</span>
 
 `add` 메서드는 두 `Point` 인스턴스의 `x` 값과 `y` 값을 더하여
@@ -141,16 +141,16 @@ trait Add<Rhs=Self> {
 *뉴타입 패턴 (newtype pattern)* 이라고 하며,
 [“뉴타입 패턴을 사용하여 외부 타입에 외부 트레잇 구현하기”][newtype]<!-- ignore -->절에서
 더 자세히 설명합니다. 밀리미터 단위의 값을 미터 단위의 값에 더하고 `Add`의
-구현이 변환을 올바르게 수행하도록 하고 싶습니다. Listing 19-15에서 보시는 것처럼
+구현이 변환을 올바르게 수행하도록 하고 싶습니다. 예제 19-15에서 보시는 것처럼
 `Meters`를 `Rhs`로 사용하여 `Millimeters`에 대한 `Add`를 구현할 수 있습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-15/src/lib.rs}}
 ```
 
-<span class="caption">Listing 19-15: `Millimeters`와 `Meters`를 더하기
+<span class="caption">예제 19-15: `Millimeters`와 `Meters`를 더하기
 위하여 `Millimeters`에 대한 `Add` 트레잇 구현하기</span>
 
 `Millimeters`와 `Meters`를 더하기 위해서, `impl Add<Meters>`라고 지정하여
@@ -181,31 +181,31 @@ trait Add<Rhs=Self> {
 구현하는 것도 가능합니다.
 
 같은 이름의 메서드를 호출할 때는 어떤 메서드를 사용할지 러스트에 알려줘야
-합니다. Listing 19-16의 코드에서는 `Pilot`과 `Wizard`라는 두 개의 트레잇을
+합니다. 예제 19-16의 코드에서는 `Pilot`과 `Wizard`라는 두 개의 트레잇을
 정의했는데, 두 트레잇 모두 `fly`라는 메서드를 가지고 있다고 가정해 봅시다.
 그런 다음 이미 `fly`라는 메서드가 구현된 `Human` 타입에 두 트레잇을 모두
 구현합니다. 각각의 `fly` 메서드는 다른 일을 합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-16/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-16: 두 트레잇에는 `fly` 메서드가
+<span class="caption">예제 19-16: 두 트레잇에는 `fly` 메서드가
 있도록 정의되어 `Human` 타입에 대해 구현되었고, `Human`에 직접 `fly`
 메서드가 구현되어 있습니다</span>
 
-`Human`의 인스턴스에 `fly`를 호출하면, Listing 19-17에서 보시는 것처럼
+`Human`의 인스턴스에 `fly`를 호출하면, 예제 19-17에서 보시는 것처럼
 컴파일러는 기본적으로 타입에 직접 구현된 메서드를 호출합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-17/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-17: `Human` 인스턴스에 `fly`
+<span class="caption">예제 19-17: `Human` 인스턴스에 `fly`
 호출하기</span>
 
 이 코드를 실행하면 `*waving arms furiously*`가 출력되어 러스트가
@@ -213,19 +213,19 @@ trait Add<Rhs=Self> {
 
 `Pilot` 트레잇이나 `Wizard` 트레잇의 `fly` 메서드를 호출하려면, 더 명확한
 문법을 사용하여 어떤 `fly` 메서드를 의도한 것인지 지정할 필요가 있습니다.
-Listing 19-18에서 이 문법을 보여줍니다.
+예제 19-18에서 이 문법을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-18/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-18: 호출하고자 하는 트레잇의 `fly`
+<span class="caption">예제 19-18: 호출하고자 하는 트레잇의 `fly`
 메서드 지정하기</span>
 
 메서드 이름 앞에 트레잇 이름을 지정하면 어떤 `fly` 구현을 호출할지
-러스트에게 명확히 알릴 수 있습니다. Listing 19-18에서 사용한
+러스트에게 명확히 알릴 수 있습니다. 예제 19-18에서 사용한
 `person.fly()`와 동일한 `Human::fly(&person)`를 작성할 수도
 있지만, 명확히 할 필요가 없는 경우라면 작성 시간이 조금 더
 길어집니다.
@@ -243,19 +243,19 @@ Listing 19-18에서 이 문법을 보여줍니다.
 그러나, 메서드가 아닌 연관 함수에는 `self` 매개변수가 없습니다.
 동일한 함수명을 가진 메서드가 아닌 함수가 정의된 여러 타입 또는
 트레잇이 있는 경우, *완전 정규화 문법*을 사용하지 않는 한 러스트는
-어떤 타입을 의미하는지 항상 알 수 없습니다. 예를 들어, Listing 19-19에서는
+어떤 타입을 의미하는지 항상 알 수 없습니다. 예를 들어, 예제 19-19에서는
 모든 강아지의 이름을 *스팟 (Spot)* 으로 지정하려는 동물 보호소에 대한
 트레잇을 생성합니다. 메서드가 아닌 연관 함수 `baby_name`이 있는 `Animal`
 트레잇을 만듭니다. `Animal` 트레잇은 구조체 `Dog`에 대해 구현되며, 여기에도
 메서드가 아닌 연관 함수 `baby_name`가 직접 제공됩니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-19/src/main.rs}}
 ```
 
-<span class="caption">Listing 19-19: 연관 함수가 있는 트레잇과
+<span class="caption">예제 19-19: 연관 함수가 있는 트레잇과
 이 트레잇을 구현하면서 동시에 같은 이름의 연관 함수가 있는
 타입</span>
 
@@ -274,17 +274,17 @@ Listing 19-18에서 이 문법을 보여줍니다.
 
 이 출력은 우리가 원했던 것이 아닙니다. 우리는 `Dog`에 구현한 `Animal`
 트레잇에 속하는 `baby_name` 함수를 호출하여 코드가 `A baby dog is
-called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용했던
-트레잇 이름을 지정하는 기법은 여기서 도움이 되지 않습니다; Listing
-19-20의 코드로 `main`을 변경하면 컴파일 에러가 발생합니다.
+called a puppy`라고 출력하기를 원합니다. 예제 19-18에서 사용했던
+트레잇 이름을 지정하는 기법은 여기서 도움이 되지 않습니다; 예제 19-20의
+코드로 `main`을 변경하면 컴파일 에러가 발생합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-20/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-20: `Animal` 트레잇의 `baby_name`을
+<span class="caption">예제 19-20: `Animal` 트레잇의 `baby_name`을
 호출하는 시도이지만, 러스트는 어떤 구현체를 사용해야 하는지 알지
 못합니다</span>
 
@@ -298,16 +298,16 @@ called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용�
 
 다른 타입에 대한 `Animal` 구현체가 아니라 `Dog`에 대한 `Animal`
 구현체를 사용하고 싶다는 것을 명확히 하고 러스트에 알려주려면,
-완전 정규화 문법을 사용해야 합니다. Listing 19-21은 완전 정규화
+완전 정규화 문법을 사용해야 합니다. 예제 19-21은 완전 정규화
 문법을 사용하는 방법을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-21/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-21: 완전 정규화 문법을 사용하여
+<span class="caption">예제 19-21: 완전 정규화 문법을 사용하여
 `Dog`에 구현된 `Animal` 트레잇의 `baby_name`을 호출하고자 함을
 지정하기</span>
 
@@ -362,16 +362,16 @@ called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용�
 요구하는 기능을 제공하는 타입에 대해서만 `OutlinePrint` 트레잇이
 작동할 것임을 명시해야 합니다. 트레잇 정의에서 `OutlinePrint: Display`를
 지정하는 것으로 그렇게 할 수 있습니다. 이 기법은 트레잇에 트레잇
-바운드를 추가하는 것과 유사합니다. Listing 19-22는 `OutlinePrint`
+바운드를 추가하는 것과 유사합니다. 예제 19-22는 `OutlinePrint`
 트레잇의 구현을 보여줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-22/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 19-22: `Display`의 기능을 요구하는
+<span class="caption">예제 19-22: `Display`의 기능을 요구하는
 `OutlinePrint` 트레잇 구현하기</span>
 
 `OutlinePrint`에 `Display` 트레잇이 필요하다고 지정했으므로,
@@ -384,7 +384,7 @@ called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용�
 `Point` 구조체와 같이 `Display`를 구현하지 않는 타입에 `OutlinePrint`를
 구현하려고 하면 어떻게 되는지 살펴봅시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-02-impl-outlineprint-for-point/src/main.rs:here}}
@@ -399,7 +399,7 @@ called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용�
 이를 해결하려면, `Point`에 `Display`를 구현하고 `OutlinePrint`가
 요구하는 제약 조건을 만족시키면 됩니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-03-impl-display-for-point/src/main.rs:here}}
@@ -428,16 +428,16 @@ called a puppy`라고 출력하기를 원합니다. Listing 19-18에서 사용�
 예를 들어, `Vec<T>`에 대해 `Display`를 구현하고 싶다고 가정해보면,
 `Display` 트레잇과 `Vec<T>` 타입이 크레이트 외부에 정의되어 있으므로
 고아 규칙에 의해 직접 구현할 수는 없습니다. `Vec<T>`의 인스턴스를 보유하는
-`Wrapper` 구조체를 만들 수 있습니다; 그러면 Listing 19-23에 나온 것처럼
+`Wrapper` 구조체를 만들 수 있습니다; 그러면 예제 19-23에 나온 것처럼
 `Wrapper`에 `Display`를 구현하고 `Vec<T>` 값을 사용할 수 있습니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-23/src/main.rs}}
 ```
 
-<span class="caption">Listing 19-23: `Display` 구현을 위해서 `Vec<String>`을
+<span class="caption">예제 19-23: `Display` 구현을 위해서 `Vec<String>`을
 감싼 `Wrapper` 타입 만들기</span>
 
 `Wrapper`는 튜플 구조체이고 `Vec<T>`는 튜플의 인덱스 0에 있는 아이템이기

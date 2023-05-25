@@ -86,7 +86,7 @@
 예를 들면, `match`는 키워드죠. `match`를 함수 이름으로 사용하는 다음
 함수를 컴파일 시도하면:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 fn match(needle: &str, haystack: &str) -> bool {
@@ -108,7 +108,7 @@ error: expected identifier, found keyword `match`
 보여줍니다. `match`를 함수 이름으로 사용하려면, 다음과 같이 원시
 식별자 문법을 사용해야 합니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn r#match(needle: &str, haystack: &str) -> bool {

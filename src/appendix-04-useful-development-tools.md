@@ -36,7 +36,7 @@ $ cargo fmt
 있습니다. 컴파일러 경고를 이미 본 적이 있을 것입니다. 예를 들어,
 다음 코드를 살펴보겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn do_something() {}
@@ -80,7 +80,7 @@ $ cargo fix
 *src/main.rs*를 다시 살펴보면, `cargo fix`가 코드를 변경했음을 알 수
 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn do_something() {}
@@ -117,7 +117,7 @@ $ cargo clippy
 예를 들어 다음과 같이 수학적 상수(예: pi)의 근사치를 사용하는 프로그램을
 작성했다고 가정해 보겠습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn main() {
@@ -146,7 +146,7 @@ error: approximate value of `f{32, 64}::consts::PI` found
 그러면 여러분이 `PI` 상수를 사용하도록 코드를 변경할 수 있습니다.
 다음 코드는 Clippy에서 어떠한 오류나 경고도 발생하지 않습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 fn main() {

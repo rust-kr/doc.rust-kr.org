@@ -15,7 +15,7 @@
 그리고, 새 *variables* 디렉토리의 *src/main.rc* 파일을 열어서
 다음의 코드로 교체하세요 (아직은 컴파일되지 않습니다):
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/src/main.rs}}
@@ -56,7 +56,7 @@
 
 예를 들어, *src/main.rs*를 다음과 같이 바꿉시다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
@@ -131,7 +131,7 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 아래처럼 똑같은 변수명과 let` 키워드의 반복으로 변수를 가릴 수
 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}

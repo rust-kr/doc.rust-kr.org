@@ -1,6 +1,6 @@
 ## 우아한 종료와 정리
 
-Listing 20-20의 코드는 의도한 대로 스레드 풀을 사용하여 비동기적으로
+예제 20-20의 코드는 의도한 대로 스레드 풀을 사용하여 비동기적으로
 요청에 응답하고 있습니다. 직접적인 방식으로 사용하지 않는 `workers`,
 `id` 및 `thread` 필드에 대한 경고가 표시되어 아무것도 정리하고 있지
 않음을 알려줍니다. 덜 우아한 <span class="keystroke">ctrl-c</span>
@@ -19,16 +19,16 @@ Listing 20-20의 코드는 의도한 대로 스레드 풀을 사용하여 비동
 
 스레드 풀에 대해 `Drop`을 구현하는 것부터 시작해 보겠습니다. 풀이
 버려지면 모든 스레드가 조인되어서 작업 완료를 보장해야 합니다.
-Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코드는
+예제 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코드는
 아직 제대로 작동하지 않습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-22/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 20-22: 스레드 풀이 스코프 밖으로 벗어날
+<span class="caption">예제 20-22: 스레드 풀이 스코프 밖으로 벗어날
 때 각 스레드 조인하기</span>
 
 먼저 스레드 풀 `workers`의 각각에 대한 반복을 수행합니다. 이를 위해
@@ -47,7 +47,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 이 에러는 각 `worker`의 가변 빌림만 있고 `join`이 인자의 소유권을 가져가기
 때문에 `join`을 호출할 수 없음을 알려줍니다. 이 문제를 해결하려면 `thread`를
 소유한 `Worker` 인스턴스로부터 스레드를 밖으로 옮겨서 `join`이 스레드를
-써버릴 수 있도록 할 필요가 있습니다. Listing 17-15에서 이 작업을 해봤었지요:
+써버릴 수 있도록 할 필요가 있습니다. 예제 17-15에서 이 작업을 해봤었지요:
 `Worker`가 대신 `Option<thread::JoinHandle<()>>`을 가지고 있다면,
 `Option`의 `take` 메서드를 호출하여 `Some` 배리언트에서 값을 빼내고
 그 자리에는 `None` 배리언트를 남길 수 있습니다. 바꿔 말하면, 실행 중인
@@ -57,7 +57,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 
 따라서 `Worker`의 정의를 다음과 같이 업데이트하고 싶습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-04-update-worker-definition/src/lib.rs:here}}
@@ -74,7 +74,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 보겠습니다; 새 `Worker`를 생성할 때 `thread` 값을 `Some`으로
 감싸야 합니다. 이 에러를 해결하려면 다음과 같이 변경하세요:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-05-fix-worker-new/src/lib.rs:here}}
@@ -84,7 +84,7 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 호출하여 `thread`를 `worker` 밖으로 빼내려고 했음을 언급했습니다. 다음과
 같이 변경하면 그렇게 됩니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,ignore,not_desired_behavior
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-06-fix-threadpool-drop/src/lib.rs:here}}
@@ -110,45 +110,45 @@ Listing 20-22는 `Drop` 구현의 첫 번째 시도를 보여줍니다; 이 코�
 `Worker` 루프를 변경할 필요가 있겠습니다.
 
 먼저 스레드가 완료될 때까지 기다리기 전에 명시적으로 `sender`를
-버리도록 `ThreadPool` `drop` 구현을 변경하겠습니다. Listing 20-23은
+버리도록 `ThreadPool` `drop` 구현을 변경하겠습니다. 예제 20-23은
 명시적으로 `sender`를 버리도록 `ThreadPool`을 변경한 내용을 보여줍니다.
 스레드에서 했던 것과 동일한 `Option` 및 `take` 기법을 사용하여
 `ThreadPool`로부터 `sender`를 빼낼 수 있습니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground,not_desired_behavior
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-23/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 20-23: 워커 스레드를 조인하기 전에
+<span class="caption">예제 20-23: 워커 스레드를 조인하기 전에
 명시적으로 `sender` 버리기</span>
 
 `sender`을 버리면 채널이 닫히며, 이는 더 이상 아무 메시지도 보내지지
 않음을 나타냅니다. 이 경우 무한 루프에서 워커가 수행하는 모든 `recv`
-호출은 에러를 반환할 것입니다. Listing 20-24에서는 그런 경우 `Worker`
+호출은 에러를 반환할 것입니다. 예제 20-24에서는 그런 경우 `Worker`
 루프가 정상적으로 종료되도록 변경하여 `ThreadPool` `drop` 구현이
 `join`을 호출할 때 스레드가 종료되도록 합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-24/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 20-24: `recv`가 에러를 반환한 경우
+<span class="caption">예제 20-24: `recv`가 에러를 반환한 경우
 명시적으로 루프 벗어나기</span>
 
-이 코드가 실제로 작동하는 것을 보기 위해서, Listing 20-25에 나온 것처럼 `main`을
+이 코드가 실제로 작동하는 것을 보기 위해서, 예제 20-25에 나온 것처럼 `main`을
 수정하여 서버를 정상적으로 종료하기 전에 두 개의 요청만 수락하도록 해봅시다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 20-25: 두 개의 요청을 처리한 후 루프를
+<span class="caption">예제 20-25: 두 개의 요청을 처리한 후 루프를
 벗어나는 것으로 서버 종료하기</span>
 
 실제 웹 서버가 두 개의 요청만 처리한 후 종료되는 것을 원하지는 않을
@@ -213,13 +213,13 @@ Shutting down worker 3
 
 여기 참고를 위한 전체 코드가 있습니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-07-final-code/src/main.rs}}
 ```
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-07-final-code/src/lib.rs}}

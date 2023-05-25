@@ -24,16 +24,16 @@
 `NewsArticle` 이나 `Tweet` 인스턴스에 저장된 데이터를 종합해 보여주는
 종합 미디어 라이브러리 크레이트 `aggregator`를 만든다고 가정합시다.
 이를 위해서는 각 타입의 요약 정보를 얻어와야 하는데, 이는 인스턴스에
-`summarize` 메서드를 호출하여 가져오고자 합니다. Listing 10-12는
+`summarize` 메서드를 호출하여 가져오고자 합니다. 예제 10-12는
 이 동작을 `Summary` 트레잇 정의로 표현합니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-12/src/lib.rs}}
 ```
 
-<span class="caption">Listing 10-12: `summarize` 메서드가 제공하는
+<span class="caption">예제 10-12: `summarize` 메서드가 제공하는
 '요약' 동작으로 구성된 `Summary` 트레잇</span>
 
 `trait` 키워드 다음 트레잇의 이름 `Summary`를 작성해
@@ -56,19 +56,19 @@
 
 `Summary` 트레잇의 메서드 시그니처를 원하는 대로 정의했으니,
 우리의 종합 미디어 내 각 타입에 `Summary` 트레잇을 구현해봅시다.
-Listing 10-13은 헤드라인, 저자, 지역 정보를 사용하여 `summarize`의 반환 값을
+예제 10-13은 헤드라인, 저자, 지역 정보를 사용하여 `summarize`의 반환 값을
 만드는 `Summary` 트레잇을 `NewsArticle` 구조체에 구현한 모습입니다.
 `Tweet` 구조체에는 트윗 내용이 이미 280자로 제한되어있음을 가정하고,
 사용자명과 해당 트윗의 전체 텍스트를 가져오도록 `summarize` 를
 정의했습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 10-13: `NewsArticle`과 `Tweet` 타입에
+<span class="caption">예제 10-13: `NewsArticle`과 `Tweet` 타입에
 `Summary` 트레잇 구현</span>
 
 어떤 타입에 대한 트레잇을 구현하는 것은 평범한 메서드를
@@ -120,17 +120,17 @@ know, people`를 출력합니다.
 이러면 특정한 타입에 트레잇을 구현할 때 기본 동작을 유지할지
 오버라이드(override)할지 선택할 수 있습니다.
 
-Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
+예제 10-14는 예제 10-12에서 `Summary` 트레잇에
 메서드 시그니처만 정의했던 것과는 달리 `summarize` 메서드에
 기본 문자열을 명시하였습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 10-14: `summarize` 메서드의 기본 구현을
+<span class="caption">예제 10-14: `summarize` 메서드의 기본 구현을
 포함하는 `Summary` 트레잇 정의하기</span>
 
 `NewsArticle` 인스턴스에 기본 구현을 사용하려면
@@ -147,7 +147,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 
 이 코드는 `New article available! (Read more...)`를 출력합니다.
 
-기본 구현을 생성한다고 해서 Listing 10-13 코드의 `Tweet`
+기본 구현을 생성한다고 해서 예제 10-13 코드의 `Tweet`
 의 `Summary` 구현을 변경할 필요는 없습니다. 기본 구현을
 오버라이딩하는 문법과, 기본 구현이 없는 트레잇 메서드를
 구현하는 문법은 동일하기 때문입니다.
@@ -189,7 +189,7 @@ Listing 10-14는 Listing 10-12에서 `Summary` 트레잇에
 ### 매개변수로서의 트레잇
 
 트레잇을 정의하고 구현하는 방법을 알아보았으니, 트레잇을 이용하여 어떤 함수가
-다양한 타입으로 작동하게 만드는 법을 알아봅시다. Listing 10-13에서 `NewsArticle`,
+다양한 타입으로 작동하게 만드는 법을 알아봅시다. 예제 10-13에서 `NewsArticle`,
 `Tweet` 타입에 구현한 `Summary` 트레잇을 사용하여, `item` 매개변수의
 `summarize` 메서드를 호출하는 `notify` 함수를 정의하겠습니다. 이때 `item`
 매개변수의 타입은 `Summary` 트레잇을 구현하는 어떤 타입입니다. 이렇게 하기
@@ -330,7 +330,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 
 제네릭 타입 매개변수를 사용하는 `impl` 블록에 트레잇 바운드를 이용하면,
 명시된 트레잇을 구현하는 타입에만 메서드를 구현할 수도 있습니다.
-예를 들어, Listing 10-15의 `Pair<T>` 타입은 항상 새로운 `Pair<T>` 인스턴스를
+예를 들어, 예제 10-15의 `Pair<T>` 타입은 항상 새로운 `Pair<T>` 인스턴스를
 반환하는 `new` 함수를 구현합니다 (5장의 [“메서드 정의”][methods]<!-- ignore -->절에서
 다룬 것처럼 `Self`는 `impl` 블록에 대한 타입의 별명이고, 지금의 경우에는
 `Pair<T>`라는 점을 상기합시다). 하지만 그 다음의 `impl` 블록에서는,
@@ -338,13 +338,13 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 가능하게 만드는 `Display` 트레잇을 모두 구현하는 타입인 경우에 대해서만
 `cmp_display` 메서드를 구현하고 있습니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-15/src/lib.rs}}
 ```
 
-<span class="caption">Listing 10-15: 트레잇 바운드를 이용해 제네릭 타입에
+<span class="caption">예제 10-15: 트레잇 바운드를 이용해 제네릭 타입에
 조건부로 메서드 구현하기</span>
 
 타입이 특정 트레잇을 구현하는 경우에만 해당 타입에 트레잇을 구현할 수도 있습니다.

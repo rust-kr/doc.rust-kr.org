@@ -7,7 +7,7 @@
 
 러스트에서의 반복자는 *게으른데*, 이는 반복자를 사용하기 위해 이를 써버리는
 메서드를 호출하기 전까지 아무런 동작을 하지 않는다는 의미입니다. 예를 들면,
-Listing 13-10의 코드는 `Vec<T>` 에 정의된 `iter` 메서드를 호출함으로써
+예제 13-10의 코드는 `Vec<T>` 에 정의된 `iter` 메서드를 호출함으로써
 벡터 `v1`에 있는 아이템들에 대한 반복자를 생성합니다. 이 코드 자체로는 어떤
 유용한 동작도 하지 않습니다.
 
@@ -15,15 +15,15 @@ Listing 13-10의 코드는 `Vec<T>` 에 정의된 `iter` 메서드를 호출함�
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-10: 반복자 생성하기</span>
+<span class="caption">예제 13-10: 반복자 생성하기</span>
 
 반복자는 `v1_iter` 변수에 저장됩니다. 일단 반복자를 만들면, 다양한 방법으로
-사용할 수 있습니다. 3장의 Listing 3-5에서는 각 아이템에 대해 어떤 코드를
+사용할 수 있습니다. 3장의 예제 3-5에서는 각 아이템에 대해 어떤 코드를
 실행하기 위해 `for` 루프를 사용하여 어떤 배열에 대한 반복을 수행했습니다.
 내부적으로는 암묵적으로 반복자를 생성한 다음 소비하는 것이었지만, 지금까지는
 이게 정확히 어떻게 동작하는지에 대해서 대충 넘겼습니다.
 
-Listing 13-11의 예제에서는 `for` 루프에서 반복자를 사용하는 부분으로부터
+예제 13-11의 예제에서는 `for` 루프에서 반복자를 사용하는 부분으로부터
 반복자 생성을 분리했습니다. `v1_iter`에 있는 반복자를 사용하여 `for`
 루프가 호출되면, 반복자의 각 요소가 루프의 한 순번마다 사용되는데, 여기서는
 각각의 값을 출력합니다.
@@ -32,7 +32,7 @@ Listing 13-11의 예제에서는 `for` 루프에서 반복자를 사용하는 �
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-11: `for` 루프에서 반복자 사용하기</span>
+<span class="caption">예제 13-11: `for` 루프에서 반복자 사용하기</span>
 
 표준 라이브러리에서 반복자를 제공하지 않는 언어에서는, 아마도
 변수를 인덱스 0으로 시작하고, 그 변수를 인덱스로 사용하여
@@ -72,17 +72,17 @@ pub trait Iterator {
 `next` 메서드인데, 이 메서드는 `Some`으로 감싼 반복자의 한 아이템을 반환하고,
 반복자가 종료될 때는 `None`을 반환합니다.
 
-반복자의 `next` 메서드를 직접 호출할 수 있습니다; Listing 13-12는
+반복자의 `next` 메서드를 직접 호출할 수 있습니다; 예제 13-12는
 벡터로부터 생성된 반복자에 대하여 `next`를 반복적으로 호출했을 때 어떤
 값들이 반환되는지 보여줍니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-12: 반복자의 `next` 메서드
+<span class="caption">예제 13-12: 반복자의 `next` 메서드
 호출하기</span>
 
 `v1_iter`를 가변으로 만들 필요가 있음을 주의하세요: 반복자에 대한 `next`
@@ -112,16 +112,16 @@ pub trait Iterator {
 호출하면 반복자를 써버리기 때문에 그렇습니다. 한 가지 예로 `sum` 메서드가 있는데,
 이는 반복자의 소유권을 가져온 다음 반복적으로 `next`를 호출하는 방식으로
 순회하며, 따라서 반복자를 소비합니다. 전체를 순회하면서 현재의 합계값에
-각 아이템을 더하고 순회가 완료되면 합계를 반환합니다. Listing 13-13은
+각 아이템을 더하고 순회가 완료되면 합계를 반환합니다. 예제 13-13은
 `sum` 메서드 사용 방식을 보여주는 테스트입니다:
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-13/src/lib.rs:here}}
 ```
 
-<span class="caption">Listing 13-13: `sum` 메서드를 호출하여 반복자의
+<span class="caption">예제 13-13: `sum` 메서드를 호출하여 반복자의
 모든 아이템에 대한 합계 구하기</span>
 
 `sum`은 반복자를 소유하여 호출하므로, `sum`을 호출한 이후에는 `v1_iter`의
@@ -133,19 +133,19 @@ pub trait Iterator {
 반복자를 소비하지 않습니다. 대신 원본 반복자의 어떤 측면을 바꿔서 다른
 반복자로 제공합니다.
 
-Listing 13-14는 반복자 어댑터 메서드인 `map`을 호출하는 예를 보여주는데,
+예제 13-14는 반복자 어댑터 메서드인 `map`을 호출하는 예를 보여주는데,
 클로저를 인자로 받아서 각 아이템에 대해 호출하여 아이템 전체를 순회합니다.
 `map` 메서드는 수정된 아이템들을 생성하는 새로운 반복자를 반환합니다.
 여기서의 클로저는 벡터의 각 아이템에서 1이 증가된 새로운 반복자를
 만듭니다:
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,not_desired_behavior
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-14/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-14: 반복자 어댑터 `map`을 호출하여
+<span class="caption">예제 13-14: 반복자 어댑터 `map`을 호출하여
 새로운 반복자 생성하기</span>
 
 하지만 이 코드는 다음과 같은 경고를 발생시킵니다:
@@ -154,26 +154,26 @@ Listing 13-14는 반복자 어댑터 메서드인 `map`을 호출하는 예를 �
 {{#include ../listings/ch13-functional-features/listing-13-14/output.txt}}
 ```
 
-Listing 13-14의 코드는 아무것도 하지 않습니다; 넘겨진 클로저는 결코 호출되지
+예제 13-14의 코드는 아무것도 하지 않습니다; 넘겨진 클로저는 결코 호출되지
 않습니다. 위 경고는 이유가 무엇인지 상기시켜 줍니다: 반복자 어댑터는 게으르고,
 반복자를 여기서 소비할 필요가 있다는 것을요.
 
 이 경고를 수정하고 반복자를 소비하기 위해서 `collect` 메서드를 사용할
-것인데, 12장의 Listing 12-1에서 `env::args`와 함께 사용했었지요. 이
+것인데, 12장의 예제 12-1에서 `env::args`와 함께 사용했었지요. 이
 메서드는 반복자를 소비하고 결과값을 모아서 컬렉션 데이터 타입으로 만들어
 줍니다.
 
-Listing 13-15에서는 `map`을 벡터에 대해 호출하여 얻은 반복자를 순회하면서
+예제 13-15에서는 `map`을 벡터에 대해 호출하여 얻은 반복자를 순회하면서
 결과를 모읍니다. 이 벡터는 원본 벡터로부터 1씩 증가된 아이템들을 담고 있는
 상태가 될 것 입니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/main.rs:here}}
 ```
 
-<span class="caption">Listing 13-15: `map`을 호출하여 새로운 반복자를
+<span class="caption">예제 13-15: `map`을 호출하여 새로운 반복자를
 생성한 다음 `collect` 메서드를 호출하여 이 반복자를 소비하고 새로운 벡터
 생성하기</span>
 
@@ -201,13 +201,13 @@ Listing 13-15에서는 `map`을 벡터에 대해 호출하여 얻은 반복자�
 `filter`를 사용하여 `Shoe` 구조체 인스턴스들의 컬렉션을 순회합니다.
 이는 명시된 크기의 신발만 반환해줄 것입니다.
 
-<span class="filename">Filename: src/lib.rs</span>
+<span class="filename">파일명: src/lib.rs</span>
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs}}
 ```
 
-<span class="caption">Listing 13-16: `shoe_size`를 캡처하는 클로저로
+<span class="caption">예제 13-16: `shoe_size`를 캡처하는 클로저로
 `filter` 메서드 사용하기</span>
 
 `shoes_in_size` 함수는 매개변수로 신발들의 벡터에 대한 소유권과 신발

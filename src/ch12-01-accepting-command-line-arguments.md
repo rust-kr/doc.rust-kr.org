@@ -36,16 +36,16 @@ $ cargo run -- searchstring example-filename.txt
 생성하는 모든 요소들을 담고 있는 벡터 같은 컬렉션으로 바꿀 수 있다는
 것입니다.
 
-Listing 12-1의 코드는 `minigrep` 프로그램이 넘겨진 어떤 커맨드 라인 인자들을
+예제 12-1의 코드는 `minigrep` 프로그램이 넘겨진 어떤 커맨드 라인 인자들을
 읽은 후, 그 값들을 벡터로 모아주도록 해줍니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-01/src/main.rs}}
 ```
 
-<span class="caption">Listing 12-1: 커맨드 라인 인자들을 벡터로 모으고
+<span class="caption">예제 12-1: 커맨드 라인 인자들을 벡터로 모으고
 출력하기</span>
 
 먼저 `use`를 사용하여 `std::env` 모듈을 스코프로 가져와서 `args`
@@ -98,16 +98,16 @@ Listing 12-1의 코드는 `minigrep` 프로그램이 넘겨진 어떤 커맨드 
 
 이 프로그램은 현재 커맨드 라인 인자로 지정된 값들에 접근할 수 있습니다.
 이제는 두 인자의 값들을 변수에 저장할 필요가 있는데, 그렇게 하면 프로그램의
-나머지 부분을 통틀어 이 값들을 사용할 수 있겠습니다. Listing 12-2에서
+나머지 부분을 통틀어 이 값들을 사용할 수 있겠습니다. 예제 12-2에서
 이 동작을 수행합니다.
 
-<span class="filename">Filename: src/main.rs</span>
+<span class="filename">파일명: src/main.rs</span>
 
 ```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-02/src/main.rs}}
 ```
 
-<span class="caption">Listing 12-2: 질의 인자와 파일 경로 인자를 담은
+<span class="caption">예제 12-2: 질의 인자와 파일 경로 인자를 담은
 변수 생성하기</span>
 
 벡터를 출력할 때 봤듯이, 프로그램의 이름이 벡터의 첫번째 값 `args[0]`을
