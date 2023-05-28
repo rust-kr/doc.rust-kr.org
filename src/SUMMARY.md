@@ -22,8 +22,8 @@
 
 - [소유권 이해하기](ch04-00-understanding-ownership.md)
     - [소유권이 뭔가요?](ch04-01-what-is-ownership.md)
-    - [참조자와 Borrow](ch04-02-references-and-borrowing.md)
-    - [슬라이스(Slice)](ch04-03-slices.md)
+    - [참조자와 빌림](ch04-02-references-and-borrowing.md)
+    - [슬라이스](ch04-03-slices.md)
 
 - [연관된 데이터를 구조체로 구조화하기](ch05-00-structs.md)
     - [구조체 정의 및 인스턴트화](ch05-01-defining-structs.md)
@@ -37,7 +37,7 @@
 
 ## Basic Rust Literacy
 
-- [커져가는 프로젝트를 패키지, 크레이트, 모듈로 관리하기](ch07-00-managing-growing-projects-with-packages-crates-and-modules.md)
+- [커져 가는 프로젝트를 패키지, 크레이트, 모듈로 관리하기](ch07-00-managing-growing-projects-with-packages-crates-and-modules.md)
     - [패키지, 크레이트](ch07-01-packages-and-crates.md)
     - [모듈을 정의하여 스코프 및 공개 여부 제어하기](ch07-02-defining-modules-to-control-scope-and-privacy.md)
     - [경로를 사용해 모듈 트리에서 아이템 가리키기](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
@@ -47,7 +47,7 @@
 - [일반적인 컬렉션](ch08-00-common-collections.md)
     - [벡터에 여러 값을 목록으로 저장하기](ch08-01-vectors.md)
     - [문자열에 UTF-8 텍스트를 저장하기](ch08-02-strings.md)
-    - [해쉬맵(hash map)에 서로 연관된 키와 값을 저장하기](ch08-03-hash-maps.md)
+    - [해쉬맵에 서로 연관된 키와 값을 저장하기](ch08-03-hash-maps.md)
 
 - [에러 처리](ch09-00-error-handling.md)
     - [복구 불가능한 에러에는 `panic!`!](ch09-01-unrecoverable-errors-with-panic.md)
@@ -67,10 +67,10 @@
 - [I/O 프로젝트: 커맨드 라인 프로그램 만들기](ch12-00-an-io-project.md)
     - [커맨드 라인 인자 받기](ch12-01-accepting-command-line-arguments.md)
     - [파일 읽기](ch12-02-reading-a-file.md)
-    - [모듈성과 에러 처리 향상을 위한 리팩토링](ch12-03-improving-error-handling-and-modularity.md)
+    - [모듈성과 에러 처리 향상을 위한 리팩터링](ch12-03-improving-error-handling-and-modularity.md)
     - [테스트 주도 개발로 라이브러리 기능 개발하기](ch12-04-testing-the-librarys-functionality.md)
     - [환경 변수 사용하기](ch12-05-working-with-environment-variables.md)
-    - [표준 출력 대신 표준 에러로 에러 메세지 작성하기](ch12-06-writing-to-stderr-instead-of-stdout.md)
+    - [표준 출력 대신 표준 에러로 에러 메시지 작성하기](ch12-06-writing-to-stderr-instead-of-stdout.md)
 
 ## Thinking in Rust
 
@@ -93,11 +93,11 @@
     - [`Drop` 트레잇으로 메모리 정리 코드 실행하기](ch15-03-drop.md)
     - [`Rc<T>`, 참조 카운트 스마트 포인터](ch15-04-rc.md)
     - [`RefCell<T>`와 내부 가변성 패턴](ch15-05-interior-mutability.md)
-    - [순환 참조는 메모리 릭을 발생시킬 수 있습니다](ch15-06-reference-cycles.md)
+    - [순환 참조는 메모리 누수를 발생시킬 수 있습니다](ch15-06-reference-cycles.md)
 
-- [겁없는 동시성](ch16-00-concurrency.md)
+- [겁 없는 동시성](ch16-00-concurrency.md)
     - [스레드를 이용하여 코드를 동시에 실행하기](ch16-01-threads.md)
-    - [메세지 패싱을 사용하여 스레드 간 데이터 전송하기](ch16-02-message-passing.md)
+    - [메시지 패싱을 사용하여 스레드 간 데이터 전송하기](ch16-02-message-passing.md)
     - [공유 상태 동시성](ch16-03-shared-state.md)
     - [`Sync`와 `Send` 트레잇을 이용한 확장 가능한 동시성](ch16-04-extensible-concurrency-sync-and-send.md)
 

@@ -38,7 +38,7 @@
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}
 ```
 
-러스트는 문서화 주석 (documentation comment) 라고 불리우는 또다른 주석 형태를
+러스트는 문서화 주석 (documentation comment) 라고 불리는 또다른 주석 형태를
 가지고 있는데, 14장의 [“Crates.io에 크레이트 배포하기”][publishing]<!-- ignore -->에서
 다루도록 하겠습니다.
 
