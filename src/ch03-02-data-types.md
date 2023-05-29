@@ -157,7 +157,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-07-numeric-operations/src/main.rs}}
 ```
 
-위의 구문에서 각 표현식은 수학 연산자를 사용하여 값을 산출한
+위의 구문에서 각 표현식은 수학 연산자를 사용하여 값을 평가한
 뒤, 그 값을 변수에 묶어 넣습니다. [부록 B][appendix_b]<!-- ignore -->에
 러스트가 제공하는 모든 연산자 목록이
 있습니다.

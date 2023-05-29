@@ -148,9 +148,9 @@ adder
 파일을 추가하면 통합 테스트 절이 더 만들어질 것입니다.
 
 통합 테스트도 마찬가지로 `cargo test` 명령어에 테스트 함수명을
-인자로 전달해 특정 통합 테스트 함수를 실행할 수 있습니다.
+인수로 전달해 특정 통합 테스트 함수를 실행할 수 있습니다.
 특정 통합 테스트 파일의 모든 테스트를 실행하려면,
-`cargo test` 명령어에 `--test` 인자로 파일명을 전달하면 됩니다.
+`cargo test` 명령어에 `--test` 인수로 파일명을 전달하면 됩니다.
 
 ```console
 {{#include ../listings/ch11-writing-automated-tests/output-only-05-single-integration/output.txt}}

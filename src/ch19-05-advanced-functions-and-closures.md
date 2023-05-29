@@ -29,7 +29,7 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 ```
 
 <span class="caption">예제 19-27: `fn` 타입을 사용하여 함수 포인터를
-인자로 허용하기</span>
+인수로 허용하기</span>
 
 이 코드는 `The answer is: 12`를 출력합니다. 여기서는 `do_twice`의 매개변수
 `f`가 `i32` 타입의 매개변수 하나를 받아 `i32`를 반환하는 `fn`임을 지정합니다.
@@ -59,7 +59,7 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-15-map-closure/src/main.rs:here}}
 ```
 
-혹은 아래와 같이 클로저 대신 `map`의 인자로 함수 이름을 지정할
+혹은 아래와 같이 클로저 대신 `map`의 인수로 함수 이름을 지정할
 수도 있습니다:
 
 ```rust
@@ -76,7 +76,7 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 각 열거형 배리언트의 이름도 이니셜라이저 함수가 된다는 것을 기억해
 두세요. 이러한 이니셜라이저 함수는 클로저 트레잇을 구현하는 함수
 포인터로써 사용될 수 있는데, 이는 다음과 같이 클로저를 취하는 메서드의
-인자로 이니셜라이저 함수를 지정할 수 있음을 뜻합니다:
+인수로 이니셜라이저 함수를 지정할 수 있음을 뜻합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-17-map-initializer/src/main.rs:here}}
