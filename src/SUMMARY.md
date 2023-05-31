@@ -18,7 +18,7 @@
     - [데이터 타입](ch03-02-data-types.md)
     - [함수](ch03-03-how-functions-work.md)
     - [주석](ch03-04-comments.md)
-    - [흐름 제어문](ch03-05-control-flow.md)
+    - [제어 흐름문](ch03-05-control-flow.md)
 
 - [소유권 이해하기](ch04-00-understanding-ownership.md)
     - [소유권이 뭔가요?](ch04-01-what-is-ownership.md)
@@ -32,8 +32,8 @@
 
 - [열거형과 패턴 매칭](ch06-00-enums.md)
     - [열거형 정의하기](ch06-01-defining-an-enum.md)
-    - [`match` 흐름 제어 구성](ch06-02-match.md)
-    - [`if let`을 사용한 간결한 흐름 제어](ch06-03-if-let.md)
+    - [`match` 제어 흐름 구조](ch06-02-match.md)
+    - [`if let`을 사용한 간결한 제어 흐름](ch06-03-if-let.md)
 
 ## Basic Rust Literacy
 
