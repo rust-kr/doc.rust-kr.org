@@ -25,7 +25,7 @@
     - [참조자와 빌림](ch04-02-references-and-borrowing.md)
     - [슬라이스](ch04-03-slices.md)
 
-- [연관된 데이터를 구조체로 구조화하기](ch05-00-structs.md)
+- [구조체로 연관된 데이터를 구조화하기](ch05-00-structs.md)
     - [구조체 정의 및 인스턴트화](ch05-01-defining-structs.md)
     - [구조체를 사용한 예제 프로그램](ch05-02-example-structs.md)
     - [메서드 문법](ch05-03-method-syntax.md)

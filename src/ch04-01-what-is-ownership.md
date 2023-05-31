@@ -166,7 +166,7 @@ let s = String::from("hello");
 네임스페이스는 7장 [“경로를 사용해 모듈 트리에서 아이템 가리키기”][paths-module-tree]<!-- ignore -->
 에서 다루고 있습니다.
 
-이 `String` 문자열은 변경 가능합니다:
+이 `String` 문자열은 변경이 가능합니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}

@@ -191,7 +191,7 @@ cd ../../..
 <span class="caption">예제 11-5: 5장 `Rectangle` 구조체와
 `can_hold` 메서드</span>
 
-`can_hold` 메서드는 Boolean 값을 반환하니
+`can_hold` 메서드는 부울린 값을 반환하니
 `assert` 매크로 사용 예시로 쓰기에 딱 알맞습니다.
 예제 11-6은 `can_hold` 메서드를 시험하는 테스트를 작성한 모습입니다.
 너비 8, 높이 7 `Rectangle` 인스턴스를 생성하고,

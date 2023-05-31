@@ -264,7 +264,7 @@ fn first_word(s: &String) -> &str {
 <span class="caption">예제 4-9: 매개변수 `s`를 문자열 슬라이스 타입으로 변경하겨
 `first_word` 함수 개선하기</span>
 
-문자열 슬라이스라면 이를 바로 인자로써 전달할 수 있습니다. `String`이라면
+문자열 슬라이스라면 이를 바로 인수로써 전달할 수 있습니다. `String`이라면
 `String`의 슬라이스 혹은 `String`에 대한 참조자를 전달할 수 있습니다.
 이러한 유연성은 *역참조 강제 (deref coercions)* 기능을 이용하는데, 15장의
 [“함수와 메서드를 이용한 암묵적 역참조 강제”][deref-coercions]<!--ignore-->절에서
