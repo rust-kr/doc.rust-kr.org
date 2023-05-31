@@ -7,7 +7,7 @@ fn main() {
 }
 
 fn calculate_length(s: String) -> (String, usize) {
-    let length = s.len(); // len() returns the length of a String
+    let length = s.len(); // len()은 String의 길이를 반환합니다
 
     (s, length)
 }

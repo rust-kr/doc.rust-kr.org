@@ -1,17 +1,17 @@
 fn main() {
-    // addition
+    // 덧셈
     let sum = 5 + 10;
 
-    // subtraction
+    // 뺄셈
     let difference = 95.5 - 4.3;
 
-    // multiplication
+    // 곱셈
     let product = 4 * 30;
 
-    // division
+    // 나눗셈
     let quotient = 56.7 / 32.2;
-    let truncated = -5 / 3; // Results in -1
+    let truncated = -5 / 3; // 결괏값은 -1입니다
 
-    // remainder
+    // 나머지 연산
     let remainder = 43 % 5;
 }

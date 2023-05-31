@@ -3,11 +3,11 @@ fn main() {
 }
 
 // ANCHOR: here
-fn dangle() -> &String { // dangle returns a reference to a String
+fn dangle() -> &String { // dangle은 String의 참조자를 반환합니다
 
-    let s = String::from("hello"); // s is a new String
+    let s = String::from("hello"); // s는 새로운 String입니다
 
-    &s // we return a reference to the String, s
-} // Here, s goes out of scope, and is dropped. Its memory goes away.
-  // Danger!
+    &s // String s의 참조자를 반환합니다
+} // 여기서 s는 스코프 밖으로 벗어나고 버려집니다. 해당 메모리는 해제됩니다.
+  // 위험합니다!
 // ANCHOR_END: here
