@@ -11,7 +11,7 @@
 조건을 제공한 뒤 다음과 같이 기술하는 식이죠. “만약 조건을 만족하면,
 이 코드 블록을 실행하세요. 그렇지 않다면 코드 블록을 실행하지 마세요.”
 
-`if` 표현식을 알아보기 위해서 여러분의 *projects* 디렉토리에 *branches*라는
+`if` 표현식을 알아보기 위해서 여러분의 *projects* 디렉터리에 *branches*라는
 새 프로젝트를 생성합시다. *src/main.rs* 파일에 다음을 입력하세요:
 
 <span class="filename">파일명: src/main.rs</span>
@@ -181,7 +181,7 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 `loop` 키워드는 여러분이 그만두라고 명시적으로 알려주기 전까지, 혹은 영원히
 코드 블록을 반복 수행하도록 해줍니다.
 
-일례로 *loops* 디렉토리의 *src/main.rs* 코드를 다음과 같이
+일례로 *loops* 디렉터리의 *src/main.rs* 코드를 다음과 같이
 바꿔보세요:
 
 <span class="filename">파일명: src/main.rs</span>

@@ -8,7 +8,7 @@
 
 ### 작업공간 생성하기
 
-*작업공간 (workspace)*은 동일한 *Cargo.lock*과 출력 디렉토리를 공유하는
+*작업공간 (workspace)*은 동일한 *Cargo.lock*과 출력 디렉터리를 공유하는
 패키지들의 집합입니다. 작업공간을 이용하여 프로젝트를 만들어 봅시다-
 여기서는 간단한 코드만 사용하여 작업공간의 구조에 집중하겠습니다.
 작업공간을 구성하는 방법은 여러 가지가 있으므로, 그중 일반적인 방법 하나를
@@ -16,14 +16,14 @@
 것입니다. 주요 기능을 제공할 바이너리는 두 라이브러리를 의존성으로 가지게
 될 것입니다. 첫 번째 라이브러리는 `add_one` 함수를 제공하고, 두 번째 라이브러리는
 `add_two` 함수를 제공할 것입니다. 이 세 크레이트는 같은 작업공간의 일부가 될
-겁니다. 작업공간을 위한 새 디렉토리를 만드는 것부터 시작하겠습니다:
+겁니다. 작업공간을 위한 새 디렉터리를 만드는 것부터 시작하겠습니다:
 
 ```console
 $ mkdir add
 $ cd add
 ```
 
-다음으로 *add* 디렉토리 내에 *Cargo.toml*을 생성하여 전체 작업공간에
+다음으로 *add* 디렉터리 내에 *Cargo.toml*을 생성하여 전체 작업공간에
 대한 설정을 합니다. 이 파일은 `[package]` 절이 없습니다. 대신
 `[workspace]` 절로 시작하여 바이너리 크레이트 패키지에 대한 경로를
 명시하는 방식으로 이 작업공간에 멤버를 추가할 것입니다; 지금의 경우
@@ -35,7 +35,7 @@ $ cd add
 {{#include ../listings/ch14-more-about-cargo/no-listing-01-workspace-with-adder-crate/add/Cargo.toml}}
 ```
 
-다음엔 *add* 디렉토리 내에서 `cargo new`를 실행하여 `adder` 바이너리
+다음엔 *add* 디렉터리 내에서 `cargo new`를 실행하여 `adder` 바이너리
 크레이트를 생성하겠습니다:
 
 <!-- manual-regeneration
@@ -50,7 +50,7 @@ $ cargo new adder
      Created binary (application) `adder` package
 ```
 
-이 시점에서 작업 공간을 `cargo build`로 빌드할 수 있습니다. *add* 디렉토리
+이 시점에서 작업 공간을 `cargo build`로 빌드할 수 있습니다. *add* 디렉터리
 내의 파일들은 아래와 같은 형태여야 합니다:
 
 ```text
@@ -63,15 +63,15 @@ $ cargo new adder
 └── target
 ```
 
-작업공간은 컴파일된 결과가 위치할 하나의 *target* 디렉토리를 최상위
-디렉토리에 가집니다; `adder` 크레이트는 자신의 *target* 디렉토리를
-갖지 않습니다. *adder* 디렉토리 내에서 `cargo build` 명령어를
+작업공간은 컴파일된 결과가 위치할 하나의 *target* 디렉터리를 최상위
+디렉터리에 가집니다; `adder` 크레이트는 자신의 *target* 디렉터리를
+갖지 않습니다. *adder* 디렉터리 내에서 `cargo build` 명령어를
 실행하더라도 컴파일 결과는 *add/adder/target*이 아닌 *add/target*에
-위치하게 될 겁니다. 카고가 이처럼 *target* 디렉토리를 작업공간 내에 구성하는
+위치하게 될 겁니다. 카고가 이처럼 *target* 디렉터리를 작업공간 내에 구성하는
 이유는, 작업공간 내의 크레이트들이 서로 의존하기로 되어있기 때문입니다.
-만약 각 크레이트가 각자의 *target* 디렉토리를 갖는다면, 각 크레이트는
+만약 각 크레이트가 각자의 *target* 디렉터리를 갖는다면, 각 크레이트는
 작업공간 내의 다른 크레이트들을 다시 컴파일하여 그 결과물을 자신의 *target*
-디렉토리에 넣어야 합니다. 하나의 *target* 디렉토리를 공유하면 크레이트들의
+디렉터리에 넣어야 합니다. 하나의 *target* 디렉터리를 공유하면 크레이트들의
 불필요한 재빌드를 피할 수 있습니다.
 
 ### 작업공간에 두 번째 패키지 생성하기
@@ -100,7 +100,7 @@ $ cargo new add_one --lib
      Created library `add_one` package
 ```
 
-*add* 디렉토리는 이제 다음과 같은 디렉토리와 파일을 갖추어야 합니다:
+*add* 디렉터리는 이제 다음과 같은 디렉터리와 파일을 갖추어야 합니다:
 
 ```text
 ├── Cargo.lock
@@ -151,7 +151,7 @@ $ cargo new add_one --lib
 <span class="caption">예제 14-7: `adder` 크레이트에서 `add_one` 라이브러리
 크레이트 사용하기</span>
 
-최상위 *add* 디렉토리에서 `cargo build`를 실행하여 작업공간을
+최상위 *add* 디렉터리에서 `cargo build`를 실행하여 작업공간을
 빌드해 봅시다!
 
 <!-- manual-regeneration
@@ -167,7 +167,7 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 0.68s
 ```
 
-*add* 디렉토리에서 바이너리 크레이트를 실행하기 위해서는 `cargo run`에
+*add* 디렉터리에서 바이너리 크레이트를 실행하기 위해서는 `cargo run`에
 `-p` 인수와 패키지명을 써서 작업공간 내의 어떤 패키지를 실행하고 싶은지
 지정해야 합니다:
 
@@ -188,7 +188,7 @@ Hello, world! 10 plus one is 11!
 
 #### 작업공간에서 외부 패키지 의존하기
 
-작업공간에는 각 크레이트 디렉토리마다 *Cargo.lock*이 생기지 않고, 최상위에
+작업공간에는 각 크레이트 디렉터리마다 *Cargo.lock*이 생기지 않고, 최상위에
 하나의 *Cargo.lock*이 생긴다는 점을 주목하세요. 이는 모든 크레이트가 모든
 의존성에 대해 같은 버전을 사용함을 보증합니다. *adder/Cargo.toml*과
 *add_one/Cargo.toml*에 `rand` 패키지를 추가하면, 카고는 이 둘을
@@ -211,7 +211,7 @@ Hello, world! 10 plus one is 11!
 ```
 
 이제 *add_one/src/lib.rs* 파일에 `use rand;`를 추가할 수 있으며,
-*add* 디렉토리에서 `cargo build`를 실행하여 전체 작업공간을 빌드하면
+*add* 디렉터리에서 `cargo build`를 실행하여 전체 작업공간을 빌드하면
 `rand` 크레이트를 가져와 컴파일할 것입니다. 아직 스코프로 가져온
 `rand`를 참조하지 않았으므로 경고 하나를 받을 겁니다:
 
@@ -283,7 +283,7 @@ error[E0432]: unresolved import `rand`
 {{#rustdoc_include ../listings/ch14-more-about-cargo/no-listing-04-workspace-with-tests/add/add_one/src/lib.rs}}
 ```
 
-이제 최상위 *add* 디렉토리에서 `cargo test`를 실행해 보세요. 이런 구조의
+이제 최상위 *add* 디렉터리에서 `cargo test`를 실행해 보세요. 이런 구조의
 작업공간에서 `cargo test`를 실행하면 작업공간의 모든 크레이트에 대한
 테스트를 실행할 것입니다:
 
@@ -325,7 +325,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 발견하지 못했음을 보여줍니다.
 
 `-p` 플래그와 테스트하고자 하는 크레이트의 이름을 명시하면 최상위
-디렉토리에서 어떤 작업공간 내 특정한 크레이트에 대한 테스트를 실행할
+디렉터리에서 어떤 작업공간 내 특정한 크레이트에 대한 테스트를 실행할
 수도 있습니다:
 
 <!-- manual-regeneration

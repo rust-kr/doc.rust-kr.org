@@ -10,9 +10,9 @@
 
 변수가 불변일 때, 어떤 이름에 한번 값이 묶이면 그 값은 바꿀 수
 없습니다. 이를 표현하기 위해, `cargo new variables`로
-*projects* 디렉토리 안에 *variables*라는 프로젝트를 만들어 봅시다.
+*projects* 디렉터리 안에 *variables*라는 프로젝트를 만들어 봅시다.
 
-그리고, 새 *variables* 디렉토리의 *src/main.rc* 파일을 열어서
+그리고, 새 *variables* 디렉터리의 *src/main.rc* 파일을 열어서
 다음의 코드로 교체하세요 (아직은 컴파일되지 않습니다):
 
 <span class="filename">파일명: src/main.rs</span>

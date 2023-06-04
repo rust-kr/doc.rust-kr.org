@@ -15,13 +15,13 @@ mod back_of_house {
 }
 
 pub fn eat_at_restaurant() {
-    // Order a breakfast in the summer with Rye toast
+    // 호밀 (Rye) 토스트를 곁들인 여름철 조식 주문하기
     let mut meal = back_of_house::Breakfast::summer("Rye");
-    // Change our mind about what bread we'd like
+    // 먹고 싶은 빵 바꾸기
     meal.toast = String::from("Wheat");
     println!("I'd like {} toast please", meal.toast);
 
-    // The next line won't compile if we uncomment it; we're not allowed
-    // to see or modify the seasonal fruit that comes with the meal
+    // 다음 라인의 주석을 해제하면 컴파일되지 않습니다; 식사와 함께
+    // 제공되는 계절 과일은 조회나 수정이 허용되지 않습니다
     // meal.seasonal_fruit = String::from("blueberries");
 }

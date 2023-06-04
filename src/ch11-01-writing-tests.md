@@ -208,7 +208,7 @@ cd ../../..
 
 `tests` 모듈에 `use super::*;` 줄이 추가되었습니다.
 `tests` 모듈 또한 7장
-[“경로를 사용해 모듈 트리에서 아이템 가리키기”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->에서 다룬
+[“경로를 사용하여 모듈 트리의 아이템 참조하기”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->에서 다룬
 가시성 규칙을 따르는 평범한 모듈입니다.
 따라서, 내부 모듈인 `tests` 모듈에서 외부 모듈의 코드를
 테스트하려면 먼저 내부 스코프로 가져와야 합니다.

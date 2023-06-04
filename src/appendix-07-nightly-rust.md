@@ -159,7 +159,7 @@ nightly-x86_64-pc-windows-msvc
 보시다시피 stable 툴체인이 기본값입니다. 대부분의 러스트 사용자는 대부분의 경우
 stable 버전을 사용합니다. 대부분의 경우 stable 버전을 사용하고 싶지만, 최신 기능을
 고려하고 있어서 특정 프로젝트에서는 nightly 버전을 사용할 수도 있습니다. 그렇게
-하려면 해당 프로젝트의 디렉토리에서 `rustup override`를 사용하여 해당 디렉토리에
+하려면 해당 프로젝트의 디렉터리에서 `rustup override`를 사용하여 해당 디렉터리에
 있을 때는 `rustup`이 사용해야 하는 것이 nightly 툴체인임을 설정하면 됩니다:
 
 ```console

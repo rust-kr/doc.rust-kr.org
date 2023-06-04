@@ -254,7 +254,7 @@ $ cargo new hello_macro_derive --lib
 ```
 
 두 크레이트는 서로 밀접하게 연관되어 있으므로, `hello_macro`
-크레이트의 디렉토리 내에 절차적 매크로 크레이트를 생성합니다.
+크레이트의 디렉터리 내에 절차적 매크로 크레이트를 생성합니다.
 `hello_macro`에서 트레잇 정의를 변경하면, `hello_macro_derive`의
 절차적 매크로 구현도 변경해야 합니다. 두 크레이트는 별도로 배포되어야
 하며, 이 크레이트를 사용하는 프로그래머는 두 크레이트를 종속성으로
@@ -413,7 +413,7 @@ DeriveInput {
 이 시점에서는 `cargo build`가 `hello_macro`와 `hello_macro_derive` 둘
 모두에서 성공적으로 완료되어야 합니다. 이 크레이트를 예제 19-30의 코드에
 연결하여 절차적 매크로가 작동하는 것을 확인해 봅시다! `cargo new pancakes`를
-사용하여 *projects* 디렉토리에 새 바이너리 프로젝트를 생성하세요. `pancake`
+사용하여 *projects* 디렉터리에 새 바이너리 프로젝트를 생성하세요. `pancake`
 크레이트의 *Cargo.toml*에 종속성으로 `hello_macro`와 `hello_macro_derive`를
 추가해야 합니다. [crates.io](https://crates.io/)에 `hello_macro`와
 `hello_macro_derive` 버전을 배포하는 중이라면, 일반적인 종속성이 됩니다;
