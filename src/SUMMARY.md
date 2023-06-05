@@ -45,12 +45,12 @@
     - [별개의 파일로 모듈 분리하기](ch07-05-separating-modules-into-different-files.md)
 
 - [일반적인 컬렉션](ch08-00-common-collections.md)
-    - [벡터에 여러 값을 목록으로 저장하기](ch08-01-vectors.md)
-    - [문자열에 UTF-8 텍스트를 저장하기](ch08-02-strings.md)
-    - [해쉬맵에 서로 연관된 키와 값을 저장하기](ch08-03-hash-maps.md)
+    - [벡터에 여러 값의 목록 저장하기](ch08-01-vectors.md)
+    - [문자열에 UTF-8 텍스트 저장하기](ch08-02-strings.md)
+    - [해쉬맵에 서로 연관된 키와 값 저장하기](ch08-03-hash-maps.md)
 
 - [에러 처리](ch09-00-error-handling.md)
-    - [복구 불가능한 에러에는 `panic!`!](ch09-01-unrecoverable-errors-with-panic.md)
+    - [복구 불가능한 에러에는 `panic!`](ch09-01-unrecoverable-errors-with-panic.md)
     - [`Result`와 함께하는 복구 가능한 에러](ch09-02-recoverable-errors-with-result.md)
     - [`panic!`이냐, `panic!`이 아니냐, 그것이 문제로다](ch09-03-to-panic-or-not-to-panic.md)
 

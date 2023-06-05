@@ -56,7 +56,7 @@ Elements of Reusable Object-Oriented Software, Addison-Wesley Professional, 1994
 
 구조체는 `pub`으로 표시되어 다른 코드가 이를 사용할 수 있지만, 구조체 안에 존재하는
 필드들은 여전히 비공개입니다. 이는 이번 사례에 매우 중요한데, 그 이유는 하나의 값이
-리스트에 추가되거나 제거될 때마다 평균 또한 확실히 갱신되도록 하고 싶기 때문입니다.
+리스트에 추가되거나 제거될 때마다 평균 또한 확실히 업데이트되도록 하고 싶기 때문입니다.
 예제 17-2와 같이 구조체에 `add`, `remove`, 그리고 `average` 메서드를 구현하여
 이를 수행합니다:
 
@@ -72,7 +72,7 @@ Elements of Reusable Object-Oriented Software, Addison-Wesley Professional, 1994
 공개 메서드들 `add`, `remove`, 그리고 `average`는 `AveragedCollection`
 인스턴스의 데이터에 접근하거나 수정할 수 있는 유일한 방법입니다. `add` 메서드를
 사용하여 `list`에 아이템을 추가하거나 `remove` 메서드를 사용하여 제거하면,
-각 구현에서는 `average` 필드의 갱신을 처리하는 비공개 메서드
+각 구현에서는 `average` 필드의 업데이트을 처리하는 비공개 메서드
 `update_average`도 호출합니다.
 
 `list`와 `average` 필드는 비공개로 해두었으므로 외부 코드가

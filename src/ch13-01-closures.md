@@ -327,7 +327,7 @@ impl<T> Option<T> {
 이는 `F`가 한 번만 호출될 수 있어야 하고, 인수가 없고, `T`를 반환함을
 의미합니다. 트레잇 바운드에 `FnOnce`를 사용하는 것은 `unwrap_or_else`가
 `f`를 아무리 많아야 한 번만 호출할 것이라는 제약 사항을 표현해 줍니다.
-`unwrap_or_else`의 본문을 보면 `Option`이 `Some`일때 `f`가 호출되지 않을
+`unwrap_or_else`의 본문을 보면 `Option`이 `Some`일 때 `f`가 호출되지 않을
 것임을 알 수 있습니다. 만일 `Option`이 `None`라면 `f`가 한 번만 호출될
 것입니다. 모든 클로저가 `FnOnce`를 구현하므로 `unwrap_or_else`는 가장
 다양한 종류의 클로저를 허용하며 될 수 있는 한 유연하게 동작합니다.

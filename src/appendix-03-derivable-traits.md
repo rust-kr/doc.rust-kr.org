@@ -166,7 +166,7 @@
 의미합니다.
 
 `Default::default` 함수는 일반적으로 5장의 [“기존
-인스턴스를 이용해 새 인스턴스를 만들 때 구조체 갱신 문법
+인스턴스를 이용해 새 인스턴스를 만들 때 구조체 업데이트 문법
 사용하기”][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -->절에서
 다룬 구조체 업데이트 구문과 함께 사용됩니다. 구조체의 몇
 개의 필드만 커스터마이징한 다음 나머지 필드에 대해 기본값을

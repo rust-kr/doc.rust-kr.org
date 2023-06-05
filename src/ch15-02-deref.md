@@ -274,9 +274,9 @@
 러스트는 다음의 세 가지 경우에 해당하는 타입과 트레잇 구현을 찾았을 때
 역참조 강제를 수행합니다: 
 
-* `T: Deref<Target=U>`일때 `&T`에서 `&U`로
-* `T: DerefMut<Target=U>`일때 `&mut T`에서 `&mut U`로
-* `T: Deref<Target=U>`일때 `&mut T`에서 `&U`로
+* `T: Deref<Target=U>`일 때 `&T`에서 `&U`로
+* `T: DerefMut<Target=U>`일 때 `&mut T`에서 `&mut U`로
+* `T: Deref<Target=U>`일 때 `&mut T`에서 `&U`로
 
 처음 두 가지 경우는 두 번째가 가변성을 구현했다는 점을 제외하면 동일합니다.
 첫 번째 경우는 어떤 `&T`가 있는데, `T`가 어떤 타입 `U`에 대한 `Deref`를
