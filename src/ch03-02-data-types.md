@@ -103,7 +103,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 > 러스트는 런타임에 정수 오버플로우가 발생했을 때 *패닉 (panic)* 을 발생시키는
 > 검사를 포함시킵니다. 러스트에서는 에러가 발생하면서 프로그램이 종료되는 경우
 > 패닉이라는 용어를 사용합니다; 9장의
-> [“복구 불가능한 에러에는 `panic!`”][unrecoverable-errors-with-panic]<!-- ignore -->절에서
+> [“`panic!`으로 복구 불가능한 에러 처리하기”][unrecoverable-errors-with-panic]<!-- ignore -->절에서
 > 패닉에 대해 좀 더 자세히 다루겠습니다.
 >
 > `--release` 플래그를 사용하여 코드를 릴리즈 모드로 컴파일하는 경우에는

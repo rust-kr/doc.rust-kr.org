@@ -50,8 +50,8 @@
     - [해쉬맵에 서로 연관된 키와 값 저장하기](ch08-03-hash-maps.md)
 
 - [에러 처리](ch09-00-error-handling.md)
-    - [복구 불가능한 에러에는 `panic!`](ch09-01-unrecoverable-errors-with-panic.md)
-    - [`Result`와 함께하는 복구 가능한 에러](ch09-02-recoverable-errors-with-result.md)
+    - [`panic!`으로 복구 불가능한 에러 처리하기](ch09-01-unrecoverable-errors-with-panic.md)
+    - [`Result`로 복구 가능한 에러 처리하기](ch09-02-recoverable-errors-with-result.md)
     - [`panic!`이냐, `panic!`이 아니냐, 그것이 문제로다](ch09-03-to-panic-or-not-to-panic.md)
 
 - [제네릭 타입, 트레잇, 라이프타임](ch10-00-generics.md)
