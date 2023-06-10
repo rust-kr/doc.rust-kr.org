@@ -61,7 +61,7 @@
 
 - [자동화 테스트 작성하기](ch11-00-testing.md)
     - [테스트 작성 방법](ch11-01-writing-tests.md)
-    - [테스트 실행 제어하기](ch11-02-running-tests.md)
+    - [테스트 실행 방법 제어하기](ch11-02-running-tests.md)
     - [테스트 조직화](ch11-03-test-organization.md)
 
 - [I/O 프로젝트: 커맨드 라인 프로그램 만들기](ch12-00-an-io-project.md)
