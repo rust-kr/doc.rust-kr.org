@@ -44,7 +44,7 @@ cd ../../..
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
 ```
 
-1장에서 보았듯이 `cargo new`는 여러분을 위해 “Hello, world!” 프로그램을 생성합니다.
+1장에서 보았듯이 `cargo new`는 여러분을 위해 ‘Hello, world!’ 프로그램을 생성합니다.
 *src/main.rs* 파일을 살펴보면 다음과 같습니다:
 
 <span class="filename">파일명: src/main.rs</span>
@@ -53,7 +53,7 @@ cd ../../..
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
 ```
 
-이제 `cargo run` 명령문을 이용하여 이 “Hello, world!” 프로그램을
+이제 `cargo run` 명령문을 이용하여 이 ‘Hello, world!’ 프로그램을
 컴파일하고 실행해 봅시다:
 
 ```console
@@ -138,7 +138,7 @@ let apples = 5;
 이 라인은 `apples`라는 변수를 만들고 5라는 값을 묶어 넣습니다.
 러스트에서 변수는 기본적으로 불변 (immutable) 인데, 이는 변수에
 어떤 값을 집어넣으면 그 값이 안 바뀔 것이란 뜻입니다. 이 개념에 대한
-자세한 내용은 3장의 [“변수와 가변성”][variables-and-mutability]<!-- ignore -->
+자세한 내용은 3장의 [‘변수와 가변성’][variables-and-mutability]<!-- ignore -->
 절에서 논의할 예정입니다. 변수의 값을 가변 (mutable), 즉 변경 가능하도록
 하려면 변수명 앞에 `mut`를 추가합니다:
 
@@ -685,7 +685,7 @@ let guess: u32 = guess.trim().parse().expect("Please type a number!");
 <span class="keystroke">enter</span>키를 반드시 눌러야 하고, 이것이
 개행문자를 문자열에 추가시킵니다. 예를 들어 사용자가 <span class="keystroke">5</span>를
 누르고 <span class="keystroke">enter</span>키를 누르면 `guess`는
-`5\n`처럼 됩니다. `\n`은 “새로운 라인”을 나타냅니다.
+`5\n`처럼 됩니다. `\n`은 ‘새로운 라인’을 나타냅니다.
 (Windows에서 <span class="keystroke">enter</span>는 캐리지 리턴과
 개행문자, 즉 `\r\n`을 발생시킵니다.) `trim` 메서드는 `\n` 혹은 `\r\n`을
 제거하고 `5`만 남도록 처리합니다.
@@ -706,7 +706,7 @@ let guess: u32 = guess.trim().parse().expect("Please type a number!");
 `parse` 메서드의 호출은 에러가 발생하기 쉽습니다. 예를 들어
 `A👍%`과 같은 문자열이 포함되어 있다면 정수로 바꿀 방법이 없습니다.
 `parse` 메서드는 실패할 수도 있으므로,
-[“`Result` 타입으로 잠재적 실패 다루기”](#handling-potential-failure-with-the-result-type)<!-- ignore-->에서
+[‘`Result` 타입으로 잠재적 실패 다루기’](#handling-potential-failure-with-the-result-type)<!-- ignore-->에서
 다루었던 `read_line`와 마찬가지로 `Result` 타입을 반환합니다.
 이 `Result`는 `expect` 메서드를 사용하여 같은 방식으로 처리하겠습니다.
 만약 `parse` 메서드가 문자열로부터 정수를 만들어 낼 수 없어
@@ -762,7 +762,7 @@ Too big!
 사용자가 이 프로그램을 종료할 수 없는 것 같습니다!
 
 사용자는 <span class="keystroke">ctrl-c</span> 단축키를 이용하여 프로그램을
-멈출 수 있습니다. 하지만 [“비밀번호와 추릿값을 비교하기”](#comparing-the-guess-to-the-secret-number)<!--
+멈출 수 있습니다. 하지만 [‘비밀번호와 추릿값을 비교하기’](#comparing-the-guess-to-the-secret-number)<!--
 ignore -->에서 `parse` 메서드에 대해 언급했던 것처럼
 이 만족할 줄 모르는 괴물에게서 빠져나올 다른 방법이 있습니다:
 만약 사용자가 숫자가 아닌 답을 적는다면 프로그램이 멈춥니다.

@@ -34,7 +34,7 @@
 라이브러리는 자신의 트레잇에 대해 대한 `derive`를 구현할 수 있으므로,
 `derive`를 사용할 수 있는 트레잇 목록은 정말 개방적입니다. `derive`를
 구현하려면 절차적 매크로를 사용해야 하며, 이는 19장의
-[“매크로”][macros]<!-- ignore -->절에서 다룹니다.
+[‘매크로’][macros]<!-- ignore -->절에서 다룹니다.
 
 ### 프로그래머 출력을 위한 `Debug`
 
@@ -111,8 +111,8 @@
 
 `Clone` 트레잇은 명시적으로 값의 깊은 복사(deep copy)를 생성할 수 있게
 해주며, 복제 과정은 임의의 코드를 실행하고 힙 데이터를 복사할 수도 있습니다.
-`Clone`에 대한 더 자세한 내용은 4장의 [“변수와 데이터 간 상호작용 방식:
-클론 (clone)”][ways-variables-and-data-interact-clone]<!-- ignore -->
+`Clone`에 대한 더 자세한 내용은 4장의 [‘변수와 데이터 간 상호작용 방식:
+클론 (clone)’][ways-variables-and-data-interact-clone]<!-- ignore -->
 절을 참고하세요.
 
 `Clone`을 파생하면 `clone` 메서드가 구현되는데, 이는 타입 전체에 대해 구현될
@@ -126,7 +126,7 @@
 
 `Copy` 트레잇은 임의의 코드 없이 스택에 저장된 비트만 복사하여 값을
 복제할 수 있게 해 줍니다. `Copy`에 대한 더 자세한 내용은 4장의
-[“스택에만 저장되는 데이터: 복사 (copy)”][stack-only-data-copy]<!-- ignore -->절을
+[‘스택에만 저장되는 데이터: 복사 (copy)’][stack-only-data-copy]<!-- ignore -->절을
 참고하세요.
 
 `Copy` 트레잇에는 아무 메서드도 정의되어 있지 않은데, 이는 프로그래머가
@@ -165,9 +165,9 @@
 위해서는 타입의 모든 필드 혹은 값 또한 `Default`를 구현해야 한다는 것을
 의미합니다.
 
-`Default::default` 함수는 일반적으로 5장의 [“기존
+`Default::default` 함수는 일반적으로 5장의 [‘기존
 인스턴스를 이용해 새 인스턴스를 만들 때 구조체 업데이트 문법
-사용하기”][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -->절에서
+사용하기’][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -->절에서
 다룬 구조체 업데이트 구문과 함께 사용됩니다. 구조체의 몇
 개의 필드만 커스터마이징한 다음 나머지 필드에 대해 기본값을
 설정하고 사용하려면 `..Default::default()`를 사용할 수

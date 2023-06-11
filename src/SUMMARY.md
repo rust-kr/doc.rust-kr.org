@@ -132,4 +132,4 @@
     - [D - 유용한 개발 도구](appendix-04-useful-development-tools.md)
     - [E - 에디션](appendix-05-editions.md)
     - [F - 번역본](appendix-06-translation.md)
-    - [G - 러스트가 만들어지는 과정과 “Nightly 러스트”](appendix-07-nightly-rust.md)
+    - [G - 러스트가 만들어지는 과정과 ‘Nightly 러스트’](appendix-07-nightly-rust.md)

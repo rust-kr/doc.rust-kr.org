@@ -41,7 +41,7 @@
 | `..` | `..`, `expr..`, `..expr`, `expr..expr` | 상한 배제 범위 리터럴 | `PartialOrd` |
 | `..=` | `..=expr`, `expr..=expr` | 상한 포함 범위 리터럴 | `PartialOrd` |
 | `..` | `..expr` | 구조체 리터럴 업데이트 문법 | |
-| `..` | `variant(x, ..)`, `struct_type { x, .. }` | “나머지” 패턴 바인딩 | |
+| `..` | `variant(x, ..)`, `struct_type { x, .. }` | ‘나머지’ 패턴 바인딩 | |
 | `...` | `expr...expr` | (사용 중단됨, 대신 `..=`를 사용) 패턴 내에서: 경계를 포함하는 범위 패턴 | |
 | `/` | `expr / expr` | 산술 나눗셈 | `Div` |
 | `/=` | `var /= expr` | 산술 나눗셈 후 대입 | `DivAssign` |
@@ -92,7 +92,7 @@
 | `b'...'` | ASCII 바이트 리터럴 |
 | <code>&vert;...&vert; expr</code> | 클로저 |
 | `!` | 발산 함수를 위한 항상 비어있는 하단 타입 |
-| `_` | “무시되는” 패턴 바인딩; 정수형 리터럴을 읽기 편하게 만드는 데도 사용됨 |
+| `_` | ‘무시되는’ 패턴 바인딩; 정수형 리터럴을 읽기 편하게 만드는 데도 사용됨 |
 
 표 B-3는 모듈 계층을 통해 아이템에 도달하는 경로의 컨텍스트에서 나타나는
 기호들을 보여줍니다.
@@ -202,4 +202,4 @@
 | `[expr; len]` | `expr` 값을 `len`개 복사한 배열 리터럴 |
 | `[type; len]` | `type`의 인스턴스를 `len`개만큼 담는 배열 타입 |
 | `expr[expr]` | 컬렉션 인덱싱. 오버로드 가능 (`Index`, `IndexMut`) |
-| `expr[..]`, `expr[a..]`, `expr[..b]`, `expr[a..b]` | 컬렉션 슬라이싱 모양의 컬렉션 인덱싱. “인덱스”로 `Range`, `RangeFrom`, `RangeTo`, 혹은 `RangeFull` 사용  |
+| `expr[..]`, `expr[a..]`, `expr[..b]`, `expr[a..b]` | 컬렉션 슬라이싱 모양의 컬렉션 인덱싱. ‘인덱스’로 `Range`, `RangeFrom`, `RangeTo`, 혹은 `RangeFull` 사용  |

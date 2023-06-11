@@ -98,7 +98,7 @@ productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실
 다른 프로그래밍 언어들은 시그니처에 인수와 반환 값을 연결하도록
 요구하지 않습니다만, 이 연습은 시간이 지날수록 더 쉬워질 것입니다.
 어쩌면 이 예제를 10장의
-[“라이프타임으로 참조자의 유효성 검증하기”][validating-references-with-lifetimes]<!-- ignore -->절에
+[‘라이프타임으로 참조자의 유효성 검증하기’][validating-references-with-lifetimes]<!-- ignore -->절에
 있는 예제와 비교하고 싶을지도 모르겠습니다.
 
 이제 테스트를 실행해 봅시다:
@@ -210,19 +210,19 @@ productive."` 라인을 가지고 있는 벡터와 일치하지 않으므로 실
 `search`로부터 반환된 각 라인에 대해 여전히 `for`를 사용하여 출력하고 있습니다.
 
 이제 전체 프로그램이 동작해야 합니다! 먼저 에밀리 딕킨슨의 시에서 딱 한 줄만
-반환되도록 “frog”라는 단어를 넣어 시도해 봅시다:
+반환되도록 ‘frog’라는 단어를 넣어 시도해 봅시다:
 
 ```console
 {{#include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/output.txt}}
 ```
 
-멋지군요! 이제 여러 줄과 매칭될 “body” 같은 단어를 시도해 봅시다:
+멋지군요! 이제 여러 줄과 매칭될 ‘body’ 같은 단어를 시도해 봅시다:
 
 ```console
 {{#include ../listings/ch12-an-io-project/output-only-03-multiple-matches/output.txt}}
 ```
 
-마지막으로, “monomorphization” 같이 이 시의 어디에도 없는 단어를 검색하는 경우
+마지막으로, ‘monomorphization’ 같이 이 시의 어디에도 없는 단어를 검색하는 경우
 아무 줄도 안 나오는지 확인해 봅시다:
 
 ```console

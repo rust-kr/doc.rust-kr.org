@@ -88,7 +88,7 @@ I/O 프로젝트에 있는 *src/lib.rs* 파일에서, 예제 13-19와 같이
 
 `Config::build` 함수의 시그니처를 업데이트해서 `args` 매개변수가
 `&[String]` 대신 트레잇 바운드 `impl Iterator<Item = String>`를 갖는
-제네릭 타입이 되도록 하였습니다. 10장의 [“매개변수로서의 트레잇”][impl-trait]<!-- ignore -->절에서
+제네릭 타입이 되도록 하였습니다. 10장의 [‘매개변수로서의 트레잇’][impl-trait]<!-- ignore -->절에서
 논의했었던 이러한 `impl Trait` 문법의 사용은 `args`가 `Iterator` 타입을
 구현하면서 `String` 아이템을 반환하는 어떤 종류의 타입이라도 가능함을
 뜻합니다.

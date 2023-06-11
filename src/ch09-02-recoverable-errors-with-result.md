@@ -6,7 +6,7 @@
 않아서 실패했다면, 프로세스를 종료해 버리는 대신 파일을 생성하는 것을
 원할지도 모르죠.
 
-2장의 [“`Result` 타입으로 잠재적 실패 다루기”][handle_failure]<!-- ignore -->절에서
+2장의 [‘`Result` 타입으로 잠재적 실패 다루기’][handle_failure]<!-- ignore -->절에서
 `Result` 열거형은 다음과 같이 `Ok`와 `Err`라는 두 개의 배리언트를 갖도록 정의되어 있음을
 상기해 봅시다:
 
@@ -506,8 +506,8 @@ don't want to include it for rustdoc testing purposes. -->
 하여 `Result` 값에 대한 `?` 사용 가능하게 하기</span>
 
 `Box<dyn Error>` 타입은 *트레잇 객체 (trait object)* 인데, 17장의
-[“트레잇 객체를 사용하여 다른 타입의 값 허용하기”][trait-objects]<!-- ignore -->절에서
-다룰 예정입니다. 지금은 `Box<dyn Error>`가 “어떠한 종류의 에러”를
+[‘트레잇 객체를 사용하여 다른 타입의 값 허용하기’][trait-objects]<!-- ignore -->절에서
+다룰 예정입니다. 지금은 `Box<dyn Error>`가 ‘어떠한 종류의 에러’를
 의미한다고 읽으면 됩니다. 반환할 에러 타입이 `Box<dyn Error>`인
 `Result`이면 어떠한 `Err` 값을 일찍 반활할 수 있으므로
 `main`에서의 `?` 사용이 허용됩니다. `main` 함수의 구현 내용이

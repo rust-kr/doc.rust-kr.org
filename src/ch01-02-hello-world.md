@@ -20,7 +20,7 @@
 디렉터리를 생성해 각종 프로젝트를 보관하는 것을 권장해 드립니다.
 
 터미널을 열고 다음 명령어를 입력해 *projects* 디렉터리를 생성한 후,
-*projects* 내에 “Hello, world!” 프로젝트용 디렉터리를 만들어 봅시다.
+*projects* 내에 ‘Hello, world!’ 프로젝트용 디렉터리를 만들어 봅시다.
 
 Linux, macOS, Windows PowerShell에서는 다음 명령어를 입력해 주세요:
 
@@ -79,7 +79,7 @@ Hello, world!
 
 사용하시는 운영체제와 상관없이
 터미널에 `Hello, world!`가 출력되면 정상입니다.
-출력되지 않으면 [“트러블 슈팅”][troubleshooting]<!-- ignore -->
+출력되지 않으면 [‘트러블 슈팅’][troubleshooting]<!-- ignore -->
 내용을 참고해 도움을 얻을 방법을 찾아보세요.
 
 문제없이 `Hello, world!`가 출력됐다면, 축하드립니다! 여러분은 공식적으로
@@ -87,7 +87,7 @@ Hello, world!
 
 ### 러스트 프로그램 뜯어보기
 
-방금 만든 “Hello, world!” 프로그램을 자세히 살펴봅시다.
+방금 만든 ‘Hello, world!’ 프로그램을 자세히 살펴봅시다.
 우선 첫 부분은 다음과 같습니다:
 
 ```rust
@@ -180,7 +180,7 @@ Windows에서는 디버깅 정보가 포함된 *pdb* 확장자 파일도 볼 수
 $ ./main # Windows에서는 .\main.exe
 ```
 
-*main.rs*가 여러분의 “Hello, world!” 프로그램이라면
+*main.rs*가 여러분의 ‘Hello, world!’ 프로그램이라면
 터미널에 `Hello, world!`가 출력될 겁니다.
 
 Ruby, Python, JavaScript 등 명령어 한 줄로 프로그램을 컴파일하고

@@ -67,7 +67,7 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 ```
 
 `to_string`이라는 이름의 함수가 여러 개 있을 수 있기 때문에, 앞서
-[“고급 트레잇”][advanced-traits]<!-- ignore --> 절에서 설명했던
+[‘고급 트레잇’][advanced-traits]<!-- ignore --> 절에서 설명했던
 완전 정규화 문법을 사용해야 하는 점을 유의하세요. 여기서는 `ToString`
 트레잇에 정의된 `to_string` 함수를 사용하고 있는데, 이는 표준
 라이브러리에서 `Display`를 구현하는 모든 타입에 대해 구현되어 있습니다.
@@ -117,8 +117,8 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 ```
 
 이 코드는 잘 컴파일됩니다. 트레잇 객체에 대한 자세한 내용은 17장의
-[“트레잇 객체를 사용하여 다른 타입의 값
-허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절을
+[‘트레잇 객체를 사용하여 다른 타입의 값
+허용하기’][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절을
 참고하세요.
 
 다음으로, 매크로를 살펴봅시다!

@@ -203,8 +203,8 @@ enum IpAddr {
 널 개념이 존재하는 언어에서, 변수의 상태는 둘 중 하나입니다.
 널인 경우와, 널이 아닌 경우죠.
 
-널을 고안한 토니 호어 (Tony Hoare) 는 그의 2009년 발표 “널 참조: 10억 달러짜리
-실수 (Null References: The Billion Dollar Mistake)”에서 다음과 같이 말합니다:
+널을 고안한 토니 호어 (Tony Hoare) 는 그의 2009년 발표 ‘널 참조: 10억 달러짜리
+실수 (Null References: The Billion Dollar Mistake)’에서 다음과 같이 말합니다:
 
 > 저는 그걸 10억 달러짜리 실수라고 부릅니다. 저는 그 당시 객체 지향
 > 언어에서 참조자를 위한 첫 포괄적인 타입 시스템을 디자인하고 있었습니다.

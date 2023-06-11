@@ -63,7 +63,7 @@
 섀도우 변수를 도입하지 않고 외부 `x`와 `y`의 값을 비교하는 `match`
 표현식을 만들려면 대신 매치 가드 조건문 (match guard conditional) 을
 사용해야 합니다. 매치 가드에 대해서는 나중에
-[“매치 가드를 사용한 추가 조건”](#extra-conditionals-with-match-guards)<!-- ignore -->절에서
+[‘매치 가드를 사용한 추가 조건’](#extra-conditionals-with-match-guards)<!-- ignore -->절에서
 설명하겠습니다.
 
 ### 다중 패턴

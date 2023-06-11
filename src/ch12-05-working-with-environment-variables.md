@@ -146,7 +146,7 @@
 `search`의 호출 여부를 결정할 수 있습니다.
 
 한번 시도해 봅시다! 먼저 환경 변수 설정 없이 질의어 `to`를 넣어 프로그램을
-실행시킬 것인데, 이는 모두 소문자인 단어 “to”가 포함된 어떤 라인과
+실행시킬 것인데, 이는 모두 소문자인 단어 ‘to’가 포함된 어떤 라인과
 매칭되어야 합니다:
 
 ```console
@@ -174,7 +174,7 @@ PS> $Env:IGNORE_CASE=1; cargo run -- to poem.txt
 PS> Remove-Item Env:IGNORE_CASE
 ```
 
-이제 대문자일 수도 있는 “to”를 담고 있는 라인들을 얻어야 합니다:
+이제 대문자일 수도 있는 ‘to’를 담고 있는 라인들을 얻어야 합니다:
 
 <!-- manual-regeneration
 cd listings/ch12-an-io-project/listing-12-23
@@ -189,7 +189,7 @@ To tell your name the livelong day
 To an admiring bog!
 ```
 
-“To”를 담고 있는 라인도 얻었으니, 훌륭합니다! `minigrep` 프로그램은 지금부터
+‘To’를 담고 있는 라인도 얻었으니, 훌륭합니다! `minigrep` 프로그램은 지금부터
 환경 변수에 의해 제어되는 대소문자 구별 없는 검색기능을 사용할 수 있게 되었습니다.
 이제 여러분은 커맨드 라인 인수 혹은 환경 변수를 통한 옵션 설정을 관리하는 방법을
 알게 되었습니다.

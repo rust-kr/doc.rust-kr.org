@@ -323,7 +323,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 행위는 `impl Trait` 문법이 컴파일러 내에 구현된
 방식으로 인한 제약 때문에 허용되지 않습니다.
 함수가 이런 식으로 동작하도록 만드는 방법은 17장의
-[“트레잇 객체를 사용하여 다른 타입의 값 허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절에서
+[‘트레잇 객체를 사용하여 다른 타입의 값 허용하기’][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절에서
 알아볼 예정입니다.
 
 ### 트레잇 바운드를 사용해 조건부로 메서드 구현하기
@@ -331,7 +331,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 제네릭 타입 매개변수를 사용하는 `impl` 블록에 트레잇 바운드를 이용하면,
 지정된 트레잇을 구현하는 타입에 대해서만 메서드를 구현할 수도 있습니다.
 예를 들어, 예제 10-15의 `Pair<T>` 타입은 언제나 새로운 `Pair<T>` 인스턴스를
-반환하는 `new` 함수를 구현합니다. (5장의 [“메서드 정의하기”][methods]<!-- ignore -->절에서
+반환하는 `new` 함수를 구현합니다. (5장의 [‘메서드 정의하기’][methods]<!-- ignore -->절에서
 다룬 것처럼 `Self`는 `impl` 블록에 대한 타입의 별칭이고, 지금의 경우에는
 `Pair<T>`라는 점을 상기합시다.) 하지만 그다음의 `impl` 블록에서는
 어떤 `T` 타입이 비교를 가능하게 해주는 `PartialOrd` 트레잇과 출력을
@@ -369,7 +369,7 @@ impl<T: Display> ToString for T {
 let s = 3.to_string();
 ```
 
-포괄 구현은 트레잇 문서 페이지의 “구현자 (Implementors)” 절에
+포괄 구현은 트레잇 문서 페이지의 ‘구현자 (Implementors)’ 절에
 있습니다.
 
 트레잇과 트레잇 바운드를 사용하면 제네릭 타입 매개변수로

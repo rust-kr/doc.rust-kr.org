@@ -4,8 +4,8 @@
 우선 테스트에 사용할 샘플 파일이 필요합니다: 여러 줄의 몇 개의 반복된
 단어들로 구성된 작은 양의 텍스트로 된 파일을 사용하겠습니다. 예제 12-3은
 딱 맞게 사용될 에밀리 딕킨슨 (Emily Dickinson) 의 시가 있습니다! 프로젝트의
-루트 레벨에 *poem.txt*이라는 이름의 파일을 만들고, 시 “I’m Nobody! Who are
-you?”를 입력하세요.
+루트 레벨에 *poem.txt*이라는 이름의 파일을 만들고, 시 ‘I’m Nobody! Who are
+you?’를 입력하세요.
 
 <span class="filename">파일명: poem.txt</span>
 

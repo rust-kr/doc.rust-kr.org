@@ -27,7 +27,7 @@
 
 `eat_at_restaurant` 함수는 우리가 만든 라이브러리 크레이트의 공개 API 중
 하나입니다. 따라서 `pub` 키워드로 지정되어 있습니다. `pub`에 대해서는
-[“`pub` 키워드로 경로 노출하기”][pub]<!-- ignore --> 절에서 자세히 알아볼 예정입니다.
+[‘`pub` 키워드로 경로 노출하기’][pub]<!-- ignore --> 절에서 자세히 알아볼 예정입니다.
 
 <span class="filename">파일명: src/lib.rs</span>
 

@@ -9,7 +9,7 @@
 ### 타입 안전성과 추상화를 위한 뉴타입 패턴 사용하기
 
 > Note: 이 절은 여러분이 이전 절
-> [“뉴타입 패턴을 사용하여 외부 타입에 외부 트레잇 구현하기”][using-the-newtype-pattern]<!-- ignore -->을
+> [‘뉴타입 패턴을 사용하여 외부 타입에 외부 트레잇 구현하기’][using-the-newtype-pattern]<!-- ignore -->을
 > 읽었다고 가정합니다.
 
 뉴타입 패턴은 지금까지 설명한 것 이외의 작업에도 유용한데, 여기에는
@@ -33,7 +33,7 @@ API를 노출할 수 있습니다.
 코드는 내부적으로 이름에 `i32` ID를 할당한다는 사실을 알 필요가
 없습니다. 뉴타입 패턴은 구현 세부 사항을 숨기는 캡슐화를 달성하는
 가벼운 방법으로, 17장의
-[“구현 세부 사항을 숨기는 캡슐화”][encapsulation-that-hides-implementation-details]<!-- ignore -->절에서
+[‘구현 세부 사항을 숨기는 캡슐화’][encapsulation-that-hides-implementation-details]<!-- ignore -->절에서
 설명한 바 있습니다.
 
 ### 타입 별칭으로 타입의 동의어 만들기
@@ -139,7 +139,7 @@ Box<dyn Fn() + Send + 'static>
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-07-never-type/src/lib.rs:here}}
 ```
 
-이 코드는 “함수 `bar`는 결코 반환하지 않습니다”라고 읽습니다. 결코 반환하지
+이 코드는 ‘함수 `bar`는 결코 반환하지 않습니다’라고 읽습니다. 결코 반환하지
 않는 함수는 *발산 함수 (diverging functions)* 라고 합니다. `!` 타입의 값은
 만들 수 없으므로, `bar`는 결코 반환할 수 없습니다.
 
@@ -155,7 +155,7 @@ Box<dyn Fn() + Send + 'static>
 있는 `match`</span>
 
 이 시점에서는 이 코드에서 몇 가지 세부 사항을 건너뛰었습니다. 6장의
-[“`match` 제어 흐름 연산자”][the-match-control-flow-operator]<!-- ignore -->절에서
+[‘`match` 제어 흐름 연산자’][the-match-control-flow-operator]<!-- ignore -->절에서
 `match` 갈래가 모두 같은 타입을 반환해야 한다는 것을 논의했습니다. 예를 들어,
 다음 코드는 작동하지 않습니다:
 
@@ -230,7 +230,7 @@ Box<dyn Fn() + Send + 'static>
 
 그럼 어떻게 해야 할까요? 이 경우에는 이미 답을 알고 있습니다: `s1`과
 `s2`의 타입을 `str`이 아닌 `&str`로 만듭니다. 4장의
-[“문자열 슬라이스”][string-slice]<!-- ignore -->절에서 슬라이스
+[‘문자열 슬라이스’][string-slice]<!-- ignore -->절에서 슬라이스
 데이터 구조는 슬라이스의 시작 위치와 길이만 저장한다는 것을 기억하세요.
 따라서 `&T`는 `T`가 위치한 메모리 주소를 저장하는 단일 값이지만,
 `&str`은 *두 개의* 값입니다: `str`의 주소와 길이 말이지요. 따라서
@@ -246,8 +246,8 @@ Box<dyn Fn() + Send + 'static>
 같은 것들이지요. 사실, 여러분은 이전에도 다른 종류의 동적 크기 타입이지만
 이런 것을 본 적이 있습니다: 바로 트레잇입니다. 모든 트레잇은 그 트레잇의 이름을
 사용하여 참조할 수 있는 동적 크기 타입입니다. 17장의
-[“트레잇 객체를 사용하여 다른 타입의 값
-허용하기”][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절에서,
+[‘트레잇 객체를 사용하여 다른 타입의 값
+허용하기’][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절에서,
 트레잇을 트레잇 객체로 사용하려면 `&dyn Trait` 또는 `Box<dyn Trait>`와
 같은 포인터 뒤에 넣어야 한다고 언급했습니다. (`Rc<dyn Trait>`도
 가능합니다.)
@@ -276,7 +276,7 @@ DST로 작업하기 위해 러스트에서는 컴파일 시점에 타입의 크�
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-14-generic-maybe-sized/src/lib.rs}}
 ```
 
-`?Size` 트레잇 바운드는 “`T`는 `Sized`일 수도 있고 아닐 수도 있다”는 의미를
+`?Size` 트레잇 바운드는 ‘`T`는 `Sized`일 수도 있고 아닐 수도 있다’는 의미를
 가지며 이 문법은 제네릭 타입이 컴파일 시점에 크기가 알려진 타입이어야 한다는
 기본값을 덮어씁니다. 이런 의미의 `?Trait` 문법은 `Sized`에만 사용할 수 있고
 다른 어떤 트레잇에도 사용할 수 없습니다.

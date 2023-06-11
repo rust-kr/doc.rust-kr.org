@@ -65,7 +65,7 @@ Windows 사용자는 [https://www.rust-lang.org/tools/install][install]에서
 빌드 도구를 설치하려면 [Visual Studio 2022][visualstudio]를
 설치할 필요가 있습니다. 구체적으로는 아래와 같은 패키지가 필요합니다:
 
-* “C++ 데스크톱 개발”
+* ‘C++ 데스크톱 개발’
 * Windows 10 혹은 11 SDK
 * 영어 언어팩과 여러분이 선택하고 싶은 다른
   언어팩
@@ -102,7 +102,7 @@ Windows CMD에서는 다음과 같이 확인합니다:
 PowerShell에서는 다음과 같이 확인합니다:
 
 ```powershell
-> echo $env:Path
+> echo $env:Path‘
 ```
 
 Linux와 macOS에서는 다음과 같이 확인합니다:
@@ -130,7 +130,7 @@ $ rustup update
 ```console
 $ rustup self uninstall
 ```
-
+’
 ### 로컬 문서
 
 러스트 설치 시 로컬 문서 (Local Documentation) 도 같이 설치됩니다. 오프라인

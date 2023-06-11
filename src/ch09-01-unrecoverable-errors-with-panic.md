@@ -158,7 +158,7 @@ note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose bac
 
 다음은 에러가 발생했을 때 `Result`를 이용하여 복구하는 방법을 살펴보겠습니다.
 언제 `panic!`을 써야 하는지, 혹은 쓰지 말아야 하는지에 대해서는 그다음에 나올
-[“`panic!`이냐, `panic!`이 아니냐, 그것이 문제로다”][to-panic-or-not-to-panic]<!-- ignore -->절에서
+[‘`panic!`이냐, `panic!`이 아니냐, 그것이 문제로다’][to-panic-or-not-to-panic]<!-- ignore -->절에서
 에서 알아볼 예정입니다.
 
 [to-panic-or-not-to-panic]:
