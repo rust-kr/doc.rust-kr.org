@@ -762,8 +762,8 @@ Too big!
 사용자가 이 프로그램을 종료할 수 없는 것 같습니다!
 
 사용자는 <span class="keystroke">ctrl-c</span> 단축키를 이용하여 프로그램을
-멈출 수 있습니다. 하지만 [‘비밀번호와 추릿값을 비교하기’](#comparing-the-guess-to-the-secret-number)<!--
-ignore -->에서 `parse` 메서드에 대해 언급했던 것처럼
+멈출 수 있습니다. 하지만 [‘비밀번호와 추릿값을 비교하기’](#comparing-the-guess-to-the-secret-number)<!-- ignore -->에서
+`parse` 메서드에 대해 언급했던 것처럼
 이 만족할 줄 모르는 괴물에게서 빠져나올 다른 방법이 있습니다:
 만약 사용자가 숫자가 아닌 답을 적는다면 프로그램이 멈춥니다.
 이를 활용하여 아래와 같이 사용자가 종료할 수 있도록 할 수 있습니다:
