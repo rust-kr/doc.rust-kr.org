@@ -102,7 +102,7 @@ Windows CMD에서는 다음과 같이 확인합니다:
 PowerShell에서는 다음과 같이 확인합니다:
 
 ```powershell
-> echo $env:Path‘
+> echo $env:Path
 ```
 
 Linux와 macOS에서는 다음과 같이 확인합니다:
@@ -130,7 +130,7 @@ $ rustup update
 ```console
 $ rustup self uninstall
 ```
-’
+
 ### 로컬 문서
 
 러스트 설치 시 로컬 문서 (Local Documentation) 도 같이 설치됩니다. 오프라인
