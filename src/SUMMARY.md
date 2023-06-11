@@ -74,7 +74,7 @@
 
 ## Thinking in Rust
 
-- [함수형 언어의 특성들: 반복자와 클로저](ch13-00-functional-features.md)
+- [함수형 언어의 특성: 반복자와 클로저](ch13-00-functional-features.md)
     - [클로저: 자신의 환경을 캡처하는 익명 함수](ch13-01-closures.md)
     - [반복자로 일련의 아이템들 처리하기](ch13-02-iterators.md)
     - [I/O 프로젝트 개선하기](ch13-03-improving-our-io-project.md)
