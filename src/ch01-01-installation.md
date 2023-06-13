@@ -83,7 +83,7 @@ $ rustc --version
 ```
 
 최신 릴리즈된 stable 버전 정보가 다음 포맷대로 나타나며,
-나타난 정보는 순서대로 버전 숫자, 커밋 해쉬(hash), 커밋 날짜입니다:
+나타난 정보는 순서대로 버전 숫자, 커밋 해시(hash), 커밋 날짜입니다:
 
 ```text
 rustc x.y.z (abcabcabc yyyy-mm-dd)

@@ -47,7 +47,7 @@
 - [일반적인 컬렉션](ch08-00-common-collections.md)
     - [벡터에 여러 값의 목록 저장하기](ch08-01-vectors.md)
     - [문자열에 UTF-8 텍스트 저장하기](ch08-02-strings.md)
-    - [해쉬맵에 서로 연관된 키와 값 저장하기](ch08-03-hash-maps.md)
+    - [해시맵에 서로 연관된 키와 값 저장하기](ch08-03-hash-maps.md)
 
 - [에러 처리](ch09-00-error-handling.md)
     - [`panic!`으로 복구 불가능한 에러 처리하기](ch09-01-unrecoverable-errors-with-panic.md)
