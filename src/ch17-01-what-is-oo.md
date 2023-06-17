@@ -11,7 +11,7 @@
 ### 객체는 데이터와 동작을 담습니다
 
 속칭 *4인조* 책이라고도 불리는 에리히 감마 (Erich Gamma), 리처드 헬름 (Richard Helm),
-랄프 존슨( Ralph Johnson), 그리고 존 블리시데스 (John Vlissides) 의 책 *디자인 패턴 (Design Patterns:
+랄프 존슨 (Ralph Johnson), 그리고 존 블리시데스 (John Vlissides) 의 책 *디자인 패턴 (Design Patterns:
 Elements of Reusable Object-Oriented Software, Addison-Wesley Professional, 1994)*
 은 객체 지향 디자인 패턴에 대한 카탈로그입니다. 이 책에서는 OOP를 다음과 같이 정의합니다:
 

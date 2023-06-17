@@ -122,7 +122,7 @@ cd ../../..
 
 ### 변수에 값 저장하기
 
-다음으로, 아래와 같이 사용자의 입력값을 저장할 *변수(variable)* 를 생성합니다.
+다음으로, 아래와 같이 사용자의 입력값을 저장할 *변수 (variable)* 를 생성합니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:string}}
@@ -181,7 +181,7 @@ let mut bananas= 5; // mutable
 
 프로그램 시작 지점에서 `use std::io`를 통해 `io` 라이브러리를 가져오지
 않았더라도, 함수 호출 시 `std::io::stdin`처럼 작성하는 것으로 이 함수를
-이용할 수 있습니다. `stdin` 함수는 터미널의 표준 입력의 핸들(handle)을
+이용할 수 있습니다. `stdin` 함수는 터미널의 표준 입력의 핸들 (handle) 을
 나타내는 타입인 [`std::io::Stdin`][iostdin]<!-- ignore -->의 인스턴스를
 돌려줍니다.
 
@@ -523,7 +523,7 @@ rand = "0.9.0"
 
 다음에는 중간에 두 개의 라인을 추가합니다. 첫 번째 라인에서는
 우리가 사용할 특정 난수 생성기를 제공하는 `rand::thread_rng`
-함수를 호출합니다: OS가 시드(seed)를 정하고 현재 스레드에서만
+함수를 호출합니다: OS가 시드 (seed) 를 정하고 현재 스레드에서만
 사용되는 난수 생성기입니다. 다음으로는 `gen_range` 메서드를
 호출합니다. 이 메서드는 `use rand::Rng;` 구문을 통해 스코프로
 가져온 `Rng` 트레잇에 정의되어 있습니다. `gen_range` 메서드는

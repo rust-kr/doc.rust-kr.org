@@ -331,8 +331,8 @@ src="img/trpl04-03.svg" class="center" style="width: 50%;" />
 {{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 
-여러분이 다른 프로그래밍 언어에서 *얕은 복사(shallow copy)*,
-*깊은 복사(deep copy)* 라는 용어를 들어보셨다면, 힙 데이터를 복사하지 않고
+여러분이 다른 프로그래밍 언어에서 *얕은 복사 (shallow copy)*,
+*깊은 복사 (deep copy)* 라는 용어를 들어보셨다면, 힙 데이터를 복사하지 않고
 포인터, 길이, 용량 값만 복사하는 것을 얕은 복사라고 생각하셨을 수도 있지만,
 러스트에서는 기존의 변수를 무효화하기 때문에
 이를 얕은 복사가 아닌 *이동 (move)* 이라 하고,

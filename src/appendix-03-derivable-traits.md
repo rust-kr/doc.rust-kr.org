@@ -109,7 +109,7 @@
 
 ### 값을 복제하기 위한 `Clone`과 `Copy`
 
-`Clone` 트레잇은 명시적으로 값의 깊은 복사(deep copy)를 생성할 수 있게
+`Clone` 트레잇은 명시적으로 값의 깊은 복사 (deep copy) 를 생성할 수 있게
 해주며, 복제 과정은 임의의 코드를 실행하고 힙 데이터를 복사할 수도 있습니다.
 `Clone`에 대한 더 자세한 내용은 4장의 [‘변수와 데이터 간 상호작용 방식:
 클론 (clone)’][ways-variables-and-data-interact-clone]<!-- ignore -->

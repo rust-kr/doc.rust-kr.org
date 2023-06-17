@@ -38,7 +38,7 @@ fn first_word(s: &String) -> ?
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:as_bytes}}
 ```
 
-그다음, 바이트 배열에 사용할 반복자(iterator)를 `iter` 메서드로 생성했습니다:
+그다음, 바이트 배열에 사용할 반복자 (iterator) 를 `iter` 메서드로 생성했습니다:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:iter}}

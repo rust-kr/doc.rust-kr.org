@@ -256,7 +256,7 @@ don't want to include it for rustdoc testing purposes. -->
 과정을 하나씩 직접 작성해 보고, 간결한 버전은 마지막에 살펴보도록 하겠습니다.
 함수의 반환 타입인 `Result<String, io::Error>`부터 먼저 살펴봅시다.
 함수가 `Result<T, E>` 타입의 값을 반환하는데 제네릭 매개변수 `T`는
-구체 타입(concrete type)인 `String`으로 채워져 있고, 제네릭 타입 `E`는
+구체 타입 (concrete type) 인 `String`으로 채워져 있고, 제네릭 타입 `E`는
 구체 타입인 `io::Error`로 채워져 있다는 뜻입니다.
 
 만일 이 함수가 문제없이 성공하면, 함수를 호출한 코드는
