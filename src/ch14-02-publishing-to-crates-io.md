@@ -332,7 +332,7 @@ Caused by:
 필수로서 여러분의 크레이트가 무엇을 하는지와 어떤 조건으로 사용할 수 있는지
 사람들이 알게끔 할 것입니다. *Cargo.toml* 안에 한두 문장 정도만 설명을 추가해
 주세요. 이 설명은 검색 결과에 여러분의 크레이트와 함께 나타나게 될 것입니다.
-`license` 필드에는 *라이선스 식별자 값 (license identifier value)*이 필요합니다.
+`license` 필드에는 *라이선스 식별자 값 (license identifier value)* 이 필요합니다.
 [Linux 재단의 Software Package Data Exchange (SPDX)][spdx]에 이 값으로
 사용할 수 있는 식별자 리스트가 있습니다. 예를 들어 여러분의 크레이트에 MIT
 라이선스를 적용하고 싶다면, `MIT` 식별자를 추가합니다:
