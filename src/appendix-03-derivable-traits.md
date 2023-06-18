@@ -165,12 +165,12 @@
 위해서는 타입의 모든 필드 혹은 값 또한 `Default`를 구현해야 한다는 것을
 의미합니다.
 
-`Default::default` 함수는 일반적으로 5장의 [‘기존
-인스턴스를 이용해 새 인스턴스를 만들 때 구조체 업데이트 문법
-사용하기’][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -->절에서
-다룬 구조체 업데이트 구문과 함께 사용됩니다. 구조체의 몇
-개의 필드만 커스터마이징한 다음 나머지 필드에 대해 기본값을
-설정하고 사용하려면 `..Default::default()`를 사용할 수
+`Default::default` 함수는 일반적으로 5장의
+[‘기존 인스턴스를 이용해 새 인스턴스를 만들 때 구조체 업데이트 문법 사용하기’][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -->절에서
+다룬 구조체 업데이트 구문과 함께 사용됩니다.
+구조체의 몇 개의 필드만 커스터마이징한 다음
+나머지 필드에 대해 기본값을 설정하고 사용하려면
+`..Default::default()`를 사용할 수
 있습니다.
 
 `Default` 트레잇은 예를 들면 `Option<T>` 인스턴스에서 `unwrap_or_default`

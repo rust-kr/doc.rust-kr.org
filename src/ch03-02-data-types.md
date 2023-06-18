@@ -43,7 +43,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 
 <span class="caption">표 3-1: 러스트의 정수형 타입들</span>
 
-| 길이    | 부호 있음 (Signed)  | 부호 없음 (Unsigned) |
+| 길이    | 부호 있음 (signed)  | 부호 없음 (unsigned) |
 |---------|---------|----------|
 | 8-bit   | `i8`    | `u8`     |
 | 16-bit  | `i16`   | `u16`    |

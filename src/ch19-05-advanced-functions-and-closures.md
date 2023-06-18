@@ -116,9 +116,9 @@ f를 쓰는) `fn` 타입으로 강제되는데, `Fn` 클로저 트레잇과 혼�
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-19-returns-closure-trait-object/src/lib.rs}}
 ```
 
-이 코드는 잘 컴파일됩니다. 트레잇 객체에 대한 자세한 내용은 17장의
-[‘트레잇 객체를 사용하여 다른 타입의 값
-허용하기’][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절을
+이 코드는 잘 컴파일됩니다.
+트레잇 객체에 대한 자세한 내용은 17장의
+[‘트레잇 객체를 사용하여 다른 타입의 값 허용하기’][using-trait-objects-that-allow-for-values-of-different-types]<!-- ignore -->절을
 참고하세요.
 
 다음으로, 매크로를 살펴봅시다!

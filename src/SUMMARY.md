@@ -110,7 +110,7 @@
 
 - [패턴과 매칭](ch18-00-patterns.md)
     - [패턴이 사용될 수 있는 모든 곳](ch18-01-all-the-places-for-patterns.md)
-    - [반박 가능성 (Refutability): 패턴이 매칭에 실패할지의 여부](ch18-02-refutability.md)
+    - [반박 가능성: 패턴이 매칭에 실패할지의 여부](ch18-02-refutability.md)
     - [패턴 문법](ch18-03-pattern-syntax.md)
 
 - [고급 기능들](ch19-00-advanced-features.md)

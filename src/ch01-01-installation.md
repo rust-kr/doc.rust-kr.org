@@ -133,7 +133,7 @@ $ rustup self uninstall
 
 ### 로컬 문서
 
-러스트 설치 시 로컬 문서 (Local Documentation) 도 같이 설치됩니다. 오프라인
+러스트 설치 시 로컬 문서 (local documentation) 도 같이 설치됩니다. 오프라인
 상태로도 이용할 수 있으며, `rustup doc` 명령어로 여러분의 브라우저에서 열어볼 수 있습니다.
 
 표준 라이브러리에서 제공하는 타입이나 함수 중 이게 무슨 기능을 하는지,
