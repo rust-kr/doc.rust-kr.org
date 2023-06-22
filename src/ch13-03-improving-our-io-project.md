@@ -83,12 +83,12 @@ I/O 프로젝트에 있는 *src/lib.rs* 파일에서, 예제 13-19와 같이
 업데이트하기</span>
 
 `env::args` 함수에 대한 표준 라이브러리 문서에는 반환되는 반복자의
-타입이 `std::env::Args`이며, 이 타입은 `Iterator` 트레잇을 구현하고
+타입이 `std::env::Args`이며, 이 타입은 `Iterator` 트레이트를 구현하고
 `String` 값을 반환함을 명시하고 있습니다.
 
 `Config::build` 함수의 시그니처를 업데이트해서 `args` 매개변수가
-`&[String]` 대신 트레잇 바운드 `impl Iterator<Item = String>`를 갖는
-제네릭 타입이 되도록 하였습니다. 10장의 [‘매개변수로서의 트레잇’][impl-trait]<!-- ignore -->절에서
+`&[String]` 대신 트레이트 바운드 `impl Iterator<Item = String>`를 갖는
+제네릭 타입이 되도록 하였습니다. 10장의 [‘매개변수로서의 트레이트’][impl-trait]<!-- ignore -->절에서
 논의했었던 이러한 `impl Trait` 문법을 사용하면 `args`가 `Iterator`
 타입을 구현하면서 `String` 아이템을 반환하는 모든 종류의 타입을
 사용할 수 있습니다.
@@ -97,9 +97,9 @@ I/O 프로젝트에 있는 *src/lib.rs* 파일에서, 예제 13-19와 같이
 때문에, `args` 매개변수의 명세 부분에 `mut` 키워드를 추가하여 가변이
 되도록 합니다.
 
-#### 인덱싱 대신 `Iterator` 트레잇 메서드 사용하기
+#### 인덱싱 대신 `Iterator` 트레이트 메서드 사용하기
 
-다음으로 `Config::build`의 본문을 수정하겠습니다. `args`가 `Iterator` 트레잇을
+다음으로 `Config::build`의 본문을 수정하겠습니다. `args`가 `Iterator` 트레이트를
 구현하고 있으므로, 여기에 `next` 메서드를 호출할 수 있다는 것을 알고 있지요!
 예제 13-20은 예제 12-23의 코드를 `next` 메서드를 사용하여 업데이트한 것입니다:
 

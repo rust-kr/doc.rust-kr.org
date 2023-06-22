@@ -136,9 +136,9 @@ $ rustup self uninstall
 러스트 설치 시 로컬 문서 (local documentation) 도 같이 설치됩니다. 오프라인
 상태로도 이용할 수 있으며, `rustup doc` 명령어로 여러분의 브라우저에서 열어볼 수 있습니다.
 
-표준 라이브러리에서 제공하는 타입이나 함수 중 이게 무슨 기능을 하는지,
-혹은 사용법을 모르면 API (Application Programming Language) 문서에서
-모르는 내용을 찾아볼 수도 있겠죠!
+표준 라이브러리에서 제공하는 타입이나 함수 중 이게 무슨 기능을 하는지나
+사용하는 법을 모르겠다면 API (Application Programming Language) 문서에서
+모르는 내용을 찾아볼 수도 있겠죠?
 
 [otherinstall]: https://forge.rust-lang.org/infra/other-installation-methods.html
 [install]: https://www.rust-lang.org/tools/install

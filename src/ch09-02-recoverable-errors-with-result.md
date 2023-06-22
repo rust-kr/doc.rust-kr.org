@@ -332,7 +332,7 @@ don't want to include it for rustdoc testing purposes. -->
 
 예제 9-6의 `match` 표현식과 `?` 연산자의 차이점은,
 `?` 연산자를 사용할 때의 에러 값들은 `from` 함수를 거친다는 것입니다.
-`from` 함수는 표준 라이브러리 내의 `From` 트레잇에 정의되어 있으며
+`from` 함수는 표준 라이브러리 내의 `From` 트레이트에 정의되어 있으며
 어떤 값의 타입을 다른 타입으로 변환하는 데에 사용합니다.
 `?` 연산자가 `from` 함수를 호출하면, `?` 연산자가 얻게 되는 에러를
 `?` 연산자가 사용된 현재 함수의 반환 타입에 정의된 에러 타입으로
@@ -505,8 +505,8 @@ don't want to include it for rustdoc testing purposes. -->
 <span class="caption">예제 9-12: `main`이 `Result<(), E>`를 반환하도록
 하여 `Result` 값에 대한 `?` 사용 가능하게 하기</span>
 
-`Box<dyn Error>` 타입은 *트레잇 객체 (trait object)* 인데, 17장의
-[‘트레잇 객체를 사용하여 다른 타입의 값 허용하기’][trait-objects]<!-- ignore -->절에서
+`Box<dyn Error>` 타입은 *트레이트 객체 (trait object)* 인데, 17장의
+[‘트레이트 객체를 사용하여 다른 타입의 값 허용하기’][trait-objects]<!-- ignore -->절에서
 다룰 예정입니다. 지금은 `Box<dyn Error>`가 ‘어떠한 종류의 에러’를
 의미한다고 읽으면 됩니다. 반환할 에러 타입이 `Box<dyn Error>`인
 `Result`이면 어떠한 `Err` 값을 일찍 반활할 수 있으므로
@@ -522,10 +522,10 @@ don't want to include it for rustdoc testing purposes. -->
 발생한 프로그램은 `0`이 아닌 어떤 정숫값을 반환합니다. 러스트 또한
 이러한 규칙과 호환될 목적으로 실행파일이 정숫값을 반환합니다.
 
-`main` 함수가 [`std::process::Termination` 트레잇][termination]<!-- ignore -->을
+`main` 함수가 [`std::process::Termination` 트레이트][termination]<!-- ignore -->를
 구현한 타입을 반환할 수도 있는데, 이는 `ExitCode`를 반환하는
 `report`라는 함수를 가지고 있습니다. 여러분이 만든 타입에 대해
-`Termination` 트레잇을 구현하려면 표준 라이브러리 문서에서 더 많은
+`Termination` 트레이트를 구현하려면 표준 라이브러리 문서에서 더 많은
 정보를 찾아보세요.
 
 `panic!` 호출하기와 `Result` 반환하기에 대한 세부 내용을 논의했으니,

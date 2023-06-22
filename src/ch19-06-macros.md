@@ -18,7 +18,7 @@
 
 기본적으로 매크로는 다른 코드를 작성하는 코드를 작성하는 방법이며, 이를
 *메타프로그래밍 (metaprogramming)* 이라고 합니다. 부록 C에서는 다양한
-트레잇의 구현을 생성하는 `derive` 속성에 대해 설명합니다. 또한 책 전체에서
+트레이트의 구현을 생성하는 `derive` 속성에 대해 설명합니다. 또한 책 전체에서
 `println!`과 `vec!` 매크로를 사용했습니다. 이 모든 매크로는 수동으로
 작성한 코드보다 더 많은 코드를 생성하기 위해 *확장*됩니다.
 
@@ -31,8 +31,8 @@
 하나의 인수로 `println!("hello")`를 호출하거나 두 개의 인수로
 `println!("hello {}", name)`을 호출할 수 있는 것처럼요. 또한 매크로는
 컴파일러가 코드의 의미를 해석하기 전에 확장되기 때문에, 매크로는 이를테면
-주어진 타입에 대한 트레잇을 구현할 수 있습니다. 이는 함수로는 불가능한데,
-함수는 런타임에 호출되고 트레잇은 컴파일 타임에 구현되어야 하기 때문입니다.
+주어진 타입에 대한 트레이트를 구현할 수 있습니다. 이는 함수로는 불가능한데,
+함수는 런타임에 호출되고 트레이트는 컴파일 타임에 구현되어야 하기 때문입니다.
 
 함수 대신 매크로를 구현할 때의 단점은 매크로 정의가 러스트
 코드를 작성하는 러스트 코드를 작성하는 것이기 때문에 함수
@@ -192,13 +192,13 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 ### 커스텀 `derive` 매크로 작성 방법
 
-`HelloMacro`라는 이름의 트레잇과 `hello_macro`라는 하나의 연관 함수를
+`HelloMacro`라는 이름의 트레이트와 `hello_macro`라는 하나의 연관 함수를
 정의하는 `hello_macro`라는 이름의 크레이트를 만들어 봅시다. 사용자가
-자신의 타입에 대해 `HelloMacro` 트레잇을 구현하도록 하는 대신,
+자신의 타입에 대해 `HelloMacro` 트레이트를 구현하도록 하는 대신,
 절차적 매크로를 제공하여 사용자가 `#[derive(HelloMacro)]`라고
 타입에 명시하여 `hello_macro` 함수의 기본 구현을 가져올 수 있도록
 하겠습니다. 기본 구현은 `Hello, Macro! My name is TypeName!`라고
-출력하는데, 여기서 `TypeName`은 이 트레잇이 정의된 타입의 이름입니다.
+출력하는데, 여기서 `TypeName`은 이 트레이트가 정의된 타입의 이름입니다.
 바꿔 말하면, 다른 프로그래머가 우리의 크레이트를 사용하여 예제 19-30과
 같은 코드를 작성할 수 있도록 하는 크레이트를 작성할 것입니다.
 
@@ -218,7 +218,7 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 $ cargo new hello_macro --lib
 ```
 
-다음은 `HelloMacro` 트레잇과 그 연관 함수를 정의하는 것입니다:
+다음은 `HelloMacro` 트레이트와 그 연관 함수를 정의하는 것입니다:
 
 <span class="filename">파일명: src/lib.rs</span>
 
@@ -226,8 +226,8 @@ $ cargo new hello_macro --lib
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
 ```
 
-트레잇과 그 함수를 정의했습니다. 이 시점에서 크레이트 사용자는 다음과 같이
-트레잇을 구현하여 원하는 기능을 구현할 수 있습니다:
+트레이트와 그 함수를 정의했습니다. 이 시점에서 크레이트 사용자는 다음과 같이
+트레이트를 구현하여 원하는 기능을 구현할 수 있습니다:
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/pancakes/src/main.rs}}
@@ -237,7 +237,7 @@ $ cargo new hello_macro --lib
 구현 블록을 작성해야 합니다; 사용자가 이러한 작업을 생략할 수 있도록
 하려고 합니다.
 
-또한, 트레잇이 구현된 타입의 이름을 출력하는 `hello_macro`
+또한, 트레이트가 구현된 타입의 이름을 출력하는 `hello_macro`
 함수를 기본 구현으로 제공할 수도 없습니다: 러스트에는 리플렉션
 기능이 없기 때문에 런타임에 타입의 이름을 조회할 수 없습니다.
 컴파일 타임에 코드를 생성하려면 매크로가 필요합니다.
@@ -255,7 +255,7 @@ $ cargo new hello_macro_derive --lib
 
 두 크레이트는 서로 밀접하게 연관되어 있으므로, `hello_macro`
 크레이트의 디렉터리 내에 절차적 매크로 크레이트를 생성합니다.
-`hello_macro`에서 트레잇 정의를 변경하면, `hello_macro_derive`의
+`hello_macro`에서 트레이트 정의를 변경하면, `hello_macro_derive`의
 절차적 매크로 구현도 변경해야 합니다. 두 크레이트는 별도로 배포되어야
 하며, 이 크레이트를 사용하는 프로그래머는 두 크레이트를 종속성으로
 추가하고 두 크레이트를 모두 스코프 안으로 가져와야 합니다. 대신
@@ -311,7 +311,7 @@ $ cargo new hello_macro_derive --lib
 `hello_macro_derive` 함수는 라이브러리 사용자가 타입에
 `#[derive(HelloMacro)]`를 지정할 때 호출됩니다. 이는
 `hello_macro_derive` 함수에 `proc_macro_derive`를 명시하고
-트레잇 이름과 일치하는 `HelloMacro`라는 이름을 지정했기 때문에
+트레이트 이름과 일치하는 `HelloMacro`라는 이름을 지정했기 때문에
 가능합니다; 이는 대부분의 절차적 매크로가 따르는 관례입니다.
 
 `hello_macro_derive` 함수는 먼저 `TokenStream`의 `input`을
@@ -366,7 +366,7 @@ DeriveInput {
 
 이제 `TokenStream`으로부터 어노테이션된 러스트 코드를 `DeriveInput`
 인스턴스로 변환하는 코드가 있으니, 예제 19-33에 나온 것처럼 어노테이션된
-타입에 `HelloMacro` 트레잇을 구현하는 코드를 생성해 봅시다.
+타입에 `HelloMacro` 트레이트를 구현하는 코드를 생성해 봅시다.
 
 <span class="filename">파일명: hello_macro_derive/src/lib.rs</span>
 
@@ -375,7 +375,7 @@ DeriveInput {
 ```
 
 <span class="caption">예제 19-33: 파싱된 러스트 코드를 사용하여
-`HelloMacro` 트레잇 구현하기</span>
+`HelloMacro` 트레이트 구현하기</span>
 
 `ast.ident`를 사용하여 어노테이션된 타입의 이름(식별자)을 담고 있는
 `Ident` 구조체 인스턴스를 얻습니다. 예제 19-32의 구조체는 예제 19-30의
@@ -397,8 +397,8 @@ DeriveInput {
 자세한 소개는 [`quote` 크레이트 문서][quote-docs]를 참조하세요.
 
 우리의 절차적 매크로는 사용자가 어노테이션한 타입에 대해 `HelloMacro`
-트레잇의 구현을 생성하도록 하고 싶고, 이는 `#name`을 사용하여 얻을 수
-있습니다. 트레잇 구현에는 `hello_macro` 함수가 하나 있고, 그 본문에는
+트레이트의 구현을 생성하도록 하고 싶고, 이는 `#name`을 사용하여 얻을 수
+있습니다. 트레이트 구현에는 `hello_macro` 함수가 하나 있고, 그 본문에는
 제공하고자 하는 기능이 담겨 있습니다: 바로 `Hello, Macro! My name is`를
 출력한 다음 어노테이션된 타입의 이름을 출력하는 것이죠.
 
@@ -425,8 +425,8 @@ DeriveInput {
 
 예제 19-30의 코드를 *src/main.rs*에 넣고 `cargo run`을 실행하세요:
 `Hello, Macro! My name is Pancakes!"라고 출력되어야 합니다. 절차적
-매크로의 `HelloMacro` 트레잇 구현은 `pancakes` 크레이트가 구현할 필요
-없이 포함되었습니다; `#[derive(HelloMacro)]`이 트레잇 구현을
+매크로의 `HelloMacro` 트레이트 구현은 `pancakes` 크레이트가 구현할 필요
+없이 포함되었습니다; `#[derive(HelloMacro)]`이 트레이트 구현을
 추가한 것이지요.
 
 다음으로 다른 종류의 절차적 매크로는 커스텀 파생 매크로와 어떻게 다른지

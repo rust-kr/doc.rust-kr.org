@@ -136,7 +136,7 @@ Connection established!
 <span class="caption">예제 20-2: `TcpStream`을 읽고 데이터
 출력하기</span>
 
-스트림에서 읽고 쓸 수 있는 트레잇과 타입에 접근하기 위해서
+스트림에서 읽고 쓸 수 있는 트레이트와 타입에 접근하기 위해서
 `std::io::prelude`와 `std::io::BufReader`를 스코프에 가져옵니다.
 `main` 함수의 `for` 루프에서 연결되었다는 메시지를 출력하는 대신,
 이제 새로운 `handle_connection` 함수를 호출하고 `stream`을
@@ -144,13 +144,13 @@ Connection established!
 
 `handle_connection` 함수에서는 `stream`에 대한 가변 참조자를 감싼
 새로운 `BufReader` 인스턴스를 생성합니다. `BufReader`는 `std::io::Read`
-트레잇 메서드에 대한 호출을 관리하는 것으로 버퍼링을 추가합니다.
+트레이트 메서드에 대한 호출을 관리하는 것으로 버퍼링을 추가합니다.
 
 브라우저가 서버로 보낸 요청의 라인들을 수집하기 위해서 `http_request`라는
 변수를 생성합니다. `Vec<_>` 타입 명시를 추가함으로써 이 라인들을
 벡터로 수집하려 함을 나타냅니다.
 
-`BufReader`는 `std::io::BufRead` 트레잇을 구현하는데, 이 트레잇이 `lines`
+`BufReader`는 `std::io::BufRead` 트레이트를 구현하는데, 이 트레이트가 `lines`
 메서드를 제공합니다. 이 `lines` 메서드는 새로운 줄 바꿈 바이트가 발견될
 때마다 데이터 스트림을 분할함으로써 `Result<String, std::io::Error>`의
 반복자를 반환합니다. 각 `String`을 얻기 위해서 각 `Result`를 매핑하고

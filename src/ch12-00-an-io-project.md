@@ -33,13 +33,13 @@
   것들을 사용)
 * 벡터와 문자열 사용하기 ([8장][ch8]<!-- ignore -->의 컬렉션)
 * 에러 처리하기 ([9장][ch9]<!-- ignore -->)
-* 적절한 곳에 트레잇과 라이프타임 사용하기 ([10장][ch10]<!-- ignore
+* 적절한 곳에 트레이트와 라이프타임 사용하기 ([10장][ch10]<!-- ignore
   -->)
 * 테스트 작성하기 ([11장][ch11]<!-- ignore -->)
 
 아울러 [13장][ch13]<!-- ignore -->과 [17장][ch17]<!-- ignore -->에서
 자세히 다루게 될 클로저 (closure), 반복자 (iterator), 그리고
-트레잇 객체 (trait object) 에 대해서도 간략히 소개하겠습니다.
+트레이트 객체 (trait object) 에 대해서도 간략히 소개하겠습니다.
 
 [ch7]: ch07-00-managing-growing-projects-with-packages-crates-and-modules.html
 [ch8]: ch08-00-common-collections.html

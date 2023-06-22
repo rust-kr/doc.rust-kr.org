@@ -22,7 +22,7 @@
 
 - [소유권 이해하기](ch04-00-understanding-ownership.md)
     - [소유권이 뭔가요?](ch04-01-what-is-ownership.md)
-    - [참조자와 빌림](ch04-02-references-and-borrowing.md)
+    - [참조와 대여](ch04-02-references-and-borrowing.md)
     - [슬라이스](ch04-03-slices.md)
 
 - [구조체로 연관된 데이터를 구조화하기](ch05-00-structs.md)
@@ -54,9 +54,9 @@
     - [`Result`로 복구 가능한 에러 처리하기](ch09-02-recoverable-errors-with-result.md)
     - [`panic!`이냐, `panic!`이 아니냐, 그것이 문제로다](ch09-03-to-panic-or-not-to-panic.md)
 
-- [제네릭 타입, 트레잇, 라이프타임](ch10-00-generics.md)
+- [제네릭 타입, 트레이트, 라이프타임](ch10-00-generics.md)
     - [제네릭 데이터 타입](ch10-01-syntax.md)
-    - [트레잇으로 공통된 동작을 정의하기](ch10-02-traits.md)
+    - [트레이트로 공통된 동작을 정의하기](ch10-02-traits.md)
     - [라이프타임으로 참조자의 유효성 검증하기](ch10-03-lifetime-syntax.md)
 
 - [자동화 테스트 작성하기](ch11-00-testing.md)
@@ -89,8 +89,8 @@
 
 - [스마트 포인터](ch15-00-smart-pointers.md)
     - [`Box<T>`를 사용하여 힙에 있는 데이터 가리키기](ch15-01-box.md)
-    - [`Deref` 트레잇으로 스마트 포인터를 보통의 참조자처럼 취급하기](ch15-02-deref.md)
-    - [`Drop` 트레잇으로 메모리 정리 코드 실행하기](ch15-03-drop.md)
+    - [`Deref` 트레이트로 스마트 포인터를 보통의 참조자처럼 취급하기](ch15-02-deref.md)
+    - [`Drop` 트레이트로 메모리 정리 코드 실행하기](ch15-03-drop.md)
     - [`Rc<T>`, 참조 카운트 스마트 포인터](ch15-04-rc.md)
     - [`RefCell<T>`와 내부 가변성 패턴](ch15-05-interior-mutability.md)
     - [순환 참조는 메모리 누수를 발생시킬 수 있습니다](ch15-06-reference-cycles.md)
@@ -99,11 +99,11 @@
     - [스레드를 이용하여 코드를 동시에 실행하기](ch16-01-threads.md)
     - [메시지 패싱을 사용하여 스레드 간 데이터 전송하기](ch16-02-message-passing.md)
     - [공유 상태 동시성](ch16-03-shared-state.md)
-    - [`Sync`와 `Send` 트레잇을 이용한 확장 가능한 동시성](ch16-04-extensible-concurrency-sync-and-send.md)
+    - [`Sync`와 `Send` 트레이트를 이용한 확장 가능한 동시성](ch16-04-extensible-concurrency-sync-and-send.md)
 
 - [러스트의 객체 지향 프로그래밍 기능들](ch17-00-oop.md)
     - [객체 지향 언어의 특성](ch17-01-what-is-oo.md)
-    - [트레잇 객체를 사용하여 다른 타입의 값 허용하기](ch17-02-trait-objects.md)
+    - [트레이트 객체를 사용하여 다른 타입의 값 허용하기](ch17-02-trait-objects.md)
     - [객체 지향 디자인 패턴 구현하기](ch17-03-oo-design-patterns.md)
 
 ## Advanced Topics
@@ -115,7 +115,7 @@
 
 - [고급 기능들](ch19-00-advanced-features.md)
     - [안전하지 않은 러스트](ch19-01-unsafe-rust.md)
-    - [고급 트레잇](ch19-03-advanced-traits.md)
+    - [고급 트레이트](ch19-03-advanced-traits.md)
     - [고급 타입](ch19-04-advanced-types.md)
     - [고급 함수와 클로저](ch19-05-advanced-functions-and-closures.md)
     - [매크로](ch19-06-macros.md)
@@ -128,7 +128,7 @@
 - [부록](appendix-00.md)
     - [A - 키워드](appendix-01-keywords.md)
     - [B - 연산자와 기호](appendix-02-operators.md)
-    - [C - 파생 가능한 트레잇](appendix-03-derivable-traits.md)
+    - [C - 파생 가능한 트레이트](appendix-03-derivable-traits.md)
     - [D - 유용한 개발 도구](appendix-04-useful-development-tools.md)
     - [E - 에디션](appendix-05-editions.md)
     - [F - 번역본](appendix-06-translation.md)

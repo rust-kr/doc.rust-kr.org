@@ -199,7 +199,7 @@
 `use` 키워드와 크레이트 이름인
 `rand`를 쓰고 가져올 아이템을 나열했습니다.
 2장 [‘임의의 숫자 생성하기’][rand]<!-- ignore --> 절을 다시 떠올려 보죠.
-`Rng` 트레잇을 스코프로 가져오고 `rand::thread_rng` 함수를 호출했었습니다.
+`Rng` 트레이트를 스코프로 가져오고 `rand::thread_rng` 함수를 호출했었습니다.
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:ch07-04}}
