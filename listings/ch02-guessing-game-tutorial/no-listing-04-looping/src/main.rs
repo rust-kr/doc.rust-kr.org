@@ -8,14 +8,14 @@ fn main() {
     let secret_number = rand::thread_rng().gen_range(1..=100);
 
     // ANCHOR: here
-    // --snip--
+    // --생략--
 
     println!("The secret number is: {secret_number}");
 
     loop {
         println!("Please input your guess.");
 
-        // --snip--
+        // --생략--
 
         // ANCHOR_END: here
 

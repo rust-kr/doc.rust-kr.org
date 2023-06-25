@@ -12,7 +12,7 @@ fn main() {
     println!("Please input your guess.");
 
     // ANCHOR: here
-    // --snip--
+    // --생략--
 
     let mut guess = String::new();
 

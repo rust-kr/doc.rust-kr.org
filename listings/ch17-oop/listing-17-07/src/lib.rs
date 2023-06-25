@@ -23,7 +23,7 @@ pub struct Button {
 
 impl Draw for Button {
     fn draw(&self) {
-        // code to actually draw a button
+        // 실제로 버튼을 그리는 코드
     }
 }
 // ANCHOR_END: here

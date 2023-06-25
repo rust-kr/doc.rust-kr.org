@@ -12,7 +12,7 @@ fn main() {
         process::exit(1);
     });
 
-    // --snip--
+    // --생략--
     // ANCHOR_END: ch13
 
     if let Err(e) = minigrep::run(config) {

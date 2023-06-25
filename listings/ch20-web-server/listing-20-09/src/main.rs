@@ -14,10 +14,10 @@ fn main() {
     }
 }
 // ANCHOR: here
-// --snip--
+// --생략--
 
 fn handle_connection(mut stream: TcpStream) {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     let buf_reader = BufReader::new(&mut stream);
     let request_line = buf_reader.lines().next().unwrap().unwrap();

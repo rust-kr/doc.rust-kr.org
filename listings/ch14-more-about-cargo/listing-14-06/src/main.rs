@@ -3,7 +3,7 @@ use art::mix;
 use art::PrimaryColor;
 
 fn main() {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     let red = PrimaryColor::Red;
     let yellow = PrimaryColor::Yellow;

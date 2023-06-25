@@ -3,7 +3,7 @@ pub struct Guess {
 }
 
 // ANCHOR: here
-// --snip--
+// --생략--
 
 impl Guess {
     pub fn new(value: i32) -> Guess {

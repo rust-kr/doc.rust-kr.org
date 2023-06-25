@@ -14,7 +14,7 @@ fn main() {
     }
 }
 // ANCHOR: here
-// --snip--
+// --생략--
 
 fn handle_connection(mut stream: TcpStream) {
     let buf_reader = BufReader::new(&mut stream);

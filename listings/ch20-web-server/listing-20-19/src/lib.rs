@@ -9,12 +9,12 @@ pub struct ThreadPool {
 }
 
 // ANCHOR: here
-// --snip--
+// --생략--
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
 
 impl ThreadPool {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     /// Create a new ThreadPool.
     ///
@@ -50,7 +50,7 @@ impl ThreadPool {
     }
 }
 
-// --snip--
+// --생략--
 // ANCHOR_END: here
 
 struct Worker {

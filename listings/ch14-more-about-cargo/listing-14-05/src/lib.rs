@@ -8,7 +8,7 @@ pub use self::kinds::SecondaryColor;
 pub use self::utils::mix;
 
 pub mod kinds {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     /// The primary colors according to the RYB color model.
     pub enum PrimaryColor {
@@ -27,7 +27,7 @@ pub mod kinds {
 }
 
 pub mod utils {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     use crate::kinds::*;
 

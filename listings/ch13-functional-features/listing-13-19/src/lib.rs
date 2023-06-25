@@ -13,7 +13,7 @@ impl Config {
     pub fn build(
         mut args: impl Iterator<Item = String>,
     ) -> Result<Config, &'static str> {
-        // --snip--
+        // --생략--
         // ANCHOR_END: here
         if args.len() < 3 {
             return Err("not enough arguments");

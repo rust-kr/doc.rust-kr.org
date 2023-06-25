@@ -15,7 +15,7 @@ fn main() {
         let mut guess = String::new();
 
         // ANCHOR: here
-        // --snip--
+        // --생략--
 
         io::stdin()
             .read_line(&mut guess)
@@ -30,7 +30,7 @@ fn main() {
 
         println!("You guessed: {guess}");
 
-        // --snip--
+        // --생략--
         // ANCHOR_END: here
 
         match guess.cmp(&secret_number) {

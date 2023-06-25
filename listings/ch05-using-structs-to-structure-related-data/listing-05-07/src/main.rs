@@ -7,7 +7,7 @@ struct User {
 
 // ANCHOR: here
 fn main() {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
 
     let user1 = User {

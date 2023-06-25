@@ -8,7 +8,7 @@ pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: Option<mpsc::Sender<Job>>,
 }
-// --snip--
+// --생략--
 // ANCHOR_END: here
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
@@ -25,7 +25,7 @@ impl ThreadPool {
     /// The `new` function will panic if the size is zero.
     // ANCHOR: here
     pub fn new(size: usize) -> ThreadPool {
-        // --snip--
+        // --생략--
 
         // ANCHOR_END: here
         assert!(size > 0);

@@ -13,7 +13,7 @@ fn main() {
     let contents = fs::read_to_string(config.file_path)
         .expect("Should have been able to read the file");
 
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
 
     println!("With text:\n{contents}");

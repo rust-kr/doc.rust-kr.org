@@ -17,10 +17,10 @@ fn main() {
     println!("With text:\n{contents}");
     // ANCHOR: here
 
-    // --snip--
+    // --생략--
 }
 
-// --snip--
+// --생략--
 
 // ANCHOR_END: here
 struct Config {

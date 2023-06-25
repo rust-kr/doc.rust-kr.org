@@ -6,7 +6,7 @@ pub struct ThreadPool {
 }
 
 impl ThreadPool {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     /// Create a new ThreadPool.
     ///
@@ -27,7 +27,7 @@ impl ThreadPool {
 
         ThreadPool { workers }
     }
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
 
     pub fn execute<F>(&self, f: F)

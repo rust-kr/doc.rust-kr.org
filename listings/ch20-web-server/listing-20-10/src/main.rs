@@ -6,7 +6,7 @@ use std::{
     thread,
     time::Duration,
 };
-// --snip--
+// --생략--
 // ANCHOR_END: here
 
 fn main() {
@@ -21,7 +21,7 @@ fn main() {
 // ANCHOR: here
 
 fn handle_connection(mut stream: TcpStream) {
-    // --snip--
+    // --생략--
 
     // ANCHOR_END: here
     let buf_reader = BufReader::new(&mut stream);
@@ -37,7 +37,7 @@ fn handle_connection(mut stream: TcpStream) {
         _ => ("HTTP/1.1 404 NOT FOUND", "404.html"),
     };
 
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
 
     let contents = fs::read_to_string(filename).unwrap();

@@ -20,7 +20,7 @@ impl Post {
 
 // ANCHOR: here
 impl DraftPost {
-    // --snip--
+    // --생략--
     // ANCHOR_END: here
     pub fn add_text(&mut self, text: &str) {
         self.content.push_str(text);
