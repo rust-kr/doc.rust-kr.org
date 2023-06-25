@@ -481,7 +481,7 @@ style="width: 50%;" />
 
 하지만 이런 식은 일반적인 컨셉이 되기엔 너무 거추장스럽고 많은 작업량이
 수반됩니다. 다행히도, 러스트에는 소유권 이동 없이 값을 사용할 수 있는
-*참조자 (references)* 라는 기능을 가지고 있습니다.
+*참조자 (reference)* 라는 기능을 가지고 있습니다.
 
 [data-types]: ch03-02-data-types.html#data-types
 [ch8]: ch08-02-strings.html

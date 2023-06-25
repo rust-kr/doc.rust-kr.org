@@ -356,7 +356,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 
 ```rust,ignore
 impl<T: Display> ToString for T {
-    // --snip--
+    // --생략--
 }
 ```
 

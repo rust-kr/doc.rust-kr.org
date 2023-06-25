@@ -28,7 +28,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 
 ### 스칼라 타입
 
-*스칼라 (scalar)* 타입은 하나의 값을 표현합니다. 러스트는 정수, 부동소수점 숫자, 부울린 (boolean),
+*스칼라 (scalar)* 타입은 하나의 값을 표현합니다. 러스트는 정수, 부동 소수점 숫자, 부울린 (boolean),
 그리고 문자, 이렇게 네 가지 스칼라 타입을 갖고 있습니다. 아마 다른 프로그래밍 언어에서도 이런 걸 본 적이
 있을 겁니다. 러스트에서는 이들이 어떤 식으로 동작하는지 살펴보도록 합시다.
 
@@ -133,7 +133,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 현대의 CPU 상에서 `f64`가 `f32`와 대략 비슷한 속도를 내면서도 더 정밀하기
 때문입니다. 모든 부동 소수점 타입은 부호가 있습니다.
 
-다음은 부동소수점 숫자의 용례입니다:
+다음은 부동 소수점 숫자의 용례입니다:
 
 <span class="filename">파일명: src/main.rs</span>
 
@@ -141,8 +141,8 @@ let guess: u32 = "42".parse().expect("Not a number!");
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-06-floating-point/src/main.rs}}
 ```
 
-부동소수점 숫자는 IEEE-754 표준을 따릅니다. `f32` 타입은 1배 수 정밀도 (single-precision) 인
-부동소수점이고, `f64`는 2배 수 정밀도 (double-precision) 입니다.
+부동 소수점 숫자는 IEEE-754 표준을 따릅니다. `f32` 타입은 1배 수 정밀도 (single-precision) 인
+부동 소수점이고, `f64`는 2배 수 정밀도 (double-precision) 입니다.
 
 #### 수치 연산
 
