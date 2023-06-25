@@ -113,7 +113,7 @@
     - [반박 가능성: 패턴이 매칭에 실패할지의 여부](ch18-02-refutability.md)
     - [패턴 문법](ch18-03-pattern-syntax.md)
 
-- [고급 기능들](ch19-00-advanced-features.md)
+- [고급 기능](ch19-00-advanced-features.md)
     - [안전하지 않은 러스트](ch19-01-unsafe-rust.md)
     - [고급 트레이트](ch19-03-advanced-traits.md)
     - [고급 타입](ch19-04-advanced-types.md)
