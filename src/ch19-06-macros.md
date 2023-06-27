@@ -147,7 +147,7 @@ let v: Vec<u32> = vec![1, 2, 3];
 
 매크로를 작성하는 방법에 대해 더 알아보려면 온라인 문서 혹은 다른 자료,
 이를테면 다니엘 킵 (Daniel Keep) 이 시작하고 루카스 위스 (Lukas Wirth) 가 이어오고 있는
-[‘The Little Book of Rust Macros’][tlborm] 같은 것을 참조하세요.
+[‘러스트 매크로의 작은 책 (The Little Book of Rust Macros)’][tlborm] 같은 것을 참조하세요.
 
 ### 속성에서 코드를 생성하기 위한 절차적 매크로
 
