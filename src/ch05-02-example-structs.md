@@ -161,7 +161,7 @@
 러스트는 디버깅 정보를 출력하는 기능을 *자체적으로 가지고 있습니다*.
 하지만 우리가 만든 구조체에 해당 기능을 적용하려면 명시적인 동의가 필요하므로,
 예제 5-12처럼 구조체 정의 바로 이전에 `#[derive(Debug)]`
-외부 속성 (outer attirbute) 을 작성해주어야 합니다.
+외부 속성 (outer attribute) 을 작성해주어야 합니다.
 
 <span class="filename">파일명: src/main.rs</span>
 
