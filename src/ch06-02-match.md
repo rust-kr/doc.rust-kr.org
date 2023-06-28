@@ -79,7 +79,7 @@
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 
-<span class="caption">예제 6-4: `Quarter` 배리언트가 `UsSate` 값도 담고
+<span class="caption">예제 6-4: `Quarter` 배리언트가 `UsState` 값도 담고
 있는 `Coin` 열거형</span>
 
 한 친구가 모든 50개 주 쿼터 동전을 모으기를 시도하는 중이라고 상상해 봅시다.
