@@ -261,7 +261,7 @@ fn first_word(s: &String) -> &str {
 {{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:here}}
 ```
 
-<span class="caption">예제 4-9: 매개변수 `s`를 문자열 슬라이스 타입으로 변경하겨
+<span class="caption">예제 4-9: 매개변수 `s`를 문자열 슬라이스 타입으로 변경하여
 `first_word` 함수 개선하기</span>
 
 문자열 슬라이스라면 이를 바로 인수로써 전달할 수 있습니다. `String`이라면
