@@ -266,8 +266,8 @@ children: RefCell { value: [] } }] } })
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-29/src/main.rs:here}}
 ```
 
-<span class="caption">예제 15-29: Creating `branch` in an inner scope and
-examining strong and weak reference counts</span>
+<span class="caption">예제 15-29: 내부 스코프에서 `branch`를 만들고
+강한 참조 카운트와 약한 참조 카운트 시험하기</span>
 
 `leaf`가 생성된 다음, 이것의 `Rc<Node>`는 강한 참조 카운트 1개와 약한 참조 카운트
 0개를 갖습니다. 내부 스코프에서 `branch`를 만들고 `leaf`와 연관짓게 되는데,

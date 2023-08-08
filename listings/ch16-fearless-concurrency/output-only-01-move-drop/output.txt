@@ -11,7 +11,7 @@ error[E0382]: use of moved value: `v`
 7  |         println!("Here's a vector: {:?}", v);
    |                                           - variable moved due to use in closure
 ...
-10 |     drop(v); // oh no!
+10 |     drop(v); // 오, 이런!
    |          ^ value used here after move
 
 For more information about this error, try `rustc --explain E0382`.

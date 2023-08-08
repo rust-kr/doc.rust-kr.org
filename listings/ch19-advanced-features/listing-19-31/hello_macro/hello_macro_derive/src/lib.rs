@@ -4,10 +4,10 @@ use syn;
 
 #[proc_macro_derive(HelloMacro)]
 pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
-    // Construct a representation of Rust code as a syntax tree
-    // that we can manipulate
+    // 조작 가능한 구문 트리로 러스트 코드의 표현을
+    // 구성합니다
     let ast = syn::parse(input).unwrap();
 
-    // Build the trait implementation
+    // 트레이트 구현체를 생성합니다
     impl_hello_macro(&ast)
 }
