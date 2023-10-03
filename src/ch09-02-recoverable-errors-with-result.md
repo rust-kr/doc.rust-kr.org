@@ -509,7 +509,7 @@ don't want to include it for rustdoc testing purposes. -->
 [‘트레이트 객체를 사용하여 다른 타입의 값 허용하기’][trait-objects]<!-- ignore -->절에서
 다룰 예정입니다. 지금은 `Box<dyn Error>`가 ‘어떠한 종류의 에러’를
 의미한다고 읽으면 됩니다. 반환할 에러 타입이 `Box<dyn Error>`인
-`Result`이면 어떠한 `Err` 값을 일찍 반활할 수 있으므로
+`Result`이면 어떠한 `Err` 값을 일찍 반환할 수 있으므로
 `main`에서의 `?` 사용이 허용됩니다. `main` 함수의 구현 내용이
 `std::io::Error` 타입의 에러만 반환하겠지만, 이 함수 시그니처에
 `Box<dyn Error>`라고 명시하면 이후 `main`의 구현체에 다른 에러들을
