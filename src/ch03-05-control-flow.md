@@ -88,7 +88,7 @@ Ruby나 JavaScript 같은 언어와 달리 러스트는 부울린 타입이 아�
 
 #### `else if`로 여러 조건식 다루기
 
-`if`와 `else` 사이에 `else if`를 조합하면 여러 조건식을 사용할 수
+`if`와 `else` 사이에 `else if`를 조합하면 여러 조건식을 사용할
 수 있습니다. 예를 들면:
 
 <span class="filename">파일명: src/main.rs</span>
