@@ -170,7 +170,7 @@ enum IpAddr {
 
 열거형과 구조체는 한 가지 더 유사한 점이 있습니다. 구조체에 `impl`을 사용해서
 메서드를 정의한 것처럼, 열거형에도 정의할 수 있습니다. 여기 `Message` 열거형에
-에 정의한 `call`이라는 메서드가 있습니다:
+정의한 `call`이라는 메서드가 있습니다:
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
