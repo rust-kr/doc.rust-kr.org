@@ -1,7 +1,7 @@
 ## 참조와 대여
 
 앞 절 마지막에 등장한 예제 4-5에서는 `String`이 `calculate_length`로
-이동해 버린 것 때문에 `calclulate_length`를 호출한 함수로 `String`을
+이동해 버린 것 때문에 `calculate_length`를 호출한 함수로 `String`을
 반환하여, 함수 호출 이후에도 `String`을 사용할 수 있게 하였습니다.
 이렇게 하는 대신 `String` 값의 참조자를 만들 수 있습니다.
 *참조자 (reference)* 는 해당 주소에 저장된 데이터에 접근할 수 있도록
