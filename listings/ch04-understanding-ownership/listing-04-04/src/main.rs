@@ -7,7 +7,7 @@ fn main() {
     let s3 = takes_and_gives_back(s2);  // s2는 takes_and_gives_back로 이동되는데,
                                         // 이 함수 또한 자신의 반환 값을 s3로
                                         // 이동시킵니다
-} // 여기서 s3가 스코프 밖으로 벗어나면서 버려집니다. s3는 이동되어서 아무 일도
+} // 여기서 s3가 스코프 밖으로 벗어나면서 버려집니다. s2는 이동되어서 아무 일도
   // 일어나지 않습니다. s1은 스코프 밖으로 벗어나고 버려집니다.
 
 fn gives_ownership() -> String {             // gives_ownership은 자신의 반환 값을
