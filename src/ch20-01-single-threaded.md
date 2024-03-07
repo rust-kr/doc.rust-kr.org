@@ -5,7 +5,7 @@
 살펴봅시다. 이러한 프로토콜의 세부 사항은 이 책의 범위를 벗어나지만,
 간단한 개요만으로도 여러분이 필요로 하는 정보를 제공할 것입니다.
 
-웹 서버에 포함되는 두 개의 주요 프로토콜은 *하이퍼텍스트 전송 프로토콜 (Hypertest Transfer Protocol, HTTP)*
+웹 서버에 포함되는 두 개의 주요 프로토콜은 *하이퍼텍스트 전송 프로토콜 (Hypertext Transfer Protocol, HTTP)*
 와 *전송 제어 프로토콜 (Transmission Control Protocol, TCP)* 입니다. 두
 프로토콜 모두 *요청-응답 프로토콜 (request-response protocol)* 이며, *클라이언트 (client)* 가
 요청을 시작하고 *서버 (server)* 가 이 요청을 수신한 다음 클라이언트에게 응답을 제공한다는
