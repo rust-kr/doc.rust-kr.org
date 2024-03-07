@@ -424,7 +424,7 @@ DeriveInput {
 ```
 
 예제 19-30의 코드를 *src/main.rs*에 넣고 `cargo run`을 실행하세요:
-`Hello, Macro! My name is Pancakes!"라고 출력되어야 합니다. 절차적
+`Hello, Macro! My name is Pancakes!`라고 출력되어야 합니다. 절차적
 매크로의 `HelloMacro` 트레이트 구현은 `pancakes` 크레이트가 구현할 필요
 없이 포함되었습니다; `#[derive(HelloMacro)]`이 트레이트 구현을
 추가한 것이지요.
