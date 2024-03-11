@@ -174,7 +174,7 @@
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
 ```
 
-불변 참조자 `rl`, `r2`의 스코프는 자신들이 마지막으로 사용된
+불변 참조자 `r1`, `r2`의 스코프는 자신들이 마지막으로 사용된
 `println!` 이후로 종료되고, 해당 `println!`은  가변 참조자 `r3`가
 생성되기 전이니 서로 스코프가 겹치지 않아서 이 코드는 문제가 없는 것이죠:
 컴파일러는 이 참조자가 어떤 지점 이후로 스코프 끝까지 사용되지 않음을
