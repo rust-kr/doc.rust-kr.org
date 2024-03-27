@@ -319,6 +319,6 @@ enum Option<T> {
 다른 코드를 실행하고 매칭되는 값 내부의 데이터를 해당 코드에서
 사용할 수 있습니다.
 
-[IpAddr]: ../std/net/enum.IpAddr.html
-[option]: ../std/option/enum.Option.html
-[docs]: ../std/option/enum.Option.html
+[IpAddr]: https://doc.rust-lang.org/std/net/enum.IpAddr.html
+[option]: https://doc.rust-lang.org/std/option/enum.Option.html
+[docs]: https://doc.rust-lang.org/std/option/enum.Option.html

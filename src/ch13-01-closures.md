@@ -420,4 +420,4 @@ r.width`는 자신의 환경으로부터 어떤 것도 캡처나 변형, 혹은 
 클로저 인수를 받으니, 계속 진행하면서 이러한 클로저 세부 내용을
 새겨둡시다!
 
-[unwrap-or-else]: ../std/option/enum.Option.html#method.unwrap_or_else
+[unwrap-or-else]: https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap_or_else

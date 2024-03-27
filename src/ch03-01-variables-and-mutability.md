@@ -188,4 +188,4 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ch02-00-guessing-game-tutorial.html#%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%EC%99%80-%EC%B6%94%EB%A6%AC%EA%B0%92%EC%9D%84-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0
 [data-types]: ch03-02-data-types.html#data-types
 [storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#storing-values-with-variables
-[const-eval]: ../reference/const_eval.html
+[const-eval]: https://doc.rust-lang.org/reference/const_eval.html

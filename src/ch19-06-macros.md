@@ -504,7 +504,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 다음으로는 이 책에서 논의한 모든 내용을 실제로 적용하여 프로젝트를
 하나 더 해보겠습니다!
 
-[ref]: ../reference/macros-by-example.html
+[ref]: https://doc.rust-lang.org/reference/macros-by-example.html
 [tlborm]: https://veykril.github.io/tlborm/
 [`syn`]: https://crates.io/crates/syn
 [`quote`]: https://crates.io/crates/quote
