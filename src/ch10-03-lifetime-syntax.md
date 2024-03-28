@@ -619,4 +619,4 @@ let s: &'static str = "I have a static lifetime.";
 ch04-02-references-and-borrowing.html#references-and-borrowing
 [string-slices-as-parameters]:
 ch04-03-slices.html#string-slices-as-parameters
-[reference]: ../reference/index.html
+[reference]: https://doc.rust-lang.org/reference/index.html

@@ -317,4 +317,4 @@ children: RefCell { value: [] } }] } })
 다음에는 러스트의 동시성에 대해 이야기해 보겠습니다. 심지어 몇 가지 새로운
 스마트 포인터에 대해서도 배우게 될 것입니다.
 
-[nomicon]: ../nomicon/index.html
+[nomicon]: https://doc.rust-lang.org/nomicon/index.html

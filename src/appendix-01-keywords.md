@@ -57,7 +57,7 @@
 * `where` - 어떤 타입을 제한하는 구절 나타내기
 * `while` - 표현식의 결과에 따라 조건 반복하기
 
-[union]: ../reference/items/unions.html
+[union]: https://doc.rust-lang.org/reference/items/unions.html
 
 ### 미래에 사용하기 위해 예약된 키워드
 
