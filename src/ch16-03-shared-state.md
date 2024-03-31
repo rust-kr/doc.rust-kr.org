@@ -246,4 +246,4 @@ Result: 10
 이제 `Send`와 `Sync` 트레이트와 이를 커스텀 타입과 함께 사용하는 방법을 이야기하는
 것으로 이 장을 마무리 하겠습니다.
 
-[atomic]: ../std/sync/atomic/index.html
+[atomic]: https://doc.rust-lang.org/std/sync/atomic/index.html

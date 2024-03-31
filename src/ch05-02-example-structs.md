@@ -104,7 +104,7 @@
 ## 트레이트 파생으로 유용한 기능 추가하기
 
 프로그램을 디버깅하는 동안 `Rectangle` 인스턴스 내 모든 필드 값을
-출력해서 확인할 수 있다면 좋을 것 같군요. 예제 5-11는 앞서 다뤄본
+출력해서 확인할 수 있다면 좋을 것 같군요. 예제 5-11은 앞서 다뤄본
 [`println!` 매크로][println]<!-- ignore -->를 사용해 본 예시이나,
 작동하진 않습니다.
 
@@ -242,7 +242,7 @@
 
 [the-tuple-type]: ch03-02-data-types.html#the-tuple-type
 [app-c]: appendix-03-derivable-traits.md
-[println]: ../std/macro.println.html
-[dbg]: ../std/macro.dbg.html
+[println]: https://doc.rust-lang.org/std/macro.println.html
+[dbg]: https://doc.rust-lang.org/std/macro.dbg.html
 [err]: ch12-06-writing-to-stderr-instead-of-stdout.html
-[attributes]: ../reference/attributes.html
+[attributes]: https://doc.rust-lang.org/reference/attributes.html

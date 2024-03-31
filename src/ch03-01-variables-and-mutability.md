@@ -128,7 +128,7 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 이름을 사용할 때 컴파일러가 두 번째 변수를 보게 될 것이라는
 의미입니다. 사실상 두 번째 변수는 첫 번째 것을 가려서, 스스로를 다시
 가리거나 스코프가 끝날 때까지 변수명의 사용을 가져가 버립니다.
-아래처럼 똑같은 변수명과 let` 키워드의 반복으로 변수를 가릴 수
+아래처럼 똑같은 변수명과 `let` 키워드의 반복으로 변수를 가릴 수
 있습니다:
 
 <span class="filename">파일명: src/main.rs</span>
@@ -188,4 +188,4 @@ const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ch02-00-guessing-game-tutorial.html#%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%EC%99%80-%EC%B6%94%EB%A6%AC%EA%B0%92%EC%9D%84-%EB%B9%84%EA%B5%90%ED%95%98%EA%B8%B0
 [data-types]: ch03-02-data-types.html#data-types
 [storing-values-with-variables]: ch02-00-guessing-game-tutorial.html#storing-values-with-variables
-[const-eval]: ../reference/const_eval.html
+[const-eval]: https://doc.rust-lang.org/reference/const_eval.html
