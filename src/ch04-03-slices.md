@@ -266,8 +266,8 @@ fn first_word(s: &String) -> &str {
 
 문자열 슬라이스라면 이를 바로 인수로써 전달할 수 있습니다. `String`이라면
 `String`의 슬라이스 혹은 `String`에 대한 참조자를 전달할 수 있습니다.
-이러한 유연성은 *역참조 강제 (deref coercions)* 기능을 이용하는데, 15장의
-[‘함수와 메서드를 이용한 암묵적 역참조 강제’][deref-coercions]<!--ignore-->절에서
+이러한 유연성은 *강제 역참조 (deref coercions)* 기능을 이용하는데, 15장의
+[‘함수와 메서드를 이용한 암묵적 강제 역참조’][deref-coercions]<!--ignore-->절에서
 다룰 것입니다.
 
 `String`에 대한 참조자 대신에 문자열 슬라이스를 매개변수로 하는 함수를 정의하면
