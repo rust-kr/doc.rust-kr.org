@@ -49,7 +49,7 @@
 - deadlock: 데드록, 교착 상태
 - deep copy: 깊은 복사
 - dependency: 디펜던시, 의존성
-- deref coercion: 강제 역참조
+- deref coercion: 역참조 강제 변환
 - derefence operator: 역참조 연산자
 - derivable: 추론 가능한
 - derivable traits: 파생 가능한 트레잇
