@@ -77,7 +77,7 @@ Elements of Reusable Object-Oriented Software, Addison-Wesley Professional, 1994
 
 `list`와 `average` 필드는 비공개로 하였으므로 외부 코드가
 `list` 필드에 직접 아이템을 추가하거나 제거할 방법은 없습니다;
-그렇게 하면 `average` 필드는 `list`가 변경될 때 동기화되지 않을 수
+그렇지 않으면 `average` 필드는 `list`가 변경될 때 동기화되지 않을 수
 있습니다. `average` 메서드는 `average` 필드의 값을 반환하므로,
 외부 코드가 `average`를 읽을 수 있도록 하지만 변경할 수는 없습니다.
 
