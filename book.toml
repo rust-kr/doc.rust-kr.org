@@ -1,9 +1,16 @@
 [book]
 title = "The Rust Programming Language"
-authors = ["Steve Klabnik", "Carol Nichols", "Contributions from the Rust Community"]
+authors = [
+  "Steve Klabnik",
+  "Carol Nichols",
+  "Contributions from the Rust Community",
+]
 language = "ko"
 
 [output.html]
 additional-css = ["ferris.css", "theme/2018-edition.css"]
 additional-js = ["ferris.js"]
-git-repository-url = "https://github.com/rust-lang/book"
+git-repository-url = "https://github.com/rust-kr/doc.rust-kr.org"
+
+[rust]
+edition = "2021"
