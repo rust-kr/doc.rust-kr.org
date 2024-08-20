@@ -456,7 +456,7 @@ called a puppy`라고 출력하기를 원합니다. 예제 19-18에서 사용했
 타입의 모든 메서드를 갖지 않도록 하려면 (이를테면 `Wrapper`
 타입의 동작을 제한하려면) 원하는 메서드만 수동으로 구현해야 합니다.
 
-이 뉴타입 패턴은 또한 트레이트가 포함되지 않은 경우에도 유용합니다. 이제 초점을
+이 뉴타입 패턴은 트레이트가 관련되지 않은 경우에도 유용합니다. 이제 초점을
 바꿔서 러스트의 타입 시스템과 상호작용하는 몇 가지 고급 방법을 살펴봅시다.
 
 [newtype]: ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types
