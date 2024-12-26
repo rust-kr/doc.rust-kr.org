@@ -144,7 +144,7 @@ let apples = 5;
 
 ```rust,ignore
 let apples = 5; // immutable
-let mut bananas= 5; // mutable
+let mut bananas = 5; // mutable
 ```
 
 > Note: `//` 문법은 현재 위치부터 라인의 끝까지 주석임을 나타냅니다.
