@@ -379,7 +379,7 @@ again!
 
 * 화씨 온도와 섭씨 온도 간 변환하기
 * *n*번째 피보나치 수 생성하기
-* 크리스마시 캐롤 ‘The Twelve Days of Christmas’ 노래의 반복성을
+* 크리스마스 캐롤 ‘The Twelve Days of Christmas’ 노래의 반복성을
   활용하여 가사 출력해보기
 
 다음으로 넘어갈 준비가 되셨다면, 이번에는 다른 프로그래밍 언어에는
