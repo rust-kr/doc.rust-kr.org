@@ -264,7 +264,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 여러분이 설치한 크레이트 코드 몇 개를 열어서 내부 구조와 공개 API가
 얼마나 다른지 살펴보세요.
 
-### Cartes.io 계정 설정하기
+### Crates.io 계정 설정하기
 
 어떤 크레이트를 배포하기에 앞서 [crates.io](https://crates.io/)<!-- ignore -->에서
 계정을 만들고 API 토큰을 얻을 필요가 있습니다. 그러려면
