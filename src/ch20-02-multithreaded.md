@@ -91,7 +91,7 @@
 여기서는 컴파일러 중심 개발을 사용하겠습니다. 원하는 함수를 호출하는
 코드를 작성한 다음, 컴파일러의 에러를 살펴보고 코드가 작동하도록
 하기 위해서는 다음에 무엇을 변경해야 하는지 결정하는 것입니다.
-하지만 착수 단계에서는 사용하지 않을 기법 먼저 살펴보겠습니다.
+하지만 착수 단계에서는 사용하지 않을 기법을 먼저 살펴보겠습니다.
 
 <!-- Old headings. Do not remove or links may break. -->
 <a id="code-structure-if-we-could-spawn-a-thread-for-each-request"></a>
